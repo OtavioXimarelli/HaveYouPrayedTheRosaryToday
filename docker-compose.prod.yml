@@ -33,7 +33,7 @@ services:
       MONGODB_URI: mongodb://rosary_user:rosary_password_2024@mongodb:27017/rosary-app?authSource=rosary-app
       JWT_SECRET: super-secret-jwt-key-for-rosary-app-2024
       JWT_EXPIRES_IN: 7d
-      FRONTEND_URL: http://localhost:3000
+      FRONTEND_URL: http://ngocw0kcg4kcwckkscgcksss.72.61.24.223.sslip.io
     expose:
       - "3001"
     depends_on:
@@ -50,12 +50,12 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_API_URL: http://localhost:3001/api
+        NEXT_PUBLIC_API_URL: http://tgswog4cw8ogw084wskosk04.72.61.24.223.sslip.io/api
     container_name: rosary-frontend
     restart: unless-stopped
     environment:
       NODE_ENV: production
-      NEXT_PUBLIC_API_URL: http://localhost:3001/api
+      NEXT_PUBLIC_API_URL: http://tgswog4cw8ogw084wskosk04.72.61.24.223.sslip.io/api
     expose:
       - "3000"
     depends_on:

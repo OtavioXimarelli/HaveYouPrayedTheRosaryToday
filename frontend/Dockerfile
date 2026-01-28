@@ -7,9 +7,12 @@ WORKDIR /app
 ARG NEXT_PUBLIC_API_URL=http://localhost:3001/api
 ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 
-# Install dependencies
+# Force production environment for build (Coolify may inject development)
+ENV NODE_ENV=production
+
+# Install dependencies (need to temporarily set to development for devDependencies)
 COPY package*.json ./
-RUN npm ci
+RUN NODE_ENV=development npm ci
 
 # Copy source code
 COPY . .
