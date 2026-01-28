@@ -1,0 +1,368 @@
+[Nest] 1  - 01/28/2026, 3:39:57 AM     LOG ;5;3m[NestFactory] Starting Nest application...
+[Nest] 1  - 01/28/2026, 3:39:57 AM     LOG ;5;3m[InstanceLoader] MongooseModule dependencies initialized;5;3m +53ms
+[Nest] 1  - 01/28/2026, 3:39:57 AM     LOG ;5;3m[InstanceLoader] PassportModule dependencies initialized;5;3m +1ms
+[Nest] 1  - 01/28/2026, 3:39:57 AM     LOG ;5;3m[InstanceLoader] AppModule dependencies initialized;5;3m +1ms
+[Nest] 1  - 01/28/2026, 3:39:57 AM     LOG ;5;3m[InstanceLoader] ConfigHostModule dependencies initialized;5;3m +0ms
+[Nest] 1  - 01/28/2026, 3:39:57 AM     LOG ;5;3m[InstanceLoader] ConfigModule dependencies initialized;5;3m +0ms
+[Nest] 1  - 01/28/2026, 3:39:57 AM     LOG ;5;3m[InstanceLoader] ConfigModule dependencies initialized;5;3m +0ms
+[Nest] 1  - 01/28/2026, 3:39:57 AM     LOG ;5;3m[InstanceLoader] ThrottlerModule dependencies initialized;5;3m +79ms
+(node:1) [MONGOOSE] Warning: Duplicate schema index on {"email":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[Nest] 1  - 01/28/2026, 3:39:57 AM     LOG ;5;3m[InstanceLoader] JwtModule dependencies initialized;5;3m +5ms
+[Nest] 1  - 01/28/2026, 3:39:57 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (1)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:00 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (2)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+[Nest] 1  - 01/28/2026, 3:40:23 AM     LOG ;5;3m[NestFactory] Starting Nest application...
+[Nest] 1  - 01/28/2026, 3:40:24 AM     LOG ;5;3m[InstanceLoader] MongooseModule dependencies initialized;5;3m +28ms
+[Nest] 1  - 01/28/2026, 3:40:24 AM     LOG ;5;3m[InstanceLoader] PassportModule dependencies initialized;5;3m +0ms
+[Nest] 1  - 01/28/2026, 3:40:24 AM     LOG ;5;3m[InstanceLoader] AppModule dependencies initialized;5;3m +0ms
+[Nest] 1  - 01/28/2026, 3:40:24 AM     LOG ;5;3m[InstanceLoader] ConfigHostModule dependencies initialized;5;3m +1ms
+[Nest] 1  - 01/28/2026, 3:40:24 AM     LOG ;5;3m[InstanceLoader] ConfigModule dependencies initialized;5;3m +0ms
+[Nest] 1  - 01/28/2026, 3:40:24 AM     LOG ;5;3m[InstanceLoader] ConfigModule dependencies initialized;5;3m +0ms
+[Nest] 1  - 01/28/2026, 3:40:24 AM     LOG ;5;3m[InstanceLoader] ThrottlerModule dependencies initialized;5;3m +57ms
+[Nest] 1  - 01/28/2026, 3:40:24 AM     LOG ;5;3m[InstanceLoader] JwtModule dependencies initialized;5;3m +0ms
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:03 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (3)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:06 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (4)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:09 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (5)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:12 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (6)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:15 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (7)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:18 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (8)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:21 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (9)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:21 AM   ERROR ;5;3m[ExceptionHandler] Authentication failed.
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+(node:1) [MONGOOSE] Warning: Duplicate schema index on {"email":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[Nest] 1  - 01/28/2026, 3:40:24 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (1)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:27 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (2)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:30 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (3)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:33 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (4)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:36 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (5)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:39 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (6)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:42 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (7)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[Nest] 1  - 01/28/2026, 3:40:49 AM     LOG ;5;3m[NestFactory] Starting Nest application...
+[Nest] 1  - 01/28/2026, 3:40:49 AM     LOG ;5;3m[InstanceLoader] MongooseModule dependencies initialized;5;3m +26ms
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:45 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (8)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:48 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (9)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:48 AM   ERROR ;5;3m[ExceptionHandler] Authentication failed.
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+(node:1) [MONGOOSE] Warning: Duplicate schema index on {"email":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[Nest] 1  - 01/28/2026, 3:40:49 AM     LOG ;5;3m[InstanceLoader] PassportModule dependencies initialized;5;3m +0ms
+[Nest] 1  - 01/28/2026, 3:40:49 AM     LOG ;5;3m[InstanceLoader] AppModule dependencies initialized;5;3m +0ms
+[Nest] 1  - 01/28/2026, 3:40:49 AM     LOG ;5;3m[InstanceLoader] ConfigHostModule dependencies initialized;5;3m +1ms
+[Nest] 1  - 01/28/2026, 3:40:49 AM     LOG ;5;3m[InstanceLoader] ConfigModule dependencies initialized;5;3m +0ms
+[Nest] 1  - 01/28/2026, 3:40:49 AM     LOG ;5;3m[InstanceLoader] ConfigModule dependencies initialized;5;3m +0ms
+[Nest] 1  - 01/28/2026, 3:40:49 AM     LOG ;5;3m[InstanceLoader] ThrottlerModule dependencies initialized;5;3m +28ms
+[Nest] 1  - 01/28/2026, 3:40:49 AM     LOG ;5;3m[InstanceLoader] JwtModule dependencies initialized;5;3m +1ms
+[Nest] 1  - 01/28/2026, 3:40:49 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (1)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:52 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (2)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:55 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (3)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:40:58 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (4)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:41:01 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (5)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:41:04 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (6)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:41:07 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (7)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[Nest] 1  - 01/28/2026, 3:41:15 AM     LOG ;5;3m[NestFactory] Starting Nest application...
+[Nest] 1  - 01/28/2026, 3:41:15 AM     LOG ;5;3m[InstanceLoader] MongooseModule dependencies initialized;5;3m +28ms
+[Nest] 1  - 01/28/2026, 3:41:15 AM     LOG ;5;3m[InstanceLoader] PassportModule dependencies initialized;5;3m +0ms
+[Nest] 1  - 01/28/2026, 3:41:15 AM     LOG ;5;3m[InstanceLoader] AppModule dependencies initialized;5;3m +0ms
+[Nest] 1  - 01/28/2026, 3:41:15 AM     LOG ;5;3m[InstanceLoader] ConfigHostModule dependencies initialized;5;3m +0ms
+[Nest] 1  - 01/28/2026, 3:41:15 AM     LOG ;5;3m[InstanceLoader] ConfigModule dependencies initialized;5;3m +1ms
+[Nest] 1  - 01/28/2026, 3:41:15 AM     LOG ;5;3m[InstanceLoader] ConfigModule dependencies initialized;5;3m +0ms
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:41:10 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (8)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:41:13 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (9)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:41:13 AM   ERROR ;5;3m[ExceptionHandler] Authentication failed.
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+(node:1) [MONGOOSE] Warning: Duplicate schema index on {"email":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[Nest] 1  - 01/28/2026, 3:41:15 AM     LOG ;5;3m[InstanceLoader] ThrottlerModule dependencies initialized;5;3m +57ms
+[Nest] 1  - 01/28/2026, 3:41:15 AM     LOG ;5;3m[InstanceLoader] JwtModule dependencies initialized;5;3m +1ms
+[Nest] 1  - 01/28/2026, 3:41:15 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (1)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:41:18 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (2)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:41:21 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (3)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:41:24 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (4)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:41:27 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (5)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
+[Nest] 1  - 01/28/2026, 3:41:30 AM   ERROR ;5;3m[MongooseModule] Unable to connect to the database. Retrying (6)...
+MongoServerError: Authentication failed.
+    at Connection.sendCommand (/app/node_modules/mongodb/lib/cmap/connection.js:306:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.command (/app/node_modules/mongodb/lib/cmap/connection.js:334:26)
+    at async executeScram (/app/node_modules/mongodb/lib/cmap/auth/scram.js:79:22)
+    at async ScramSHA256.auth (/app/node_modules/mongodb/lib/cmap/auth/scram.js:39:16)
+    at async performInitialHandshake (/app/node_modules/mongodb/lib/cmap/connect.js:104:13)
+    at async connect (/app/node_modules/mongodb/lib/cmap/connect.js:24:9)
