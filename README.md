@@ -1,199 +1,213 @@
-# 🙏 Você Já Rezou o Terço Hoje?
+# 🙏 Have You Prayed the Rosary Today?
 
-A prayer tracking application with community features.
+> A community-driven prayer tracking app that helps Catholics maintain their daily Rosary practice with streaks, reflections, and social features.
 
-## Project Structure
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/)
+[![NestJS](https://img.shields.io/badge/NestJS-10-red?logo=nestjs)](https://nestjs.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-7.0-green?logo=mongodb)](https://www.mongodb.com/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](https://www.docker.com/)
+
+## ✨ Features
+
+- **Daily Check-ins** - Log your Rosary prayers with mystery selection
+- **Streak Tracking** - Maintain and visualize your prayer consistency
+- **Community Feed** - Share reflections and support others with "Amen"
+- **Prayer Requests** - Post intentions and mark answered prayers
+- **Testimonials** - Share graces received with the community
+
+## 📁 Project Structure
 
 ```
-├── frontend/          # Next.js 14 frontend
+├── frontend/              # Next.js 14 (React)
 │   ├── src/
-│   ├── Dockerfile
-│   └── package.json
-├── backend/           # NestJS API
+│   │   ├── app/          # App Router pages
+│   │   ├── components/   # UI components
+│   │   ├── services/     # API client
+│   │   └── hooks/        # Custom React hooks
+│   └── Dockerfile
+│
+├── backend/               # NestJS API
 │   ├── src/
-│   ├── docker/
-│   ├── Dockerfile
-│   └── package.json
+│   │   └── modules/
+│   │       ├── auth/     # JWT authentication
+│   │       ├── users/    # User management
+│   │       ├── checkins/ # Prayer check-ins
+│   │       └── prayers/  # Prayer requests
+│   ├── docker/           # MongoDB init scripts
+│   └── Dockerfile
+│
 ├── docker-compose.yml      # Local development
-├── docker-compose.prod.yml # Production (Coolify)
-└── .env.example
+└── docker-compose.prod.yml # Production deployment
 ```
 
-## Local Development
+## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js 20+
 - Docker & Docker Compose
-- MongoDB (via Docker)
 
-### Quick Start
+### 1. Clone and Install
 
-1. **Start MongoDB:**
+```bash
+git clone https://github.com/your-username/HaveYouPrayedTheRosaryToday.git
+cd HaveYouPrayedTheRosaryToday
+
+# Install all dependencies
+cd frontend && npm install && cd ..
+cd backend && npm install && cd ..
+```
+
+### 2. Start MongoDB
+
 ```bash
 cd backend
 docker-compose up -d
 ```
 
-2. **Start Backend:**
+### 3. Run the Application
+
+**Backend** (Terminal 1):
 ```bash
 cd backend
-npm install
 npm run start:dev
 ```
 
-3. **Start Frontend:**
+**Frontend** (Terminal 2):
 ```bash
 cd frontend
-npm install
 npm run dev
 ```
 
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:3001/api
-- Swagger Docs: http://localhost:3001/api/docs
-- Mongo Express: http://localhost:8081
+### 4. Access
+
+| Service | URL |
+|---------|-----|
+| Frontend | http://localhost:3000 |
+| API | http://localhost:3001/api |
+| Swagger Docs | http://localhost:3001/api/docs |
+| Mongo Express | http://localhost:8081 |
 
 ---
 
-## 🚀 Coolify Deployment Guide
+## 🐳 Docker Deployment
 
-### Option 1: Docker Compose (Recommended)
+### Local (Full Stack)
 
-1. **In Coolify Dashboard:**
-   - Go to **Projects** → Create new project
-   - Add **Resource** → **Docker Compose**
-   - Connect your Git repository
-   - Set compose file: `docker-compose.prod.yml`
+```bash
+docker-compose up -d --build
+```
 
-2. **Configure Environment Variables:**
-   ```
-   MONGO_ROOT_USER=rosary_admin
-   MONGO_ROOT_PASSWORD=<generate-secure-password>
-   MONGO_APP_USER=rosary_user
-   MONGO_APP_PASSWORD=<generate-secure-password>
-   JWT_SECRET=<generate-32-char-secret>
-   FRONTEND_URL=https://your-domain.com
-   NEXT_PUBLIC_API_URL=https://api.your-domain.com/api
-   ```
+### Production
 
-3. **Configure Domains:**
-   - Frontend: `your-domain.com` → port 3000
-   - Backend: `api.your-domain.com` → port 3001
-
-4. **Enable SSL** via Let's Encrypt
-
-### Option 2: Separate Services
-
-Deploy each service individually for more control:
-
-#### MongoDB
-1. Add Resource → **Database** → **MongoDB**
-2. Note the connection string
-
-#### Backend (NestJS)
-1. Add Resource → **Dockerfile**
-2. Build path: `./backend`
-3. Dockerfile: `Dockerfile`
-4. Environment variables:
-   ```
-   NODE_ENV=production
-   PORT=3001
-   MONGODB_URI=<from-step-1>
-   JWT_SECRET=<your-secret>
-   FRONTEND_URL=https://your-domain.com
-   ```
-5. Domain: `api.your-domain.com`
-
-#### Frontend (Next.js)
-1. Add Resource → **Dockerfile**
-2. Build path: `./frontend`
-3. Dockerfile: `Dockerfile`
-4. Build args:
-   ```
-   NEXT_PUBLIC_API_URL=https://api.your-domain.com/api
-   ```
-5. Domain: `your-domain.com`
+```bash
+docker-compose -f docker-compose.prod.yml up -d --build
+```
 
 ---
 
-## Environment Variables Reference
+## ☁️ Coolify Deployment
 
-### Backend (.env)
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `NODE_ENV` | Environment (production/development) | Yes |
-| `PORT` | Server port (default: 3001) | No |
-| `MONGODB_URI` | MongoDB connection string | Yes |
-| `JWT_SECRET` | Secret for JWT tokens (min 32 chars) | Yes |
-| `JWT_EXPIRES_IN` | Token expiration (default: 7d) | No |
-| `FRONTEND_URL` | Frontend URL for CORS | Yes |
-| `THROTTLE_TTL` | Rate limit window in seconds | No |
-| `THROTTLE_LIMIT` | Max requests per window | No |
+[Coolify](https://coolify.io) is a self-hosted PaaS alternative to Heroku/Vercel.
 
-### Frontend
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `NEXT_PUBLIC_API_URL` | Backend API URL | Yes |
+### Step-by-Step Guide
+
+1. **Create Project** in Coolify Dashboard
+
+2. **Add Resource** → Select **Docker Compose**
+
+3. **Connect Repository** → Your Git repo
+
+4. **Configure:**
+   - Compose file: `docker-compose.prod.yml`
+   - Add environment variables (see below)
+
+5. **Set Domains:**
+   | Service | Domain | Port |
+   |---------|--------|------|
+   | Frontend | `yourdomain.com` | 3000 |
+   | Backend | `api.yourdomain.com` | 3001 |
+
+6. **Enable SSL** → Let's Encrypt
+
+### Required Environment Variables
+
+```env
+# MongoDB
+MONGO_ROOT_USER=rosary_admin
+MONGO_ROOT_PASSWORD=<secure-password>
+MONGO_APP_USER=rosary_user
+MONGO_APP_PASSWORD=<secure-password>
+
+# Authentication
+JWT_SECRET=<min-32-character-secret>
+
+# URLs
+FRONTEND_URL=https://yourdomain.com
+NEXT_PUBLIC_API_URL=https://api.yourdomain.com/api
+```
+
+> ⚠️ **Security:** Always use strong, unique passwords in production.
 
 ---
 
-## API Endpoints
+## 📡 API Reference
 
 ### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/register` | Create account |
+| POST | `/api/auth/login` | Login |
 
 ### Check-ins
-- `POST /api/checkins` - Create prayer check-in
-- `GET /api/checkins/feed` - Public feed
-- `GET /api/checkins/my` - User's check-ins
-- `GET /api/checkins/today` - Today's check-in
-- `POST /api/checkins/:id/amen` - Toggle Amen
-- `POST /api/checkins/:id/comments` - Add comment
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/checkins` | Create check-in |
+| GET | `/api/checkins/feed` | Community feed |
+| GET | `/api/checkins/today` | Today's check-in |
+| GET | `/api/checkins/my` | User's history |
+| POST | `/api/checkins/:id/amen` | Toggle Amen |
+| POST | `/api/checkins/:id/comments` | Add comment |
 
 ### Prayer Requests
-- `POST /api/prayers` - Create prayer request
-- `GET /api/prayers` - List active requests
-- `POST /api/prayers/:id/pray` - Mark praying for
-- `POST /api/prayers/:id/answered` - Mark as answered
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/prayers` | Create request |
+| GET | `/api/prayers` | List requests |
+| POST | `/api/prayers/:id/pray` | Mark praying |
+| POST | `/api/prayers/:id/answered` | Mark answered |
+| GET | `/api/prayers/testimonials` | View testimonials |
 
-### Users
-- `GET /api/users/me` - Current user profile
-- `GET /api/users/me/stats` - User statistics
-- `PUT /api/users/me` - Update profile
-
----
-
-## Tech Stack
-
-**Frontend:**
-- Next.js 14 (App Router)
-- TypeScript
-- Tailwind CSS
-- TanStack Query
-- Shadcn/UI patterns
-
-**Backend:**
-- NestJS 10
-- MongoDB + Mongoose
-- Passport JWT
-- Swagger/OpenAPI
-
-**Infrastructure:**
-- Docker
-- Coolify (self-hosted PaaS)
+### User
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/users/me` | Get profile |
+| PUT | `/api/users/me` | Update profile |
+| GET | `/api/users/me/stats` | Get statistics |
 
 ---
 
-## Security Notes
+## 🛠 Tech Stack
 
-1. **Always change JWT_SECRET in production**
-2. **Use strong MongoDB passwords**
-3. **Enable HTTPS via Coolify/Let's Encrypt**
-4. **Keep dependencies updated**
+| Layer | Technology |
+|-------|------------|
+| **Frontend** | Next.js 14, TypeScript, Tailwind CSS, TanStack Query |
+| **Backend** | NestJS 10, Mongoose, Passport JWT, Swagger |
+| **Database** | MongoDB 7.0 |
+| **Deployment** | Docker, Coolify |
 
 ---
 
-## License
+## 🔒 Security Checklist
 
-MIT
+- [ ] Change `JWT_SECRET` to a unique 32+ character string
+- [ ] Use strong MongoDB passwords
+- [ ] Enable HTTPS in production
+- [ ] Keep dependencies updated
+- [ ] Never commit `.env` files
+
+---
+
+## 📄 License
+
+MIT © 2024
