@@ -1,8 +1,13 @@
 import { Controller, Get, Put, Body, Param, UseGuards, Request } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { Request as ExpressRequest } from 'express';
 import { UsersService } from './users.service';
 import { UpdateUserDto, UserResponseDto } from './dto/user.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+
+interface AuthRequest extends ExpressRequest {
+  user?: { userId: string; email: string };
+}
 
 @ApiTags('users')
 @Controller('users')
@@ -14,16 +19,16 @@ export class UsersController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Obter perfil do usuário atual' })
   @ApiResponse({ status: 200, type: UserResponseDto })
-  async getProfile(@Request() req) {
-    return this.usersService.findById(req.user.userId);
+  async getProfile(@Request() req: AuthRequest) {
+    return this.usersService.findById(req.user!.userId);
   }
 
   @Get('me/stats')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Obter estatísticas do usuário atual' })
-  async getStats(@Request() req) {
-    return this.usersService.getStats(req.user.userId);
+  async getStats(@Request() req: AuthRequest) {
+    return this.usersService.getStats(req.user!.userId);
   }
 
   @Put('me')
@@ -31,8 +36,8 @@ export class UsersController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Atualizar perfil do usuário atual' })
   @ApiResponse({ status: 200, type: UserResponseDto })
-  async updateProfile(@Request() req, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(req.user.userId, updateUserDto);
+  async updateProfile(@Request() req: AuthRequest, @Body() updateUserDto: UpdateUserDto) {
+    return this.usersService.update(req.user!.userId, updateUserDto);
   }
 
   @Get(':id')

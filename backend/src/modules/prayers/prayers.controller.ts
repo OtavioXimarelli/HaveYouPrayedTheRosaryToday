@@ -11,9 +11,14 @@ import {
   Request,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
+import { Request as ExpressRequest } from 'express';
 import { PrayersService } from './prayers.service';
 import { CreatePrayerRequestDto, UpdatePrayerRequestDto, MarkAnsweredDto } from './dto/prayer-request.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+
+interface AuthRequest extends ExpressRequest {
+  user?: { userId: string; email: string };
+}
 
 @ApiTags('Intenções de Oração')
 @Controller('prayers')
@@ -24,8 +29,8 @@ export class PrayersController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Criar nova intenção de oração' })
-  async create(@Request() req, @Body() createDto: CreatePrayerRequestDto) {
-    return this.prayersService.create(req.user.userId, createDto);
+  async create(@Request() req: AuthRequest, @Body() createDto: CreatePrayerRequestDto) {
+    return this.prayersService.create(req.user!.userId, createDto);
   }
 
   @Get()
@@ -37,13 +42,11 @@ export class PrayersController {
     @Query('page') page?: string,
     @Query('limit') limit?: string,
     @Query('category') category?: string,
-    @Request() req?,
   ) {
     const pageNum = page ? parseInt(page, 10) : 1;
     const limitNum = limit ? parseInt(limit, 10) : 20;
-    const userId = req?.user?.userId;
 
-    return this.prayersService.findAll(pageNum, limitNum, category, userId);
+    return this.prayersService.findAll(pageNum, limitNum, category);
   }
 
   @Get('my')
@@ -53,14 +56,14 @@ export class PrayersController {
   @ApiQuery({ name: 'page', required: false, type: Number })
   @ApiQuery({ name: 'limit', required: false, type: Number })
   async getMyPrayerRequests(
-    @Request() req,
+    @Request() req: AuthRequest,
     @Query('page') page?: string,
     @Query('limit') limit?: string,
   ) {
     const pageNum = page ? parseInt(page, 10) : 1;
     const limitNum = limit ? parseInt(limit, 10) : 20;
 
-    return this.prayersService.findUserPrayerRequests(req.user.userId, pageNum, limitNum);
+    return this.prayersService.findUserPrayerRequests(req.user!.userId, pageNum, limitNum);
   }
 
   @Get('testimonials')
@@ -89,18 +92,18 @@ export class PrayersController {
   @ApiOperation({ summary: 'Atualizar intenção de oração' })
   async update(
     @Param('id') id: string,
-    @Request() req,
+    @Request() req: AuthRequest,
     @Body() updateDto: UpdatePrayerRequestDto,
   ) {
-    return this.prayersService.update(id, req.user.userId, updateDto);
+    return this.prayersService.update(id, req.user!.userId, updateDto);
   }
 
   @Post(':id/pray')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Marcar que está rezando por esta intenção' })
-  async togglePrayingFor(@Param('id') id: string, @Request() req) {
-    return this.prayersService.togglePrayingFor(id, req.user.userId);
+  async togglePrayingFor(@Param('id') id: string, @Request() req: AuthRequest) {
+    return this.prayersService.togglePrayingFor(id, req.user!.userId);
   }
 
   @Post(':id/answered')
@@ -109,18 +112,18 @@ export class PrayersController {
   @ApiOperation({ summary: 'Marcar intenção como atendida' })
   async markAsAnswered(
     @Param('id') id: string,
-    @Request() req,
+    @Request() req: AuthRequest,
     @Body() markAnsweredDto: MarkAnsweredDto,
   ) {
-    return this.prayersService.markAsAnswered(id, req.user.userId, markAnsweredDto);
+    return this.prayersService.markAsAnswered(id, req.user!.userId, markAnsweredDto);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Excluir intenção de oração' })
-  async delete(@Param('id') id: string, @Request() req) {
-    await this.prayersService.delete(id, req.user.userId);
+  async delete(@Param('id') id: string, @Request() req: AuthRequest) {
+    await this.prayersService.delete(id, req.user!.userId);
     return { message: 'Intenção excluída com sucesso' };
   }
 }

@@ -1,6 +1,16 @@
 import { IsString, IsOptional, IsBoolean, IsEnum, MaxLength, MinLength } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IntentionTag } from '../../checkins/schemas/checkin.schema';
+export type IntentionTag = 
+  | 'Família'
+  | 'Paz'
+  | 'Saúde'
+  | 'Trabalho'
+  | 'Estudos'
+  | 'Vocação'
+  | 'Conversão'
+  | 'Igreja'
+  | 'Fiéis Defuntos'
+  | 'Pessoal';
 
 export class CreatePrayerRequestDto {
   @ApiProperty({ description: 'Título da intenção de oração' })

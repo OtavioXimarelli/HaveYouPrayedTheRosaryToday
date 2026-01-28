@@ -10,9 +10,14 @@ import {
   Request,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
+import { Request as ExpressRequest } from 'express';
 import { CheckInsService } from './checkins.service';
-import { CreateCheckInDto, AddCommentDto, FeedQueryDto } from './dto/checkin.dto';
+import { CreateCheckInDto, AddCommentDto } from './dto/checkin.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+
+interface AuthRequest extends ExpressRequest {
+  user?: { userId: string; email: string };
+}
 
 @ApiTags('Check-ins')
 @Controller('checkins')
@@ -23,8 +28,8 @@ export class CheckInsController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Criar novo check-in de oração' })
-  async create(@Request() req, @Body() createCheckInDto: CreateCheckInDto) {
-    return this.checkInsService.create(req.user.userId, createCheckInDto);
+  async create(@Request() req: AuthRequest, @Body() createCheckInDto: CreateCheckInDto) {
+    return this.checkInsService.create(req.user!.userId, createCheckInDto);
   }
 
   @Get('feed')
@@ -34,21 +39,19 @@ export class CheckInsController {
   async getFeed(
     @Query('page') page?: string,
     @Query('limit') limit?: string,
-    @Request() req?,
   ) {
     const pageNum = page ? parseInt(page, 10) : 1;
     const limitNum = limit ? parseInt(limit, 10) : 20;
-    const userId = req?.user?.userId;
     
-    return this.checkInsService.findPublicFeed(pageNum, limitNum, userId);
+    return this.checkInsService.findPublicFeed(pageNum, limitNum);
   }
 
   @Get('today')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Verificar se usuário já fez check-in hoje' })
-  async getTodayCheckIn(@Request() req) {
-    const checkIn = await this.checkInsService.getTodayCheckIn(req.user.userId);
+  async getTodayCheckIn(@Request() req: AuthRequest) {
+    const checkIn = await this.checkInsService.getTodayCheckIn(req.user!.userId);
     return {
       hasCheckedIn: !!checkIn,
       checkIn,
@@ -62,22 +65,22 @@ export class CheckInsController {
   @ApiQuery({ name: 'page', required: false, type: Number })
   @ApiQuery({ name: 'limit', required: false, type: Number })
   async getMyCheckIns(
-    @Request() req,
+    @Request() req: AuthRequest,
     @Query('page') page?: string,
     @Query('limit') limit?: string,
   ) {
     const pageNum = page ? parseInt(page, 10) : 1;
     const limitNum = limit ? parseInt(limit, 10) : 20;
     
-    return this.checkInsService.findUserCheckIns(req.user.userId, pageNum, limitNum);
+    return this.checkInsService.findUserCheckIns(req.user!.userId, pageNum, limitNum);
   }
 
   @Get('stats')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Obter estatísticas de check-ins do usuário' })
-  async getStats(@Request() req) {
-    return this.checkInsService.getCheckInStats(req.user.userId);
+  async getStats(@Request() req: AuthRequest) {
+    return this.checkInsService.getCheckInStats(req.user!.userId);
   }
 
   @Get(':id')
@@ -90,8 +93,8 @@ export class CheckInsController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Dar/remover Amém em um check-in' })
-  async toggleAmen(@Param('id') id: string, @Request() req) {
-    return this.checkInsService.toggleAmen(id, req.user.userId);
+  async toggleAmen(@Param('id') id: string, @Request() req: AuthRequest) {
+    return this.checkInsService.toggleAmen(id, req.user!.userId);
   }
 
   @Post(':id/comments')
@@ -100,18 +103,18 @@ export class CheckInsController {
   @ApiOperation({ summary: 'Adicionar comentário em um check-in' })
   async addComment(
     @Param('id') id: string,
-    @Request() req,
+    @Request() req: AuthRequest,
     @Body() addCommentDto: AddCommentDto,
   ) {
-    return this.checkInsService.addComment(id, req.user.userId, addCommentDto);
+    return this.checkInsService.addComment(id, req.user!.userId, addCommentDto);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Excluir um check-in' })
-  async delete(@Param('id') id: string, @Request() req) {
-    await this.checkInsService.delete(id, req.user.userId);
+  async delete(@Param('id') id: string, @Request() req: AuthRequest) {
+    await this.checkInsService.delete(id, req.user!.userId);
     return { message: 'Check-in excluído com sucesso' };
   }
 }

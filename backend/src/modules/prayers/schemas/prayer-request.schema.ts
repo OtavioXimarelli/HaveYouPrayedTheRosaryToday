@@ -1,8 +1,19 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
-import { IntentionTag } from '../checkins/schemas/checkin.schema';
 
 export type PrayerRequestDocument = PrayerRequest & Document;
+
+export type IntentionTag = 
+  | 'Família'
+  | 'Paz'
+  | 'Saúde'
+  | 'Trabalho'
+  | 'Estudos'
+  | 'Vocação'
+  | 'Conversão'
+  | 'Igreja'
+  | 'Fiéis Defuntos'
+  | 'Pessoal';
 
 @Schema({ timestamps: true })
 export class PrayerRequest {

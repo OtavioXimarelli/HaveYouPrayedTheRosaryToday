@@ -37,7 +37,7 @@ export class AuthResponseDto {
     id: string;
     name: string;
     email: string;
-    avatarUrl?: string;
+    avatar?: string;
     currentStreak: number;
     longestStreak: number;
     totalCheckIns: number;

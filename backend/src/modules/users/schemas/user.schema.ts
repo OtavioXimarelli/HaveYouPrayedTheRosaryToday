@@ -83,7 +83,9 @@ UserSchema.set('toJSON', {
   virtuals: true,
   versionKey: false,
   transform: (doc, ret) => {
-    delete ret.passwordHash;
+    if (ret.passwordHash) {
+      ret.passwordHash = undefined as unknown as string;
+    }
     return ret;
   },
 });
