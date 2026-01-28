@@ -1,122 +1,199 @@
-# 📿 Have You Prayed the Rosary Today?
+# 🙏 Você Já Rezou o Terço Hoje?
 
-A beautiful, minimalist web application to track daily Rosary prayers and connect with a supportive prayer community.
+A prayer tracking application with community features.
 
-## Features
-
-- **Daily Check-in**: Record your daily Rosary prayer with mystery selection, reflections, and intentions
-- **Smart Mystery Selection**: Auto-suggests the appropriate mystery based on the day of the week
-- **Streak Tracking**: Gamification through consecutive day streaks
-- **Community Feed**: See and interact with other believers' prayer check-ins
-- **Amen Button**: Like system for prayer support (similar to a "like" button)
-- **Comments**: Leave encouraging words for fellow pray-ers
-- **Mobile-First Design**: Responsive design optimized for all devices
-
-## Tech Stack
-
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **UI Components**: Custom Shadcn/UI-style components
-- **State Management**: TanStack Query (React Query)
-- **Icons**: Lucide React
-
-## Architecture
-
-This project uses a **Service/Repository Pattern** to ensure seamless transition from mock data to a real backend.
+## Project Structure
 
 ```
-src/
-├── app/                    # Next.js App Router pages
-├── components/             # React components
-│   ├── ui/                 # Base UI components (Button, Dialog, etc.)
-│   ├── hero-section.tsx    # Main hero with CTA
-│   ├── check-in-modal.tsx  # Prayer check-in form
-│   ├── community-feed.tsx  # Social feed of prayers
-│   └── streak-counter.tsx  # Gamification display
-├── hooks/                  # Custom React hooks
-│   ├── use-rosary.ts       # API hooks (React Query)
-│   └── use-toast.ts        # Toast notifications
-├── lib/                    # Utility functions
-├── providers/              # React context providers
-├── services/               # API service layer
-│   ├── api.ts              # Service functions (mock implementation)
-│   └── mockData.ts         # Mock data store
-└── types/                  # TypeScript type definitions
+├── frontend/          # Next.js 14 frontend
+│   ├── src/
+│   ├── Dockerfile
+│   └── package.json
+├── backend/           # NestJS API
+│   ├── src/
+│   ├── docker/
+│   ├── Dockerfile
+│   └── package.json
+├── docker-compose.yml      # Local development
+├── docker-compose.prod.yml # Production (Coolify)
+└── .env.example
 ```
 
-### Mock Services
-
-The `services/api.ts` file contains mock implementations that simulate network latency:
-
-```typescript
-// Example: Submit a check-in
-export async function submitCheckIn(request: CreateCheckInRequest): Promise<CreateCheckInResponse> {
-  await delay(500); // Simulate network latency
-  // ... mock implementation
-}
-```
-
-When the Java Spring Boot backend is ready, simply replace the mock implementations with actual API calls.
-
-## Getting Started
+## Local Development
 
 ### Prerequisites
+- Node.js 20+
+- Docker & Docker Compose
+- MongoDB (via Docker)
 
-- Node.js 18+ 
-- npm or pnpm
+### Quick Start
 
-### Installation
-
+1. **Start MongoDB:**
 ```bash
-# Install dependencies
-npm install
+cd backend
+docker-compose up -d
+```
 
-# Run development server
+2. **Start Backend:**
+```bash
+cd backend
+npm install
+npm run start:dev
+```
+
+3. **Start Frontend:**
+```bash
+cd frontend
+npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see the application.
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:3001/api
+- Swagger Docs: http://localhost:3001/api/docs
+- Mongo Express: http://localhost:8081
 
-### Build for Production
+---
 
-```bash
-npm run build
-npm start
-```
+## 🚀 Coolify Deployment Guide
 
-## Design System
+### Option 1: Docker Compose (Recommended)
 
-### Colors
+1. **In Coolify Dashboard:**
+   - Go to **Projects** → Create new project
+   - Add **Resource** → **Docker Compose**
+   - Connect your Git repository
+   - Set compose file: `docker-compose.prod.yml`
 
-- **Navy** (Primary): `#1E3A5F` - Deep, serene background
-- **Gold** (Accent): `#D4AF37` - Subtle highlights and CTAs
-- **White**: Clean text and cards
+2. **Configure Environment Variables:**
+   ```
+   MONGO_ROOT_USER=rosary_admin
+   MONGO_ROOT_PASSWORD=<generate-secure-password>
+   MONGO_APP_USER=rosary_user
+   MONGO_APP_PASSWORD=<generate-secure-password>
+   JWT_SECRET=<generate-32-char-secret>
+   FRONTEND_URL=https://your-domain.com
+   NEXT_PUBLIC_API_URL=https://api.your-domain.com/api
+   ```
 
-### Typography
+3. **Configure Domains:**
+   - Frontend: `your-domain.com` → port 3000
+   - Backend: `api.your-domain.com` → port 3001
 
-- Clean, readable fonts with proper hierarchy
-- Mobile-optimized sizes
+4. **Enable SSL** via Let's Encrypt
 
-## Future Backend Integration
+### Option 2: Separate Services
 
-The mock services are designed to be replaced with real API calls:
+Deploy each service individually for more control:
 
-1. Update `services/api.ts` to call your Java Spring Boot endpoints
-2. Keep the same function signatures
-3. UI components remain unchanged
+#### MongoDB
+1. Add Resource → **Database** → **MongoDB**
+2. Note the connection string
 
-Example endpoint mappings:
-- `POST /api/checkins` → `submitCheckIn()`
-- `GET /api/feed` → `getFeed()`
-- `GET /api/users/me/stats` → `getUserStats()`
-- `POST /api/checkins/:id/amen` → `addAmen()`
-- `POST /api/checkins/:id/comments` → `addComment()`
+#### Backend (NestJS)
+1. Add Resource → **Dockerfile**
+2. Build path: `./backend`
+3. Dockerfile: `Dockerfile`
+4. Environment variables:
+   ```
+   NODE_ENV=production
+   PORT=3001
+   MONGODB_URI=<from-step-1>
+   JWT_SECRET=<your-secret>
+   FRONTEND_URL=https://your-domain.com
+   ```
+5. Domain: `api.your-domain.com`
+
+#### Frontend (Next.js)
+1. Add Resource → **Dockerfile**
+2. Build path: `./frontend`
+3. Dockerfile: `Dockerfile`
+4. Build args:
+   ```
+   NEXT_PUBLIC_API_URL=https://api.your-domain.com/api
+   ```
+5. Domain: `your-domain.com`
+
+---
+
+## Environment Variables Reference
+
+### Backend (.env)
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `NODE_ENV` | Environment (production/development) | Yes |
+| `PORT` | Server port (default: 3001) | No |
+| `MONGODB_URI` | MongoDB connection string | Yes |
+| `JWT_SECRET` | Secret for JWT tokens (min 32 chars) | Yes |
+| `JWT_EXPIRES_IN` | Token expiration (default: 7d) | No |
+| `FRONTEND_URL` | Frontend URL for CORS | Yes |
+| `THROTTLE_TTL` | Rate limit window in seconds | No |
+| `THROTTLE_LIMIT` | Max requests per window | No |
+
+### Frontend
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `NEXT_PUBLIC_API_URL` | Backend API URL | Yes |
+
+---
+
+## API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login
+
+### Check-ins
+- `POST /api/checkins` - Create prayer check-in
+- `GET /api/checkins/feed` - Public feed
+- `GET /api/checkins/my` - User's check-ins
+- `GET /api/checkins/today` - Today's check-in
+- `POST /api/checkins/:id/amen` - Toggle Amen
+- `POST /api/checkins/:id/comments` - Add comment
+
+### Prayer Requests
+- `POST /api/prayers` - Create prayer request
+- `GET /api/prayers` - List active requests
+- `POST /api/prayers/:id/pray` - Mark praying for
+- `POST /api/prayers/:id/answered` - Mark as answered
+
+### Users
+- `GET /api/users/me` - Current user profile
+- `GET /api/users/me/stats` - User statistics
+- `PUT /api/users/me` - Update profile
+
+---
+
+## Tech Stack
+
+**Frontend:**
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- TanStack Query
+- Shadcn/UI patterns
+
+**Backend:**
+- NestJS 10
+- MongoDB + Mongoose
+- Passport JWT
+- Swagger/OpenAPI
+
+**Infrastructure:**
+- Docker
+- Coolify (self-hosted PaaS)
+
+---
+
+## Security Notes
+
+1. **Always change JWT_SECRET in production**
+2. **Use strong MongoDB passwords**
+3. **Enable HTTPS via Coolify/Let's Encrypt**
+4. **Keep dependencies updated**
+
+---
 
 ## License
 
 MIT
-
----
-
-*Built with faith and love* 🙏

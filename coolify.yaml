@@ -1,0 +1,23 @@
+# Coolify-specific deployment configuration
+# This file provides hints to Coolify for deployment
+
+# Build and deployment settings
+build:
+  # Use docker-compose for multi-service deployment
+  type: docker-compose
+  file: docker-compose.prod.yml
+
+# Service configurations
+services:
+  frontend:
+    port: 3000
+    healthcheck: /
+    
+  backend:
+    port: 3001
+    healthcheck: /api/health
+
+# Volume persistence
+volumes:
+  mongodb_data:
+    persist: true

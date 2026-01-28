@@ -7,6 +7,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { CheckInsModule } from './modules/checkins/checkins.module';
 import { PrayersModule } from './modules/prayers/prayers.module';
+import { HealthController } from './health.controller';
 
 @Module({
   imports: [
@@ -41,5 +42,6 @@ import { PrayersModule } from './modules/prayers/prayers.module';
     CheckInsModule,
     PrayersModule,
   ],
+  controllers: [HealthController],
 })
 export class AppModule {}

@@ -1,0 +1,73 @@
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: rosary-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: rosary-app
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - rosary-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # NestJS Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: rosary-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      MONGODB_URI: mongodb://${MONGO_APP_USER}:${MONGO_APP_PASSWORD}@mongodb:27017/rosary-app?authSource=rosary-app
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: 7d
+      FRONTEND_URL: ${FRONTEND_URL}
+    expose:
+      - "3001"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - rosary-network
+    labels:
+      - "coolify.managed=true"
+
+  # Next.js Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+    container_name: rosary-frontend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+    expose:
+      - "3000"
+    depends_on:
+      - backend
+    networks:
+      - rosary-network
+    labels:
+      - "coolify.managed=true"
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  rosary-network:
+    driver: bridge
