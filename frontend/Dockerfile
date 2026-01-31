@@ -29,9 +29,6 @@ RUN pnpm run build
 # Production stage
 FROM node:20-alpine AS runner
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
-
 WORKDIR /app
 
 ENV NODE_ENV=production
@@ -41,10 +38,14 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Copy built assets from the correct workspace location
-COPY --from=builder --chown=nextjs:nodejs /workspace/frontend/public ./public
+# Copy standalone output (includes server.js and necessary dependencies)
 COPY --from=builder --chown=nextjs:nodejs /workspace/frontend/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /workspace/frontend/.next/static ./.next/static
+
+# Copy static files
+COPY --from=builder --chown=nextjs:nodejs /workspace/frontend/.next/static ./frontend/.next/static
+
+# Copy public files
+COPY --from=builder --chown=nextjs:nodejs /workspace/frontend/public ./frontend/public
 
 USER nextjs
 
@@ -53,4 +54,5 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["node", "server.js"]
+# The server.js is in the frontend subdirectory due to outputFileTracingRoot
+CMD ["node", "frontend/server.js"]
