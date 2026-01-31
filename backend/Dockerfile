@@ -7,8 +7,8 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 # Set working directory to workspace root
 WORKDIR /workspace
 
-# Force cache bust for fresh build
-ARG CACHEBUST=1
+# Force cache bust - update timestamp to force rebuild
+ARG CACHEBUST=2026-01-31-v2
 
 ENV NODE_ENV=production
 
