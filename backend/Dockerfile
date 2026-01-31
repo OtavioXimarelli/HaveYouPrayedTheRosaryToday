@@ -7,6 +7,9 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 # Set working directory to workspace root
 WORKDIR /workspace
 
+# Force cache bust for fresh build
+ARG CACHEBUST=1
+
 ENV NODE_ENV=production
 
 # Copy workspace files (monorepo structure)
