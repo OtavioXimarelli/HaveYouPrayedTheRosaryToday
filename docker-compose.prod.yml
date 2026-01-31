@@ -33,7 +33,7 @@ services:
       MONGODB_URI: mongodb://rosary_root:rosary_root_password_2024@mongodb:27017/rosary-app?authSource=admin
       JWT_SECRET: super-secret-jwt-key-for-rosary-app-2024
       JWT_EXPIRES_IN: 7d
-      FRONTEND_URL: http://ngocw0kcg4kcwckkscgcksss.72.61.24.223.sslip.io
+      FRONTEND_URL: https://rosario.ximarelli.dev
     expose:
       - "3001"
     depends_on:
@@ -46,7 +46,7 @@ services:
       context: .
       dockerfile: frontend/Dockerfile
       args:
-        NEXT_PUBLIC_API_URL: http://tgswog4cw8ogw084wskosk04.72.61.24.223.sslip.io/api
+        NEXT_PUBLIC_API_URL: https://rosario.ximarelli.dev/api
     deploy:
       resources:
         limits:
@@ -55,7 +55,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3000
-      NEXT_PUBLIC_API_URL: http://tgswog4cw8ogw084wskosk04.72.61.24.223.sslip.io/api
+      NEXT_PUBLIC_API_URL: https://rosario.ximarelli.dev/api
     expose:
       - "3000"
     depends_on:
