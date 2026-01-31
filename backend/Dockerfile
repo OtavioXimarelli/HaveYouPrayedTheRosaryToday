@@ -8,7 +8,7 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /workspace
 
 # Force cache bust - update timestamp to force rebuild
-ARG CACHEBUST=2026-01-31-v2
+ARG CACHEBUST=2026-01-31-v3
 
 ENV NODE_ENV=production
 
@@ -34,14 +34,11 @@ ENV NODE_ENV=production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nestjs
 
-# Copy built dist from backend
-COPY --from=builder --chown=nestjs:nodejs /workspace/backend/dist ./dist
+# Copy the entire workspace to preserve pnpm symlink structure
+COPY --from=builder --chown=nestjs:nodejs /workspace ./
 
-# Copy node_modules from workspace root (pnpm workspace structure)
-COPY --from=builder --chown=nestjs:nodejs /workspace/node_modules ./node_modules
-
-# Copy backend package.json
-COPY --from=builder --chown=nestjs:nodejs /workspace/backend/package*.json ./
+# The backend dist and node_modules are accessible via workspace structure
+WORKDIR /app/backend
 
 USER nestjs
 
@@ -49,4 +46,5 @@ EXPOSE 3001
 
 ENV PORT=3001
 
+# Run from backend directory where symlinks are valid
 CMD ["node", "dist/main.js"]
