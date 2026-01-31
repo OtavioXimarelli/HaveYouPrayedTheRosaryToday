@@ -4,16 +4,20 @@ FROM node:20-alpine AS builder
 # Install pnpm
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
-WORKDIR /app
+# Set working directory to workspace root
+WORKDIR /workspace
+
+ENV NODE_ENV=production
+
+# Copy workspace files (monorepo structure)
+COPY pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY backend ./backend
 
 # Install dependencies
-COPY package*.json ./
-RUN pnpm install --no-frozen-lockfile
-
-# Copy source code
-COPY . .
+RUN pnpm install --filter=backend --frozen-lockfile
 
 # Build the application
+WORKDIR /workspace/backend
 RUN pnpm run build
 
 # Production stage
@@ -30,10 +34,10 @@ ENV NODE_ENV=production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nestjs
 
-# Copy built assets
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package*.json ./
+# Copy built assets from the correct workspace location
+COPY --from=builder --chown=nestjs:nodejs /workspace/backend/dist ./dist
+COPY --from=builder --chown=nestjs:nodejs /workspace/backend/node_modules ./node_modules
+COPY --from=builder --chown=nestjs:nodejs /workspace/backend/package*.json ./
 
 USER nestjs
 

@@ -4,24 +4,26 @@ FROM node:20-alpine AS builder
 # Install pnpm
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
-WORKDIR /app
+# Set working directory to workspace root
+WORKDIR /workspace
 
 # Accept build arguments
 ARG NEXT_PUBLIC_API_URL=http://localhost:3001/api
 ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 
-# Force production environment for build (Coolify may inject development)
+# Force production environment for build
 ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Copy workspace files (monorepo structure)
+COPY pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY frontend ./frontend
 
 # Install dependencies
-COPY package*.json ./
-RUN pnpm install --no-frozen-lockfile
-
-# Copy source code
-COPY . .
+RUN pnpm install --filter=frontend --frozen-lockfile
 
 # Build the application
-ENV NEXT_TELEMETRY_DISABLED=1
+WORKDIR /workspace/frontend
 RUN pnpm run build
 
 # Production stage
@@ -39,10 +41,10 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Copy built assets
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
+# Copy built assets from the correct workspace location
+COPY --from=builder --chown=nextjs:nodejs /workspace/frontend/public ./public
+COPY --from=builder --chown=nextjs:nodejs /workspace/frontend/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /workspace/frontend/.next/static ./.next/static
 
 USER nextjs
 

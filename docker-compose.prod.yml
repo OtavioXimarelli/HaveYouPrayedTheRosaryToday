@@ -20,8 +20,8 @@ services:
   # NestJS Backend API
   backend:
     build:
-      context: ./backend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: backend/Dockerfile
     deploy:
       resources:
         limits:
@@ -43,8 +43,8 @@ services:
   # Next.js Frontend
   frontend:
     build:
-      context: ./frontend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: frontend/Dockerfile
       args:
         NEXT_PUBLIC_API_URL: http://tgswog4cw8ogw084wskosk04.72.61.24.223.sslip.io/api
     deploy:
