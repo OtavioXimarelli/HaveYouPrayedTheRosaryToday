@@ -23,9 +23,6 @@ RUN pnpm run build
 # Production stage
 FROM node:20-alpine AS runner
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
-
 WORKDIR /app
 
 ENV NODE_ENV=production
@@ -34,9 +31,13 @@ ENV NODE_ENV=production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nestjs
 
-# Copy built assets from the correct workspace location
+# Copy built dist from backend
 COPY --from=builder --chown=nestjs:nodejs /workspace/backend/dist ./dist
-COPY --from=builder --chown=nestjs:nodejs /workspace/backend/node_modules ./node_modules
+
+# Copy node_modules from workspace root (pnpm workspace structure)
+COPY --from=builder --chown=nestjs:nodejs /workspace/node_modules ./node_modules
+
+# Copy backend package.json
 COPY --from=builder --chown=nestjs:nodejs /workspace/backend/package*.json ./
 
 USER nestjs
