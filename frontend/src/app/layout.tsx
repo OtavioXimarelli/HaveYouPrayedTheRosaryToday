@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { QueryProvider } from "@/providers/query-provider";
 import { Toaster } from "@/components/ui/toaster";
+import { Navbar } from "@/components/navbar";
 
 // Use local font to avoid Google Fonts fetch issues in Docker builds
 const inter = localFont({
@@ -54,6 +55,7 @@ export default function RootLayout({
     <html lang="pt-BR" className="dark">
       <body className={`${inter.variable} font-sans`}>
         <QueryProvider>
+          <Navbar />
           {children}
           <Toaster />
         </QueryProvider>
