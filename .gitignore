@@ -7,6 +7,13 @@ node_modules
 .pnp.js
 .yarn/install-state.gz
 
+# pnpm
+.pnpm-debug.log*
+
+# npm/yarn (not used)
+package-lock.json
+yarn.lock
+
 # testing
 coverage
 **/coverage

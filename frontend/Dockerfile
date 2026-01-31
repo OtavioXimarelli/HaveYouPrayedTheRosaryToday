@@ -1,6 +1,9 @@
 # Build stage
 FROM node:20-alpine AS builder
 
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
 WORKDIR /app
 
 # Accept build arguments
@@ -11,18 +14,21 @@ ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 ENV NODE_ENV=production
 
 # Install dependencies (need to temporarily set to development for devDependencies)
-COPY package*.json ./
-RUN NODE_ENV=development npm ci
+COPY package*.json pnpm-lock.yaml* ./
+RUN NODE_ENV=development pnpm install --frozen-lockfile
 
 # Copy source code
 COPY . .
 
 # Build the application
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN npm run build
+RUN pnpm run build
 
 # Production stage
 FROM node:20-alpine AS runner
+
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
 WORKDIR /app
 
