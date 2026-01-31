@@ -13,9 +13,9 @@ ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 # Force production environment for build (Coolify may inject development)
 ENV NODE_ENV=production
 
-# Install dependencies (need to temporarily set to development for devDependencies)
-COPY package*.json pnpm-lock.yaml* ./
-RUN NODE_ENV=development pnpm install --frozen-lockfile
+# Install dependencies
+COPY package*.json ./
+RUN pnpm install --no-frozen-lockfile
 
 # Copy source code
 COPY . .
