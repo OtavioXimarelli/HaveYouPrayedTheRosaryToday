@@ -86,12 +86,12 @@ export function Navbar() {
   return (
     <>
       {/* Logo - Fixed on the opposite side */}
-      <div className="fixed left-4 sm:left-6 top-4 sm:top-6 z-[100] flex items-center gap-2">
+      {/* <div className="fixed left-4 sm:left-6 top-4 sm:top-6 z-[100] flex items-center gap-2">
         <span className="text-2xl">📿</span>
         <span className="text-white font-semibold hidden sm:inline">
           Terço Hoje
         </span>
-      </div>
+      </div> */}
 
       <StaggeredMenu
         position="right"

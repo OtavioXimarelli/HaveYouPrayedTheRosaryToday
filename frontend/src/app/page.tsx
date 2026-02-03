@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { HeroSection } from "@/components/hero-section";
 import { CommunityFeed } from "@/components/community-feed";
 import { AuthModal } from "@/components/auth-modal";
@@ -8,6 +9,7 @@ import { Heart, Users, TrendingUp, Calendar, Sparkles, Shield, Check } from "luc
 import { Button } from "@/components/ui/button";
 
 export default function HomePage() {
+  const router = useRouter();
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "signup">("signup");
 
@@ -309,10 +311,10 @@ export default function HomePage() {
             <div>
               <h4 className="text-white font-bold mb-3 sm:mb-4 text-base sm:text-lg">Sobre o Rosário</h4>
               <ul className="space-y-2 sm:space-y-3 text-sm text-blue-200">
-                <li className="hover:text-gold transition-colors cursor-pointer touch-manipulation">📖 Como rezar o terço</li>
-                <li className="hover:text-gold transition-colors cursor-pointer touch-manipulation">📜 História do Rosário</li>
-                <li className="hover:text-gold transition-colors cursor-pointer touch-manipulation">🌟 Mistérios do dia</li>
-                <li className="hover:text-gold transition-colors cursor-pointer touch-manipulation">🙏 Orações tradicionais</li>
+                <li className="hover:text-gold transition-colors cursor-pointer touch-manipulation" onClick={() => router.push("/como-rezar")}>📖 Como rezar o terço</li>
+                <li className="hover:text-gold transition-colors cursor-pointer touch-manipulation" onClick={() => router.push("/historia")}>📜 História do Rosário</li>
+                <li className="hover:text-gold transition-colors cursor-pointer touch-manipulation" onClick={() => router.push("/misterios-do-dia")}>🌟 Mistérios do dia</li>
+                <li className="hover:text-gold transition-colors cursor-pointer touch-manipulation" onClick={() => router.push("/oracoes-tradicionais")}>🙏 Orações tradicionais</li>
               </ul>
             </div>
             
