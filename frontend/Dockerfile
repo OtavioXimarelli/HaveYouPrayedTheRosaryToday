@@ -26,6 +26,12 @@ RUN pnpm install --filter=frontend --frozen-lockfile
 WORKDIR /workspace/frontend
 RUN pnpm run build
 
+# Debug: List what was created
+RUN echo "=== Contents of .next directory ===" && \
+    ls -la .next/ && \
+    echo "=== Checking for standalone ===" && \
+    (ls -la .next/standalone/ || echo "standalone directory not found")
+
 # Production stage
 FROM node:20-alpine AS runner
 
@@ -38,13 +44,9 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Copy standalone output (includes server.js and necessary dependencies)
+# Verify standalone output exists and copy it
 COPY --from=builder --chown=nextjs:nodejs /workspace/frontend/.next/standalone ./
-
-# Copy static files
 COPY --from=builder --chown=nextjs:nodejs /workspace/frontend/.next/static ./frontend/.next/static
-
-# Copy public files
 COPY --from=builder --chown=nextjs:nodejs /workspace/frontend/public ./frontend/public
 
 USER nextjs
