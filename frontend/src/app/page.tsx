@@ -417,7 +417,7 @@ export default function HomePage() {
               Feito com fé e amor • {new Date().getFullYear()} • Você Já Rezou o Terço Hoje?
             </p>
             <p className="text-slate-600 text-sm italic">
-              "Reze o Rosário todos os dias para obter a paz no mundo" - Nossa Senhora de Fátima
+              &ldquo;Reze o Rosário todos os dias para obter a paz no mundo&rdquo; - Nossa Senhora de Fátima
             </p>
           </div>
         </div>
