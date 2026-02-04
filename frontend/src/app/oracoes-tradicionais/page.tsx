@@ -28,7 +28,11 @@ export default function OracoesPage() {
       icon: "✝",
       title: "Sinal da Cruz",
       subtitle: "Início e fim do Rosário",
-      latin: "In nomine Patris, et Filii, et Spiritus Sancti. Amen.",
+      latinTitle: "Signum Crucis",
+      latin: `In nomine Patris,
+et Filii,
+et Spiritus Sancti.
+Amen.`,
       text: `Em nome do Pai,
 e do Filho
 e do Espírito Santo.
@@ -39,7 +43,27 @@ Amém.`,
       icon: "📖",
       title: "Credo Apostólico",
       subtitle: "Rezado no crucifixo — Símbolo dos Apóstolos",
-      latin: "Credo in Deum Patrem omnipotentem...",
+      latinTitle: "Symbolum Apostolorum",
+      latin: `Credo in Deum Patrem omnipotentem,
+Creatorem caeli et terrae,
+et in Iesum Christum, Filium Eius unicum, Dominum nostrum,
+qui conceptus est de Spiritu Sancto,
+natus ex Maria Virgine,
+passus sub Pontio Pilato,
+crucifixus, mortuus, et sepultus,
+descendit ad inferos,
+tertia die resurrexit a mortuis,
+ascendit ad caelos,
+sedet ad dexteram Dei Patris omnipotentis,
+inde venturus est iudicare vivos et mortuos.
+
+Credo in Spiritum Sanctum,
+sanctam Ecclesiam catholicam,
+sanctorum communionem,
+remissionem peccatorum,
+carnis resurrectionem,
+vitam aeternam.
+Amen.`,
       text: `Creio em Deus Pai todo-poderoso,
 Criador do céu e da terra.
 
@@ -67,7 +91,19 @@ Amém.`,
       icon: "👨",
       title: "Pai Nosso",
       subtitle: "Oração do Senhor — antes de cada dezena",
-      latin: "Pater noster, qui es in caelis...",
+      latinTitle: "Pater Noster",
+      latin: `Pater noster, qui es in caelis,
+sanctificetur nomen tuum.
+Adveniat regnum tuum.
+Fiat voluntas tua,
+sicut in caelo et in terra.
+
+Panem nostrum quotidianum da nobis hodie,
+et dimitte nobis debita nostra
+sicut et nos dimittimus debitoribus nostris.
+Et ne nos inducas in tentationem,
+sed libera nos a malo.
+Amen.`,
       text: `Pai nosso que estais nos céus,
 santificado seja o vosso Nome,
 venha a nós o vosso Reino,
@@ -87,7 +123,16 @@ Amém.`,
       icon: "👸",
       title: "Ave Maria",
       subtitle: "Saudação Angélica — dez vezes em cada dezena",
-      latin: "Ave Maria, gratia plena, Dominus tecum...",
+      latinTitle: "Ave Maria",
+      latin: `Ave Maria, gratia plena,
+Dominus tecum.
+Benedicta tu in mulieribus,
+et benedictus fructus ventris tui, Iesus.
+
+Sancta Maria, Mater Dei,
+ora pro nobis peccatoribus,
+nunc et in hora mortis nostrae.
+Amen.`,
       text: `Ave Maria, cheia de graça,
 o Senhor é convosco,
 bendita sois vós entre as mulheres
@@ -104,7 +149,15 @@ Amém.`,
       icon: "✨",
       title: "Glória ao Pai",
       subtitle: "Doxologia Menor — após cada dezena",
-      latin: "Gloria Patri, et Filio, et Spiritui Sancto...",
+      latinTitle: "Gloria Patri",
+      latin: `Gloria Patri,
+et Filio,
+et Spiritui Sancto.
+
+Sicut erat in principio,
+et nunc et semper,
+et in saecula saeculorum.
+Amen.`,
       text: `Glória ao Pai,
 e ao Filho
 e ao Espírito Santo.
@@ -118,6 +171,7 @@ Amém.`,
       icon: "🔥",
       title: "Oração de Fátima",
       subtitle: "Jaculatória — após cada Glória",
+      latinTitle: "Oratio Fatimae",
       text: `Ó meu Jesus,
 perdoai-nos e livrai-nos do fogo do inferno;
 levai as almas todas para o céu,
@@ -130,7 +184,26 @@ da vossa misericórdia.`,
       icon: "👑",
       title: "Salve Rainha",
       subtitle: "Salve Regina — ao final do Rosário",
-      latin: "Salve, Regina, Mater misericordiae...",
+      latinTitle: "Salve Regina",
+      latin: `Salve, Regina, Mater misericordiae,
+vita, dulcedo, et spes nostra, salve.
+
+Ad te clamamus exsules filii Hevae,
+ad te suspiramus, gementes et flentes
+in hac lacrimarum valle.
+
+Eia, ergo, advocata nostra, illos tuos
+misericordes oculos ad nos converte;
+
+et Iesum, benedictum fructum ventris tui,
+nobis post hoc exsilium ostende.
+
+O clemens, O pia, O dulcis Virgo Maria.
+
+V. Ora pro nobis, sancta Dei Genetrix.
+R. Ut digni efficiamur promissionibus Christi.
+
+Amen.`,
       text: `Salve, Rainha, Mãe de misericórdia,
 vida, doçura e esperança nossa, salve!
 
@@ -160,6 +233,17 @@ Amém.`,
       icon: "🙏",
       title: "Oração Final",
       subtitle: "Coleta — após a Salve Rainha",
+      latinTitle: "Oratio conclusiva",
+      latin: `Deus, cuius Unigenitus
+per vitam, mortem et resurrectionem suam
+nobis salutis aeternae praemia comparavit:
+concede, quaesumus;
+ut haec mysteria sacratissimo beatae Mariae Virginis Rosario recolentes,
+et imitemur quod continent,
+et quod promittunt assequamur.
+
+Per Christum Dominum nostrum.
+Amen.`,
       text: `Ó Deus, cujo Filho Unigênito,
 por sua vida, morte e ressurreição,
 nos obteve o prêmio da salvação eterna:
@@ -231,9 +315,9 @@ Amém.`,
                     <p className="text-sm text-gold-600 dark:text-gold-400 font-medium">
                       {prayer.subtitle}
                     </p>
-                    {prayer.latin && (
+                    {prayer.latinTitle && (
                       <p className="text-xs text-muted-foreground mt-1 italic">
-                        {prayer.latin}
+                        {prayer.latinTitle}
                       </p>
                     )}
                   </div>
@@ -253,12 +337,37 @@ Amém.`,
                 </Button>
               </div>
 
-              {/* Prayer Text */}
-              <div className="p-5 rounded-xl bg-card border border-border">
-                <p className="text-foreground leading-relaxed whitespace-pre-line text-lg">
-                  {prayer.text}
-                </p>
-              </div>
+              {/* Prayer Text - Side by Side Layout */}
+              {prayer.latin ? (
+                <div className="grid md:grid-cols-2 gap-4">
+                  {/* Portuguese Version */}
+                  <div className="p-5 rounded-xl bg-card border border-border">
+                    <p className="text-gold-600 dark:text-gold-400 font-semibold mb-3 text-sm uppercase tracking-wide">
+                      Português
+                    </p>
+                    <p className="text-foreground leading-relaxed whitespace-pre-line text-lg">
+                      {prayer.text}
+                    </p>
+                  </div>
+                  
+                  {/* Latin Version */}
+                  <div className="p-5 rounded-xl bg-gradient-to-br from-gold-light/50 to-gold-light/30 dark:from-gold-900/20 dark:to-gold-900/10 border border-gold-500/20">
+                    <p className="text-gold-700 dark:text-gold-500 font-semibold mb-3 text-sm uppercase tracking-wide">
+                      Latim
+                    </p>
+                    <p className="text-foreground leading-relaxed whitespace-pre-line text-lg italic">
+                      {prayer.latin}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                /* Portuguese Only (Fatima Prayer) */
+                <div className="p-5 rounded-xl bg-card border border-border">
+                  <p className="text-foreground leading-relaxed whitespace-pre-line text-lg">
+                    {prayer.text}
+                  </p>
+                </div>
+              )}
 
               {/* Scripture Source */}
               {prayer.source && (
