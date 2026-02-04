@@ -1,37 +1,9 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import { QueryProvider } from "@/providers/query-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { Navbar } from "@/components/navbar";
-
-// Use local font to avoid Google Fonts fetch issues in Docker builds
-const inter = localFont({
-  src: [
-    {
-      path: "./fonts/Inter-Regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "./fonts/Inter-Medium.woff2",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "./fonts/Inter-SemiBold.woff2",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "./fonts/Inter-Bold.woff2",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-  variable: "--font-inter",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Você Já Rezou o Terço Hoje? | Rastreador Diário de Oração",
@@ -52,13 +24,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR" className="dark">
-      <body className={`${inter.variable} font-sans`}>
-        <QueryProvider>
-          <Navbar />
-          {children}
-          <Toaster />
-        </QueryProvider>
+    <html lang="pt-BR" suppressHydrationWarning>
+      <body className="font-manrope antialiased">
+        <ThemeProvider defaultTheme="system" storageKey="rosario-theme">
+          <QueryProvider>
+            <Navbar />
+            {children}
+            <Toaster />
+          </QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

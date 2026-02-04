@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Sparkles, Check } from "lucide-react";
+import { Sparkles, Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTodayStatus } from "@/hooks/use-rosary";
 import { CheckInModal } from "./check-in-modal";
@@ -14,80 +14,134 @@ export function HeroSection() {
   const hasPrayed = status?.hasPrayed ?? false;
 
   return (
-    <section className="relative min-h-[100dvh] flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-blue-100" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(59,130,246,0.1),transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_rgba(255,215,0,0.1),transparent_50%)]" />
-      
-      {/* Decorative elements - hidden on mobile */}
-      <div className="hidden sm:block absolute top-20 right-20 w-2 h-2 bg-gold rounded-full animate-pulse" />
-      <div className="hidden sm:block absolute bottom-40 left-20 w-3 h-3 bg-blue-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
-      <div className="hidden md:block absolute top-1/3 left-1/4 w-1.5 h-1.5 bg-gold/60 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-      
-      <div className="relative z-10 w-full max-w-2xl mx-auto">
+    <section className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden">
+      {/* Background - Light Mode */}
+      <div className="absolute inset-0 bg-sacred-cream dark:hidden">
+        {/* Radial gold glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(212,175,55,0.15)_0%,transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(212,175,55,0.1)_0%,transparent_40%)]" />
+        {/* Noise texture */}
+        <div className="absolute inset-0 opacity-30 noise-overlay" />
+      </div>
+
+      {/* Background - Dark Mode */}
+      <div className="absolute inset-0 hidden dark:block bg-gradient-to-b from-slate-950 via-sacred-blue to-slate-950">
+        {/* Radial gold glow from top */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(212,175,55,0.12)_0%,transparent_50%)]" />
+        {/* Stars effect */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 right-[20%] w-1 h-1 bg-gold-400 rounded-full animate-pulse" />
+          <div className="absolute top-32 right-[35%] w-1.5 h-1.5 bg-gold-300 rounded-full animate-pulse" style={{ animationDelay: "0.5s" }} />
+          <div className="absolute top-16 left-[25%] w-1 h-1 bg-gold-400 rounded-full animate-pulse" style={{ animationDelay: "1s" }} />
+          <div className="absolute top-40 left-[15%] w-0.5 h-0.5 bg-gold-300 rounded-full animate-pulse" style={{ animationDelay: "0.3s" }} />
+          <div className="absolute bottom-40 right-[10%] w-1 h-1 bg-gold-400/60 rounded-full animate-pulse" style={{ animationDelay: "0.7s" }} />
+          <div className="absolute bottom-60 left-[30%] w-0.5 h-0.5 bg-gold-300/60 rounded-full animate-pulse" style={{ animationDelay: "1.2s" }} />
+        </div>
+      </div>
+
+      {/* Decorative cross pattern - subtle */}
+      <div className="absolute top-10 left-10 text-gold-500/10 dark:text-gold-400/5 text-[200px] font-serif select-none pointer-events-none">
+        ✝
+      </div>
+      <div className="absolute bottom-10 right-10 text-gold-500/10 dark:text-gold-400/5 text-[150px] font-serif select-none pointer-events-none rotate-12">
+        ✝
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Stats display if available */}
         {status?.stats && status.stats.totalCheckIns > 0 && (
-          <div className="mb-6 sm:mb-8 animate-fade-in">
+          <div className="mb-8 animate-fade-up opacity-0" style={{ animationDelay: "100ms" }}>
             <StreakCounter stats={status.stats} />
           </div>
         )}
 
-        {/* Rosary icon */}
-        <div className="mb-6 sm:mb-8 relative">
-          <div className={`w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 mx-auto rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center shadow-2xl border-4 border-white ${hasPrayed ? 'animate-glow' : ''}`}>
+        {/* Rosary icon with glow effect */}
+        <div className="mb-8 sm:mb-10 relative inline-block animate-fade-up opacity-0" style={{ animationDelay: "200ms" }}>
+          <div 
+            className={`w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full flex items-center justify-center shadow-2xl border-2 border-gold-500/30 dark:border-gold-400/40 transition-all duration-500 ${
+              hasPrayed 
+                ? "bg-gradient-to-br from-gold-500 to-gold-600 animate-pulse-gold" 
+                : "bg-gradient-to-br from-sacred-blue to-slate-800 dark:from-slate-800 dark:to-slate-900"
+            }`}
+          >
             {hasPrayed ? (
-              <Check className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 text-white" strokeWidth={3} />
+              <Check className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-white" strokeWidth={2.5} />
             ) : (
-              <span className="text-4xl sm:text-5xl md:text-6xl">📿</span>
+              <span className="text-5xl sm:text-6xl md:text-7xl">📿</span>
             )}
           </div>
           {hasPrayed && (
-            <Sparkles className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-blue-600 animate-pulse-gentle" />
+            <Sparkles className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 w-8 h-8 sm:w-10 sm:h-10 text-gold-500 animate-pulse" />
           )}
+          {/* Glow ring */}
+          <div className={`absolute inset-0 rounded-full ${hasPrayed ? "ring-4 ring-gold-400/30 animate-ping" : ""}`} style={{ animationDuration: "2s" }} />
         </div>
 
         {/* Main heading */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-blue-900 mb-4 sm:mb-6 tracking-tight px-2">
-          Você já rezou o
-          <span className="block bg-gradient-to-r from-gold to-gold-dark bg-clip-text text-transparent mt-2">Terço hoje?</span>
+        <h1 className="animate-fade-up opacity-0" style={{ animationDelay: "300ms" }}>
+          <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-cinzel font-bold text-sacred-blue dark:text-white tracking-tight mb-3">
+            Você já rezou o
+          </span>
+          <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-cinzel font-bold bg-gradient-to-r from-gold-500 via-gold-400 to-gold-600 bg-clip-text text-transparent">
+            Terço hoje?
+          </span>
         </h1>
 
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-blue-700 mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed px-2">
+        {/* Subtitle */}
+        <p className="mt-6 sm:mt-8 text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-manrope animate-fade-up opacity-0" style={{ animationDelay: "400ms" }}>
           {hasPrayed
-            ? "Parabéns! Você já rezou hoje. Sua fidelidade é uma bênção! 🙏"
+            ? "Parabéns! Você já rezou hoje. Sua fidelidade é uma bênção!"
             : "Una-se a milhares de católicos em oração. O Rosário é uma poderosa ferramenta de fé e esperança."}
         </p>
 
         {/* CTA Button */}
-        {!hasPrayed ? (
-          <Button
-            size="lg"
-            onClick={() => setIsModalOpen(true)}
-            disabled={isLoading}
-            className="group w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 active:from-blue-800 active:to-blue-900 text-white px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold shadow-xl hover:shadow-2xl transition-all touch-manipulation min-h-[3rem] sm:min-h-0"
-          >
-            <span className="mr-2">Vamos rezar</span>
-            <span className="group-hover:scale-125 transition-transform">✝</span>
-          </Button>
-        ) : (
-          <div className="space-y-3 sm:space-y-4 px-2">
-            <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 md:px-8 py-3 sm:py-4 bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 rounded-full border-2 border-green-300 shadow-lg">
-              <Check className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" strokeWidth={3} />
-              <span className="font-bold text-sm sm:text-base md:text-lg">Terço concluído por hoje</span>
+        <div className="mt-10 sm:mt-12 animate-fade-up opacity-0" style={{ animationDelay: "500ms" }}>
+          {!hasPrayed ? (
+            <Button
+              size="lg"
+              onClick={() => setIsModalOpen(true)}
+              disabled={isLoading}
+              data-testid="hero-pray-button"
+              className="group relative px-8 sm:px-10 py-6 sm:py-7 text-lg sm:text-xl font-cinzel font-bold tracking-wide rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow-lg transition-all duration-300 border-2 border-gold-400/50"
+            >
+              <span className="relative z-10 flex items-center gap-3">
+                <span>Vamos Rezar</span>
+                <span className="text-2xl group-hover:rotate-12 transition-transform duration-300">✝</span>
+              </span>
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
+            </Button>
+          ) : (
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-3 px-8 py-4 glass rounded-full border border-green-500/30 dark:border-green-400/30">
+                <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center">
+                  <Check className="w-5 h-5 text-white" strokeWidth={3} />
+                </div>
+                <span className="font-cinzel font-bold text-green-700 dark:text-green-400 text-lg">
+                  Terço concluído por hoje
+                </span>
+              </div>
+              <p className="text-slate-500 dark:text-slate-400 font-medium">
+                Volte amanhã para continuar sua jornada de fé
+              </p>
             </div>
-            <p className="text-blue-600 text-sm sm:text-base font-medium px-2">
-              Volte amanhã para continuar sua jornada de fé! ✨
-            </p>
-          </div>
-        )}
+          )}
+        </div>
 
         {/* Scroll indicator */}
-        <div className="mt-12 sm:mt-16 md:mt-20 animate-bounce">
-          <div className="w-6 h-10 sm:w-8 sm:h-12 mx-auto border-2 border-blue-300 rounded-full flex items-start justify-center pt-2">
-            <div className="w-1 h-2 sm:w-1.5 sm:h-3 bg-blue-400 rounded-full" />
-          </div>
-          <p className="text-blue-500 text-xs sm:text-sm mt-2 sm:mt-3 font-medium px-2">Descubra mais sobre o Rosário</p>
+        <div className="mt-16 sm:mt-20 animate-bounce">
+          <button 
+            onClick={() => {
+              const element = document.getElementById("about");
+              if (element) element.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="inline-flex flex-col items-center gap-2 text-slate-400 dark:text-slate-500 hover:text-gold-500 dark:hover:text-gold-400 transition-colors"
+            data-testid="scroll-indicator"
+          >
+            <span className="text-sm font-medium tracking-wide uppercase">Descubra mais</span>
+            <ChevronDown className="w-6 h-6" />
+          </button>
         </div>
       </div>
 
