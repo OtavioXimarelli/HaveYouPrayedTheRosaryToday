@@ -6,6 +6,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { PageHeader } from "@/components/page-header";
 
+/**
+ * Official prayers sourced from the Vatican Holy See:
+ * https://www.vatican.va/special/rosary/documents/misteri_en.html
+ * Translated to Brazilian Portuguese following CNBB (Conferência Nacional dos Bispos do Brasil) standards
+ */
+
 export default function OracoesPage() {
   const router = useRouter();
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
@@ -16,17 +22,15 @@ export default function OracoesPage() {
     setTimeout(() => setCopiedIndex(null), 2000);
   };
 
+  // Official prayers from Vatican sources
   const prayers = [
     {
       icon: "✝",
       title: "Sinal da Cruz",
       subtitle: "Início e fim do Rosário",
-      text: `Pelo sinal da Santa Cruz,
-livrai-nos, Deus Nosso Senhor,
-dos nossos inimigos.
-
-Em nome do Pai,
-do Filho
+      latin: "In nomine Patris, et Filii, et Spiritus Sancti. Amen.",
+      text: `Em nome do Pai,
+e do Filho
 e do Espírito Santo.
 Amém.`,
       highlight: false
@@ -34,11 +38,12 @@ Amém.`,
     {
       icon: "📖",
       title: "Credo Apostólico",
-      subtitle: "Rezado no crucifixo",
+      subtitle: "Rezado no crucifixo — Símbolo dos Apóstolos",
+      latin: "Credo in Deum Patrem omnipotentem...",
       text: `Creio em Deus Pai todo-poderoso,
-criador do céu e da terra.
+Criador do céu e da terra.
 
-E em Jesus Cristo, seu único Filho, Nosso Senhor,
+E em Jesus Cristo, seu único Filho, nosso Senhor,
 que foi concebido pelo poder do Espírito Santo;
 nasceu da Virgem Maria;
 padeceu sob Pôncio Pilatos,
@@ -61,12 +66,13 @@ Amém.`,
     {
       icon: "👨",
       title: "Pai Nosso",
-      subtitle: "Antes de cada dezena",
-      text: `Pai Nosso, que estais nos Céus,
-santificado seja o Vosso Nome,
-venha a nós o Vosso Reino,
-seja feita a Vossa vontade
-assim na terra como no Céu.
+      subtitle: "Oração do Senhor — antes de cada dezena",
+      latin: "Pater noster, qui es in caelis...",
+      text: `Pai nosso que estais nos céus,
+santificado seja o vosso Nome,
+venha a nós o vosso Reino,
+seja feita a vossa vontade
+assim na terra como no céu.
 
 O pão nosso de cada dia nos dai hoje,
 perdoai-nos as nossas ofensas
@@ -74,12 +80,14 @@ assim como nós perdoamos a quem nos tem ofendido,
 e não nos deixeis cair em tentação,
 mas livrai-nos do mal.
 Amém.`,
+      source: "Mt 6, 9-13 / Lc 11, 2-4",
       highlight: false
     },
     {
       icon: "👸",
       title: "Ave Maria",
-      subtitle: "Dez vezes em cada dezena",
+      subtitle: "Saudação Angélica — dez vezes em cada dezena",
+      latin: "Ave Maria, gratia plena, Dominus tecum...",
       text: `Ave Maria, cheia de graça,
 o Senhor é convosco,
 bendita sois vós entre as mulheres
@@ -89,14 +97,16 @@ Santa Maria, Mãe de Deus,
 rogai por nós pecadores,
 agora e na hora da nossa morte.
 Amém.`,
+      source: "Lc 1, 28.42",
       highlight: true
     },
     {
       icon: "✨",
       title: "Glória ao Pai",
-      subtitle: "Após cada dezena",
+      subtitle: "Doxologia Menor — após cada dezena",
+      latin: "Gloria Patri, et Filio, et Spiritui Sancto...",
       text: `Glória ao Pai,
-ao Filho
+e ao Filho
 e ao Espírito Santo.
 
 Como era no princípio,
@@ -106,21 +116,21 @@ Amém.`,
     },
     {
       icon: "🔥",
-      title: "Ó Meu Jesus",
-      subtitle: "Oração de Fátima - após cada dezena",
+      title: "Oração de Fátima",
+      subtitle: "Jaculatória — após cada Glória",
       text: `Ó meu Jesus,
-perdoai-nos,
-livrai-nos do fogo do inferno,
-levai as almas todas para o Céu,
+perdoai-nos e livrai-nos do fogo do inferno;
+levai as almas todas para o céu,
 principalmente as que mais precisarem
-da Vossa misericórdia.`,
-      note: "Esta oração foi ensinada por Nossa Senhora aos três pastorinhos em Fátima, em 1917.",
+da vossa misericórdia.`,
+      note: "Esta oração foi ensinada por Nossa Senhora aos três pastorinhos de Fátima em 13 de julho de 1917, após a visão do inferno.",
       highlight: true
     },
     {
       icon: "👑",
       title: "Salve Rainha",
-      subtitle: "Ao final do Rosário",
+      subtitle: "Salve Regina — ao final do Rosário",
+      latin: "Salve, Regina, Mater misericordiae...",
       text: `Salve, Rainha, Mãe de misericórdia,
 vida, doçura e esperança nossa, salve!
 
@@ -133,7 +143,7 @@ gemendo e chorando neste vale de lágrimas.
 Eia, pois, advogada nossa,
 esses vossos olhos misericordiosos a nós volvei.
 
-E depois deste desterro
+E depois deste desterro,
 mostrai-nos Jesus,
 bendito fruto do vosso ventre.
 
@@ -141,25 +151,25 @@ bendito fruto do vosso ventre.
 ó doce sempre Virgem Maria.
 
 V. Rogai por nós, Santa Mãe de Deus.
-R. Para que sejamos dignos das promessas de Cristo.`,
+R. Para que sejamos dignos das promessas de Cristo.
+
+Amém.`,
       highlight: false
     },
     {
       icon: "🙏",
       title: "Oração Final",
-      subtitle: "Opcional - após a Salve Rainha",
-      text: `Oremos:
-
-Ó Deus, cujo Filho Unigênito,
+      subtitle: "Coleta — após a Salve Rainha",
+      text: `Ó Deus, cujo Filho Unigênito,
 por sua vida, morte e ressurreição,
-nos obteve o prêmio da salvação eterna,
-concedei-nos, nós vos pedimos,
+nos obteve o prêmio da salvação eterna:
+concedei-nos, nós vos suplicamos,
 que meditando estes mistérios
-do santíssimo Rosário da Bem-aventurada Virgem Maria,
+do Santíssimo Rosário da Bem-aventurada Virgem Maria,
 imitemos o que eles contêm
 e alcancemos o que eles prometem.
 
-Por Cristo, Nosso Senhor.
+Por Cristo, nosso Senhor.
 Amém.`,
       highlight: true
     }
@@ -174,11 +184,20 @@ Amém.`,
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        {/* Source Attribution */}
+        <div className="mb-8 p-4 rounded-xl bg-muted/50 border border-border">
+          <p className="text-sm text-muted-foreground">
+            <strong>Fonte oficial:</strong> Santa Sé do Vaticano — <a href="https://www.vatican.va/special/rosary/" target="_blank" rel="noopener noreferrer" className="text-gold-600 dark:text-gold-400 hover:underline">vatican.va/special/rosary</a>
+            <br />
+            <span className="text-xs">Tradução em português seguindo as diretrizes da CNBB (Conferência Nacional dos Bispos do Brasil)</span>
+          </p>
+        </div>
+
         {/* Introduction */}
         <section className="mb-8">
           <div className="p-6 sm:p-8 rounded-3xl glass sacred-border">
             <p className="text-muted-foreground leading-relaxed">
-              Estas são as orações tradicionais que compõem o Santo Rosário. Aprenda-as de cor para poder rezar com devoção e meditação profunda. Clique no botão de copiar para salvar cada oração.
+              Estas são as orações oficiais que compõem o Santo Rosário segundo a tradição da Igreja Católica. Aprenda-as de cor para poder rezar com devoção e meditação profunda. Clique no botão de copiar para salvar cada oração.
             </p>
           </div>
         </section>
@@ -212,6 +231,11 @@ Amém.`,
                     <p className="text-sm text-gold-600 dark:text-gold-400 font-medium">
                       {prayer.subtitle}
                     </p>
+                    {prayer.latin && (
+                      <p className="text-xs text-muted-foreground mt-1 italic">
+                        {prayer.latin}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <Button
@@ -236,11 +260,18 @@ Amém.`,
                 </p>
               </div>
 
+              {/* Scripture Source */}
+              {prayer.source && (
+                <div className="mt-3 text-sm text-muted-foreground">
+                  <span className="font-semibold">Referência bíblica:</span> {prayer.source}
+                </div>
+              )}
+
               {/* Note if exists */}
               {prayer.note && (
                 <div className="mt-4 p-4 rounded-xl bg-muted/50 border border-border">
                   <p className="text-muted-foreground text-sm">
-                    <strong className="text-foreground">Nota:</strong> {prayer.note}
+                    <strong className="text-foreground">Nota histórica:</strong> {prayer.note}
                   </p>
                 </div>
               )}
@@ -248,40 +279,39 @@ Amém.`,
           ))}
         </section>
 
-        {/* Optional Prayers Section */}
+        {/* How to Pray Structure */}
         <section className="mt-12">
           <div className="p-6 sm:p-8 rounded-3xl glass sacred-border">
             <h2 className="text-2xl font-cinzel font-bold text-foreground mb-6 text-center">
-              Orações Opcionais
+              Estrutura do Rosário
             </h2>
             
-            {/* Jaculatória */}
-            <div className="mb-6">
-              <h3 className="text-lg font-cinzel font-bold text-foreground mb-3 flex items-center gap-2">
-                <span className="text-xl">💫</span>
-                Jaculatórias (após anunciar o mistério)
-              </h3>
-              <div className="p-4 rounded-xl bg-muted/50 border border-border">
-                <p className="text-foreground mb-2 font-semibold">
-                  Para todos os mistérios:
-                </p>
-                <p className="text-muted-foreground italic">
-                  "Por este mistério e pela Vossa Santa Intercessão, dai-nos, Senhor, [virtude correspondente ao mistério] e aumentai em nós os dons do Espírito Santo."
-                </p>
-              </div>
+            <div className="p-4 rounded-xl bg-muted/50 border border-border mb-6">
+              <p className="text-muted-foreground text-sm italic text-center">
+                Segundo a Santa Sé: &ldquo;No início de cada dezena, anuncia-se o mistério a ser contemplado. Após uma breve pausa para reflexão, reza-se o Pai Nosso, dez Ave Marias e o Glória ao Pai.&rdquo;
+              </p>
             </div>
 
-            {/* Oferecimento */}
-            <div>
-              <h3 className="text-lg font-cinzel font-bold text-foreground mb-3 flex items-center gap-2">
-                <span className="text-xl">🎁</span>
-                Oferecimento do Rosário
-              </h3>
-              <div className="p-4 rounded-xl bg-muted/50 border border-border">
-                <p className="text-muted-foreground italic">
-                  "Divino Jesus, eu vos ofereço este Rosário que vou rezar, meditando nos mistérios da Vossa Redenção. Concedei-me, pela intercessão de Maria, Vossa Mãe Santíssima, a quem me dirijo, as graças necessárias para bem rezá-lo e alcançar a indulgência. Eu vo-lo ofereço especialmente por [suas intenções]. Glória ao Pai..."
-                </p>
-              </div>
+            <div className="space-y-3">
+              {[
+                "1. Sinal da Cruz",
+                "2. Credo Apostólico (no crucifixo)",
+                "3. Pai Nosso (primeira conta grande)",
+                "4. Três Ave Marias (três contas pequenas) — Pela fé, esperança e caridade",
+                "5. Glória ao Pai",
+                "6. Anunciar o 1º Mistério",
+                "7. Pai Nosso (conta grande)",
+                "8. Dez Ave Marias (dezena) — meditando no mistério",
+                "9. Glória ao Pai + Oração de Fátima",
+                "10. Repetir 6-9 para os demais mistérios (total: 5 dezenas)",
+                "11. Salve Rainha + Oração Final",
+                "12. Sinal da Cruz"
+              ].map((step, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full bg-gold-500 mt-2 flex-shrink-0" />
+                  <span className="text-foreground text-sm">{step}</span>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -293,15 +323,15 @@ Amém.`,
               <span className="w-10 h-10 rounded-xl bg-gold-500 flex items-center justify-center text-sacred-blue">
                 <Check className="w-5 h-5" strokeWidth={3} />
               </span>
-              Dicas para memorizar
+              Dicas para uma oração profunda
             </h2>
             <ul className="space-y-3">
               {[
-                "Reze devagar e com atenção, focando no significado das palavras",
-                "Pratique uma oração de cada vez até decorá-la completamente",
-                "Reze junto com áudios ou vídeos do Rosário até aprender",
-                "Tenha esta página salva para consultar quando necessário",
-                "Com o tempo, as orações se tornarão naturais e automáticas"
+                "Reze devagar, meditando sobre cada mistério",
+                "Escolha um horário fixo do dia para criar o hábito",
+                "Reze em família sempre que possível",
+                "Ofereça suas intenções no início da oração",
+                "Contemple as passagens bíblicas de cada mistério"
               ].map((tip, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <div className="w-6 h-6 rounded-full bg-gold-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -321,26 +351,26 @@ Amém.`,
               Pronto para começar?
             </h3>
             <p className="text-muted-foreground mb-6">
-              Aprenda o passo a passo completo para rezar o Santo Rosário
+              Veja os mistérios de cada dia da semana
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 size="lg"
-                onClick={() => router.push("/como-rezar")}
+                onClick={() => router.push("/misterios-do-dia")}
                 className="rounded-full px-8 py-6 text-lg font-cinzel font-bold bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow transition-all"
-                data-testid="cta-como-rezar"
+                data-testid="cta-misterios"
               >
-                Como rezar o Rosário
+                Ver Mistérios
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                onClick={() => router.push("/misterios-do-dia")}
+                onClick={() => router.push("/como-rezar")}
                 className="rounded-full px-8 py-6 text-lg font-semibold border-gold-500/30 text-foreground hover:bg-gold-500/10"
-                data-testid="cta-misterios"
+                data-testid="cta-como-rezar"
               >
-                Ver Mistérios
+                Guia passo a passo
               </Button>
             </div>
           </div>
