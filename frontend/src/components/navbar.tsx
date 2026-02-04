@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 export function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
+  const showDesktopNavOnMobile = process.env.NEXT_PUBLIC_SHOW_DESKTOP_NAV_ON_MOBILE === "true";
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [comingSoonModalOpen, setComingSoonModalOpen] = useState(false);
   const [comingSoonFeature, setComingSoonFeature] = useState("");
@@ -77,7 +78,9 @@ export function Navbar() {
     <>
       {/* Desktop Floating Navbar - Minimalist 3-item design */}
       <nav 
-        className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden md:flex items-center gap-2 px-3 py-2.5 rounded-full transition-all duration-500 ${
+        className={`fixed bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-50 ${
+          showDesktopNavOnMobile ? "flex" : "hidden md:flex"
+        } items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2 sm:py-2.5 rounded-full transition-all duration-500 max-w-[calc(100vw-1.5rem)] ${
           scrolled 
             ? "bg-sacred-blue/95 dark:bg-slate-900/95 backdrop-blur-xl shadow-2xl border border-white/10" 
             : "bg-sacred-blue/90 dark:bg-slate-900/90 backdrop-blur-lg shadow-xl border border-white/5"
@@ -87,13 +90,13 @@ export function Navbar() {
         {/* 1. Home */}
         <button
           onClick={() => navigateTo("/")}
-          className={`flex items-center gap-2.5 px-4 py-2 rounded-full transition-colors ${
+          className={`flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full transition-colors ${
             pathname === "/" ? "bg-white/10" : "hover:bg-white/10"
           }`}
           data-testid="navbar-home"
         >
-          <span className="text-xl">📿</span>
-          <span className="text-white font-medium text-sm">Início</span>
+          <span className="text-lg sm:text-xl">📿</span>
+          <span className="text-white font-medium text-xs sm:text-sm">Início</span>
         </button>
 
         <div className="w-px h-6 bg-white/20" />
@@ -102,7 +105,7 @@ export function Navbar() {
         <div className="relative" ref={explorarRef}>
           <button
             onClick={() => setExplorarOpen(!explorarOpen)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors ${
+            className={`flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full transition-colors ${
               isOnContentPage || explorarOpen
                 ? "bg-gold-500/20 text-gold-400" 
                 : "text-white/80 hover:text-white hover:bg-white/10"
@@ -110,14 +113,14 @@ export function Navbar() {
             data-testid="navbar-explorar"
           >
             <BookOpen className="w-4 h-4" />
-            <span className="text-sm font-medium">Explorar</span>
+            <span className="text-xs sm:text-sm font-medium">Explorar</span>
             <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${explorarOpen ? "rotate-180" : ""}`} />
           </button>
 
           {/* Dropdown Menu */}
           {explorarOpen && (
             <div 
-              className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-72 bg-sacred-blue dark:bg-slate-900 rounded-2xl border border-white/10 shadow-2xl overflow-hidden"
+              className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-[min(18rem,calc(100vw-2rem))] sm:w-72 bg-sacred-blue dark:bg-slate-900 rounded-2xl border border-white/10 shadow-2xl overflow-hidden"
               data-testid="explorar-dropdown"
             >
               <div className="p-2">
@@ -154,7 +157,7 @@ export function Navbar() {
         {/* 3. Começar CTA */}
         <button
           onClick={() => showComingSoon("Funcionalidade de Check-in / Comunidade")}
-          className="relative flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue font-cinzel font-bold text-sm tracking-wide hover:shadow-[0_0_20px_-5px_rgba(212,175,55,0.5)] transition-all"
+          className="relative flex items-center gap-2 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue font-cinzel font-bold text-xs sm:text-sm tracking-wide hover:shadow-[0_0_20px_-5px_rgba(212,175,55,0.5)] transition-all"
           data-testid="navbar-comecar"
         >
           <Play className="w-4 h-4" />
@@ -164,6 +167,7 @@ export function Navbar() {
       </nav>
 
       {/* Mobile Header */}
+      {!showDesktopNavOnMobile && (
       <header 
         className={`fixed top-0 left-0 right-0 z-50 md:hidden transition-all duration-300 ${
           scrolled 
@@ -198,9 +202,10 @@ export function Navbar() {
           </div>
         </div>
       </header>
+      )}
 
       {/* Mobile Menu Overlay - Simplified */}
-      {mobileMenuOpen && (
+      {!showDesktopNavOnMobile && mobileMenuOpen && (
         <div 
           className="fixed inset-0 z-40 md:hidden"
           onClick={() => setMobileMenuOpen(false)}
