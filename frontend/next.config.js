@@ -26,6 +26,8 @@ const nextConfig = {
   outputFileTracingIncludes: {
     '/': ['./public/**/*'],
   },
+  // Empty turbopack config to silence the webpack/turbopack warning in Next.js 16
+  turbopack: {},
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api',
   },
