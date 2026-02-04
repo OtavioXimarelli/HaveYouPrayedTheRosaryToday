@@ -11,6 +11,14 @@ export const metadata: Metadata = {
     "Acompanhe suas orações diárias do terço, construa uma sequência e conecte-se com uma comunidade de oração. Um app minimalista para aprofundar sua fé.",
   keywords: ["terço", "rosário", "oração", "católico", "fé", "oração diária", "meditação"],
   authors: [{ name: "Terço Hoje" }],
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+  },
   openGraph: {
     title: "Você Já Rezou o Terço Hoje?",
     description: "Acompanhe suas orações diárias do terço e conecte-se com fiéis do mundo todo.",

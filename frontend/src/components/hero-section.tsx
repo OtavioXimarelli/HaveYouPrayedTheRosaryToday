@@ -69,6 +69,7 @@ export function HeroSection() {
               <Check className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-white" strokeWidth={2.5} />
             ) : (
               <span className="text-5xl sm:text-6xl md:text-7xl">📿</span>
+              
             )}
           </div>
           {hasPrayed && (
