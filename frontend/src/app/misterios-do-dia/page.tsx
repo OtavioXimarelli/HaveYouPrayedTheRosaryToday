@@ -43,6 +43,7 @@ export default function MisteriosPage() {
       bgGradient: "from-blue-500/10 to-blue-600/5 dark:from-blue-500/20 dark:to-blue-600/10",
       borderColor: "border-blue-500/30",
       badgeColor: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+      note: undefined as string | undefined,
       mysteries: [
         { 
           number: 1, 
@@ -126,6 +127,7 @@ export default function MisteriosPage() {
       bgGradient: "from-purple-600/10 to-purple-700/5 dark:from-purple-600/20 dark:to-purple-700/10",
       borderColor: "border-purple-600/30",
       badgeColor: "bg-purple-600/10 text-purple-700 dark:text-purple-400",
+      note: undefined as string | undefined,
       mysteries: [
         { 
           number: 1, 
@@ -167,6 +169,7 @@ export default function MisteriosPage() {
       bgGradient: "from-gold-500/10 to-gold-600/5 dark:from-gold-500/20 dark:to-gold-600/10",
       borderColor: "border-gold-500/30",
       badgeColor: "bg-gold-500/10 text-gold-700 dark:text-gold-400",
+      note: undefined as string | undefined,
       mysteries: [
         { 
           number: 1, 
