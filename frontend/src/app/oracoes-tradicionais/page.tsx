@@ -1,333 +1,271 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowRight, Copy, Check } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { PageHeader } from "@/components/page-header";
 
 export default function OracoesPage() {
   const router = useRouter();
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+
+  const copyToClipboard = (text: string, index: number) => {
+    navigator.clipboard.writeText(text);
+    setCopiedIndex(index);
+    setTimeout(() => setCopiedIndex(null), 2000);
+  };
+
+  const prayers = [
+    {
+      icon: "✝",
+      title: "Sinal da Cruz",
+      subtitle: "Início e fim do Rosário",
+      text: `Pelo sinal da Santa Cruz,
+livrai-nos, Deus Nosso Senhor,
+dos nossos inimigos.
+
+Em nome do Pai,
+do Filho
+e do Espírito Santo.
+Amém.`,
+      highlight: false
+    },
+    {
+      icon: "📖",
+      title: "Credo Apostólico",
+      subtitle: "Rezado no crucifixo",
+      text: `Creio em Deus Pai todo-poderoso,
+criador do céu e da terra.
+
+E em Jesus Cristo, seu único Filho, Nosso Senhor,
+que foi concebido pelo poder do Espírito Santo;
+nasceu da Virgem Maria;
+padeceu sob Pôncio Pilatos,
+foi crucificado, morto e sepultado;
+desceu à mansão dos mortos;
+ressuscitou ao terceiro dia;
+subiu aos céus;
+está sentado à direita de Deus Pai todo-poderoso,
+de onde há de vir a julgar os vivos e os mortos.
+
+Creio no Espírito Santo;
+na Santa Igreja Católica;
+na comunhão dos santos;
+na remissão dos pecados;
+na ressurreição da carne;
+na vida eterna.
+Amém.`,
+      highlight: true
+    },
+    {
+      icon: "👨",
+      title: "Pai Nosso",
+      subtitle: "Antes de cada dezena",
+      text: `Pai Nosso, que estais nos Céus,
+santificado seja o Vosso Nome,
+venha a nós o Vosso Reino,
+seja feita a Vossa vontade
+assim na terra como no Céu.
+
+O pão nosso de cada dia nos dai hoje,
+perdoai-nos as nossas ofensas
+assim como nós perdoamos a quem nos tem ofendido,
+e não nos deixeis cair em tentação,
+mas livrai-nos do mal.
+Amém.`,
+      highlight: false
+    },
+    {
+      icon: "👸",
+      title: "Ave Maria",
+      subtitle: "Dez vezes em cada dezena",
+      text: `Ave Maria, cheia de graça,
+o Senhor é convosco,
+bendita sois vós entre as mulheres
+e bendito é o fruto do vosso ventre, Jesus.
+
+Santa Maria, Mãe de Deus,
+rogai por nós pecadores,
+agora e na hora da nossa morte.
+Amém.`,
+      highlight: true
+    },
+    {
+      icon: "✨",
+      title: "Glória ao Pai",
+      subtitle: "Após cada dezena",
+      text: `Glória ao Pai,
+ao Filho
+e ao Espírito Santo.
+
+Como era no princípio,
+agora e sempre.
+Amém.`,
+      highlight: false
+    },
+    {
+      icon: "🔥",
+      title: "Ó Meu Jesus",
+      subtitle: "Oração de Fátima - após cada dezena",
+      text: `Ó meu Jesus,
+perdoai-nos,
+livrai-nos do fogo do inferno,
+levai as almas todas para o Céu,
+principalmente as que mais precisarem
+da Vossa misericórdia.`,
+      note: "Esta oração foi ensinada por Nossa Senhora aos três pastorinhos em Fátima, em 1917.",
+      highlight: true
+    },
+    {
+      icon: "👑",
+      title: "Salve Rainha",
+      subtitle: "Ao final do Rosário",
+      text: `Salve, Rainha, Mãe de misericórdia,
+vida, doçura e esperança nossa, salve!
+
+A vós bradamos,
+os degredados filhos de Eva.
+
+A vós suspiramos,
+gemendo e chorando neste vale de lágrimas.
+
+Eia, pois, advogada nossa,
+esses vossos olhos misericordiosos a nós volvei.
+
+E depois deste desterro
+mostrai-nos Jesus,
+bendito fruto do vosso ventre.
+
+Ó clemente, ó piedosa,
+ó doce sempre Virgem Maria.
+
+V. Rogai por nós, Santa Mãe de Deus.
+R. Para que sejamos dignos das promessas de Cristo.`,
+      highlight: false
+    },
+    {
+      icon: "🙏",
+      title: "Oração Final",
+      subtitle: "Opcional - após a Salve Rainha",
+      text: `Oremos:
+
+Ó Deus, cujo Filho Unigênito,
+por sua vida, morte e ressurreição,
+nos obteve o prêmio da salvação eterna,
+concedei-nos, nós vos pedimos,
+que meditando estes mistérios
+do santíssimo Rosário da Bem-aventurada Virgem Maria,
+imitemos o que eles contêm
+e alcancemos o que eles prometem.
+
+Por Cristo, Nosso Senhor.
+Amém.`,
+      highlight: true
+    }
+  ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
-      {/* Header */}
-      <header className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-6 sm:py-8 px-4 sm:px-6 lg:px-8 shadow-lg">
-        <div className="max-w-4xl mx-auto">
-          <Button
-            variant="ghost"
-            className="text-white hover:bg-white/20 mb-4"
-            onClick={() => router.push("/")}
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Voltar
-          </Button>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">
-            🙏 Orações Tradicionais
-          </h1>
-          <p className="text-blue-100 text-lg">
-            As orações essenciais para rezar o Santo Rosário
-          </p>
-        </div>
-      </header>
+    <main className="min-h-screen bg-background">
+      <PageHeader 
+        title="Orações Tradicionais"
+        subtitle="As orações essenciais para rezar o Santo Rosário"
+        icon="🙏"
+      />
 
-      {/* Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         {/* Introduction */}
         <section className="mb-8">
-          <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg border-2 border-blue-200">
-            <p className="text-blue-700 leading-relaxed">
-              Estas são as orações tradicionais que compõem o Santo Rosário. Aprenda-as de cor para poder rezar com devoção e meditação profunda.
+          <div className="p-6 sm:p-8 rounded-3xl glass sacred-border">
+            <p className="text-muted-foreground leading-relaxed">
+              Estas são as orações tradicionais que compõem o Santo Rosário. Aprenda-as de cor para poder rezar com devoção e meditação profunda. Clique no botão de copiar para salvar cada oração.
             </p>
           </div>
         </section>
 
-        {/* Sinal da Cruz */}
-        <section className="mb-8">
-          <div className="bg-gradient-to-br from-blue-50 to-white p-6 sm:p-8 rounded-2xl shadow-lg border-l-4 border-blue-600">
-            <div className="flex items-start gap-4 mb-4">
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 text-white flex items-center justify-center text-2xl flex-shrink-0">
-                ✝️
+        {/* Prayers */}
+        <section className="space-y-6">
+          {prayers.map((prayer, index) => (
+            <div 
+              key={index}
+              className={`p-6 sm:p-8 rounded-2xl transition-all duration-300 ${
+                prayer.highlight 
+                  ? "bg-gradient-to-br from-gold-500/10 to-gold-600/5 dark:from-gold-500/15 dark:to-gold-600/10 border border-gold-500/20" 
+                  : "glass sacred-border"
+              }`}
+              data-testid={`prayer-${index}`}
+            >
+              {/* Header */}
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex items-start gap-4">
+                  <div className={`w-14 h-14 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 shadow-lg ${
+                    prayer.highlight 
+                      ? "bg-gradient-to-br from-gold-500 to-gold-600"
+                      : "bg-gradient-to-br from-sacred-blue to-slate-700"
+                  }`}>
+                    {prayer.icon}
+                  </div>
+                  <div>
+                    <h2 className="text-xl sm:text-2xl font-cinzel font-bold text-foreground">
+                      {prayer.title}
+                    </h2>
+                    <p className="text-sm text-gold-600 dark:text-gold-400 font-medium">
+                      {prayer.subtitle}
+                    </p>
+                  </div>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => copyToClipboard(prayer.text, index)}
+                  className="rounded-full hover:bg-gold-500/10"
+                  data-testid={`copy-prayer-${index}`}
+                >
+                  {copiedIndex === index ? (
+                    <Check className="w-5 h-5 text-green-500" />
+                  ) : (
+                    <Copy className="w-5 h-5 text-muted-foreground" />
+                  )}
+                </Button>
               </div>
-              <div>
-                <h2 className="text-2xl font-bold text-blue-900 mb-1">
-                  Sinal da Cruz
-                </h2>
-                <p className="text-sm text-blue-600">Início e fim do Rosário</p>
+
+              {/* Prayer Text */}
+              <div className="p-5 rounded-xl bg-card border border-border">
+                <p className="text-foreground leading-relaxed whitespace-pre-line text-lg">
+                  {prayer.text}
+                </p>
               </div>
+
+              {/* Note if exists */}
+              {prayer.note && (
+                <div className="mt-4 p-4 rounded-xl bg-muted/50 border border-border">
+                  <p className="text-muted-foreground text-sm">
+                    <strong className="text-foreground">Nota:</strong> {prayer.note}
+                  </p>
+                </div>
+              )}
             </div>
-            <div className="bg-white p-5 rounded-xl border border-blue-200">
-              <p className="text-blue-800 leading-relaxed text-lg">
-                Pelo sinal da Santa Cruz,<br />
-                livrai-nos, Deus Nosso Senhor,<br />
-                dos nossos inimigos.<br />
-                <br />
-                Em nome do Pai,<br />
-                do Filho<br />
-                e do Espírito Santo.<br />
-                <strong>Amém.</strong>
-              </p>
-            </div>
-          </div>
+          ))}
         </section>
 
-        {/* Credo */}
-        <section className="mb-8">
-          <div className="bg-gradient-to-br from-gold-light to-white p-6 sm:p-8 rounded-2xl shadow-lg border-l-4 border-gold">
-            <div className="flex items-start gap-4 mb-4">
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-gold to-gold-dark text-white flex items-center justify-center text-2xl flex-shrink-0">
-                📖
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold text-blue-900 mb-1">
-                  Credo Apostólico
-                </h2>
-                <p className="text-sm text-blue-600">Rezado no crucifixo</p>
-              </div>
-            </div>
-            <div className="bg-white p-5 rounded-xl border border-gold/30">
-              <p className="text-blue-800 leading-relaxed text-lg">
-                Creio em Deus Pai todo-poderoso,<br />
-                criador do céu e da terra.<br />
-                <br />
-                E em Jesus Cristo, seu único Filho, Nosso Senhor,<br />
-                que foi concebido pelo poder do Espírito Santo;<br />
-                nasceu da Virgem Maria;<br />
-                padeceu sob Pôncio Pilatos,<br />
-                foi crucificado, morto e sepultado;<br />
-                desceu à mansão dos mortos;<br />
-                ressuscitou ao terceiro dia;<br />
-                subiu aos céus;<br />
-                está sentado à direita de Deus Pai todo-poderoso,<br />
-                de onde há de vir a julgar os vivos e os mortos.<br />
-                <br />
-                Creio no Espírito Santo;<br />
-                na Santa Igreja Católica;<br />
-                na comunhão dos santos;<br />
-                na remissão dos pecados;<br />
-                na ressurreição da carne;<br />
-                na vida eterna.<br />
-                <strong>Amém.</strong>
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Pai Nosso */}
-        <section className="mb-8">
-          <div className="bg-gradient-to-br from-blue-50 to-white p-6 sm:p-8 rounded-2xl shadow-lg border-l-4 border-blue-600">
-            <div className="flex items-start gap-4 mb-4">
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 text-white flex items-center justify-center text-2xl flex-shrink-0">
-                👨
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold text-blue-900 mb-1">
-                  Pai Nosso
-                </h2>
-                <p className="text-sm text-blue-600">Antes de cada dezena</p>
-              </div>
-            </div>
-            <div className="bg-white p-5 rounded-xl border border-blue-200">
-              <p className="text-blue-800 leading-relaxed text-lg">
-                Pai Nosso, que estais nos Céus,<br />
-                santificado seja o Vosso Nome,<br />
-                venha a nós o Vosso Reino,<br />
-                seja feita a Vossa vontade<br />
-                assim na terra como no Céu.<br />
-                <br />
-                O pão nosso de cada dia nos dai hoje,<br />
-                perdoai-nos as nossas ofensas<br />
-                assim como nós perdoamos a quem nos tem ofendido,<br />
-                e não nos deixeis cair em tentação,<br />
-                mas livrai-nos do mal.<br />
-                <strong>Amém.</strong>
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Ave Maria */}
-        <section className="mb-8">
-          <div className="bg-gradient-to-br from-gold-light to-white p-6 sm:p-8 rounded-2xl shadow-lg border-l-4 border-gold">
-            <div className="flex items-start gap-4 mb-4">
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-gold to-gold-dark text-white flex items-center justify-center text-2xl flex-shrink-0">
-                👸
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold text-blue-900 mb-1">
-                  Ave Maria
-                </h2>
-                <p className="text-sm text-blue-600">Dez vezes em cada dezena</p>
-              </div>
-            </div>
-            <div className="bg-white p-5 rounded-xl border border-gold/30">
-              <p className="text-blue-800 leading-relaxed text-lg">
-                Ave Maria, cheia de graça,<br />
-                o Senhor é convosco,<br />
-                bendita sois vós entre as mulheres<br />
-                e bendito é o fruto do vosso ventre, Jesus.<br />
-                <br />
-                Santa Maria, Mãe de Deus,<br />
-                rogai por nós pecadores,<br />
-                agora e na hora da nossa morte.<br />
-                <strong>Amém.</strong>
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Glória ao Pai */}
-        <section className="mb-8">
-          <div className="bg-gradient-to-br from-blue-50 to-white p-6 sm:p-8 rounded-2xl shadow-lg border-l-4 border-blue-600">
-            <div className="flex items-start gap-4 mb-4">
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 text-white flex items-center justify-center text-2xl flex-shrink-0">
-                ✨
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold text-blue-900 mb-1">
-                  Glória ao Pai
-                </h2>
-                <p className="text-sm text-blue-600">Após cada dezena</p>
-              </div>
-            </div>
-            <div className="bg-white p-5 rounded-xl border border-blue-200">
-              <p className="text-blue-800 leading-relaxed text-lg">
-                Glória ao Pai,<br />
-                ao Filho<br />
-                e ao Espírito Santo.<br />
-                <br />
-                Como era no princípio,<br />
-                agora e sempre.<br />
-                <strong>Amém.</strong>
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Ó Meu Jesus (Oração de Fátima) */}
-        <section className="mb-8">
-          <div className="bg-gradient-to-br from-gold-light to-white p-6 sm:p-8 rounded-2xl shadow-lg border-l-4 border-gold">
-            <div className="flex items-start gap-4 mb-4">
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-gold to-gold-dark text-white flex items-center justify-center text-2xl flex-shrink-0">
-                🔥
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold text-blue-900 mb-1">
-                  Ó Meu Jesus
-                </h2>
-                <p className="text-sm text-blue-600">Oração de Fátima - após cada dezena</p>
-              </div>
-            </div>
-            <div className="bg-white p-5 rounded-xl border border-gold/30">
-              <p className="text-blue-800 leading-relaxed text-lg">
-                Ó meu Jesus,<br />
-                perdoai-nos,<br />
-                livrai-nos do fogo do inferno,<br />
-                levai as almas todas para o Céu,<br />
-                principalmente as que mais precisarem<br />
-                da Vossa misericórdia.
-              </p>
-            </div>
-            <div className="mt-4 bg-blue-50 p-4 rounded-lg">
-              <p className="text-blue-700 text-sm">
-                <strong>💡 Nota:</strong> Esta oração foi ensinada por Nossa Senhora aos três pastorinhos em Fátima, em 1917.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Salve Rainha */}
-        <section className="mb-8">
-          <div className="bg-gradient-to-br from-blue-50 to-white p-6 sm:p-8 rounded-2xl shadow-lg border-l-4 border-blue-600">
-            <div className="flex items-start gap-4 mb-4">
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 text-white flex items-center justify-center text-2xl flex-shrink-0">
-                👑
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold text-blue-900 mb-1">
-                  Salve Rainha
-                </h2>
-                <p className="text-sm text-blue-600">Ao final do Rosário</p>
-              </div>
-            </div>
-            <div className="bg-white p-5 rounded-xl border border-blue-200">
-              <p className="text-blue-800 leading-relaxed text-lg">
-                Salve, Rainha, Mãe de misericórdia,<br />
-                vida, doçura e esperança nossa, salve!<br />
-                <br />
-                A vós bradamos,<br />
-                os degredados filhos de Eva.<br />
-                <br />
-                A vós suspiramos,<br />
-                gemendo e chorando neste vale de lágrimas.<br />
-                <br />
-                Eia, pois, advogada nossa,<br />
-                esses vossos olhos misericordiosos a nós volvei.<br />
-                <br />
-                E depois deste desterro<br />
-                mostrai-nos Jesus,<br />
-                bendito fruto do vosso ventre.<br />
-                <br />
-                Ó clemente, ó piedosa,<br />
-                ó doce sempre Virgem Maria.<br />
-                <br />
-                <strong>V.</strong> Rogai por nós, Santa Mãe de Deus.<br />
-                <strong>R.</strong> Para que sejamos dignos das promessas de Cristo.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Oração Final */}
-        <section className="mb-8">
-          <div className="bg-gradient-to-br from-gold-light to-white p-6 sm:p-8 rounded-2xl shadow-lg border-l-4 border-gold">
-            <div className="flex items-start gap-4 mb-4">
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-gold to-gold-dark text-white flex items-center justify-center text-2xl flex-shrink-0">
-                🙏
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold text-blue-900 mb-1">
-                  Oração Final
-                </h2>
-                <p className="text-sm text-blue-600">Opcional - após a Salve Rainha</p>
-              </div>
-            </div>
-            <div className="bg-white p-5 rounded-xl border border-gold/30">
-              <p className="text-blue-800 leading-relaxed text-lg">
-                <strong>Oremos:</strong><br />
-                <br />
-                Ó Deus, cujo Filho Unigênito,<br />
-                por sua vida, morte e ressurreição,<br />
-                nos obteve o prêmio da salvação eterna,<br />
-                concedei-nos, nós vos pedimos,<br />
-                que meditando estes mistérios<br />
-                do santíssimo Rosário da Bem-aventurada Virgem Maria,<br />
-                imitemos o que eles contêm<br />
-                e alcancemos o que eles prometem.<br />
-                <br />
-                Por Cristo, Nosso Senhor.<br />
-                <strong>Amém.</strong>
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Outras Orações Opcionais */}
-        <section className="mb-8">
-          <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg border-2 border-blue-200">
-            <h2 className="text-2xl font-bold text-blue-900 mb-6 text-center">
+        {/* Optional Prayers Section */}
+        <section className="mt-12">
+          <div className="p-6 sm:p-8 rounded-3xl glass sacred-border">
+            <h2 className="text-2xl font-cinzel font-bold text-foreground mb-6 text-center">
               Orações Opcionais
             </h2>
             
             {/* Jaculatória */}
             <div className="mb-6">
-              <h3 className="text-lg font-bold text-blue-900 mb-3 flex items-center gap-2">
+              <h3 className="text-lg font-cinzel font-bold text-foreground mb-3 flex items-center gap-2">
                 <span className="text-xl">💫</span>
                 Jaculatórias (após anunciar o mistério)
               </h3>
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <p className="text-blue-800 mb-2">
-                  <strong>Para todos os mistérios:</strong>
+              <div className="p-4 rounded-xl bg-muted/50 border border-border">
+                <p className="text-foreground mb-2 font-semibold">
+                  Para todos os mistérios:
                 </p>
-                <p className="text-blue-700 italic">
+                <p className="text-muted-foreground italic">
                   "Por este mistério e pela Vossa Santa Intercessão, dai-nos, Senhor, [virtude correspondente ao mistério] e aumentai em nós os dons do Espírito Santo."
                 </p>
               </div>
@@ -335,12 +273,12 @@ export default function OracoesPage() {
 
             {/* Oferecimento */}
             <div>
-              <h3 className="text-lg font-bold text-blue-900 mb-3 flex items-center gap-2">
+              <h3 className="text-lg font-cinzel font-bold text-foreground mb-3 flex items-center gap-2">
                 <span className="text-xl">🎁</span>
                 Oferecimento do Rosário
               </h3>
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <p className="text-blue-700 italic">
+              <div className="p-4 rounded-xl bg-muted/50 border border-border">
+                <p className="text-muted-foreground italic">
                   "Divino Jesus, eu vos ofereço este Rosário que vou rezar, meditando nos mistérios da Vossa Redenção. Concedei-me, pela intercessão de Maria, Vossa Mãe Santíssima, a quem me dirijo, as graças necessárias para bem rezá-lo e alcançar a indulgência. Eu vo-lo ofereço especialmente por [suas intenções]. Glória ao Pai..."
                 </p>
               </div>
@@ -349,59 +287,58 @@ export default function OracoesPage() {
         </section>
 
         {/* Tips Section */}
-        <section className="mb-8">
-          <div className="bg-gradient-to-br from-blue-600 to-blue-700 text-white p-6 sm:p-8 rounded-2xl shadow-xl">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-              <span>💡</span>
+        <section className="mt-12">
+          <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-sacred-blue via-slate-800 to-slate-900 text-white">
+            <h2 className="text-2xl font-cinzel font-bold mb-6 flex items-center gap-3">
+              <span className="w-10 h-10 rounded-xl bg-gold-500 flex items-center justify-center text-sacred-blue">
+                <Check className="w-5 h-5" strokeWidth={3} />
+              </span>
               Dicas para memorizar
             </h2>
-            <ul className="space-y-3 text-blue-50">
-              <li className="flex items-start gap-3">
-                <span className="text-gold text-xl flex-shrink-0">•</span>
-                <span>Reze devagar e com atenção, focando no significado das palavras</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-gold text-xl flex-shrink-0">•</span>
-                <span>Pratique uma oração de cada vez até decorá-la completamente</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-gold text-xl flex-shrink-0">•</span>
-                <span>Reze junto com áudios ou vídeos do Rosário até aprender</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-gold text-xl flex-shrink-0">•</span>
-                <span>Tenha esta página salva para consultar quando necessário</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-gold text-xl flex-shrink-0">•</span>
-                <span>Com o tempo, as orações se tornarão naturais e automáticas</span>
-              </li>
+            <ul className="space-y-3">
+              {[
+                "Reze devagar e com atenção, focando no significado das palavras",
+                "Pratique uma oração de cada vez até decorá-la completamente",
+                "Reze junto com áudios ou vídeos do Rosário até aprender",
+                "Tenha esta página salva para consultar quando necessário",
+                "Com o tempo, as orações se tornarão naturais e automáticas"
+              ].map((tip, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-gold-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-2 h-2 rounded-full bg-gold-400" />
+                  </div>
+                  <span className="text-white/90">{tip}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </section>
 
         {/* CTA */}
-        <section className="text-center">
-          <div className="bg-gradient-to-br from-gold-light to-white p-8 rounded-2xl border-2 border-gold shadow-xl">
-            <h3 className="text-2xl font-bold text-blue-900 mb-4">
+        <section className="mt-12 text-center">
+          <div className="p-8 sm:p-10 rounded-3xl glass sacred-border">
+            <h3 className="text-2xl font-cinzel font-bold text-foreground mb-4">
               Pronto para começar?
             </h3>
-            <p className="text-blue-700 mb-6">
+            <p className="text-muted-foreground mb-6">
               Aprenda o passo a passo completo para rezar o Santo Rosário
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
                 onClick={() => router.push("/como-rezar")}
+                className="rounded-full px-8 py-6 text-lg font-cinzel font-bold bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow transition-all"
+                data-testid="cta-como-rezar"
               >
                 Como rezar o Rosário
+                <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-blue-600 text-blue-600 hover:bg-blue-50"
                 onClick={() => router.push("/misterios-do-dia")}
+                className="rounded-full px-8 py-6 text-lg font-semibold border-gold-500/30 text-foreground hover:bg-gold-500/10"
+                data-testid="cta-misterios"
               >
                 Ver Mistérios
               </Button>
