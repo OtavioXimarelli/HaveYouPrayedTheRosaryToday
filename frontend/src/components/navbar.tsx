@@ -2,16 +2,17 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { Menu, X, BookOpen, History, Sparkles, ScrollText, ChevronDown, Play } from "lucide-react";
+import { Home, BookOpen, History, Sparkles, ScrollText, ChevronDown, Play, LayoutDashboard } from "lucide-react";
 import { AuthModal } from "./auth-modal";
 import { ComingSoonModal } from "./coming-soon-modal";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "@/components/ui/button";
+import { Sun, Moon } from "lucide-react";
+import { useTheme } from "@/providers/theme-provider";
 
 export function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
-  const showDesktopNavOnMobile = process.env.NEXT_PUBLIC_SHOW_DESKTOP_NAV_ON_MOBILE === "true";
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [comingSoonModalOpen, setComingSoonModalOpen] = useState(false);
   const [comingSoonFeature, setComingSoonFeature] = useState("");
@@ -20,6 +21,11 @@ export function Navbar() {
   const [explorarOpen, setExplorarOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const explorarRef = useRef<HTMLDivElement>(null);
+  const { resolvedTheme, setTheme } = useTheme();
+
+  const toggleTheme = () => {
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -78,9 +84,7 @@ export function Navbar() {
     <>
       {/* Desktop Floating Navbar - Minimalist 3-item design */}
       <nav 
-        className={`fixed bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-50 ${
-          showDesktopNavOnMobile ? "flex" : "hidden md:flex"
-        } items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2 sm:py-2.5 rounded-full transition-all duration-500 max-w-[calc(100vw-1.5rem)] ${
+        className={`fixed bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-50 hidden md:flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2 sm:py-2.5 rounded-full transition-all duration-500 max-w-[calc(100vw-1.5rem)] ${
           scrolled 
             ? "bg-sacred-blue/95 dark:bg-slate-900/95 backdrop-blur-xl shadow-2xl border border-white/10" 
             : "bg-sacred-blue/90 dark:bg-slate-900/90 backdrop-blur-lg shadow-xl border border-white/5"
@@ -149,12 +153,21 @@ export function Navbar() {
 
         <div className="w-px h-6 bg-white/20" />
 
-        {/* Theme Toggle */}
-        <ThemeToggle />
+        {/* 3. Dashboard */}
+        <button
+          onClick={() => navigateTo("/dashboard")}
+          className={`flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full transition-colors ${
+            pathname === "/dashboard" ? "bg-gold-500/20 text-gold-400" : "text-white/80 hover:text-white hover:bg-white/10"
+          }`}
+          data-testid="navbar-dashboard"
+        >
+          <LayoutDashboard className="w-4 h-4" />
+          <span className="text-xs sm:text-sm font-medium">Dashboard</span>
+        </button>
 
         <div className="w-px h-6 bg-white/20" />
 
-        {/* 3. Começar CTA */}
+        {/* Começar CTA */}
         <button
           onClick={() => showComingSoon("Funcionalidade de Check-in / Comunidade")}
           className="relative flex items-center gap-2 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue font-cinzel font-bold text-xs sm:text-sm tracking-wide hover:shadow-[0_0_20px_-5px_rgba(212,175,55,0.5)] transition-all"
@@ -166,96 +179,136 @@ export function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile Header */}
-      {!showDesktopNavOnMobile && (
-      <header 
-        className={`fixed top-0 left-0 right-0 z-50 md:hidden transition-all duration-300 ${
-          scrolled 
-            ? "bg-sacred-blue/95 dark:bg-slate-900/95 backdrop-blur-xl shadow-lg" 
-            : "bg-transparent"
-        }`}
-        data-testid="navbar-mobile"
-      >
-        <div className="flex items-center justify-between px-4 py-3">
-          <button
-            onClick={() => navigateTo("/")}
-            className="flex items-center gap-2"
-            data-testid="mobile-home"
-          >
-            <span className="text-2xl">📿</span>
-            <span className={`font-cinzel font-bold text-sm tracking-wide ${scrolled ? "text-white" : "text-sacred-blue dark:text-white"}`}>
-              Terço Hoje
-            </span>
-          </button>
+      {/* ═══════════════════════════════════════════
+           MOBILE — Native-style bottom tab bar
+           No top header needed; just a compact tab bar
+           ═══════════════════════════════════════════ */}
+      <nav
+          className="fixed bottom-0 left-0 right-0 z-50 md:hidden safe-area-bottom"
+          data-testid="mobile-tab-bar"
+        >
+          {/* Frosted glass background */}
+          <div className="bg-sacred-blue/95 dark:bg-slate-900/95 backdrop-blur-xl border-t border-white/[0.06]">
+            <div className="flex items-end justify-around px-2 pt-1.5 pb-1.5">
+              {/* Home */}
+              <button
+                onClick={() => navigateTo("/")}
+                className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
+                  pathname === "/" ? "text-gold-400" : "text-white/50 active:text-white/80"
+                }`}
+                data-testid="mobile-tab-home"
+              >
+                <Home className={`w-[22px] h-[22px] ${pathname === "/" ? "stroke-[2.5]" : "stroke-[1.5]"}`} />
+                <span className="text-[10px] mt-0.5 leading-tight">{pathname === "/" ? "Início" : "Início"}</span>
+                {pathname === "/" && <div className="w-1 h-1 rounded-full bg-gold-400 mt-0.5" />}
+              </button>
 
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`w-10 h-10 rounded-full ${scrolled ? "text-white hover:bg-white/10" : "text-sacred-blue dark:text-white hover:bg-sacred-blue/10 dark:hover:bg-white/10"}`}
-              data-testid="mobile-menu-toggle"
-            >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </Button>
+              {/* Explorar */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
+                  isOnContentPage || mobileMenuOpen ? "text-gold-400" : "text-white/50 active:text-white/80"
+                }`}
+                data-testid="mobile-tab-explorar"
+              >
+                <BookOpen className={`w-[22px] h-[22px] ${isOnContentPage ? "stroke-[2.5]" : "stroke-[1.5]"}`} />
+                <span className="text-[10px] mt-0.5 leading-tight">Explorar</span>
+                {isOnContentPage && <div className="w-1 h-1 rounded-full bg-gold-400 mt-0.5" />}
+              </button>
+
+              {/* Central CTA — elevated gold pill */}
+              <button
+                onClick={() => showComingSoon("Funcionalidade de Check-in / Comunidade")}
+                className="flex flex-col items-center justify-center -mt-3 group"
+                data-testid="mobile-tab-comecar"
+              >
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center shadow-gold-glow group-active:scale-95 transition-transform">
+                  <Play className="w-5 h-5 text-sacred-blue ml-0.5" />
+                </div>
+                <span className="text-[10px] text-gold-400 mt-0.5 leading-tight">Rezar</span>
+              </button>
+
+              {/* Dashboard */}
+              <button
+                onClick={() => navigateTo("/dashboard")}
+                className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
+                  pathname === "/dashboard" ? "text-gold-400" : "text-white/50 active:text-white/80"
+                }`}
+                data-testid="mobile-tab-dashboard"
+              >
+                <LayoutDashboard className={`w-[22px] h-[22px] ${pathname === "/dashboard" ? "stroke-[2.5]" : "stroke-[1.5]"}`} />
+                <span className="text-[10px] mt-0.5 leading-tight">Painel</span>
+                {pathname === "/dashboard" && <div className="w-1 h-1 rounded-full bg-gold-400 mt-0.5" />}
+              </button>
+
+              {/* More / Mais */}
+              <button
+                onClick={() => showComingSoon("Perfil e Configurações")}
+                className="flex flex-col items-center justify-center w-14 py-1 rounded-lg text-white/50 active:text-white/80 transition-colors"
+                data-testid="mobile-tab-more"
+              >
+                <div className="flex gap-[3px] items-center justify-center w-[22px] h-[22px]">
+                  <div className="w-[4px] h-[4px] rounded-full bg-current" />
+                  <div className="w-[4px] h-[4px] rounded-full bg-current" />
+                  <div className="w-[4px] h-[4px] rounded-full bg-current" />
+                </div>
+                <span className="text-[10px] mt-0.5 leading-tight">Mais</span>
+              </button>
+            </div>
           </div>
-        </div>
-      </header>
-      )}
+        </nav>
 
-      {/* Mobile Menu Overlay - Simplified */}
-      {!showDesktopNavOnMobile && mobileMenuOpen && (
-        <div 
+      {/* ═══ Mobile Explorar Sheet (slides up from bottom) ═══ */}
+      {mobileMenuOpen && (
+        <div
           className="fixed inset-0 z-40 md:hidden"
           onClick={() => setMobileMenuOpen(false)}
         >
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-          <div 
-            className="absolute top-16 left-4 right-4 bg-sacred-blue dark:bg-slate-900 rounded-2xl border border-white/10 shadow-2xl overflow-hidden"
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+          <div
+            className="absolute bottom-[68px] left-3 right-3 bg-sacred-blue dark:bg-slate-900 rounded-2xl border border-white/10 shadow-2xl overflow-hidden animate-fade-in safe-area-bottom"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="p-4 space-y-3">
-              {/* Explorar Section */}
-              <p className="text-white/50 text-xs uppercase tracking-wider font-semibold px-3">Explorar o Rosário</p>
-              
-              <div className="space-y-1">
-                {explorarLinks.map((link) => (
-                  <button
-                    key={link.path}
-                    onClick={() => navigateTo(link.path)}
-                    className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-colors ${
-                      pathname === link.path 
-                        ? "bg-gold-500/20 text-gold-400" 
-                        : "text-white hover:bg-white/10"
-                    }`}
-                    data-testid={`mobile-nav-${link.path.replace("/", "")}`}
-                  >
-                    <link.icon className="w-5 h-5" />
-                    <div className="text-left">
-                      <span className="font-medium block">{link.label}</span>
-                      <span className="text-xs text-white/50">{link.description}</span>
-                    </div>
-                  </button>
-                ))}
-              </div>
+            <div className="p-3">
+              <div className="w-10 h-1 rounded-full bg-white/20 mx-auto mb-3" />
 
-              {/* CTA Button */}
-              <div className="border-t border-white/10 pt-4 mt-4">
+              {explorarLinks.map((link) => (
                 <button
-                  onClick={() => showComingSoon("Funcionalidade de Check-in / Comunidade")}
-                  className="relative flex items-center justify-center gap-2 w-full px-4 py-3.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue font-cinzel font-bold tracking-wide hover:shadow-gold-glow transition-all"
-                  data-testid="mobile-nav-comecar"
+                  key={link.path}
+                  onClick={() => navigateTo(link.path)}
+                  className={`flex items-center gap-3 w-full px-3 py-3 rounded-xl transition-colors min-h-[48px] ${
+                    pathname === link.path
+                      ? "bg-gold-500/15 text-gold-400"
+                      : "text-white hover:bg-white/5 active:bg-white/10"
+                  }`}
+                  data-testid={`mobile-nav-${link.path.replace("/", "")}`}
                 >
-                  <Play className="w-5 h-5" />
-                  <span>Começar a Rezar</span>
-                  <span className="absolute top-2 right-2 w-2.5 h-2.5 rounded-full bg-sacred-blue animate-pulse" title="Em desenvolvimento" />
+                  <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 ${
+                    pathname === link.path ? "bg-gold-500/20" : "bg-white/5"
+                  }`}>
+                    <link.icon className="w-[18px] h-[18px]" />
+                  </div>
+                  <div className="text-left min-w-0">
+                    <span className="font-medium block text-sm">{link.label}</span>
+                    <span className="text-[11px] text-white/40">{link.description}</span>
+                  </div>
                 </button>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       )}
+
+      {/* ═══ Floating Theme Toggle ═══ */}
+      <button
+        onClick={toggleTheme}
+        className="fixed top-4 right-4 z-50 w-10 h-10 rounded-full glass sacred-border flex items-center justify-center hover:shadow-gold-glow transition-all duration-300 group"
+        data-testid="floating-theme-toggle"
+        aria-label="Alternar tema"
+      >
+        <Sun className="h-4 w-4 rotate-0 scale-100 text-gold-600 transition-transform duration-300 dark:-rotate-90 dark:scale-0" />
+        <Moon className="absolute h-4 w-4 rotate-90 scale-0 text-gold-400 transition-transform duration-300 dark:rotate-0 dark:scale-100" />
+      </button>
 
       <AuthModal
         isOpen={authModalOpen}
