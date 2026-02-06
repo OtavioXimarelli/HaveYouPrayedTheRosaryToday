@@ -1,111 +1,250 @@
 "use client";
 
-import { Construction, Sparkles, Heart, Calendar, ArrowLeft } from "lucide-react";
+import { useState } from "react";
+import { Flame, Trophy, Calendar, Heart, Sparkles, ChevronRight, Clock } from "lucide-react";
+import { StreakCounter } from "@/components/streak-counter";
+import { CheckInModal } from "@/components/check-in-modal";
+import { useTodayStatus, useUserStats } from "@/hooks/use-rosary";
+import { getMysteryInfo, MysteryType } from "@/types";
 
 export default function DashboardPage() {
-  const handleBackClick = () => {
-    window.location.href = "/";
-  };
+  const [showCheckInModal, setShowCheckInModal] = useState(false);
+  const { data: todayStatus } = useTodayStatus();
+  const { data: stats, isLoading } = useUserStats();
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 pt-24 pb-12">
-      <main className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mx-auto">
-          {/* Main Content Card */}
-          <div className="bg-white rounded-2xl shadow-2xl border-2 border-blue-200 p-6 sm:p-8 md:p-12">
-            {/* Icon */}
-            <div className="flex justify-center mb-6 sm:mb-8">
-              <div className="relative">
-                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center shadow-lg animate-pulse">
-                  <Construction className="w-10 h-10 sm:w-12 sm:h-12 text-white" strokeWidth={2.5} />
-                </div>
-                <div className="absolute -top-2 -right-2">
-                  <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-gold animate-pulse" fill="#FFD700" />
-                </div>
-              </div>
-            </div>
+  const mockRecentActivity = [
+    {
+      id: 1,
+      user: "Você",
+      mystery: "joyful" as MysteryType,
+      time: "Hoje às 07:30",
+      intentions: 2,
+    },
+    {
+      id: 2,
+      user: "Maria Silva",
+      mystery: "sorrowful" as MysteryType,
+      time: "Hoje às 18:45",
+      intentions: 3,
+    },
+    {
+      id: 3,
+      user: "João Santos",
+      mystery: "glorious" as MysteryType,
+      time: "Ontem às 06:00",
+      intentions: 1,
+    },
+  ];
 
-            {/* Title */}
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-blue-900 mb-4 sm:mb-6 text-center">
-              Dashboard em Construção
-            </h1>
-
-            {/* Description */}
-            <p className="text-base sm:text-lg md:text-xl text-blue-700 mb-6 sm:mb-8 leading-relaxed text-center">
-              Estamos trabalhando arduamente para trazer uma experiência incrível de acompanhamento 
-              da sua jornada espiritual. Em breve, você poderá:
-            </p>
-
-            {/* Feature List */}
-            <div className="space-y-4 sm:space-y-5 text-left max-w-lg mx-auto mb-8 sm:mb-10">
-              <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-md">
-                  <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-blue-900 text-sm sm:text-base mb-1">
-                    Registrar suas orações diárias
-                  </h3>
-                  <p className="text-xs sm:text-sm text-blue-600">
-                    Acompanhe sua sequência de devoção
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl bg-gradient-to-r from-gold-light to-gold/20 border border-gold">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center flex-shrink-0 shadow-md">
-                  <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-blue-900 text-sm sm:text-base mb-1">
-                    Ver estatísticas e progresso
-                  </h3>
-                  <p className="text-xs sm:text-sm text-blue-600">
-                    Visualize seu crescimento espiritual
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-md">
-                  <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-blue-900 text-sm sm:text-base mb-1">
-                    Compartilhar intenções de oração
-                  </h3>
-                  <p className="text-xs sm:text-sm text-blue-600">
-                    Conecte-se com a comunidade
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Footer Message */}
-            <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl p-4 sm:p-6 mb-6">
-              <p className="text-sm sm:text-base font-semibold mb-2 text-center">
-                🙏 Obrigado pela sua paciência!
-              </p>
-              <p className="text-xs sm:text-sm text-blue-100 text-center">
-                Enquanto isso, continue rezando o terço diariamente.<br />
-                Deus abençoe sua jornada de fé!
-              </p>
-            </div>
-
-            {/* Back to Home Button */}
-            <div className="text-center">
-              <button
-                type="button"
-                onClick={handleBackClick}
-                className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 hover:text-blue-800 hover:bg-blue-50 font-semibold text-sm sm:text-base transition-all px-6 py-3 rounded-lg border-2 border-blue-300 hover:border-blue-500 shadow-md hover:shadow-lg cursor-pointer active:scale-95"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                Voltar para a página inicial
-              </button>
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background dark:bg-navy-darker pt-24 pb-12">
+        <div className="container mx-auto px-4">
+          <div className="animate-pulse space-y-6">
+            <div className="h-12 bg-muted rounded-xl w-1/3" />
+            <div className="grid md:grid-cols-3 gap-6">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="h-40 bg-muted rounded-2xl" />
+              ))}
             </div>
           </div>
         </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-background dark:bg-navy-darker pt-24 pb-20">
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+        {/* Welcome Header */}
+        <div className="mb-12 sm:mb-16 animate-fade-up">
+          <h1 className="font-cinzel font-bold text-4xl sm:text-5xl md:text-6xl text-foreground dark:text-white mb-3 tracking-tight">
+            Bem-vindo de volta
+          </h1>
+          <p className="font-manrope text-lg text-muted-foreground">
+            Continue sua jornada espiritual com o Terço
+          </p>
+        </div>
+
+        {/* Main CTA - Check In Button */}
+        <div className="mb-12 sm:mb-16">
+          <button
+            onClick={() => setShowCheckInModal(true)}
+            className="w-full md:w-auto glass rounded-3xl px-8 sm:px-12 py-6 sm:py-8 sacred-border hover:-translate-y-1 transition-transform duration-300 cursor-pointer group"
+            data-testid="dashboard-checkin-button"
+          >
+            <div className="flex items-center justify-between gap-4">
+              <div className="text-left">
+                <div className="font-cinzel font-bold text-2xl sm:text-3xl text-foreground dark:text-white mb-1">
+                  Registrar Oração
+                </div>
+                <p className="font-manrope text-sm text-muted-foreground">
+                  {todayStatus?.hasPrayed
+                    ? "Você já rezou hoje! Continue sua sequência."
+                    : "Reze seu Terço de hoje"}
+                </p>
+              </div>
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-[0_0_30px_-5px_rgba(212,175,55,0.6)] transition-shadow">
+                <Heart className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+              </div>
+            </div>
+          </button>
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
+          {/* Streak Card */}
+          <div className="glass rounded-2xl sacred-border p-6 sm:p-8 hover:-translate-y-1 transition-transform duration-300">
+            <div className="flex items-start justify-between mb-6">
+              <div>
+                <p className="font-manrope text-sm text-muted-foreground mb-2">
+                  SEQUÊNCIA ATUAL
+                </p>
+                <div className="font-cinzel font-bold text-5xl sm:text-6xl text-foreground dark:text-white">
+                  {stats?.currentStreak || 0}
+                </div>
+                <p className="font-manrope text-sm text-muted-foreground mt-2">
+                  dias seguidos
+                </p>
+              </div>
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg">
+                <Flame className="w-7 h-7 text-white" />
+              </div>
+            </div>
+            {(stats?.currentStreak || 0) >= 7 && (
+              <div className="bg-orange-500/10 text-orange-600 dark:text-orange-400 px-3 py-2 rounded-lg text-xs font-semibold inline-block">
+                Pegando fogo! 🔥
+              </div>
+            )}
+          </div>
+
+          {/* Best Streak Card */}
+          <div className="glass rounded-2xl sacred-border p-6 sm:p-8 hover:-translate-y-1 transition-transform duration-300">
+            <div className="flex items-start justify-between mb-6">
+              <div>
+                <p className="font-manrope text-sm text-muted-foreground mb-2">
+                  MELHOR SEQUÊNCIA
+                </p>
+                <div className="font-cinzel font-bold text-5xl sm:text-6xl text-foreground dark:text-white">
+                  {stats?.longestStreak || 0}
+                </div>
+                <p className="font-manrope text-sm text-muted-foreground mt-2">
+                  dias consecutivos
+                </p>
+              </div>
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center shadow-lg shadow-gold/30">
+                <Trophy className="w-7 h-7 text-white" />
+              </div>
+            </div>
+          </div>
+
+          {/* Total Prayers Card */}
+          <div className="glass rounded-2xl sacred-border p-6 sm:p-8 hover:-translate-y-1 transition-transform duration-300">
+            <div className="flex items-start justify-between mb-6">
+              <div>
+                <p className="font-manrope text-sm text-muted-foreground mb-2">
+                  TOTAL DE TERÇOS
+                </p>
+                <div className="font-cinzel font-bold text-5xl sm:text-6xl text-foreground dark:text-white">
+                  {stats?.totalCheckIns || 0}
+                </div>
+                <p className="font-manrope text-sm text-muted-foreground mt-2">
+                  rezados com devoção
+                </p>
+              </div>
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
+                <Calendar className="w-7 h-7 text-white" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Recent Activity & Today's Mystery */}
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+          {/* Today's Mystery */}
+          <div className="glass rounded-2xl sacred-border p-6 sm:p-8">
+            <h2 className="font-cinzel font-bold text-2xl text-foreground dark:text-white mb-6">
+              Mistério de Hoje
+            </h2>
+            <div className="space-y-4">
+              <div>
+                <p className="font-manrope text-sm text-muted-foreground mb-2">
+                  TIPO
+                </p>
+                <p className="font-cinzel font-bold text-xl text-foreground dark:text-white">
+                  {getMysteryInfo(todayStatus?.stats?.favoriteMysterys?.[0] || "joyful").name}
+                </p>
+              </div>
+              <div>
+                <p className="font-manrope text-sm text-muted-foreground mb-2">
+                  DESCRIÇÃO
+                </p>
+                <p className="font-manrope text-foreground dark:text-white leading-relaxed">
+                  {getMysteryInfo(todayStatus?.stats?.favoriteMysterys?.[0] || "joyful").description}
+                </p>
+              </div>
+              <button
+                onClick={() => setShowCheckInModal(true)}
+                className="w-full mt-6 bg-gradient-to-r from-gold to-gold-dark text-navy-darker font-cinzel font-bold py-3 rounded-full hover:shadow-[0_0_30px_-5px_rgba(212,175,55,0.6)] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                data-testid="mystery-pray-button"
+              >
+                Rezar Este Mistério <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Recent Activity */}
+          <div className="glass rounded-2xl sacred-border p-6 sm:p-8">
+            <h2 className="font-cinzel font-bold text-2xl text-foreground dark:text-white mb-6">
+              Atividade Recente
+            </h2>
+            <div className="space-y-4">
+              {mockRecentActivity.map((activity) => (
+                <div
+                  key={activity.id}
+                  className="flex items-center gap-4 p-4 rounded-xl bg-foreground/5 dark:bg-white/5 hover:bg-foreground/10 dark:hover:bg-white/10 transition-colors"
+                >
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center flex-shrink-0">
+                    <Heart className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-manrope font-semibold text-foreground dark:text-white truncate">
+                      {activity.user}
+                    </p>
+                    <p className="font-manrope text-sm text-muted-foreground">
+                      {getMysteryInfo(activity.mystery).name}
+                    </p>
+                  </div>
+                  <div className="text-right flex-shrink-0">
+                    <p className="font-manrope text-xs text-muted-foreground flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      {activity.time}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Motivational Message */}
+        <div className="mt-12 sm:mt-16 glass rounded-2xl sacred-border p-8 sm:p-10 text-center">
+          <Sparkles className="w-12 h-12 text-gold mx-auto mb-4" />
+          <p className="font-cinzel font-bold text-2xl sm:text-3xl text-foreground dark:text-white mb-3">
+            Sua devoção importa
+          </p>
+          <p className="font-manrope text-muted-foreground max-w-2xl mx-auto">
+            Cada Terço rezado com o coração contribui para sua paz espiritual e para o mundo.
+            Continue sua sequência e inspire outros fiéis.
+          </p>
+        </div>
       </main>
+
+      {/* Check In Modal */}
+      <CheckInModal
+        open={showCheckInModal}
+        onOpenChange={setShowCheckInModal}
+      />
     </div>
   );
 }
