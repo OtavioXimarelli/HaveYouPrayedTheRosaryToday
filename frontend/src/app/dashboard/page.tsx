@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Flame, Trophy, Calendar, Heart, Sparkles, ChevronRight, Clock } from "lucide-react";
 import { StreakCounter } from "@/components/streak-counter";
 import { CheckInModal } from "@/components/check-in-modal";
+import { LightRays } from "@/components/LightRays";
 import { useTodayStatus, useUserStats } from "@/hooks/use-rosary";
 import { getMysteryInfo, MysteryType } from "@/types";
 
@@ -54,8 +55,50 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background dark:bg-navy-darker pt-24 pb-20">
-      <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+    <div className="min-h-screen bg-background dark:bg-navy-darker pt-24 pb-20 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Light mode background */}
+        <div className="absolute inset-0 dark:hidden bg-gradient-to-br from-background via-white to-background opacity-50" />
+        
+        {/* Dark mode background with holy light effect */}
+        <div className="hidden dark:block absolute inset-0 bg-gradient-to-b from-navy-darker via-blue-950/40 to-navy-darker" />
+        <div className="hidden dark:block absolute inset-0 dark:from-gold/5 dark:via-transparent dark:to-transparent dark:bg-radial" 
+          style={{
+            backgroundImage: 'radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 70%)',
+          }}
+        />
+        
+        {/* LightRays Effect */}
+        <div className="absolute inset-0 w-full h-full flex justify-center" aria-hidden="true">
+          <div style={{ width: "1080px", height: "1080px", position: "relative" }}>
+            <LightRays
+              raysOrigin="top-center"
+              raysColor="#9a8f19"
+              raysSpeed={0.9}
+              lightSpread={1.3}
+              rayLength={1.3}
+              pulsating={false}
+              fadeDistance={1}
+              saturation={1}
+              followMouse
+              mouseInfluence={0.1}
+              noiseAmount={0}
+              distortion={0}
+            />
+          </div>
+        </div>
+        
+        {/* Noise texture overlay */}
+        <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.03]"
+          style={{
+            backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E\")",
+          }}
+        />
+      </div>
+
+      {/* Content */}
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
         {/* Welcome Header */}
         <div className="mb-12 sm:mb-16 animate-fade-up">
           <h1 className="font-cinzel font-bold text-4xl sm:text-5xl md:text-6xl text-foreground dark:text-white mb-3 tracking-tight">
