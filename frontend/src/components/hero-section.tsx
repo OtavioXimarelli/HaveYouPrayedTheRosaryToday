@@ -5,13 +5,19 @@ import { Sparkles, Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTodayStatus } from "@/hooks/use-rosary";
 import { CheckInModal } from "./check-in-modal";
+import { ComingSoonModal } from "./coming-soon-modal";
 import { StreakCounter } from "./streak-counter";
 
 export function HeroSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [comingSoonModalOpen, setComingSoonModalOpen] = useState(false);
   const { data: status, isLoading } = useTodayStatus();
 
   const hasPrayed = status?.hasPrayed ?? false;
+
+  const handlePrayClick = () => {
+    setComingSoonModalOpen(true);
+  };
 
   return (
     <section className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden">
@@ -69,6 +75,7 @@ export function HeroSection() {
               <Check className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-white" strokeWidth={2.5} />
             ) : (
               <span className="text-5xl sm:text-6xl md:text-7xl">📿</span>
+
             )}
           </div>
           {hasPrayed && (
@@ -100,7 +107,7 @@ export function HeroSection() {
           {!hasPrayed ? (
             <Button
               size="lg"
-              onClick={() => setIsModalOpen(true)}
+              onClick={handlePrayClick}
               disabled={isLoading}
               data-testid="hero-pray-button"
               className="group relative px-8 sm:px-10 py-6 sm:py-7 text-lg sm:text-xl font-cinzel font-bold tracking-wide rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow-lg transition-all duration-300 border-2 border-gold-400/50"
@@ -109,6 +116,8 @@ export function HeroSection() {
                 <span>Vamos Rezar</span>
                 <span className="text-2xl group-hover:rotate-12 transition-transform duration-300">✝</span>
               </span>
+              {/* Coming soon indicator */}
+              <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-sacred-blue animate-pulse shadow-lg" title="Em desenvolvimento" />
               {/* Shimmer effect */}
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
             </Button>
@@ -146,6 +155,12 @@ export function HeroSection() {
       </div>
 
       <CheckInModal open={isModalOpen} onOpenChange={setIsModalOpen} />
+      
+      <ComingSoonModal
+        isOpen={comingSoonModalOpen}
+        onClose={() => setComingSoonModalOpen(false)}
+        featureName="Funcionalidade de Check-in / Comunidade"
+      />
     </section>
   );
 }
