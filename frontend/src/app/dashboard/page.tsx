@@ -130,7 +130,6 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background" data-testid="dashboard-page">
-      <Navbar />
       
       {/* Main Content */}
       <main className="pt-4 pb-32 md:pt-8 md:pb-24 px-4 sm:px-6 lg:px-8">
