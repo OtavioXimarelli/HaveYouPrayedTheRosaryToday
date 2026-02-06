@@ -8,7 +8,6 @@ import {
   ChevronRight, TrendingUp, Star, Sun, Moon
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Navbar } from "@/components/navbar";
 import { 
   UserStats, CheckIn, MYSTERIES, getTodaysMystery, getMysteryInfo, MysteryType 
 } from "@/types";
