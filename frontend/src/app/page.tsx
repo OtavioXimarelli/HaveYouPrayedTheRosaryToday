@@ -6,8 +6,9 @@ import { HeroSection } from "@/components/hero-section";
 import { AuthModal } from "@/components/auth-modal";
 import { PageTransition } from "@/components/page-transition";
 import { 
-  Heart, Users, TrendingUp, Calendar, Sparkles, Shield, Check,
-  BookOpen, History, ScrollText, ArrowRight, Clock, Globe
+  Heart, Users, Calendar, Sparkles, Check,
+  BookOpen, History, ScrollText, ArrowRight,
+  Timer, Edit3, Library, Cross, Globe, TrendingUp, Shield
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -30,156 +31,142 @@ export default function HomePage() {
       <main className="min-h-screen bg-background">
         <HeroSection />
       
-      {/* What is the Rosary Section - Bento Grid */}
+      {/* Rosário Vivo - Main Vision Section */}
       <section id="about" className="py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden">
-        {/* Background decoration */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(212,175,55,0.05)_0%,transparent_70%)]" />
         
         <div className="max-w-7xl mx-auto relative z-10">
-          {/* Section Header */}
           <div className="text-center mb-16 sm:mb-20">
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gold-500/10 dark:bg-gold-500/20 border border-gold-500/20 mb-6">
-              <span className="text-lg">📿</span>
-              <span className="text-gold-700 dark:text-gold-400 font-semibold text-sm uppercase tracking-wider">O Santo Rosário</span>
+              <Cross className="w-4 h-4 text-gold-600 dark:text-gold-400" />
+              <span className="text-gold-700 dark:text-gold-400 font-semibold text-sm uppercase tracking-wider">Rosário Vivo</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-cinzel font-bold text-foreground mb-6">
-              O que é o <span className="text-gold-500">Rosário</span>?
+              Viva sua <span className="text-gold-500">fé católica</span> plenamente
             </h2>
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Uma poderosa oração católica que medita os mistérios da vida de Jesus Cristo através de Maria
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Mais que um app de oração, somos sua companhia diária na jornada espiritual. 
+              Acompanhe seu crescimento, explore conteúdos profundos, e conecte-se com uma comunidade global de fé.
             </p>
           </div>
 
-          {/* Bento Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {/* Large Card - History */}
-            <div 
-              onClick={() => router.push("/historia")}
-              className="group md:col-span-2 lg:col-span-2 p-8 sm:p-10 rounded-3xl glass cursor-pointer hover:-translate-y-1 transition-all duration-300 hover:shadow-gold-glow sacred-border"
-              data-testid="card-historia"
-            >
-              <div className="flex flex-col sm:flex-row gap-6 items-start">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-105 transition-transform">
-                  <History className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl sm:text-3xl font-cinzel font-bold text-foreground mb-3 group-hover:text-gold-500 transition-colors">
-                    História e Significado
-                  </h3>
-                  <p className="text-muted-foreground text-lg leading-relaxed mb-4">
-                    O Rosário surgiu no século XIII como uma forma de oração acessível a todos os fiéis. Através da repetição do Ave Maria e meditação dos mistérios, nos aproximamos de Cristo através do coração de Maria.
-                  </p>
-                  <div className="flex items-center gap-2 text-gold-600 dark:text-gold-400 font-semibold">
-                    <span>Conhecer a história</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
+          {/* Core Features - 3 Main Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-12">
+            <div className="p-8 rounded-3xl glass sacred-border hover:-translate-y-1 transition-all duration-300 hover:shadow-gold-glow">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center mb-6 shadow-lg">
+                <Calendar className="w-8 h-8 text-white" />
               </div>
-            </div>
-
-            {/* Time Card */}
-            <div className="p-8 rounded-3xl bg-gradient-to-br from-sacred-blue to-slate-800 dark:from-slate-800 dark:to-slate-900 text-white relative overflow-hidden group hover:-translate-y-1 transition-all duration-300">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gold-500/10 rounded-full -translate-y-1/2 translate-x-1/2" />
-              <div className="relative z-10">
-                <Clock className="w-10 h-10 text-gold-400 mb-4" />
-                <h3 className="text-4xl sm:text-5xl font-cinzel font-bold mb-2">15-20</h3>
-                <p className="text-xl font-semibold text-white/90 mb-2">minutos</p>
-                <p className="text-white/70 text-sm">
-                  Um pequeno investimento de tempo que traz imensos frutos espirituais
-                </p>
-              </div>
-            </div>
-
-            {/* Structure Card */}
-            <div 
-              onClick={() => router.push("/misterios-do-dia")}
-              className="p-8 rounded-3xl glass sacred-border cursor-pointer group hover:-translate-y-1 transition-all duration-300 hover:shadow-gold-glow"
-              data-testid="card-misterios"
-            >
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
-                <Sparkles className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-xl font-cinzel font-bold text-foreground mb-3 group-hover:text-gold-500 transition-colors">
-                Estrutura do Rosário
-              </h3>
-              <p className="text-muted-foreground mb-4">
-                20 mistérios em quatro grupos: Gozosos, Luminosos, Dolorosos e Gloriosos.
+              <h3 className="text-2xl font-cinzel font-bold text-foreground mb-3">Acompanhe diariamente</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Registre suas orações, construa sequências, celebre conquistas. Transforme o rosário em um hábito vivo e consistente.
               </p>
-              <div className="space-y-2">
-                {["Segunda e Sábado", "Quinta-feira", "Terça e Sexta", "Quarta e Domingo"].map((day, i) => (
-                  <div key={day} className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <div className="w-2 h-2 rounded-full bg-gold-500" />
-                    <span>{["Gozosos", "Luminosos", "Dolorosos", "Gloriosos"][i]}</span>
-                    <span className="text-gold-600 dark:text-gold-400 ml-auto text-xs">{day}</span>
-                  </div>
-                ))}
-              </div>
             </div>
 
-            {/* How to Pray Card */}
-            <div 
-              onClick={() => router.push("/como-rezar")}
-              className="p-8 rounded-3xl glass sacred-border cursor-pointer group hover:-translate-y-1 transition-all duration-300 hover:shadow-gold-glow"
-              data-testid="card-como-rezar"
-            >
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-sacred-blue to-slate-700 dark:from-slate-700 dark:to-slate-800 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
-                <BookOpen className="w-7 h-7 text-gold-400" />
+            <div className="p-8 rounded-3xl glass sacred-border hover:-translate-y-1 transition-all duration-300 hover:shadow-gold-glow">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-sacred-blue to-slate-700 flex items-center justify-center mb-6 shadow-lg">
+                <BookOpen className="w-8 h-8 text-gold-400" />
               </div>
-              <h3 className="text-xl font-cinzel font-bold text-foreground mb-3 group-hover:text-gold-500 transition-colors">
-                Como Rezar
-              </h3>
-              <p className="text-muted-foreground mb-4">
-                Guia passo a passo para rezar o Santo Rosário com devoção e meditação.
+              <h3 className="text-2xl font-cinzel font-bold text-foreground mb-3">Explore e aprenda</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Métodos de meditação, história dos mistérios, ensinamentos dos santos. Aprofunde sua compreensão e vivência do rosário.
               </p>
-              <div className="flex items-center gap-2 text-gold-600 dark:text-gold-400 font-semibold text-sm">
-                <span>Ver guia completo</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </div>
             </div>
 
-            {/* Prayers Card */}
-            <div 
-              onClick={() => router.push("/oracoes-tradicionais")}
-              className="p-8 rounded-3xl glass sacred-border cursor-pointer group hover:-translate-y-1 transition-all duration-300 hover:shadow-gold-glow"
-              data-testid="card-oracoes"
-            >
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-sacred-blue to-slate-700 dark:from-slate-700 dark:to-slate-800 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
-                <ScrollText className="w-7 h-7 text-gold-400" />
+            <div className="p-8 rounded-3xl glass sacred-border hover:-translate-y-1 transition-all duration-300 hover:shadow-gold-glow">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center mb-6 shadow-lg">
+                <Users className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-cinzel font-bold text-foreground mb-3 group-hover:text-gold-500 transition-colors">
-                Orações Tradicionais
-              </h3>
-              <p className="text-muted-foreground mb-4">
-                Pai Nosso, Ave Maria, Credo, Salve Rainha e outras orações essenciais.
+              <h3 className="text-2xl font-cinzel font-bold text-foreground mb-3">Ore em comunidade</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Una-se a milhares de católicos ao redor do mundo. Compartilhe intenções, encoraje outros, cresça juntos na fé.
               </p>
-              <div className="flex items-center gap-2 text-gold-600 dark:text-gold-400 font-semibold text-sm">
-                <span>Ver orações</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </div>
             </div>
           </div>
 
-          {/* Benefits Section */}
-          <div className="mt-16 p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-sacred-blue to-slate-800 dark:from-slate-800 dark:to-slate-900 text-white">
-            <h3 className="text-2xl sm:text-3xl font-cinzel font-bold mb-8 text-center">
-              Benefícios <span className="text-gold-400">Espirituais</span>
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                "Fortalece a fé e a confiança em Deus",
-                "Traz paz interior e serenidade",
-                "Protege contra as tentações",
-                "Aproxima-nos de Jesus através de Maria",
-                "Une famílias e comunidades em oração",
-                "Obtém graças e bênçãos especiais"
-              ].map((benefit, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-gold-500 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Check className="w-4 h-4 text-sacred-blue" strokeWidth={3} />
-                  </div>
-                  <span className="text-white/90">{benefit}</span>
-                </div>
-              ))}
+          {/* Quick Access Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div 
+              onClick={() => router.push("/como-rezar")}
+              className="p-5 rounded-2xl glass sacred-border cursor-pointer hover:-translate-y-1 transition-all duration-300 group"
+            >
+              <BookOpen className="w-7 h-7 text-gold-500 mb-3 group-hover:scale-110 transition-transform" />
+              <h4 className="font-cinzel font-bold text-foreground text-sm mb-1">Como Rezar</h4>
+              <p className="text-xs text-muted-foreground">Guia passo a passo</p>
+            </div>
+
+            <div 
+              onClick={() => router.push("/misterios-do-dia")}
+              className="p-5 rounded-2xl glass sacred-border cursor-pointer hover:-translate-y-1 transition-all duration-300 group"
+            >
+              <Sparkles className="w-7 h-7 text-gold-500 mb-3 group-hover:scale-110 transition-transform" />
+              <h4 className="font-cinzel font-bold text-foreground text-sm mb-1">Mistérios</h4>
+              <p className="text-xs text-muted-foreground">Meditações diárias</p>
+            </div>
+
+            <div 
+              onClick={() => router.push("/historia")}
+              className="p-5 rounded-2xl glass sacred-border cursor-pointer hover:-translate-y-1 transition-all duration-300 group"
+            >
+              <History className="w-7 h-7 text-gold-500 mb-3 group-hover:scale-110 transition-transform" />
+              <h4 className="font-cinzel font-bold text-foreground text-sm mb-1">História</h4>
+              <p className="text-xs text-muted-foreground">Origem e tradição</p>
+            </div>
+
+            <div 
+              onClick={() => router.push("/oracoes-tradicionais")}
+              className="p-5 rounded-2xl glass sacred-border cursor-pointer hover:-translate-y-1 transition-all duration-300 group"
+            >
+              <ScrollText className="w-7 h-7 text-gold-500 mb-3 group-hover:scale-110 transition-transform" />
+              <h4 className="font-cinzel font-bold text-foreground text-sm mb-1">Orações</h4>
+              <p className="text-xs text-muted-foreground">Textos completos</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Coming Soon Features */}
+      <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gold-500/5 via-background to-background">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-cinzel font-bold text-foreground mb-4">
+              Em <span className="text-gold-500">breve</span>
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Novas ferramentas para enriquecer sua experiência espiritual
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="p-6 rounded-2xl glass sacred-border">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold-500/20 to-gold-600/20 flex items-center justify-center mb-4">
+                <Timer className="w-6 h-6 text-gold-500" />
+              </div>
+              <h3 className="font-cinzel font-bold text-foreground mb-2">Guia Interativo</h3>
+              <p className="text-sm text-muted-foreground">Temporizador e guia passo a passo enquanto reza</p>
+            </div>
+
+            <div className="p-6 rounded-2xl glass sacred-border">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold-500/20 to-gold-600/20 flex items-center justify-center mb-4">
+                <Edit3 className="w-6 h-6 text-gold-500" />
+              </div>
+              <h3 className="font-cinzel font-bold text-foreground mb-2">Diário Espiritual</h3>
+              <p className="text-sm text-muted-foreground">Registre reflexões e intenções pessoais</p>
+            </div>
+
+            <div className="p-6 rounded-2xl glass sacred-border">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold-500/20 to-gold-600/20 flex items-center justify-center mb-4">
+                <Library className="w-6 h-6 text-gold-500" />
+              </div>
+              <h3 className="font-cinzel font-bold text-foreground mb-2">Biblioteca</h3>
+              <p className="text-sm text-muted-foreground">PDFs, documentos e materiais para download</p>
+            </div>
+
+            <div className="p-6 rounded-2xl glass sacred-border">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold-500/20 to-gold-600/20 flex items-center justify-center mb-4">
+                <BookOpen className="w-6 h-6 text-gold-500" />
+              </div>
+              <h3 className="font-cinzel font-bold text-foreground mb-2">Artigos & Guias</h3>
+              <p className="text-sm text-muted-foreground">Conteúdo profundo sobre santos e espiritualidade</p>
             </div>
           </div>
         </div>
@@ -323,12 +310,12 @@ export default function HomePage() {
           </div>
           
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-cinzel font-bold text-white mb-6">
-            Junte-se à nossa comunidade
+            Comece sua jornada hoje
           </h2>
           
           <p className="text-lg sm:text-xl lg:text-2xl text-white/80 mb-10 sm:mb-12 max-w-2xl mx-auto leading-relaxed">
-            Milhares de católicos ao redor do mundo já fazem parte. 
-            Comece hoje sua jornada de fé e devoção ao Santo Rosário.
+            Junte-se a milhares de católicos ao redor do mundo vivendo o Rosário Vivo. 
+            Gratuito, open-source, e feito com fé.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -363,10 +350,10 @@ export default function HomePage() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-4xl">📿</span>
-                <span className="font-cinzel font-bold text-xl">Terço Hoje</span>
+                <span className="font-cinzel font-bold text-xl">Rosário Vivo</span>
               </div>
               <p className="text-slate-400 leading-relaxed">
-                Uma comunidade global de católicos unidos em oração diária do Santo Rosário.
+                Viva sua fé católica plenamente. Comunidade global de oração e crescimento espiritual.
               </p>
             </div>
             
@@ -416,7 +403,7 @@ export default function HomePage() {
           
           <div className="text-center pt-8 border-t border-slate-800">
             <p className="text-slate-500 text-sm mb-2">
-              Feito com fé e amor • {new Date().getFullYear()} • Você Já Rezou o Terço Hoje?
+              Feito com fé e amor • {new Date().getFullYear()} • Rosário Vivo
             </p>
             <p className="text-slate-600 text-sm italic">
               &ldquo;Reze o Rosário todos os dias para obter a paz no mundo&rdquo; - Nossa Senhora de Fátima

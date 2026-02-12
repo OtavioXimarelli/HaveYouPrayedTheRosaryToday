@@ -1,7 +1,7 @@
 {
-  "name": "rosary-app",
+  "name": "rosario-vivo",
   "version": "1.0.0",
-  "description": "Você Já Rezou o Terço Hoje? - Prayer tracking app",
+  "description": "Rosário Vivo - Live your Catholic faith fully",
   "private": true,
   "scripts": {
     "dev": "concurrently \"pnpm --filter backend start:dev\" \"pnpm --filter frontend dev\"",

@@ -394,6 +394,11 @@ content/
 - [x] Traditional prayers page
 - [x] St. Louis de Montfort method section
 - [x] Smooth page transitions
+- [x] Enhanced landing page with Catholic Hub vision
+- [x] Comprehensive features showcase
+- [x] Learning paths preview
+- [x] Saints section preview
+- [x] Resources library preview
 
 **In Progress:**
 - [ ] Phase 1 enhancements

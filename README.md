@@ -1,6 +1,6 @@
-# 🙏 Have You Prayed the Rosary Today?
+# � Rosário Vivo (Living Rosary)
 
-> A community-driven prayer tracking app that helps Catholics maintain their daily Rosary practice with streaks, reflections, and social features.
+> A comprehensive Catholic spiritual platform that helps you live your faith fully - track your daily Rosary practice, explore deep spiritual content, and connect with a global community of prayer.
 
 [![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/)
 [![NestJS](https://img.shields.io/badge/NestJS-10-red?logo=nestjs)](https://nestjs.com/)
@@ -9,11 +9,18 @@
 
 ## ✨ Features
 
+### Currently Available
 - **Daily Check-ins** - Log your Rosary prayers with mystery selection
 - **Streak Tracking** - Maintain and visualize your prayer consistency
-- **Community Feed** - Share reflections and support others with "Amen"
-- **Prayer Requests** - Post intentions and mark answered prayers
-- **Testimonials** - Share graces received with the community
+- **Educational Content** - Learn how to pray the Rosary, understand the Mysteries, explore history
+- **Traditional Prayers** - Complete texts of essential Catholic prayers
+
+### Coming Soon
+- **Interactive Prayer Guide** - Step-by-step guided Rosary with timer
+- **Spiritual Journal** - Record personal reflections and intentions
+- **Resource Library** - PDFs, documents, and materials for download
+- **Deep Content** - Articles and guides on saints, spirituality, and Marian devotion
+- **Community Feed** - Share reflections and pray together globally
 
 ## 📁 Project Structure
 

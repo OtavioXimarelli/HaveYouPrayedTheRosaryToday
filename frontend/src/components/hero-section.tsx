@@ -87,11 +87,11 @@ export function HeroSection() {
 
         {/* Main heading */}
         <h1 className="animate-fade-up opacity-0" style={{ animationDelay: "300ms" }}>
-          <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-cinzel font-bold text-sacred-blue dark:text-white tracking-tight mb-3">
-            Você já rezou o
+          <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-cinzel font-bold bg-gradient-to-r from-gold-500 via-gold-400 to-gold-600 bg-clip-text text-transparent mb-4">
+            Rosário Vivo
           </span>
-          <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-cinzel font-bold bg-gradient-to-r from-gold-500 via-gold-400 to-gold-600 bg-clip-text text-transparent">
-            Terço hoje?
+          <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-cinzel font-semibold text-sacred-blue dark:text-white">
+            Viva sua fé, cada dia
           </span>
         </h1>
 
@@ -99,7 +99,7 @@ export function HeroSection() {
         <p className="mt-6 sm:mt-8 text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-manrope animate-fade-up opacity-0" style={{ animationDelay: "400ms" }}>
           {hasPrayed
             ? "Parabéns! Você já rezou hoje. Sua fidelidade é uma bênção!"
-            : "Una-se a milhares de católicos em oração. O Rosário é uma poderosa ferramenta de fé e esperança."}
+            : "Acompanhe sua jornada espiritual, explore conteúdos profundos e conecte-se com uma comunidade global de fé."}
         </p>
 
         {/* CTA Button */}
