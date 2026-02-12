@@ -11,18 +11,24 @@ WORKDIR /workspace
 ARG NEXT_PUBLIC_API_URL=http://localhost:3001/api
 ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 
-# Force production environment for build
-ENV NODE_ENV=production
+# Do not force production yet — install needs devDependencies for build
 ENV NEXT_TELEMETRY_DISABLED=1
+
+# Use a pnpm store inside the container for determinism
+ENV PNPM_HOME="/workspace/.pnpm-store"
+ENV PNPM_STORE_PATH="/workspace/.pnpm-store"
 
 # Copy workspace files (monorepo structure)
 COPY pnpm-workspace.yaml pnpm-lock.yaml package.json ./
 COPY frontend ./frontend
 
-# Install dependencies
-RUN pnpm install --filter=frontend --frozen-lockfile
+# Install dependencies (ensure devDependencies are present for the Next.js build)
+# Temporarily set NODE_ENV=development so devDependencies are installed.
+ENV NODE_ENV=development
+RUN pnpm install --frozen-lockfile --store-dir /workspace/.pnpm-store
 
-# Build the application
+# Build the application in production mode
+ENV NODE_ENV=production
 WORKDIR /workspace/frontend
 RUN pnpm run build
 
