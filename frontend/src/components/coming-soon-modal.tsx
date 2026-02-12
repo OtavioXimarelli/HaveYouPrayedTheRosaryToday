@@ -15,7 +15,7 @@ export function ComingSoonModal({ isOpen, onClose, featureName }: ComingSoonModa
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md glass border-gold-500/20">
         <DialogHeader>
-          <div className="flex items-center justify-center mb-4">
+          <div className="flex items-center justify-center mb-4 animate-scale-in">
             <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center shadow-gold-glow animate-pulse-gold">
               <Construction className="w-8 h-8 text-sacred-blue" strokeWidth={2.5} />
             </div>
@@ -30,7 +30,7 @@ export function ComingSoonModal({ isOpen, onClose, featureName }: ComingSoonModa
         </DialogHeader>
 
         {/* Visible modal body — rendered as divs to avoid <p> nesting issues */}
-        <div className="text-center space-y-4 pt-2">
+        <div className="text-center space-y-4 pt-2 animate-slide-up animate-delay-100">
           <p className="text-base text-muted-foreground">
             A funcionalidade{" "}
             <strong className="text-gold-600 dark:text-gold-400">{featureName}</strong>{" "}

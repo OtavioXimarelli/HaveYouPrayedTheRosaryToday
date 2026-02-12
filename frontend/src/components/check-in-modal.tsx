@@ -95,14 +95,14 @@ export function CheckInModal({ open, onOpenChange }: CheckInModalProps) {
     return (
       <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogContent className="sm:max-w-md bg-gradient-to-br from-navy to-navy-dark border-gold/30">
-          <div className="flex flex-col items-center justify-center py-12 text-center">
-            <div className="w-20 h-20 bg-gold rounded-full flex items-center justify-center mb-6 animate-glow">
+          <div className="flex flex-col items-center justify-center py-12 text-center animate-fade-in">
+            <div className="w-20 h-20 bg-gold rounded-full flex items-center justify-center mb-6 animate-scale-in animate-pulse-gold">
               <Sparkles className="w-10 h-10 text-navy-dark" />
             </div>
-            <h2 className="text-2xl font-bold text-white mb-2">
+            <h2 className="text-2xl font-bold text-white mb-2 animate-slide-up animate-delay-200">
               Lindo! 🙏
             </h2>
-            <p className="text-white/70">
+            <p className="text-white/70 animate-slide-up animate-delay-300">
               Seu terço foi registrado. Que Deus te abençoe.
             </p>
           </div>
@@ -125,7 +125,7 @@ export function CheckInModal({ open, onOpenChange }: CheckInModalProps) {
 
         <div className="space-y-6 py-4">
           {/* Mystery Selection */}
-          <div className="space-y-2">
+          <div className="space-y-2 animate-slide-up">
             <Label htmlFor="mystery" className="text-navy dark:text-white font-medium">
               Qual Mistério você rezou?
             </Label>
@@ -154,7 +154,7 @@ export function CheckInModal({ open, onOpenChange }: CheckInModalProps) {
           </div>
 
           {/* Reflection */}
-          <div className="space-y-2">
+          <div className="space-y-2 animate-slide-up animate-delay-100">
             <Label htmlFor="reflection" className="text-navy dark:text-white font-medium">
               O que tocou seu coração hoje?{" "}
               <span className="text-muted-foreground font-normal">(opcional)</span>
@@ -173,7 +173,7 @@ export function CheckInModal({ open, onOpenChange }: CheckInModalProps) {
           </div>
 
           {/* Intentions */}
-          <div className="space-y-3">
+          <div className="space-y-3 animate-slide-up animate-delay-200">
             <Label className="text-navy dark:text-white font-medium">
               Intenções da Oração
             </Label>

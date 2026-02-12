@@ -50,8 +50,8 @@ export function AuthModal({ isOpen, onClose, mode, onSwitchMode }: AuthModalProp
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md bg-white border-2 border-blue-200">
         <DialogHeader>
-          <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
+          <div className="flex justify-center mb-4 animate-scale-in">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg animate-pulse-gold">
               <span className="text-3xl">📿</span>
             </div>
           </div>
@@ -67,7 +67,7 @@ export function AuthModal({ isOpen, onClose, mode, onSwitchMode }: AuthModalProp
 
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           {mode === "signup" && (
-            <div className="space-y-2">
+            <div className="space-y-2 animate-slide-up">
               <Label htmlFor="name" className="text-blue-900 font-semibold">
                 Nome completo
               </Label>
@@ -86,7 +86,7 @@ export function AuthModal({ isOpen, onClose, mode, onSwitchMode }: AuthModalProp
             </div>
           )}
 
-          <div className="space-y-2">
+          <div className="space-y-2 animate-slide-up animate-delay-100">
             <Label htmlFor="email" className="text-blue-900 font-semibold">
               Email
             </Label>
