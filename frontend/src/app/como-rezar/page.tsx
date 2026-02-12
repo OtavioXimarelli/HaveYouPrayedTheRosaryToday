@@ -98,6 +98,17 @@ export default function ComoRezarPage() {
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        {/* Intro Section - Rosário Vivo Approach */}
+        <section className="mb-12">
+          <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-gold-500/5 to-gold-600/5 border border-gold-500/20">
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              O Rosário é mais que uma série de orações — é uma meditação contemplativa sobre a vida de Cristo através dos olhos de Maria. 
+              Cada mistério nos convida a <span className="text-gold-600 dark:text-gold-400 font-semibold">viver nossa fé</span> de forma mais profunda, 
+              transformando a repetição em contemplação e o hábito em amor vivo.
+            </p>
+          </div>
+        </section>
+
         {/* Introduction Card */}
         <section className="mb-12">
           <div className="p-6 sm:p-8 rounded-3xl glass sacred-border">

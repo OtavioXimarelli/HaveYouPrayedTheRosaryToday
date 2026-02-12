@@ -270,6 +270,17 @@ Amém.`,
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        {/* Intro Section - Rosário Vivo Approach */}
+        <section className="mb-12">
+          <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-gold-500/5 to-gold-600/5 border border-gold-500/20">
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Cada oração do Rosário carrega séculos de devoção e sabedoria espiritual. 
+              Conhecer seu significado profundo nos permite <span className="text-gold-600 dark:text-gold-400 font-semibold">viver a oração</span> não como repetição mecânica, 
+              mas como diálogo íntimo com Deus através de Maria.
+            </p>
+          </div>
+        </section>
+
         {/* Source Attribution */}
         <div className="mb-8 p-4 rounded-xl bg-muted/50 border border-border">
           <p className="text-sm text-muted-foreground">

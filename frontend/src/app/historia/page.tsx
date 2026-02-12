@@ -103,6 +103,17 @@ export default function HistoriaPage() {
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        {/* Intro Section - Rosário Vivo Approach */}
+        <section className="mb-12">
+          <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-gold-500/5 to-gold-600/5 border border-gold-500/20">
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Por mais de 800 anos, o Rosário tem sido a oração do povo de Deus — de reis e camponeses, de santos e pecadores. 
+              Conhecer sua história nos ajuda a <span className="text-gold-600 dark:text-gold-400 font-semibold">viver esta tradição viva</span>, 
+              compreendendo que fazemos parte de uma corrente ininterrupta de fé que atravessa os séculos.
+            </p>
+          </div>
+        </section>
+
         {/* Timeline */}
         <section className="space-y-6">
           {timeline.map((item, index) => (
