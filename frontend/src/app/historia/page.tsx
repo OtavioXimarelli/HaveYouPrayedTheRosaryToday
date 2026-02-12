@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
+import { PageTransition } from "@/components/page-transition";
 
 export default function HistoriaPage() {
   const router = useRouter();
@@ -93,8 +94,9 @@ export default function HistoriaPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-background">
-      <PageHeader 
+    <PageTransition>
+      <main className="min-h-screen bg-background">
+        <PageHeader 
         title="História do Rosário"
         subtitle="A origem e evolução de uma das orações mais amadas"
         icon="📜"
@@ -206,5 +208,6 @@ export default function HistoriaPage() {
         </section>
       </div>
     </main>
+    </PageTransition>
   );
 }

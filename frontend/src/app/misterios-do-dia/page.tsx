@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
+import { PageTransition } from "@/components/page-transition";
 
 /**
  * Content sourced from the Official Vatican Holy See:
@@ -208,8 +209,9 @@ export default function MisteriosPage() {
   const mysteryOrder = ['gozosos', 'luminosos', 'dolorosos', 'gloriosos'] as const;
 
   return (
-    <main className="min-h-screen bg-background">
-      <PageHeader 
+    <PageTransition>
+      <main className="min-h-screen bg-background">
+        <PageHeader 
         title="Mistérios do Rosário"
         subtitle="Meditações sobre a vida de Jesus Cristo e Maria"
         icon="✨"
@@ -368,5 +370,6 @@ export default function MisteriosPage() {
         </section>
       </div>
     </main>
+    </PageTransition>
   );
 }

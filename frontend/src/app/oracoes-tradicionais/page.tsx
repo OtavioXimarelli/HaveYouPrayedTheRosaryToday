@@ -5,6 +5,7 @@ import { ArrowRight, Copy, Check } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { PageHeader } from "@/components/page-header";
+import { PageTransition } from "@/components/page-transition";
 
 /**
  * Official prayers sourced from the Vatican Holy See:
@@ -260,8 +261,9 @@ Amém.`,
   ];
 
   return (
-    <main className="min-h-screen bg-background">
-      <PageHeader 
+    <PageTransition>
+      <main className="min-h-screen bg-background">
+        <PageHeader 
         title="Orações Tradicionais"
         subtitle="As orações essenciais para rezar o Santo Rosário"
         icon="🙏"
@@ -486,5 +488,6 @@ Amém.`,
         </section>
       </div>
     </main>
+    </PageTransition>
   );
 }

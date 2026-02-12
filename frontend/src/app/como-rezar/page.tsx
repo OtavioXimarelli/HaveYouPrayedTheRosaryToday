@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Check, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
+import { PageTransition } from "@/components/page-transition";
 
 export default function ComoRezarPage() {
   const router = useRouter();
@@ -88,8 +89,9 @@ export default function ComoRezarPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-background">
-      <PageHeader 
+    <PageTransition>
+      <main className="min-h-screen bg-background">
+        <PageHeader 
         title="Como Rezar o Terço"
         subtitle="Guia passo a passo para rezar o Santo Rosário"
         icon="📖"
@@ -227,6 +229,153 @@ export default function ComoRezarPage() {
           </div>
         </section>
 
+        {/* St. Louis de Montfort Method Section */}
+        <section className="mt-12">
+          <div className="p-6 sm:p-8 rounded-3xl glass sacred-border">
+            <div className="flex items-start gap-4 mb-6">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center text-3xl flex-shrink-0 shadow-lg">
+                ⛪
+              </div>
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-cinzel font-bold text-foreground mb-2">
+                  Método de São Luís Maria Grignon de Montfort
+                </h2>
+                <p className="text-gold-600 dark:text-gold-400 font-semibold">
+                  Uma forma profunda de meditar o Santo Rosário
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <p className="text-muted-foreground leading-relaxed">
+                São Luís Maria Grignon de Montfort (1673-1716), grande apóstolo do Rosário, ensinou um método especial de meditação para tornar a oração mais contemplativa e frutuosa. Seu método consiste em dividir cada Ave Maria em três partes, meditando aspectos específicos do mistério em cada uma.
+              </p>
+
+              <div className="p-5 rounded-xl bg-muted/50 border border-border">
+                <h3 className="font-cinzel font-bold text-lg text-foreground mb-4">
+                  Como funciona o método:
+                </h3>
+                <p className="text-muted-foreground mb-4">
+                  Durante cada dezena, enquanto reza as 10 Ave Marias, medite sobre o mistério anunciado dividindo a contemplação em três aspectos:
+                </p>
+                
+                <div className="space-y-4">
+                  <div className="flex gap-3 items-start">
+                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gold-500 to-gold-600 text-white flex items-center justify-center font-bold flex-shrink-0">
+                      1
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-foreground mb-1">
+                        Primeiras 3-4 Ave Marias: O Fato
+                      </h4>
+                      <p className="text-muted-foreground text-sm">
+                        Medite sobre o acontecimento em si. O que aconteceu? Visualize a cena bíblica, os personagens, o ambiente.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 items-start">
+                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gold-500 to-gold-600 text-white flex items-center justify-center font-bold flex-shrink-0">
+                      2
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-foreground mb-1">
+                        Próximas 3-4 Ave Marias: As Virtudes
+                      </h4>
+                      <p className="text-muted-foreground text-sm">
+                        Contemple as virtudes praticadas por Jesus e Maria naquele mistério. Que lições eles nos ensinam?
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 items-start">
+                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gold-500 to-gold-600 text-white flex items-center justify-center font-bold flex-shrink-0">
+                      3
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-foreground mb-1">
+                        Últimas 2-3 Ave Marias: A Aplicação
+                      </h4>
+                      <p className="text-muted-foreground text-sm">
+                        Aplique o mistério à sua vida. Como posso imitar essas virtudes? O que Deus está me pedindo?
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-5 rounded-xl bg-gold-500/10 dark:bg-gold-500/20 border border-gold-500/20">
+                <h3 className="font-cinzel font-bold text-lg text-foreground mb-4 flex items-center gap-2">
+                  <span>📖</span>
+                  Exemplo prático: A Anunciação
+                </h3>
+                
+                <div className="space-y-3 text-sm">
+                  <div>
+                    <p className="font-semibold text-gold-700 dark:text-gold-400 mb-1">
+                      Ave Marias 1-3: O Fato
+                    </p>
+                    <p className="text-muted-foreground italic">
+                      "Vejo o Arcanjo Gabriel entrando na casa de Maria em Nazaré. Ouço suas palavras: 'Ave, cheia de graça!' Contemplo a humildade de Maria em seu quarto simples."
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="font-semibold text-gold-700 dark:text-gold-400 mb-1">
+                      Ave Marias 4-7: As Virtudes
+                    </p>
+                    <p className="text-muted-foreground italic">
+                      "Admiro a humildade profunda de Maria. Ela não se exalta, mas se questiona com prudência. Vejo sua fé absoluta quando diz 'Eis aqui a serva do Senhor'. Sua obediência total à vontade de Deus."
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="font-semibold text-gold-700 dark:text-gold-400 mb-1">
+                      Ave Marias 8-10: A Aplicação
+                    </p>
+                    <p className="text-muted-foreground italic">
+                      "Senhor, como posso dizer 'sim' à Tua vontade hoje? Dá-me a humildade de Maria para aceitar Teus planos. Ajuda-me a confiar mesmo quando não entendo."
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-5 rounded-xl bg-card border-l-4 border-gold-500">
+                <p className="text-foreground italic leading-relaxed">
+                  <span className="font-semibold not-italic">"O Rosário bem rezado</span> não é uma oração longa, mas profunda. É a meditação dos mistérios da vida, morte e glória de Jesus e Maria, que nos leva a uma conversão do coração e a uma vida de santidade."
+                </p>
+                <p className="text-gold-600 dark:text-gold-400 font-semibold text-sm mt-2">
+                  — São Luís Maria Grignon de Montfort
+                </p>
+              </div>
+
+              <div className="p-5 rounded-xl bg-muted/50 border border-border">
+                <h3 className="font-cinzel font-bold text-lg text-foreground mb-3">
+                  Benefícios deste método:
+                </h3>
+                <ul className="space-y-2">
+                  {[
+                    "Evita a distração e mantém a mente focada no mistério",
+                    "Transforma o Rosário em verdadeira meditação contemplativa",
+                    "Aprofunda o conhecimento da vida de Jesus e Maria",
+                    "Facilita a aplicação prática dos ensinamentos evangélicos",
+                    "Torna a oração mais pessoal e transformadora"
+                  ].map((benefit, i) => (
+                    <li key={i} className="flex items-start gap-2 text-muted-foreground">
+                      <Check className="w-5 h-5 text-gold-500 flex-shrink-0 mt-0.5" strokeWidth={2} />
+                      <span>{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <p className="text-muted-foreground text-sm italic">
+                <strong>Nota:</strong> Este método requer prática e concentração. Comece devagar, talvez com apenas uma dezena por dia usando este método, e gradualmente aumente conforme se sentir confortável.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
         <section className="mt-12 text-center">
           <div className="p-8 sm:p-10 rounded-3xl glass sacred-border">
@@ -248,5 +397,6 @@ export default function ComoRezarPage() {
         </section>
       </div>
     </main>
+    </PageTransition>
   );
 }

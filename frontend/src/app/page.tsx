@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { HeroSection } from "@/components/hero-section";
 import { AuthModal } from "@/components/auth-modal";
+import { PageTransition } from "@/components/page-transition";
 import { 
   Heart, Users, TrendingUp, Calendar, Sparkles, Shield, Check,
   BookOpen, History, ScrollText, ArrowRight, Clock, Globe
@@ -25,8 +26,9 @@ export default function HomePage() {
   };
 
   return (
-    <main className="min-h-screen bg-background">
-      <HeroSection />
+    <PageTransition>
+      <main className="min-h-screen bg-background">
+        <HeroSection />
       
       {/* What is the Rosary Section - Bento Grid */}
       <section id="about" className="py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden">
@@ -430,5 +432,6 @@ export default function HomePage() {
         onSwitchMode={switchMode}
       />
     </main>
+    </PageTransition>
   );
 }

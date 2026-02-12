@@ -13,6 +13,7 @@ import {
 } from "@/types";
 import { getUserStats, getFeed } from "@/services/api";
 import { ComingSoonModal } from "@/components/coming-soon-modal";
+import { PageTransition } from "@/components/page-transition";
 
 /* ─── Mystery visual mapping ─── */
 const mysteryColors: Record<MysteryType, { bg: string; text: string; gradient: string; icon: string }> = {
@@ -130,7 +131,7 @@ export default function DashboardPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center space-y-4">
+        <div className="text-center space-y-4 animate-fade-in">
           <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center animate-pulse-gold">
             <span className="text-3xl">📿</span>
           </div>
@@ -144,10 +145,11 @@ export default function DashboardPage() {
 
   /* ─── Render ─── */
   return (
-    <div
-      className="min-h-screen bg-background relative noise-overlay"
-      data-testid="dashboard-page"
-    >
+    <PageTransition>
+      <div
+        className="min-h-screen bg-background relative noise-overlay"
+        data-testid="dashboard-page"
+      >
       {/* Subtle radial glow behind content */}
       <div
         className="pointer-events-none absolute inset-0 bg-gradient-radial-gold opacity-40 dark:opacity-20"
@@ -662,5 +664,6 @@ export default function DashboardPage() {
         featureName="Dashboard"
       />
     </div>
+    </PageTransition>
   );
 }
