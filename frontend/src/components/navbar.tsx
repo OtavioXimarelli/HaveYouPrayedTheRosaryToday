@@ -299,17 +299,6 @@ export function Navbar() {
         </div>
       )}
 
-      {/* ═══ Floating Theme Toggle ═══ */}
-      <button
-        onClick={toggleTheme}
-        className="fixed top-4 right-4 z-50 w-10 h-10 rounded-full glass sacred-border flex items-center justify-center hover:shadow-gold-glow transition-all duration-300 group"
-        data-testid="floating-theme-toggle"
-        aria-label="Alternar tema"
-      >
-        <Sun className="h-4 w-4 rotate-0 scale-100 text-gold-600 transition-transform duration-300 dark:-rotate-90 dark:scale-0" />
-        <Moon className="absolute h-4 w-4 rotate-90 scale-0 text-gold-400 transition-transform duration-300 dark:rotate-0 dark:scale-100" />
-      </button>
-
       <AuthModal
         isOpen={authModalOpen}
         onClose={() => setAuthModalOpen(false)}

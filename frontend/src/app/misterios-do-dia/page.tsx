@@ -218,6 +218,17 @@ export default function MisteriosPage() {
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        {/* Intro Section - Rosário Vivo Approach */}
+        <section className="mb-12">
+          <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-gold-500/5 to-gold-600/5 border border-gold-500/20">
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Os mistérios do Rosário não são apenas eventos históricos para recordar — são janelas abertas para contemplar Cristo. 
+              Ao meditar cada mistério, <span className="text-gold-600 dark:text-gold-400 font-semibold">vivemos a fé</span> que eles revelam, 
+              permitindo que a vida de Jesus transforme nossa própria vida.
+            </p>
+          </div>
+        </section>
+
         {/* Source Attribution */}
         <div className="mb-8 p-4 rounded-xl bg-muted/50 border border-border">
           <p className="text-sm text-muted-foreground">

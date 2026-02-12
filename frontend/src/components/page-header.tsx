@@ -1,8 +1,6 @@
 "use client";
 
-import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
 
 interface PageHeaderProps {
   title: string;
@@ -14,7 +12,7 @@ export function PageHeader({ title, subtitle, icon }: PageHeaderProps) {
   const router = useRouter();
 
   return (
-    <header className="relative overflow-hidden">
+    <header className="relative overflow-hidden mt-16 sm:mt-20">
       {/* Background - matches theme */}
       <div className="absolute inset-0 bg-gradient-to-br from-sacred-blue via-slate-800 to-slate-900">
         {/* Gold accent glow */}
@@ -27,17 +25,7 @@ export function PageHeader({ title, subtitle, icon }: PageHeaderProps) {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-        <Button
-          variant="ghost"
-          onClick={() => router.push("/")}
-          className="mb-6 text-white/80 hover:text-white hover:bg-white/10 rounded-full px-4"
-          data-testid="back-button"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Voltar
-        </Button>
-        
-        <div className="flex items-center gap-4 mb-4">
+        <div className="flex items-center gap-4">
           <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center shadow-lg shadow-gold-500/20">
             <span className="text-3xl sm:text-4xl">{icon}</span>
           </div>

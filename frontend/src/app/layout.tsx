@@ -3,7 +3,7 @@ import "./globals.css";
 import { QueryProvider } from "@/providers/query-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
-import { Navbar } from "@/components/navbar";
+import { NavigationWrapper } from "@/components/navigation-wrapper";
 
 export const viewport: Viewport = {
   themeColor: "#0F172A",
@@ -14,16 +14,16 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Você Já Rezou o Terço Hoje? | Rastreador Diário de Oração",
+  title: "Rosário Vivo | Viva sua fé católica plenamente",
   description:
-    "Acompanhe suas orações diárias do terço, construa uma sequência e conecte-se com uma comunidade de oração. Um app minimalista para aprofundar sua fé.",
-  keywords: ["terço", "rosário", "oração", "católico", "fé", "oração diária", "meditação"],
-  authors: [{ name: "Terço Hoje" }],
+    "Acompanhe sua jornada espiritual, explore conteúdos profundos sobre o Rosário e espiritualidade católica, e conecte-se com uma comunidade global de fé. Gratuito e open-source.",
+  keywords: ["rosário", "terço", "oração", "católico", "fé", "espiritualidade", "maria", "meditação", "santos"],
+  authors: [{ name: "Rosário Vivo" }],
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Terço Hoje",
+    title: "Rosário Vivo",
   },
   icons: {
     icon: [
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "Você Já Rezou o Terço Hoje?",
-    description: "Acompanhe suas orações diárias do terço e conecte-se com fiéis do mundo todo.",
+    title: "Rosário Vivo - Viva sua fé católica plenamente",
+    description: "Plataforma completa de espiritualidade católica. Acompanhe sua jornada, explore conteúdos profundos e ore em comunidade.",
     type: "website",
   },
 };
@@ -53,7 +53,7 @@ export default function RootLayout({
       <body className="font-manrope antialiased">
         <ThemeProvider defaultTheme="system" storageKey="rosario-theme">
           <QueryProvider>
-            <Navbar />
+            <NavigationWrapper />
             {children}
             <Toaster />
           </QueryProvider>
