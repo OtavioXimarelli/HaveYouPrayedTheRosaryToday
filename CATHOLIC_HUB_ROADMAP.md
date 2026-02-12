@@ -27,7 +27,7 @@ Validate that users want deeper Catholic content beyond simple tracking.
 
 #### 1.1 Expand "Como Rezar" (How to Pray)
 - [x] St. Louis de Montfort method (COMPLETED)
-- [ ] Add Padre Pio's method
+- [x] Add Padre Pio's method (COMPLETED)
 - [ ] Add Scriptural Rosary guide (with full biblical passages)
 - [ ] Add Different prayer intentions templates
 - [ ] Add "Advanced Techniques" section

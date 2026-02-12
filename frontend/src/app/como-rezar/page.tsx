@@ -240,9 +240,14 @@ export default function ComoRezarPage() {
           </div>
         </section>
 
-        {/* St. Louis de Montfort Method Section */}
+        {/* St. Louis de Montfort Method Section - Summary */}
         <section className="mt-12">
-          <div className="p-6 sm:p-8 rounded-3xl glass sacred-border">
+          <div className="p-6 sm:p-8 rounded-3xl glass sacred-border relative overflow-hidden">
+            {/* Premium Badge */}
+            <div className="absolute top-6 right-6 px-3 py-1 rounded-full bg-gold-500/20 border border-gold-500/30 backdrop-blur-sm">
+              <span className="text-gold-600 dark:text-gold-400 text-xs font-semibold">Conteúdo Completo Disponível</span>
+            </div>
+
             <div className="flex items-start gap-4 mb-6">
               <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center text-3xl flex-shrink-0 shadow-lg">
                 ⛪
@@ -257,131 +262,234 @@ export default function ComoRezarPage() {
               </div>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4">
               <p className="text-muted-foreground leading-relaxed">
-                São Luís Maria Grignon de Montfort (1673-1716), grande apóstolo do Rosário, ensinou um método especial de meditação para tornar a oração mais contemplativa e frutuosa. Seu método consiste em dividir cada Ave Maria em três partes, meditando aspectos específicos do mistério em cada uma.
+                São Luís Maria Grignon de Montfort (1673-1716), grande apóstolo do Rosário, ensinou um método especial para tornar a oração mais contemplativa. Seu método divide cada Ave Maria em três partes para aprofundar a meditação.
               </p>
 
               <div className="p-5 rounded-xl bg-muted/50 border border-border">
                 <h3 className="font-cinzel font-bold text-lg text-foreground mb-4">
-                  Como funciona o método:
+                  Estrutura básica do método:
                 </h3>
-                <p className="text-muted-foreground mb-4">
-                  Durante cada dezena, enquanto reza as 10 Ave Marias, medite sobre o mistério anunciado dividindo a contemplação em três aspectos:
-                </p>
                 
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div className="flex gap-3 items-start">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gold-500 to-gold-600 text-white flex items-center justify-center font-bold flex-shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gold-500 to-gold-600 text-white flex items-center justify-center font-bold flex-shrink-0 text-sm">
                       1
                     </div>
                     <div>
-                      <h4 className="font-semibold text-foreground mb-1">
-                        Primeiras 3-4 Ave Marias: O Fato
+                      <h4 className="font-semibold text-foreground">
+                        Primeiras Ave Marias: O Fato
                       </h4>
                       <p className="text-muted-foreground text-sm">
-                        Medite sobre o acontecimento em si. O que aconteceu? Visualize a cena bíblica, os personagens, o ambiente.
+                        Visualize o acontecimento bíblico do mistério
                       </p>
                     </div>
                   </div>
 
                   <div className="flex gap-3 items-start">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gold-500 to-gold-600 text-white flex items-center justify-center font-bold flex-shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gold-500 to-gold-600 text-white flex items-center justify-center font-bold flex-shrink-0 text-sm">
                       2
                     </div>
                     <div>
-                      <h4 className="font-semibold text-foreground mb-1">
-                        Próximas 3-4 Ave Marias: As Virtudes
+                      <h4 className="font-semibold text-foreground">
+                        Ave Marias seguintes: As Virtudes
                       </h4>
                       <p className="text-muted-foreground text-sm">
-                        Contemple as virtudes praticadas por Jesus e Maria naquele mistério. Que lições eles nos ensinam?
+                        Contemple as virtudes de Jesus e Maria
                       </p>
                     </div>
                   </div>
 
                   <div className="flex gap-3 items-start">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gold-500 to-gold-600 text-white flex items-center justify-center font-bold flex-shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gold-500 to-gold-600 text-white flex items-center justify-center font-bold flex-shrink-0 text-sm">
                       3
                     </div>
                     <div>
-                      <h4 className="font-semibold text-foreground mb-1">
-                        Últimas 2-3 Ave Marias: A Aplicação
+                      <h4 className="font-semibold text-foreground">
+                        Últimas Ave Marias: A Aplicação
                       </h4>
                       <p className="text-muted-foreground text-sm">
-                        Aplique o mistério à sua vida. Como posso imitar essas virtudes? O que Deus está me pedindo?
+                        Aplique os ensinamentos à sua vida
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="p-5 rounded-xl bg-gold-500/10 dark:bg-gold-500/20 border border-gold-500/20">
-                <h3 className="font-cinzel font-bold text-lg text-foreground mb-4 flex items-center gap-2">
-                  <span>📖</span>
-                  Exemplo prático: A Anunciação
-                </h3>
-                
-                <div className="space-y-3 text-sm">
-                  <div>
-                    <p className="font-semibold text-gold-700 dark:text-gold-400 mb-1">
-                      Ave Marias 1-3: O Fato
-                    </p>
-                    <p className="text-muted-foreground italic">
-                      "Vejo o Arcanjo Gabriel entrando na casa de Maria em Nazaré. Ouço suas palavras: 'Ave, cheia de graça!' Contemplo a humildade de Maria em seu quarto simples."
+              {/* Locked Content Teaser */}
+              <div className="relative mt-6">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/80 to-background z-10 flex items-end justify-center pb-6">
+                  <Button
+                    size="lg"
+                    onClick={() => router.push("/")}
+                    className="rounded-full px-8 py-6 text-base font-cinzel font-bold bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow transition-all"
+                  >
+                    Criar conta para ver conteúdo completo
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Button>
+                </div>
+
+                <div className="blur-sm pointer-events-none select-none">
+                  <div className="p-5 rounded-xl bg-gold-500/10 border border-gold-500/20 mb-4">
+                    <h3 className="font-cinzel font-bold text-foreground mb-2">
+                      📖 Exemplo prático detalhado
+                    </h3>
+                    <p className="text-muted-foreground text-sm">
+                      Aprenda passo a passo como aplicar este método em cada mistério, com exemplos práticos de como meditar a Anunciação, o Nascimento de Jesus e mais...
                     </p>
                   </div>
 
-                  <div>
-                    <p className="font-semibold text-gold-700 dark:text-gold-400 mb-1">
-                      Ave Marias 4-7: As Virtudes
+                  <div className="p-4 rounded-xl bg-card border border-border mb-4">
+                    <p className="text-muted-foreground text-sm">
+                      + Guia completo de meditação para cada um dos 20 mistérios
                     </p>
-                    <p className="text-muted-foreground italic">
-                      "Admiro a humildade profunda de Maria. Ela não se exalta, mas se questiona com prudência. Vejo sua fé absoluta quando diz 'Eis aqui a serva do Senhor'. Sua obediência total à vontade de Deus."
+                    <p className="text-muted-foreground text-sm mt-2">
+                      + Técnicas avançadas de contemplação
                     </p>
-                  </div>
-
-                  <div>
-                    <p className="font-semibold text-gold-700 dark:text-gold-400 mb-1">
-                      Ave Marias 8-10: A Aplicação
-                    </p>
-                    <p className="text-muted-foreground italic">
-                      "Senhor, como posso dizer 'sim' à Tua vontade hoje? Dá-me a humildade de Maria para aceitar Teus planos. Ajuda-me a confiar mesmo quando não entendo."
+                    <p className="text-muted-foreground text-sm mt-2">
+                      + Citações completas dos escritos de São Luís de Montfort
                     </p>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
 
-              <div className="p-5 rounded-xl bg-card border-l-4 border-gold-500">
-                <p className="text-foreground italic leading-relaxed">
-                  <span className="font-semibold not-italic">"O Rosário bem rezado</span> não é uma oração longa, mas profunda. É a meditação dos mistérios da vida, morte e glória de Jesus e Maria, que nos leva a uma conversão do coração e a uma vida de santidade."
-                </p>
-                <p className="text-gold-600 dark:text-gold-400 font-semibold text-sm mt-2">
-                  — São Luís Maria Grignon de Montfort
+        {/* Padre Pio Method Section - Summary */}
+        <section className="mt-12">
+          <div className="p-6 sm:p-8 rounded-3xl glass sacred-border relative overflow-hidden">
+            {/* Premium Badge */}
+            <div className="absolute top-6 right-6 px-3 py-1 rounded-full bg-gold-500/20 border border-gold-500/30 backdrop-blur-sm">
+              <span className="text-gold-600 dark:text-gold-400 text-xs font-semibold">Conteúdo Completo Disponível</span>
+            </div>
+
+            <div className="flex items-start gap-4 mb-6">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-sacred-blue to-slate-700 flex items-center justify-center text-3xl flex-shrink-0 shadow-lg">
+                🙏
+              </div>
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-cinzel font-bold text-foreground mb-2">
+                  Método de São Padre Pio de Pietrelcina
+                </h2>
+                <p className="text-gold-600 dark:text-gold-400 font-semibold">
+                  A oração do coração fervoroso
                 </p>
               </div>
+            </div>
+
+            <div className="space-y-4">
+              <p className="text-muted-foreground leading-relaxed">
+                São Padre Pio (1887-1968) rezava até 40 terços por dia e dizia: <span className="italic font-semibold text-foreground">"O Rosário é a arma"</span>. Seu método enfatiza a união íntima com Cristo através de Maria, rezando com o coração, não apenas com os lábios.
+              </p>
 
               <div className="p-5 rounded-xl bg-muted/50 border border-border">
-                <h3 className="font-cinzel font-bold text-lg text-foreground mb-3">
-                  Benefícios deste método:
+                <h3 className="font-cinzel font-bold text-lg text-foreground mb-4">
+                  Princípios essenciais:
                 </h3>
-                <ul className="space-y-2">
+                
+                <div className="space-y-3">
                   {[
-                    "Evita a distração e mantém a mente focada no mistério",
-                    "Transforma o Rosário em verdadeira meditação contemplativa",
-                    "Aprofunda o conhecimento da vida de Jesus e Maria",
-                    "Facilita a aplicação prática dos ensinamentos evangélicos",
-                    "Torna a oração mais pessoal e transformadora"
-                  ].map((benefit, i) => (
-                    <li key={i} className="flex items-start gap-2 text-muted-foreground">
-                      <Check className="w-5 h-5 text-gold-500 flex-shrink-0 mt-0.5" strokeWidth={2} />
-                      <span>{benefit}</span>
-                    </li>
+                    { emoji: "❤️", title: "Reze com o coração, não apenas com os lábios" },
+                    { emoji: "⚔️", title: "Use o Rosário como arma espiritual" },
+                    { emoji: "🕊️", title: "Una-se aos sofrimentos de Cristo" },
+                    { emoji: "👩", title: "Confie totalmente em Maria" },
+                    { emoji: "🔥", title: "Reze com perseverança diária" }
+                  ].map((item, i) => (
+                    <div key={i} className="flex gap-3 items-center">
+                      <span className="text-2xl">{item.emoji}</span>
+                      <p className="text-foreground font-medium text-sm">{item.title}</p>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
 
-              <p className="text-muted-foreground text-sm italic">
-                <strong>Nota:</strong> Este método requer prática e concentração. Comece devagar, talvez com apenas uma dezena por dia usando este método, e gradualmente aumente conforme se sentir confortável.
+              {/* Locked Content Teaser */}
+              <div className="relative mt-6">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/80 to-background z-10 flex items-end justify-center pb-6">
+                  <Button
+                    size="lg"
+                    onClick={() => router.push("/")}
+                    className="rounded-full px-8 py-6 text-base font-cinzel font-bold bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow transition-all"
+                  >
+                    Junte-se à comunidade para aprender mais
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Button>
+                </div>
+
+                <div className="blur-sm pointer-events-none select-none">
+                  <div className="p-5 rounded-xl bg-sacred-blue/10 border border-sacred-blue/20 mb-4">
+                    <h3 className="font-cinzel font-bold text-foreground mb-2">
+                      ✨ Como Padre Pio rezava exatamente
+                    </h3>
+                    <p className="text-muted-foreground text-sm">
+                      Descubra os gestos, pausas e visualizações específicas que Padre Pio usava durante cada parte do Rosário...
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-card border border-border mb-4">
+                    <p className="text-muted-foreground text-sm">
+                      + Suas práticas devocionais secretas
+                    </p>
+                    <p className="text-muted-foreground text-sm mt-2">
+                      + Testemunhos de conversão através do Rosário
+                    </p>
+                    <p className="text-muted-foreground text-sm mt-2">
+                      + Citações completas e ensinamentos pessoais
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section - Join Community */}
+        <section className="mt-12">
+          <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-sacred-blue via-slate-800 to-slate-900 text-white relative overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,175,55,0.15)_0%,transparent_50%)]" />
+            
+            <div className="relative z-10 text-center">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center shadow-lg">
+                <span className="text-3xl">📿</span>
+              </div>
+              
+              <h3 className="text-2xl sm:text-3xl font-cinzel font-bold mb-4">
+                Aprofunde sua vida de oração
+              </h3>
+              
+              <p className="text-white/80 text-lg mb-6 max-w-2xl mx-auto leading-relaxed">
+                Junte-se à nossa comunidade e tenha acesso a conteúdos completos, métodos detalhados de santos, 
+                guias práticos e muito mais para viver o Rosário plenamente.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+                <div className="flex items-center gap-2 text-white/70">
+                  <Check className="w-5 h-5 text-gold-400" />
+                  <span className="text-sm">Métodos completos dos santos</span>
+                </div>
+                <div className="flex items-center gap-2 text-white/70">
+                  <Check className="w-5 h-5 text-gold-400" />
+                  <span className="text-sm">Guias de meditação detalhados</span>
+                </div>
+                <div className="flex items-center gap-2 text-white/70">
+                  <Check className="w-5 h-5 text-gold-400" />
+                  <span className="text-sm">Comunidade de apoio</span>
+                </div>
+              </div>
+
+              <Button
+                size="lg"
+                onClick={() => router.push("/")}
+                className="rounded-full px-10 py-6 text-lg font-cinzel font-bold bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow-lg transition-all"
+              >
+                Começar gratuitamente
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+
+              <p className="text-white/50 text-sm mt-4">
+                100% gratuito • Sem cartão de crédito • Open-source
               </p>
             </div>
           </div>
