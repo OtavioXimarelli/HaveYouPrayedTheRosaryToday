@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { Home, BookOpen, History, Sparkles, ScrollText, ChevronDown, Play, LayoutDashboard } from "lucide-react";
+import { Home, BookOpen, History, Sparkles, ScrollText, ChevronDown, Play, LayoutDashboard, GraduationCap, Compass, Library } from "lucide-react";
 import { AuthModal } from "./auth-modal";
 import { ComingSoonModal } from "./coming-soon-modal";
 import { ThemeToggle } from "./theme-toggle";
@@ -72,10 +72,14 @@ export function Navbar() {
   };
 
   const explorarLinks = [
-    { label: "Como Rezar", description: "Aprenda passo a passo", icon: BookOpen, path: "/como-rezar" },
-    { label: "História", description: "Origens e tradição", icon: History, path: "/historia" },
-    { label: "Mistérios do Dia", description: "Meditações diárias", icon: Sparkles, path: "/misterios-do-dia" },
-    { label: "Orações", description: "Textos tradicionais", icon: ScrollText, path: "/oracoes-tradicionais" },
+    { label: "Como Rezar", description: "Aprenda passo a passo", icon: BookOpen, path: "/como-rezar", isPublic: true },
+    { label: "História", description: "Origens e tradição", icon: History, path: "/historia", isPublic: true },
+    { label: "Mistérios do Dia", description: "Meditações diárias", icon: Sparkles, path: "/misterios-do-dia", isPublic: true },
+    { label: "Orações", description: "Textos tradicionais", icon: ScrollText, path: "/oracoes-tradicionais", isPublic: true },
+    { label: "Ensinamentos", description: "Aprenda sobre a fé", icon: GraduationCap, path: "/ensinamentos", isPublic: false },
+    { label: "Ferramentas", description: "Recursos interativos", icon: Compass, path: "/ferramentas", isPublic: false },
+    { label: "Sobre", description: "Nossa missão e valores", icon: BookOpen, path: "/about", isPublic: true },
+    { label: "Recursos", description: "Biblioteca e downloads", icon: Library, path: "/recursos", isPublic: false },
   ];
 
   const isOnContentPage = explorarLinks.some(link => pathname === link.path);
@@ -140,8 +144,15 @@ export function Navbar() {
                     data-testid={`explorar-${link.path.replace("/", "")}`}
                   >
                     <link.icon className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <span className="font-medium block">{link.label}</span>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium block">{link.label}</span>
+                        {!link.isPublic && (
+                          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-gold-500/20 text-gold-300 font-semibold">
+                            ⭐ Membros
+                          </span>
+                        )}
+                      </div>
                       <span className="text-xs text-white/50">{link.description}</span>
                     </div>
                   </button>
@@ -288,8 +299,15 @@ export function Navbar() {
                   }`}>
                     <link.icon className="w-[18px] h-[18px]" />
                   </div>
-                  <div className="text-left min-w-0">
-                    <span className="font-medium block text-sm">{link.label}</span>
+                  <div className="text-left min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium block text-sm">{link.label}</span>
+                      {!link.isPublic && (
+                        <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-gold-500/20 text-gold-300 font-semibold whitespace-nowrap">
+                          Membros
+                        </span>
+                      )}
+                    </div>
                     <span className="text-[11px] text-white/40">{link.description}</span>
                   </div>
                 </button>

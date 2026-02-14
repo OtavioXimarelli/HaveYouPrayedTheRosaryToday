@@ -102,27 +102,10 @@ export function HeroSection() {
             : "Acompanhe sua jornada espiritual, explore conteúdos profundos e conecte-se com uma comunidade global de fé."}
         </p>
 
-        {/* CTA Button */}
-        <div className="mt-10 sm:mt-12 animate-fade-up opacity-0" style={{ animationDelay: "500ms" }}>
-          {!hasPrayed ? (
-            <Button
-              size="lg"
-              onClick={handlePrayClick}
-              disabled={isLoading}
-              data-testid="hero-pray-button"
-              className="group relative px-8 sm:px-10 py-6 sm:py-7 text-lg sm:text-xl font-cinzel font-bold tracking-wide rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow-lg transition-all duration-300 border-2 border-gold-400/50"
-            >
-              <span className="relative z-10 flex items-center gap-3">
-                <span>Vamos Rezar</span>
-                <span className="text-2xl group-hover:rotate-12 transition-transform duration-300">✝</span>
-              </span>
-              {/* Coming soon indicator */}
-              <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-sacred-blue animate-pulse shadow-lg" title="Em desenvolvimento" />
-              {/* Shimmer effect */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
-            </Button>
-          ) : (
-            <div className="space-y-4">
+        {/* CTA Section - 3 Quick Start Paths */}
+        <div className="mt-12 sm:mt-14 animate-fade-up opacity-0" style={{ animationDelay: "500ms" }}>
+          {hasPrayed ? (
+            <div className="space-y-4 mb-12">
               <div className="inline-flex items-center gap-3 px-8 py-4 glass rounded-full border border-green-500/30 dark:border-green-400/30">
                 <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center">
                   <Check className="w-5 h-5 text-white" strokeWidth={3} />
@@ -135,7 +118,49 @@ export function HeroSection() {
                 Volte amanhã para continuar sua jornada de fé
               </p>
             </div>
-          )}
+          ) : null}
+          
+          {/* Primary CTA */}
+          <div className="mb-10">
+            <p className="text-sm font-cinzel font-semibold text-gold-500 dark:text-gold-400 uppercase tracking-widest mb-6">
+              Como você deseja começar?
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {/* Path 1: Pray Now */}
+              <a
+                href="/como-rezar"
+                className="group relative p-6 glass rounded-lg border border-gold-500/30 hover:border-gold-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/20 block"
+              >
+                <div className="text-3xl mb-3">📿</div>
+                <h3 className="font-cinzel font-bold text-lg text-white mb-2">Rezar Agora</h3>
+                <p className="text-sm text-slate-300">Comece seu terço em minutos</p>
+              </a>
+
+              {/* Path 2: Learn Faith */}
+              <a
+                href="/ensinamentos"
+                className="group relative p-6 glass rounded-lg border border-gold-500/30 hover:border-gold-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/20 block"
+              >
+                <div className="text-3xl mb-3">📚</div>
+                <h3 className="font-cinzel font-bold text-lg text-white mb-2">Aprender</h3>
+                <p className="text-sm text-slate-300">Explore ensinamentos da fé</p>
+              </a>
+
+              {/* Path 3: Track & Grow (Signup CTA) */}
+              <a
+                href="#cta"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector('[data-testid="cta-section"]')?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="group relative p-6 glass rounded-lg border border-gold-500/30 hover:border-gold-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/20"
+              >
+                <div className="text-3xl mb-3">⭐</div>
+                <h3 className="font-cinzel font-bold text-lg text-white mb-2">Rastrear & Crescer</h3>
+                <p className="text-sm text-slate-300">Crie sua conta gratuita</p>
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* Scroll indicator */}

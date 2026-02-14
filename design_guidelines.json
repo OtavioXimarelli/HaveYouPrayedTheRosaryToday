@@ -3,7 +3,36 @@
     "name": "Rosario - Modern Catholic Prayer",
     "tone": "Reverent, Peaceful, Modern, Community-driven",
     "aesthetic": "Modern Cathedral - Glassmorphism meets Sacred Art",
-    "target_audience": "Universal Catholic faithful (Youth to Elderly)"
+    "target_audience": "Universal Catholic faithful (Youth to Elderly)",
+    "project_type": "Open-source, community-driven, no monetization"
+  },
+  "content_strategy": {
+    "public_content": {
+      "description": "Available to all visitors without login",
+      "pages": ["/", "/como-rezar", "/historia", "/misterios-do-dia", "/oracoes-tradicionais"],
+      "features": ["Basic prayer guides", "Mysteries of the day", "History timeline", "Traditional prayers"]
+    },
+    "member_content": {
+      "description": "Requires free account - no payment, open-source philosophy",
+      "pages": ["/ensinamentos/*", "/ferramentas/*", "/recursos/*"],
+      "features": [
+        "Teachings articles on Catholic doctrine",
+        "Saints biographies and lives",
+        "Church history and theology",
+        "Prayer methods and devotions",
+        "Interactive prayer guide",
+        "Spiritual journal",
+        "Meditation timer",
+        "Intentions board",
+        "Downloads library"
+      ],
+      "rationale": "Account required to save progress, participate in community, and access deeper content - NOT for monetization",
+      "ensinamentos": {
+        "description": "Teaching Hub - Casual browsing of Catholic faith topics",
+        "structure": "Bento grid layout with 7 topic categories",
+        "topics": ["Saints & Church Fathers", "Catholic Theology", "Church History", "Prayer Methods", "Sacraments", "Marian Devotion", "Scripture & Rosary"]
+      }
+    }
   },
   "typography": {
     "headings": {
