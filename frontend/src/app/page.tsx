@@ -373,6 +373,15 @@ export default function HomePage() {
             <div>
               <h4 className="font-cinzel font-bold mb-4 text-lg">Comunidade</h4>
               <ul className="space-y-3 text-slate-400">
+                <li>
+                  <button 
+                    onClick={() => router.push('/about')}
+                    className="flex items-center gap-2 hover:text-gold-400 transition-colors"
+                  >
+                    <BookOpen className="w-4 h-4" />
+                    <span>Sobre o projeto</span>
+                  </button>
+                </li>
                 <li className="flex items-center gap-2 hover:text-gold-400 transition-colors cursor-pointer">
                   <Users className="w-4 h-4" />
                   <span>Nossos membros</span>
