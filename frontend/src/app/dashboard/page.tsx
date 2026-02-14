@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import {
   Flame, Trophy, Calendar, ArrowRight, Sparkles, Heart,
   BookOpen, Clock, CheckCircle2, History, Users,
-  ChevronRight, TrendingUp, Star, Sun, Moon
+  ChevronRight, TrendingUp, Star, Sun, Moon,
+  GraduationCap, Compass, Library, Lock
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
