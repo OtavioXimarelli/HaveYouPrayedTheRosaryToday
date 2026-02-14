@@ -630,6 +630,80 @@ export default function DashboardPage() {
             </div>
           </section>
 
+          {/* ═══════════ MEMBER FEATURES SECTION ═══════════ */}
+          <section
+            className="animate-fade-up animate-delay-450"
+            data-testid="member-features"
+          >
+            <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-gold-500/5 to-gold-600/5 border border-gold-500/20">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center shadow-lg">
+                  <Star className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-cinzel font-bold text-foreground text-lg">Recursos para Membros</h3>
+                  <p className="text-gold-600 dark:text-gold-400 text-sm">Crie sua conta gratuita para acessar</p>
+                </div>
+              </div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[
+                  {
+                    icon: GraduationCap,
+                    title: "Centro de Formação",
+                    description: "Caminhos estruturados de aprendizado espiritual",
+                    path: "/formacao"
+                  },
+                  {
+                    icon: Compass,
+                    title: "Ferramentas de Oração",
+                    description: "Guia interativo, diário e temporizador",
+                    path: "/ferramentas"
+                  },
+                  {
+                    icon: Library,
+                    title: "Biblioteca de Recursos",
+                    description: "Downloads, documentos e escritos de santos",
+                    path: "/recursos"
+                  }
+                ].map((feature) => (
+                  <button
+                    key={feature.path}
+                    onClick={() => router.push(feature.path)}
+                    className="group p-4 rounded-xl bg-card border border-border hover:border-gold-500/30 hover:-translate-y-0.5 transition-all text-left"
+                    data-testid={`member-feature-${feature.path.replace("/", "")}`}
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-gold-500/20 to-gold-600/20 flex items-center justify-center flex-shrink-0">
+                        <feature.icon className="w-5 h-5 text-gold-600 dark:text-gold-400" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-foreground text-sm group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">
+                          {feature.title}
+                        </h4>
+                        <p className="text-muted-foreground text-xs mt-0.5">{feature.description}</p>
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-gold-500/10 text-center">
+                <p className="text-muted-foreground text-sm mb-3">
+                  100% gratuito • Projeto open-source • Comunidade de fé
+                </p>
+                <Button
+                  onClick={() => router.push("/")}
+                  className="rounded-full px-6 py-5 text-sm font-cinzel font-bold bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow transition-all"
+                  data-testid="member-signup-btn"
+                >
+                  Criar conta gratuita
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
+            </div>
+          </section>
+
           {/* ═══════════ MOTIVATIONAL QUOTE ═══════════ */}
           <section
             className="animate-fade-up animate-delay-500"
