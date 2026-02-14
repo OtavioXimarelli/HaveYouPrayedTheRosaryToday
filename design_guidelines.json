@@ -3,7 +3,30 @@
     "name": "Rosario - Modern Catholic Prayer",
     "tone": "Reverent, Peaceful, Modern, Community-driven",
     "aesthetic": "Modern Cathedral - Glassmorphism meets Sacred Art",
-    "target_audience": "Universal Catholic faithful (Youth to Elderly)"
+    "target_audience": "Universal Catholic faithful (Youth to Elderly)",
+    "project_type": "Open-source, community-driven, no monetization"
+  },
+  "content_strategy": {
+    "public_content": {
+      "description": "Available to all visitors without login",
+      "pages": ["/", "/como-rezar", "/historia", "/misterios-do-dia", "/oracoes-tradicionais"],
+      "features": ["Basic prayer guides", "Mysteries of the day", "History timeline", "Traditional prayers"]
+    },
+    "member_content": {
+      "description": "Requires free account - no payment, open-source philosophy",
+      "pages": ["/formacao/*", "/ferramentas/*", "/recursos/*"],
+      "features": [
+        "Formation paths (Beginner, Intermediate, Advanced)",
+        "Saints biographies and methods",
+        "Interactive prayer guide",
+        "Spiritual journal",
+        "Meditation timer",
+        "Intentions board",
+        "Downloads library",
+        "Progress tracking"
+      ],
+      "rationale": "Account required to save progress, participate in community, and access deeper content - NOT for monetization"
+    }
   },
   "typography": {
     "headings": {
