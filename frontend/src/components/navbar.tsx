@@ -76,6 +76,9 @@ export function Navbar() {
     { label: "História", description: "Origens e tradição", icon: History, path: "/historia" },
     { label: "Mistérios do Dia", description: "Meditações diárias", icon: Sparkles, path: "/misterios-do-dia" },
     { label: "Orações", description: "Textos tradicionais", icon: ScrollText, path: "/oracoes-tradicionais" },
+    { label: "Formação", description: "Centro de aprendizado", icon: GraduationCap, path: "/formacao" },
+    { label: "Ferramentas", description: "Recursos interativos", icon: Compass, path: "/ferramentas" },
+    { label: "Recursos", description: "Biblioteca e downloads", icon: Library, path: "/recursos" },
   ];
 
   const isOnContentPage = explorarLinks.some(link => pathname === link.path);
