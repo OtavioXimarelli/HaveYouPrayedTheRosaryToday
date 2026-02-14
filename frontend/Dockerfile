@@ -27,8 +27,9 @@ COPY frontend ./frontend
 ENV NODE_ENV=development
 RUN pnpm install --frozen-lockfile --store-dir /workspace/.pnpm-store
 
-# Build the application in production mode
+# Build the application in production mode (force webpack to ensure standalone output)
 ENV NODE_ENV=production
+ENV NEXT_DISABLE_TURBOPACK=1
 WORKDIR /workspace/frontend
 RUN pnpm run build
 

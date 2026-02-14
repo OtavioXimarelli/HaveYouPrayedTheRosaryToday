@@ -10,13 +10,13 @@ WORKDIR /workspace
 # Force cache bust - update timestamp to force rebuild
 ARG CACHEBUST=2026-01-31-v3
 
-ENV NODE_ENV=production
+ENV NODE_ENV=development
 
 # Copy workspace files (monorepo structure)
 COPY pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY backend ./backend
 
-# Install dependencies
+# Install dependencies (include devDependencies needed for build)
 RUN pnpm install --filter=backend --frozen-lockfile
 
 # Build the application
