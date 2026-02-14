@@ -518,8 +518,8 @@ export default function DashboardPage() {
                 },
                 {
                   icon: GraduationCap,
-                  label: "Formação",
-                  path: "/formacao",
+                  label: "Ensinamentos",
+                  path: "/ensinamentos",
                   gradient: "from-emerald-500 to-emerald-600",
                 },
                 {
@@ -650,9 +650,9 @@ export default function DashboardPage() {
                 {[
                   {
                     icon: GraduationCap,
-                    title: "Centro de Formação",
-                    description: "Caminhos estruturados de aprendizado espiritual",
-                    path: "/formacao"
+                    title: "Ensinamentos da Santa Igreja",
+                    description: "Aprenda sobre teologia, santos, história e devoção",
+                    path: "/ensinamentos"
                   },
                   {
                     icon: Compass,
