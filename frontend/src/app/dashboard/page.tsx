@@ -517,16 +517,16 @@ export default function DashboardPage() {
                   gradient: "from-gold-500 to-gold-600",
                 },
                 {
-                  icon: History,
-                  label: "História",
-                  path: "/historia",
-                  gradient: "from-sacred-blue to-slate-700 dark:from-slate-700 dark:to-slate-800",
+                  icon: GraduationCap,
+                  label: "Formação",
+                  path: "/formacao",
+                  gradient: "from-emerald-500 to-emerald-600",
                 },
                 {
-                  icon: Users,
-                  label: "Comunidade",
-                  path: "/#community",
-                  gradient: "from-gold-500 to-gold-600",
+                  icon: Compass,
+                  label: "Ferramentas",
+                  path: "/ferramentas",
+                  gradient: "from-blue-500 to-blue-600",
                 },
               ].map((action) => (
                 <button
