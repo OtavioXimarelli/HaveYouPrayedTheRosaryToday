@@ -31,244 +31,232 @@ export default function HomePage() {
       <main className="min-h-screen bg-background">
         <HeroSection />
       
-      {/* Rosário Vivo - Main Vision Section */}
-      <section id="about" className="py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden">
+      {/* What You Get Section - Public vs Member */}
+      <section className="py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(212,175,55,0.05)_0%,transparent_70%)]" />
         
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16 sm:mb-20">
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gold-500/10 dark:bg-gold-500/20 border border-gold-500/20 mb-6">
-              <Cross className="w-4 h-4 text-gold-600 dark:text-gold-400" />
-              <span className="text-gold-700 dark:text-gold-400 font-semibold text-sm uppercase tracking-wider">Rosário Vivo</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-cinzel font-bold text-foreground mb-6">
-              Viva sua <span className="text-gold-500">fé católica</span> plenamente
+              O que você <span className="text-gold-500">consegue fazer</span>
             </h2>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Mais que um app de oração, somos sua companhia diária na jornada espiritual. 
-              Acompanhe seu crescimento, explore conteúdos profundos, e conecte-se com uma comunidade global de fé.
+              Explore agora • Crie sua conta gratuita para desbloquear tudo
             </p>
           </div>
 
-          {/* Core Features - 3 Main Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-12">
-            <div className="p-8 rounded-3xl glass sacred-border hover:-translate-y-1 transition-all duration-300 hover:shadow-gold-glow">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center mb-6 shadow-lg">
-                <Calendar className="w-8 h-8 text-white" />
+          {/* Public vs Member Comparison */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
+            {/* Public Features */}
+            <div className="p-8 sm:p-10 rounded-3xl glass sacred-border">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-400 to-slate-500 flex items-center justify-center">
+                  <Globe className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-2xl font-cinzel font-bold text-foreground">Acesso Público</h3>
               </div>
-              <h3 className="text-2xl font-cinzel font-bold text-foreground mb-3">Acompanhe diariamente</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Registre suas orações, construa sequências, celebre conquistas. Transforme o rosário em um hábito vivo e consistente.
-              </p>
+              <p className="text-muted-foreground text-sm mb-6">Disponível para todos, sem login:</p>
+              <ul className="space-y-3">
+                {[
+                  "📖 Como rezar o Rosário",
+                  "✨ Mistérios do dia",
+                  "📚 Orações tradicionais",
+                  "🕰️ Confira os horários",
+                  "📜 Histórico básico",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-foreground">
+                    <Check className="w-5 h-5 text-gold-500 flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <div className="p-8 rounded-3xl glass sacred-border hover:-translate-y-1 transition-all duration-300 hover:shadow-gold-glow">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-sacred-blue to-slate-700 flex items-center justify-center mb-6 shadow-lg">
-                <BookOpen className="w-8 h-8 text-gold-400" />
+            {/* Member Features */}
+            <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-gold-500/10 to-gold-600/5 border border-gold-500/30 relative">
+              <div className="absolute -top-4 right-6 inline-flex items-center gap-2 px-4 py-1 rounded-full bg-gold-500 text-sacred-blue font-cinzel font-bold text-sm">
+                ⭐ Conta Grátis
               </div>
-              <h3 className="text-2xl font-cinzel font-bold text-foreground mb-3">Explore e aprenda</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Métodos de meditação, história dos mistérios, ensinamentos dos santos. Aprofunde sua compreensão e vivência do rosário.
-              </p>
-            </div>
-
-            <div className="p-8 rounded-3xl glass sacred-border hover:-translate-y-1 transition-all duration-300 hover:shadow-gold-glow">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center mb-6 shadow-lg">
-                <Users className="w-8 h-8 text-white" />
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center">
+                  <Heart className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-2xl font-cinzel font-bold text-foreground">Membro 100% Grátis</h3>
               </div>
-              <h3 className="text-2xl font-cinzel font-bold text-foreground mb-3">Ore em comunidade</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Una-se a milhares de católicos ao redor do mundo. Compartilhe intenções, encoraje outros, cresça juntos na fé.
-              </p>
+              <p className="text-muted-foreground text-sm mb-6">Crie sua conta e acesse:</p>
+              <ul className="space-y-3">
+                {[
+                  "📊 Rastreador de sequência",
+                  "🎓 Ensinamentos da Santa Igreja",
+                  "🔧 Ferramentas de oração",
+                  "📚 Biblioteca de recursos",
+                  "❤️ Mural de intenções",
+                  "🎯 Progresso salvo",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-foreground font-medium">
+                    <Check className="w-5 h-5 text-gold-500 flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
           {/* Quick Access Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div 
-              onClick={() => router.push("/como-rezar")}
-              className="p-5 rounded-2xl glass sacred-border cursor-pointer hover:-translate-y-1 transition-all duration-300 group"
-            >
-              <BookOpen className="w-7 h-7 text-gold-500 mb-3 group-hover:scale-110 transition-transform" />
-              <h4 className="font-cinzel font-bold text-foreground text-sm mb-1">Como Rezar</h4>
-              <p className="text-xs text-muted-foreground">Guia passo a passo</p>
-            </div>
+          <div className="mt-16">
+            <h3 className="text-xl font-cinzel font-bold text-foreground mb-6 text-center">Explore Agora (Sem Login)</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div 
+                onClick={() => router.push("/como-rezar")}
+                className="p-5 rounded-2xl glass sacred-border cursor-pointer hover:-translate-y-1 transition-all duration-300 group"
+              >
+                <BookOpen className="w-7 h-7 text-gold-500 mb-3 group-hover:scale-110 transition-transform" />
+                <h4 className="font-cinzel font-bold text-foreground text-sm mb-1">Como Rezar</h4>
+                <p className="text-xs text-muted-foreground">Guia passo a passo</p>
+              </div>
 
-            <div 
-              onClick={() => router.push("/misterios-do-dia")}
-              className="p-5 rounded-2xl glass sacred-border cursor-pointer hover:-translate-y-1 transition-all duration-300 group"
-            >
-              <Sparkles className="w-7 h-7 text-gold-500 mb-3 group-hover:scale-110 transition-transform" />
-              <h4 className="font-cinzel font-bold text-foreground text-sm mb-1">Mistérios</h4>
-              <p className="text-xs text-muted-foreground">Meditações diárias</p>
-            </div>
+              <div 
+                onClick={() => router.push("/misterios-do-dia")}
+                className="p-5 rounded-2xl glass sacred-border cursor-pointer hover:-translate-y-1 transition-all duration-300 group"
+              >
+                <Sparkles className="w-7 h-7 text-gold-500 mb-3 group-hover:scale-110 transition-transform" />
+                <h4 className="font-cinzel font-bold text-foreground text-sm mb-1">Mistérios</h4>
+                <p className="text-xs text-muted-foreground">Meditações diárias</p>
+              </div>
 
-            <div 
-              onClick={() => router.push("/historia")}
-              className="p-5 rounded-2xl glass sacred-border cursor-pointer hover:-translate-y-1 transition-all duration-300 group"
-            >
-              <History className="w-7 h-7 text-gold-500 mb-3 group-hover:scale-110 transition-transform" />
-              <h4 className="font-cinzel font-bold text-foreground text-sm mb-1">História</h4>
-              <p className="text-xs text-muted-foreground">Origem e tradição</p>
-            </div>
+              <div 
+                onClick={() => router.push("/historia")}
+                className="p-5 rounded-2xl glass sacred-border cursor-pointer hover:-translate-y-1 transition-all duration-300 group"
+              >
+                <History className="w-7 h-7 text-gold-500 mb-3 group-hover:scale-110 transition-transform" />
+                <h4 className="font-cinzel font-bold text-foreground text-sm mb-1">História</h4>
+                <p className="text-xs text-muted-foreground">Origem e tradição</p>
+              </div>
 
-            <div 
-              onClick={() => router.push("/oracoes-tradicionais")}
-              className="p-5 rounded-2xl glass sacred-border cursor-pointer hover:-translate-y-1 transition-all duration-300 group"
-            >
-              <ScrollText className="w-7 h-7 text-gold-500 mb-3 group-hover:scale-110 transition-transform" />
-              <h4 className="font-cinzel font-bold text-foreground text-sm mb-1">Orações</h4>
-              <p className="text-xs text-muted-foreground">Textos completos</p>
+              <div 
+                onClick={() => router.push("/oracoes-tradicionais")}
+                className="p-5 rounded-2xl glass sacred-border cursor-pointer hover:-translate-y-1 transition-all duration-300 group"
+              >
+                <ScrollText className="w-7 h-7 text-gold-500 mb-3 group-hover:scale-110 transition-transform" />
+                <h4 className="font-cinzel font-bold text-foreground text-sm mb-1">Orações</h4>
+                <p className="text-xs text-muted-foreground">Textos completos</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Coming Soon Features */}
-      <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gold-500/5 via-background to-background">
+      {/* Quick Start Flows - 3 User Journeys */}
+      <section className="py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gold-500/5 via-background to-background">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-cinzel font-bold text-foreground mb-4">
-              Em <span className="text-gold-500">breve</span>
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Novas ferramentas para enriquecer sua experiência espiritual
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="p-6 rounded-2xl glass sacred-border">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold-500/20 to-gold-600/20 flex items-center justify-center mb-4">
-                <Timer className="w-6 h-6 text-gold-500" />
-              </div>
-              <h3 className="font-cinzel font-bold text-foreground mb-2">Guia Interativo</h3>
-              <p className="text-sm text-muted-foreground">Temporizador e guia passo a passo enquanto reza</p>
-            </div>
-
-            <div className="p-6 rounded-2xl glass sacred-border">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold-500/20 to-gold-600/20 flex items-center justify-center mb-4">
-                <Edit3 className="w-6 h-6 text-gold-500" />
-              </div>
-              <h3 className="font-cinzel font-bold text-foreground mb-2">Diário Espiritual</h3>
-              <p className="text-sm text-muted-foreground">Registre reflexões e intenções pessoais</p>
-            </div>
-
-            <div className="p-6 rounded-2xl glass sacred-border">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold-500/20 to-gold-600/20 flex items-center justify-center mb-4">
-                <Library className="w-6 h-6 text-gold-500" />
-              </div>
-              <h3 className="font-cinzel font-bold text-foreground mb-2">Biblioteca</h3>
-              <p className="text-sm text-muted-foreground">PDFs, documentos e materiais para download</p>
-            </div>
-
-            <div className="p-6 rounded-2xl glass sacred-border">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold-500/20 to-gold-600/20 flex items-center justify-center mb-4">
-                <BookOpen className="w-6 h-6 text-gold-500" />
-              </div>
-              <h3 className="font-cinzel font-bold text-foreground mb-2">Artigos & Guias</h3>
-              <p className="text-sm text-muted-foreground">Conteúdo profundo sobre santos e espiritualidade</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Community Section */}
-      <section id="community" className="py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 bg-muted/50 dark:bg-slate-900/50 relative overflow-hidden">
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L30 60M0 30L60 30' stroke='%23D4AF37' stroke-width='1'/%3E%3C/svg%3E\")" }} />
-        </div>
-
-        <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-cinzel font-bold text-foreground mb-6">
-              Nossa <span className="text-gold-500">Comunidade</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-cinzel font-bold text-foreground mb-4">
+              Por onde <span className="text-gold-500">começar</span>?
             </h2>
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Unidos em oração, crescendo juntos na fé
-            </p>
+            <p className="text-lg text-muted-foreground">Escolha seu caminho espiritual</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Track Progress */}
-            <div className="group p-8 rounded-3xl bg-card border border-border hover:border-gold-500/30 hover:-translate-y-1 transition-all duration-300 hover:shadow-gold-glow">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform shadow-lg">
+            {/* Path 1: Prayer Now */}
+            <div className="group p-8 rounded-3xl glass sacred-border hover:-translate-y-2 transition-all duration-300 hover:shadow-gold-glow cursor-pointer"
+              onClick={() => router.push("/como-rezar")}
+            >
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center mb-6 shadow-lg group-hover:scale-105 transition-transform">
                 <Calendar className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-cinzel font-bold text-foreground mb-3">
-                Acompanhe sua Jornada
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Registre suas orações diárias e construa uma sequência de devoção. Veja seu crescimento espiritual ao longo do tempo.
+              <h3 className="text-2xl font-cinzel font-bold text-foreground mb-2">Quero rezar agora</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                Aprenda o passo a passo do Rosário com guias, mistérios do dia e orações tradicionais.
               </p>
-            </div>
-
-            {/* Global Community */}
-            <div className="group p-8 rounded-3xl bg-card border border-border hover:border-gold-500/30 hover:-translate-y-1 transition-all duration-300 hover:shadow-gold-glow">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-sacred-blue to-slate-700 dark:from-slate-700 dark:to-slate-800 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform shadow-lg">
-                <Globe className="w-8 h-8 text-gold-400" />
+              <div className="flex items-center gap-2 text-gold-600 dark:text-gold-400 font-semibold text-sm group-hover:gap-3 transition-all">
+                Começar
+                <ArrowRight className="w-4 h-4" />
               </div>
-              <h3 className="text-xl font-cinzel font-bold text-foreground mb-3">
-                Comunidade Global
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Conecte-se com milhares de católicos ao redor do mundo, compartilhando intenções e encorajamento mútuo.
-              </p>
             </div>
 
-            {/* Deepen Faith */}
-            <div className="group p-8 rounded-3xl bg-card border border-border hover:border-gold-500/30 hover:-translate-y-1 transition-all duration-300 hover:shadow-gold-glow">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform shadow-lg">
+            {/* Path 2: Learn Faith */}
+            <div className="group p-8 rounded-3xl glass sacred-border hover:-translate-y-2 transition-all duration-300 hover:shadow-gold-glow cursor-pointer"
+              onClick={() => router.push("/ensinamentos")}
+            >
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center mb-6 shadow-lg group-hover:scale-105 transition-transform">
+                <BookOpen className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-cinzel font-bold text-foreground mb-2">Quero aprender sobre a fé</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                Explore teologia católica, vidas de santos, história da Igreja e devoção mariana.
+              </p>
+              <div className="flex items-center gap-2">
+                <span className="text-xs px-2 py-1 rounded-full bg-muted text-muted-foreground font-semibold">Membros</span>
+                <span className="text-gold-600 dark:text-gold-400 font-semibold text-sm group-hover:translate-x-1 transition-transform ml-auto">Explorar <ArrowRight className="w-4 h-4 inline" /></span>
+              </div>
+            </div>
+
+            {/* Path 3: Track & Community */}
+            <div className="group p-8 rounded-3xl bg-gradient-to-br from-gold-500/10 to-gold-600/5 border border-gold-500/30 hover:-translate-y-2 transition-all duration-300 cursor-pointer relative"
+              onClick={() => setAuthModalOpen(true)}
+            >
+              <div className="absolute -top-3 -right-3 inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gold-500 text-sacred-blue font-cinzel font-bold text-xs">
+                ⭐ RECOMENDADO
+              </div>
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center mb-6 shadow-lg group-hover:scale-105 transition-transform">
                 <Heart className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-cinzel font-bold text-foreground mb-3">
-                Aprofunde sua Fé
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Fortaleça sua vida espiritual com o hábito diário da oração do terço e meditação dos mistérios.
+              <h3 className="text-2xl font-cinzel font-bold text-foreground mb-2">Quero rastrear e crescer</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                Crie sua conta 100% grátis: rastreie sequências, acesse tudo, junte-se a milhares de católicos.
               </p>
+              <Button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setAuthModalOpen(true);
+                }}
+                className="rounded-full px-6 py-2 text-sm font-cinzel font-bold bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow transition-all"
+              >
+                Criar conta grátis
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 bg-background">
-        <div className="max-w-7xl mx-auto">
+      {/* Community & Benefits Section */}
+      <section id="community" className="py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 bg-muted/50 dark:bg-slate-900/50 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-cinzel font-bold text-foreground mb-6">
-              Por que <span className="text-gold-500">participar</span>?
+              Por que <span className="text-gold-500">Rosário Vivo</span>?
             </h2>
-            <p className="text-lg sm:text-xl text-muted-foreground">
-              Descubra os benefícios de fazer parte desta comunidade de oração
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+              Mais que um app, somos sua companhia na jornada espiritual
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             {[
               {
                 icon: TrendingUp,
-                title: "Acompanhe seu progresso espiritual",
-                description: "Visualize suas sequências de oração, total de terços rezados e veja seu crescimento ao longo dos meses",
+                title: "Rastreie seu progresso",
+                description: "Acompanhe sequências, total de rosários rezados e celebre conquistas",
                 gradient: "from-gold-500 to-gold-600"
               },
               {
-                icon: Sparkles,
-                title: "Compartilhe suas intenções",
-                description: "Publique suas intenções de oração e una-se a outros fiéis orando pelas mesmas causas",
-                gradient: "from-sacred-blue to-slate-700"
-              },
-              {
-                icon: Shield,
-                title: "Ambiente seguro e respeitoso",
-                description: "Uma comunidade moderada onde o respeito e a fé são os pilares fundamentais",
-                gradient: "from-gold-500 to-gold-600"
+                icon: BookOpen,
+                title: "Aprenda sobre a fé",
+                description: "Acesse ensinamentos, vidas de santos, teologia e história da Igreja",
+                gradient: "from-emerald-500 to-emerald-600"
               },
               {
                 icon: Heart,
-                title: "Motivação diária",
-                description: "Receba lembretes gentis e veja outras pessoas rezando para manter sua motivação em alta",
-                gradient: "from-sacred-blue to-slate-700"
+                title: "Una-se à comunidade",
+                description: "Compartilhe intenções e ore junto a milhares de católicos no mundo",
+                gradient: "from-rose-500 to-rose-600"
+              },
+              {
+                icon: Shield,
+                title: "100% Grátis & Open-Source",
+                description: "Sem pagamentos, sem anúncios, sem monetização. Apenas fé e comunidade",
+                gradient: "from-blue-500 to-blue-600"
               }
             ].map((feature, i) => (
               <div 
