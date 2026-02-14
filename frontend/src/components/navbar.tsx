@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { Home, BookOpen, History, Sparkles, ScrollText, ChevronDown, Play, LayoutDashboard } from "lucide-react";
+import { Home, BookOpen, History, Sparkles, ScrollText, ChevronDown, Play, LayoutDashboard, GraduationCap, Compass, Library } from "lucide-react";
 import { AuthModal } from "./auth-modal";
 import { ComingSoonModal } from "./coming-soon-modal";
 import { ThemeToggle } from "./theme-toggle";
