@@ -1,578 +1,622 @@
 # 🙏 Catholic Hub - MVP Roadmap & Implementation Plan
 
-**Last Updated:** February 11, 2026  
-**Status:** Phase 1 - Planning Complete  
-**Vision:** Transform simple rosary tracker into comprehensive Catholic spiritual formation platform
+**Last Updated:** February 18, 2026  
+**Status:** Frontend MVP - Content Architecture Complete, Backend Not Started  
+**Vision:** Digital companion for Catholic spiritual life - prayer tracking + accessible Church teachings
+
+---
+
+## 🏗️ Architecture Overview
+
+### Tech Stack
+
+**Frontend (Implemented):**
+- Next.js 16 (App Router) + React 19 + TypeScript
+- React Query (TanStack Query) for future API integration
+- Tailwind CSS + Radix UI + shadcn/ui components
+- PWA support (next-pwa with service worker & manifest)
+- **Current State**: Mock data + localStorage only
+
+**Backend (Planned - NOT IMPLEMENTED):**
+- NestJS boilerplate exists but NOT connected/functional
+- Planned: MongoDB + Passport JWT
+- **Current State**: Code structure only, no working endpoints
+
+### Deployment Status
+- Docker Compose files exist but backend is NOT functional
+- Frontend can run standalone with mock data
+- No database integration yet
 
 ---
 
 ## 🎯 MVP Definition - "Catholic Hub" Validation
 
 ### Goal
-Validate that users want deeper Catholic content beyond simple tracking.
+Validate that users want accessible Church teachings alongside prayer tracking—**no formal courses**, just a practical guide to Catholic faith.
+
+### Core Philosophy
+- **NOT a course platform** - No formal classes, lessons, or certificates
+- **IS a companion guide** - Synthesized Church teachings you explore at your own pace
+- **NOT sequential learning** - Browse topics freely like a digital Catholic compendium
+- **IS practical spirituality** - Prayer tracking + teachings + tools in one place
 
 ### Success Metrics
-- [ ] Time spent on educational content (not just tracking)
-- [ ] Return visits to Learning Center
-- [ ] Downloads of resources
-- [ ] Engagement with prayer tools
-- [ ] Community interaction (intentions, comments)
+- [ ] Time spent on teachings content (not just tracking)
+- [ ] Return visits to browse different topics
+- [ ] Engagement with prayer tools (when built)
+- [ ] Daily check-in consistency
+- [ ] User retention (7-day and 30-day)
 
 ---
 
-## 📋 Frontend MVP Roadmap (8 Weeks)
+## 📋 Content Architecture
 
-### **PHASE 1: Enhanced Core Pages** (Week 1-2)
-*Make existing pages "hub-worthy" with deeper content*
+### Current Approach: "Guide, Not Course"
 
-#### 1.1 Expand "Como Rezar" (How to Pray)
-- [x] St. Louis de Montfort method (COMPLETED)
-- [x] Add Padre Pio's method (COMPLETED)
-- [ ] Add Scriptural Rosary guide (with full biblical passages)
-- [ ] Add Different prayer intentions templates
-- [ ] Add "Advanced Techniques" section
-- [ ] Add Printable prayer guides (PDF-ready layouts)
+Rosário Vivo synthesizes Church teachings into accessible content—think digital Catholic compendium, not online university.
 
-#### 1.2 Deepen "Mistérios" (Mysteries)
-- [ ] Add full biblical context for each mystery
-- [ ] Add questions for meditation
-- [ ] Add Saints' quotes about each mystery
-- [ ] Add visual aids descriptions
-- [ ] Add save/favorite mysteries feature (UI with mock data)
+### 1. `/ensinamentos` - Teachings Hub 📚
+**What it is**: Browse Catholic teachings by topic - like a reference library
 
-#### 1.3 Enrich "História" (History)
-- [ ] Add Papal teachings section (excerpts from encyclicals)
-- [ ] Add Apparitions details (Fatima, Lourdes, Guadalupe, etc.)
-- [ ] Add Miracle stories/testimonies
-- [ ] Add Timeline visualization
-- [ ] Add Famous converts through the Rosary
+**Categories (structure exists, content minimal):**
+- **Santos** (Saints & Church Fathers)
+- **Teologia** (Catholic Theology)
+- **História** (Church History)
+- **Escritura** (Sacred Scripture)
+- **Maria** (Mariology)
+- **Sacramentos** (Sacraments)
+- **Orações** (Prayers & Devotions)
 
-#### 1.4 Boost "Orações" (Prayers)
-- [ ] Add Novenas section
-- [ ] Add Litanies (Litany of Loreto, Sacred Heart, etc.)
-- [ ] Add Morning/Evening prayers
-- [ ] Add Prayers for different intentions
-- [ ] Add Copy/share/download functionality
+**User Experience**: Click any topic → read → explore related topics. No progress tracking, no required order.
+
+### 2. `/formacao` - Spiritual Formation Guide 🌱
+**What it is**: Organized pathways through teachings (NOT formal courses)
+
+**Paths (structure exists, minimal content):**
+- **Iniciante** - Basic Rosary & Marian devotion guide
+- **Intermediário** - Deeper contemplative practices
+- **Avançado** - Advanced theology and consecration
+- **Santos** - Learn from saints' spiritual methods
+
+**User Experience**: Suggested reading order with optional progress tracking. Still exploratory, just more organized.
+
+**Key Difference from Ensinamentos**: Same teachings, different organization. Think "suggested path" vs "browse freely."
+
+### 3. `/ferramentas` - Prayer Tools (Future)
+**What it will be**: Practical digital prayer aids
+
+**Planned Tools:**
+- Interactive Rosary Guide
+- Prayer Journal
+- Meditation Timer
+- Intention Board
+
+**Current Status**: Placeholder page only
+
+### 4. `/recursos` - Resources Library (Future)
+**What it will be**: Downloadable materials
+
+**Planned:**
+- Prayer cards (PDF)
+- Links to Vatican documents
+- Curated reading lists
+
+**Current Status**: Placeholder page only
 
 ---
 
-### **PHASE 2: New Learning Center** (Week 3-4)
-*Core of the "hub" concept - structured spiritual formation*
+## 📊 Implementation Status
 
-#### 2.1 Create `/formacao` (Formation) Section Structure
+### ✅ Completed (Frontend Only with Mock Data)
 
-**Route Structure:**
+**Frontend Core:**
+- [x] Next.js 16 with App Router + React 19 + TypeScript
+- [x] PWA configuration (manifest, service worker)
+- [x] Theme system (dark/light mode with next-themes)
+- [x] Page transitions (GSAP animations)
+- [x] Component library (shadcn/ui + Radix UI)
+- [x] Mock data service layer (ready to swap with real API)
+- [x] localStorage for check-ins and stats
+- [x] Responsive design (mobile-first)
+
+**Pages (Implemented with Mock Data):**
+- [x] Landing page - Feature showcase, public vs member comparison
+- [x] About page - Mission, principles, timeline, FAQ
+- [x] Dashboard - Check-in system with streak tracking (localStorage)
+- [x] Como Rezar - St. Louis de Montfort method page
+- [x] Mistérios do Dia - Daily mysteries overview
+- [x] História - Rosary history page
+- [x] Orações Tradicionais - Traditional prayers
+- [x] `/ensinamentos` - Hub page with 7 category cards
+- [x] `/ensinamentos/santos` - Saints category page (structure, minimal content)
+- [x] `/ensinamentos/teologia` - Theology category page (structure, minimal content)
+- [x] `/ensinamentos/historia` - History category page (structure, minimal content)
+- [x] `/formacao` - Hub page with 4 learning paths
+- [x] `/formacao/iniciante` - Beginner path page with 5 lesson cards
+- [x] `/formacao/santos` - Saints path page
+- [x] `/ferramentas` - Tools placeholder page
+- [x] `/recursos` - Resources placeholder page
+
+**Reusable Components:**
+- [x] `PageHeader` - Consistent headers with icon, title, subtitle
+- [x] `PageTransition` - Smooth GSAP page transitions
+- [x] `BreadcrumbNav` - Breadcrumb navigation
+- [x] `LockedContent` - Content gating UI (non-functional, visual only)
+- [x] `ProgressBar` - Visual progress indicator
+- [x] `LessonCard` - Lesson preview cards
+- [x] `AuthModal` - Login/signup modal (UI only, no backend)
+- [x] `CheckInModal` - Daily check-in modal (localStorage)
+- [x] `StreakCounter` - Streak visualization
+- [x] `HeroSection` - Landing hero with animations
+- [x] `NavigationWrapper` - Responsive nav system
+- [x] UI components from shadcn (Button, Card, Dialog, etc.)
+
+### ❌ NOT Implemented (Exists as Code Structure Only)
+
+**Backend:**
+- ❌ NestJS code exists but NOT running/connected
+- ❌ MongoDB - No database setup
+- ❌ Authentication - No real auth (AuthModal is UI only)
+- ❌ API endpoints - None functional
+- ❌ User accounts - No real persistence
+- ❌ Check-ins persistence - Only localStorage (not synced)
+
+**Docker/Deployment:**
+- ❌ Docker Compose exists but backend doesn't work
+- ❌ Only frontend container is functional
+
+### 🔄 In Progress / Next Priority
+
+**Content Writing (Highest Priority):**
+- [ ] Write actual articles for `/ensinamentos` categories
+- [ ] Write actual lessons for `/formacao` paths
+- [ ] Implement `[slug]` dynamic routes to display content
+- [ ] Add markdown/MDX support for rich content
+
+**Tools Development (Frontend Only - localStorage):**
+- [ ] Interactive Rosary Guide with bead tracker
+- [ ] Prayer Journal (localStorage)
+- [ ] Meditation Timer
+- [ ] All without backend - pure frontend
+
+**Backend Implementation (Future):**
+- [ ] Actually implement NestJS backend
+- [ ] Connect MongoDB
+- [ ] Implement real authentication
+- [ ] Migrate from mock data to real API calls
+- [ ] User account system
+
+---
+
+## 📅 Realistic Timeline (Next 8 Weeks)
+
+### Weeks 1-3: Content Creation (Frontend MVP)
+**Goal**: Fill ensinamentos and formacao with actual content
+
+- [ ] Write 20+ articles for Ensinamentos (Santos, Teologia, Maria priority)
+- [ ] Write 5 Iniciante lessons with full content
+- [ ] Write 3 Intermediário lessons
+- [ ] Implement `[slug]` dynamic routing for content pages
+- [ ] Add MDX or markdown rendering
+- [ ] Content metadata (reading time, related topics, tags)
+
+**Content Structure:**
 ```
-/formacao
-├── /iniciante (Beginner Path)
-├── /intermediario (Intermediate)  
-├── /avancado (Advanced)
-└── /santos (Saints)
+content/
+├── ensinamentos/
+│   ├── santos/
+│   │   ├── sao-domingo.md
+│   │   ├── sao-luis-de-montfort.md
+│   │   └── ... (10+ more)
+│   ├── teologia/
+│   ├── maria/
+│   └── ...
+└── formacao/
+    ├── iniciante/
+    │   ├── 01-o-que-e-rosario.md
+    │   ├── 02-papel-de-maria.md
+    │   └── ... (5 total)
+    └── ...
 ```
 
-#### 2.2 Content Pages to Create
+### Weeks 4-5: Prayer Tools (Frontend Only)
+**Goal**: Build interactive prayer features without backend
 
-**Beginner Path (5 lessons minimum):**
-- [ ] What is the Rosary? (Deep dive)
-- [ ] Understanding Mary's Role in Salvation
-- [ ] The Power of Repetitive Prayer
-- [ ] Building a Daily Prayer Habit
-- [ ] Overcoming Distractions in Prayer
+- [ ] Interactive Rosary Guide (`/ferramentas/guia-interativo`)
+  - Visual bead tracker (SVG or CSS)
+  - Step-by-step prayer text
+  - Timer for pacing
+  - localStorage for preferences
+- [ ] Prayer Journal (`/ferramentas/diario`)
+  - Simple form for reflections
+  - Save to localStorage
+  - Calendar view of past entries
+  - Export as text/JSON
+- [ ] Meditation Timer (`/ferramentas/temporizador`)
+  - Countdown timer
+  - Mystery selection
+  - Audio notification (optional)
+- [ ] Enhanced Dashboard
+  - Widget showing tools usage
+  - Quick access to recent entries
 
-**Intermediate (5 lessons minimum):**
-- [ ] Contemplative Prayer & the Rosary
-- [ ] Liturgical Year & Rosary Connection
-- [ ] Scriptural Roots of Each Mystery
-- [ ] Rosary & the Sacraments
-- [ ] Mary in Sacred Scripture
+### Weeks 6-8: Backend Implementation
+**Goal**: Make the backend actually work
 
-**Advanced (5 lessons minimum):**
-- [ ] Marian Theology Essentials
-- [ ] Total Consecration to Mary (Preparation)
-- [ ] Mystical Aspects of the Rosary
-- [ ] Rosary & Catholic Social Teaching
-- [ ] Leading Family & Community Rosary
-
-**Saints Section (5 saints minimum):**
-- [ ] St. Dominic's Vision & the Rosary
-- [ ] St. Louis de Montfort's Marian Writings
-- [ ] St. Padre Pio & Daily Rosary Practice
-- [ ] St. John Paul II's Rosary Devotion
-- [ ] St. Thérèse's Little Way & Mary
-
-#### 2.3 Progress Tracking UI Components
-- [ ] Breadcrumb navigation component
-- [ ] "Completed" checkmarks (localStorage)
-- [ ] Estimated reading time display
-- [ ] Related articles sidebar
-- [ ] Learning path progress bar
-
----
-
-### **PHASE 3: Prayer Tools Hub** (Week 5-6)
-*Interactive features that keep users engaged*
-
-#### 3.1 Create `/ferramentas` (Tools) Section
-
-**Interactive Prayer Guide:**
-- [ ] Step-by-step rosary with click-through interface
-- [ ] Visual bead tracker component
-- [ ] Pause timer between mysteries
-- [ ] Pace selector (fast/normal/contemplative)
-- [ ] Background options UI (plain, nature themes)
-
-**Prayer Journal:**
-- [ ] Daily reflection form with prompts
-- [ ] Save entries to localStorage
-- [ ] Calendar view of past entries
-- [ ] Export/print journal functionality
-- [ ] Search past reflections
-
-**Meditation Timer:**
-- [ ] Custom time setter per mystery
-- [ ] Visual countdown display
-- [ ] Gentle notification system (visual)
-- [ ] Background ambient themes (UI only for MVP)
-- [ ] Guided meditation text prompts
-
-**Intention Board UI:**
-- [ ] Submit intention form
-- [ ] Browse intentions grid/list
-- [ ] "I'm praying for this" counter (frontend only)
-- [ ] Category filter (health, family, peace, etc.)
-- [ ] Moderation placeholder UI
-
-**Personal Dashboard Enhancements:**
-- [ ] Reading progress widget
-- [ ] Tools usage statistics
-- [ ] Favorite content list
-- [ ] Prayer milestone badges
-- [ ] Spiritual growth insights chart
-
----
-
-### **PHASE 4: Resource Library** (Week 7-8)
-*Downloadable, shareable content*
-
-#### 4.1 Create `/recursos` (Resources) Section
-
-**Downloads Library:**
-- [ ] Printable prayer cards (HTML/CSS designed)
-- [ ] Rosary novenas PDFs
-- [ ] Monthly prayer calendars
-- [ ] Meditation guides
-- [ ] Catechism excerpts on Mary/Rosary
-
-**Reading Library:**
-- [ ] Papal Documents section
-  - [ ] Rosarium Virginis Mariae (John Paul II)
-  - [ ] Relevant encyclical excerpts
-  - [ ] Pope Francis on Mary
-- [ ] Saints' Writings section
-  - [ ] Secret of the Rosary (St. Louis de Montfort)
-  - [ ] Padre Pio letters excerpts
-- [ ] Church Documents section
-  - [ ] CCC sections on Mary and prayer
-  - [ ] Vatican II on Marian devotion
-
-**Link Directory:**
-- [ ] Vatican official resources
-- [ ] EWTN Catholic resources
-- [ ] Catholic Answers links
-- [ ] USCCB/local bishop conference
-- [ ] Recommended books list
-
-**Visual Resources Placeholders:**
-- [ ] Mystery artwork gallery structure
-- [ ] Saints portraits placeholders
-- [ ] Apparition sites photos layout
-- [ ] Vatican/Church photos section
+- [ ] **Week 6**: Get NestJS backend running
+  - Fix Docker Compose configuration
+  - Get MongoDB connected
+  - Health check endpoints working
+  - CORS configured correctly
+- [ ] **Week 7**: Implement Authentication
+  - JWT auth working
+  - Register/login endpoints
+  - Password hashing (bcrypt)
+  - Frontend integration with auth
+- [ ] **Week 8**: Migrate Features to Backend
+  - Check-ins API (POST, GET)
+  - User stats API
+  - Replace localStorage with API calls
+  - Data migration strategy for existing users
 
 ---
 
 ## 🏗️ Technical Implementation Details
 
-### New Routes to Create
+### Route Structure (Current)
 
 ```
 frontend/src/app/
+├── page.tsx                      # Landing page
+├── about/page.tsx                # About page
+├── dashboard/page.tsx            # Dashboard (mock data)
+├── como-rezar/page.tsx           # How to pray
+├── misterios-do-dia/page.tsx     # Daily mysteries
+├── historia/page.tsx             # Rosary history
+├── oracoes-tradicionais/page.tsx # Traditional prayers
+├── ensinamentos/
+│   ├── page.tsx                  # Hub page
+│   ├── santos/page.tsx           # Santos category
+│   ├── teologia/page.tsx         # Theology category
+│   ├── historia/page.tsx         # History category
+│   ├── escritura/page.tsx        # Scripture category (minimal)
+│   ├── maria/page.tsx            # Mary category (minimal)
+│   ├── sacramentos/page.tsx      # Sacraments category (minimal)
+│   └── oracoes/page.tsx          # Prayers category (minimal)
 ├── formacao/
-│   ├── page.tsx                    # Learning Center hub
+│   ├── page.tsx                  # Hub page
 │   ├── iniciante/
-│   │   ├── page.tsx               # Beginner path overview
-│   │   └── [slug]/page.tsx        # Individual lessons
-│   ├── intermediario/
-│   │   ├── page.tsx
-│   │   └── [slug]/page.tsx
-│   ├── avancado/
-│   │   ├── page.tsx
-│   │   └── [slug]/page.tsx
-│   └── santos/
-│       ├── page.tsx               # Saints overview
-│       └── [saint]/page.tsx       # Individual saint bio
-├── ferramentas/
-│   ├── page.tsx                   # Tools hub
-│   ├── guia-interativo/page.tsx   # Interactive rosary
-│   ├── diario/page.tsx            # Prayer journal
-│   ├── temporizador/page.tsx      # Meditation timer
-│   └── intencoes/page.tsx         # Intentions board
-├── recursos/
-│   ├── page.tsx                   # Resources hub
-│   ├── downloads/page.tsx         # Downloadable content
-│   ├── biblioteca/page.tsx        # Reading library
-│   └── links/page.tsx             # External links
-└── comunidade/
-    ├── page.tsx                   # Community hub
-    ├── intencoes/page.tsx         # Shared intentions
-    └── testemunhos/page.tsx       # Testimonies
+│   │   ├── page.tsx              # Path overview
+│   │   └── [slug]/page.tsx       # NOT YET IMPLEMENTED
+│   ├── intermediario/page.tsx    # Path overview
+│   ├── avancado/page.tsx         # Path overview
+│   └── santos/page.tsx           # Saints path overview
+├── ferramentas/page.tsx          # Tools placeholder
+└── recursos/page.tsx             # Resources placeholder
 ```
 
-### Components to Create
+### Data Flow (Current vs Future)
 
-#### Learning Components
-- [ ] `components/learning/lesson-card.tsx` - Card for each lesson
-- [ ] `components/learning/progress-bar.tsx` - Visual progress
-- [ ] `components/learning/lesson-layout.tsx` - Standard lesson wrapper
-- [ ] `components/learning/breadcrumb-nav.tsx` - Navigation breadcrumbs
-- [ ] `components/learning/related-content.tsx` - Sidebar suggestions
-
-#### Tools Components
-- [ ] `components/tools/rosary-beads.tsx` - Visual bead tracker
-- [ ] `components/tools/meditation-timer.tsx` - Timer widget
-- [ ] `components/tools/journal-entry.tsx` - Journal entry form/card
-- [ ] `components/tools/intention-card.tsx` - Single intention display
-- [ ] `components/tools/prayer-guide-step.tsx` - Step in interactive guide
-
-#### Resources Components
-- [ ] `components/resources/download-card.tsx` - Downloadable item card
-- [ ] `components/resources/reading-card.tsx` - Book/article card
-- [ ] `components/resources/pdf-viewer.tsx` - Inline PDF display
-- [ ] `components/resources/link-card.tsx` - External link card
-
-#### Dashboard Components
-- [ ] `components/dashboard/learning-progress.tsx` - Progress widget
-- [ ] `components/dashboard/recent-activity.tsx` - Activity feed
-- [ ] `components/dashboard/suggested-content.tsx` - Recommendations
-- [ ] `components/dashboard/achievement-badges.tsx` - Badges display
-
-### State Management (LocalStorage MVP)
-
-```typescript
-// types/user-progress.ts
-interface UserProgress {
-  completedLessons: string[];
-  journalEntries: JournalEntry[];
-  favoriteContent: string[];
-  prayerStats: PrayerStats;
-  savedIntentions: Intention[];
-  readingProgress: ReadingProgress[];
-}
-
-interface JournalEntry {
-  id: string;
-  date: string;
-  mystery: MysteryType;
-  reflection: string;
-  intentions?: string[];
-}
-
-interface PrayerStats {
-  totalRosaries: number;
-  currentStreak: number;
-  longestStreak: number;
-  favoriteMytery: MysteryType;
-  toolsUsed: string[];
-}
-
-// Use localStorage for MVP, migrate to backend later
+**Current State:**
 ```
+User Action → Component → MockData Service → localStorage
+                                           ↓
+                                    Component Re-render
+```
+
+**Future State:**
+```
+User Action → Component → API Service → Backend API → MongoDB
+                             ↓            ↓
+                        React Query   JWT Auth
+                             ↓
+                      Component Re-render
+```
+
+### State Management Strategy
+
+**Current (Mock Data):**
+- `services/mockData.ts` - Static mock data
+- `services/api.ts` - Service layer with simulated delays
+- `localStorage` - Persistence for check-ins and stats
+- No global state - everything in components or React Query
+
+**Future (Real Backend):**
+- Keep same service layer structure
+- Replace mock implementations with fetch/axios calls
+- React Query for caching and synchronization
+- JWT token in httpOnly cookies or localStorage
+- Optional: Zustand for global UI state (modals, theme, etc.)
 
 ---
 
-## 📊 Content Creation Strategy
+## 📝 Content Strategy
 
-### Content Organization
+### Writing Guidelines
 
+**Tone:**
+- Reverent but accessible
+- No theological jargon without explanation
+- Personal but rooted in Church teaching
+- Practical application focus
+
+**Structure for Ensinamentos Articles:**
+```markdown
+---
+title: "Article Title"
+category: "santos" | "teologia" | etc.
+readingTime: "10 min"
+tags: ["rosary", "prayer", "saints"]
+---
+
+# Title
+
+## Introduction
+Brief hook and context
+
+## Main Content
+2-3 sections with clear headers
+
+## Practical Application
+How this applies to daily life
+
+## Further Reading
+Related articles and official Church documents
 ```
-content/
-├── lessons/
-│   ├── beginner/
-│   │   ├── 01-what-is-rosary.md
-│   │   ├── 02-mary-role.md
-│   │   └── ...
-│   ├── intermediate/
-│   └── advanced/
-├── saints/
-│   ├── dominic.md
-│   ├── louis-de-montfort.md
-│   └── ...
-├── prayers/
-│   ├── novenas/
-│   ├── litanies/
-│   └── intentions/
-└── resources/
-    ├── documents/
-    └── links/
+
+**Structure for Formação Lessons:**
+```markdown
+---
+path: "iniciante" | "intermediario" | "avancado"
+number: 1
+title: "Lesson Title"
+duration: "15 min"
+---
+
+# Lesson Title
+
+## Learning Goals
+What you'll understand after this lesson
+
+## Content
+Main teaching with examples
+
+## Reflection Questions
+Prompts for personal meditation
+
+## Practice
+Concrete action steps
+
+## Next Lesson
+Preview of next topic
 ```
 
-### Content Format (Markdown/JSON)
-- Easy to write and version control
-- Can be moved to CMS/backend later
-- MDX support for rich components
-- Frontmatter for metadata
+### Content Priorities
+
+**Phase 1 (Weeks 1-2):**
+1. Write 5 complete Iniciante lessons
+2. Write 10 Santos articles (most popular saints)
+3. Write 5 Maria articles (role in salvation, apparitions)
+
+**Phase 2 (Week 3):**
+1. Write 5 Teologia articles (Trinity, Incarnation, etc.)
+2. Write 5 História articles (Early Church, Vatican II, etc.)
+3. Start Intermediário lessons
+
+**Phase 3 (Ongoing):**
+1. Fill out remaining categories
+2. Add related content links
+3. Implement search functionality
 
 ---
 
-## 🎨 Design System Enhancements
+## 🎨 Design System Notes
 
-### New UI Patterns Needed
+### Components to Build (Tools Phase)
 
-#### Learning Cards
-- [ ] Lesson card with completion status
-- [ ] Saint biography card with image
-- [ ] Resource download card with file info
-- [ ] Progress indicator styles
+**Rosary Bead Tracker:**
+```tsx
+<RosaryBeads
+  currentBead={15}
+  totalBeads={59}
+  onBeadClick={(index) => handleBeadClick(index)}
+  variant="circle" | "chain"
+/>
+```
 
-#### Interactive Elements
-- [ ] Rosary bead visual (SVG or CSS)
-- [ ] Timer controls and display
-- [ ] Rich text editor for journal
-- [ ] Checkbox/toggle for completion
+**Prayer Step Display:**
+```tsx
+<PrayerStep
+  number={1}
+  prayer="Pai Nosso"
+  text="Pai nosso que estais no céu..."
+  isActive={true}
+  onComplete={() => handleComplete()}
+/>
+```
 
-#### Navigation Enhancements
-- [ ] Learning path sidebar menu
-- [ ] Breadcrumb navigation component
-- [ ] "Next lesson" flow buttons
-- [ ] Section navigation (phases)
-
-#### Badges/Achievements
-- [ ] Completed path badges (visual)
-- [ ] Reading milestone icons
-- [ ] Prayer consistency badges
-- [ ] Special feast day badges
+**Journal Entry Form:**
+```tsx
+<JournalForm
+  mystery={selectedMystery}
+  onSave={(entry) => saveToLocalStorage(entry)}
+  defaultIntentions={[]}
+/>
+```
 
 ---
 
 ## 🚀 MVP Launch Checklist
 
-### Must Have (Validates Hub Concept)
-- [ ] 3 learning paths with 5 lessons each (15 total)
-- [ ] Interactive rosary guide (basic version)
-- [ ] Prayer journal with localStorage
-- [ ] 10+ downloadable resources
-- [ ] 5 Saints biographies
-- [ ] Resource library with 20+ curated links
-- [ ] Enhanced existing pages with deeper content
-- [ ] Basic progress tracking (localStorage)
+### Must Have for Launch
+- [ ] 5 complete Iniciante lessons with rich content
+- [ ] 20+ Ensinamentos articles across categories
+- [ ] Dynamic routing working for all content
+- [ ] Mobile-responsive design tested
+- [ ] Basic SEO (meta tags, sitemap)
+- [ ] Privacy policy and terms
+- [ ] Working check-in system (even if localStorage)
+- [ ] At least 1 interactive tool (Rosary guide OR journal)
 
-### Nice to Have (Post-Launch Priority)
-- [ ] Audio guide placeholders/info
-- [ ] Curated testimonies section
+### Nice to Have
+- [ ] Backend authentication working
+- [ ] All 4 formação paths with content
+- [ ] All prayer tools implemented
+- [ ] Search functionality
 - [ ] Social sharing buttons
-- [ ] Email export of journal
 
-### Future Features (Phase 2+)
-- [ ] Video content integration
-- [ ] Live group prayer scheduling
-- [ ] Advanced user profiles
-- [ ] Push notifications
+### Future Features (Post-Launch)
+- [ ] Community features (intentions, testimonies)
 - [ ] Native mobile apps
-- [ ] Offline mode
+- [ ] Offline mode (full PWA)
+- [ ] Audio guides for prayers
+- [ ] Multiple languages (Spanish, English)
 
 ---
 
-## 📈 Progress Tracking
+## 📈 Success Metrics
 
-### Current Status
+### Technical Metrics
+- [ ] Page load time < 2s (Lighthouse score > 90)
+- [ ] Mobile responsive (tested on 3+ devices)
+- [ ] Accessibility score > 85
+- [ ] Zero console errors in production
 
-**Completed:**
-- [x] Project structure and basic pages
-- [x] Dashboard with check-in functionality
-- [x] Basic "How to Pray" page
-- [x] Mysteries overview page
-- [x] History page
-- [x] Traditional prayers page
-- [x] St. Louis de Montfort method section
-- [x] Smooth page transitions
-- [x] Enhanced landing page with Catholic Hub vision
-- [x] Comprehensive features showcase
-- [x] Learning paths preview
-- [x] Saints section preview
-- [x] Resources library preview
-
-**In Progress:**
-- [ ] Phase 1 enhancements
-
-**Next Up:**
-- [ ] Padre Pio method
-- [ ] Scriptural Rosary guide
-- [ ] Enhanced Mysteries with meditation questions
-
-### Weekly Goals
-
-**Week 1:**
-- [ ] Complete Como Rezar enhancements
-- [ ] Begin Mysteries deep dive content
-
-**Week 2:**
-- [ ] Complete Mysteries enhancements
-- [ ] Complete History enhancements
-- [ ] Complete Prayers enhancements
-
-**Week 3:**
-- [ ] Create Learning Center structure
-- [ ] Write 5 beginner lessons
-- [ ] Create lesson components
-
-**Week 4:**
-- [ ] Write intermediate lessons
-- [ ] Write advanced lessons
-- [ ] Complete saints section
-
-**Week 5:**
-- [ ] Create Tools hub structure
-- [ ] Build interactive rosary guide
-- [ ] Build prayer journal
-
-**Week 6:**
-- [ ] Build meditation timer
-- [ ] Build intention board UI
-- [ ] Enhance dashboard
-
-**Week 7:**
-- [ ] Create Resources section
-- [ ] Build downloads library
-- [ ] Organize reading library
-
-**Week 8:**
-- [ ] Complete link directory
-- [ ] Final polish and testing
-- [ ] Prepare for user validation
-
----
-
-## 🎯 Validation Metrics
-
-### After MVP Launch, Track:
-
-**Engagement Metrics:**
+### User Engagement (Post-Launch)
 - Average session duration
 - Pages per session
-- Return visitor rate
-- Most visited sections
+- Return visitor rate (7-day, 30-day)
+- Most read articles/lessons
+- Tool usage frequency
+- Check-in consistency rate
 
-**Content Performance:**
-- Most completed lessons
-- Most downloaded resources
-- Most read articles
-- Most used tools
-
-**User Behavior:**
-- Learning path completion rate
-- Journal entries per user
-- Tools usage frequency
-- Community interaction (intentions)
-
-**Conversion Goals:**
-- Sign-up to active user conversion
-- Guest to registered conversion
-- Feature discovery rate
-- Time to first "aha moment"
+### Content Performance
+- Time spent per article
+- Lesson completion rate
+- Most shared content
+- Search queries (when implemented)
 
 ---
 
-## 🤝 Backend Integration Planning
+## 🤝 Backend Integration Plan (Detailed)
 
-### Data to Eventually Persist:
+### Phase 1: Infrastructure (Week 6)
 
-1. **User Progress**
-   - Completed lessons
-   - Reading history
-   - Achievement badges
+**Docker Setup:**
+```bash
+# Get MongoDB actually running
+docker-compose up mongodb
 
-2. **User Generated Content**
-   - Journal entries
-   - Prayer intentions
-   - Testimonies
-
-3. **Community Data**
-   - Shared intentions
-   - Prayer counts
-   - Comments/reactions
-
-4. **Analytics**
-   - Usage statistics
-   - Content performance
-   - User journey data
-
-### API Endpoints to Plan For:
-
-```
-POST   /api/progress/lesson
-GET    /api/progress/user
-POST   /api/journal/entry
-GET    /api/journal/entries
-POST   /api/intentions
-GET    /api/intentions
-POST   /api/intentions/:id/pray
-GET    /api/stats/dashboard
-POST   /api/testimonies
-GET    /api/testimonies
+# Fix NestJS connection
+# Update connection string
+# Test health endpoint
 ```
 
+**Database Schema:**
+```typescript
+// User
+{
+  _id: ObjectId,
+  email: string,
+  password: string (hashed),
+  name: string,
+  createdAt: Date,
+  currentStreak: number,
+  longestStreak: number,
+  totalCheckIns: number
+}
+
+// CheckIn
+{
+  _id: ObjectId,
+  userId: ObjectId,
+  mystery: string,
+  reflection: string,
+  intentions: string[],
+  createdAt: Date,
+  isPublic: boolean
+}
+```
+
+### Phase 2: Authentication (Week 7)
+
+**Endpoints to Implement:**
+```
+POST /api/auth/register
+POST /api/auth/login
+GET  /api/auth/me (verify token)
+POST /api/auth/logout
+```
+
+**Frontend Integration:**
+```typescript
+// Update api.ts
+export async function login(email: string, password: string) {
+  const response = await fetch(`${API_URL}/auth/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password })
+  });
+  
+  const { accessToken, user } = await response.json();
+  localStorage.setItem('token', accessToken);
+  return user;
+}
+```
+
+### Phase 3: Data Migration (Week 8)
+
+**Migrate localStorage to Backend:**
+```typescript
+// Migration helper
+async function migrateLocalDataToBackend() {
+  const localCheckIns = getStoredCheckIns();
+  const localStats = getStoredStats();
+  
+  // Send to backend if user logged in
+  if (isAuthenticated) {
+    await bulkCreateCheckIns(localCheckIns);
+    await updateUserStats(localStats);
+    // Clear localStorage
+  }
+}
+```
+
 ---
 
-## 📝 Notes & Decisions
+## 📞 Current Status Summary
 
-### Key Decisions Made:
-- Frontend-first approach with localStorage MVP
-- Markdown-based content for easy management
-- Progressive enhancement strategy
-- Mobile-first responsive design
-- Accessibility as core requirement
+**What We Have:**
+- ✅ Beautiful frontend with all page structures
+- ✅ Mock data system that works perfectly
+- ✅ Component library ready to go
+- ✅ Content architecture decided
+- ✅ PWA configuration for mobile
 
-### Open Questions:
-- [ ] Should we add Spanish/English translations?
-- [ ] Monetization strategy (donations, premium features)?
-- [ ] Moderation strategy for user content?
-- [ ] SEO optimization priority?
-- [ ] Social media integration depth?
+**What We DON'T Have:**
+- ❌ Backend is NOT working (just code structure)
+- ❌ No database connected
+- ❌ No real user accounts
+- ❌ No actual content (just placeholders)
+- ❌ Tools are just placeholder pages
 
-### Technical Debt to Address:
-- [ ] Migrate localStorage to backend
-- [ ] Implement proper authentication
-- [ ] Add server-side rendering for SEO
-- [ ] Optimize images and assets
-- [ ] Set up CDN for resources
+**Next Steps (This Week):**
+1. Start writing actual content for Ensinamentos
+2. Implement `[slug]` routing for dynamic pages
+3. Add markdown rendering (MDX or react-markdown)
+4. Test on mobile devices
 
----
+**This Month:**
+1. Complete 20+ articles
+2. Complete 5 Iniciante lessons
+3. Build one interactive tool (Rosary guide)
 
-## 🎉 Success Criteria
-
-### MVP is successful if:
-1. ✅ Users spend >10min per session on learning content
-2. ✅ >30% completion rate on beginner path
-3. ✅ >50% of active users try prayer tools
-4. ✅ >20% of users download resources
-5. ✅ Users return >3 times in first month
-6. ✅ Positive qualitative feedback on "hub" concept
-
-If these metrics are hit, proceed to:
-- Backend development
-- Phase 2 features
-- Marketing/growth initiatives
-- Community building
+**Within 2 Months:**
+1. Get backend actually working
+2. Connect to database
+3. Launch MVP with real users
 
 ---
 
-## 📞 Contact & Support
-
-**Project Lead:** [Your Name]  
-**Development Phase:** Frontend MVP  
-**Expected Backend Start:** After Phase 4 completion  
-**Target MVP Launch:** 8 weeks from start
-
----
-
-*Last Updated: February 11, 2026*  
-*This is a living document - update as progress is made*
+*Last Updated: February 18, 2026*  
+*This is a living document - update as we make real progress*
