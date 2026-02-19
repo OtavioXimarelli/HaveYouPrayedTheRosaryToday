@@ -73,7 +73,7 @@ export default function IniciantePage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
           <BreadcrumbNav 
             items={[
-              { label: "Formação", path: "/formacao" },
+              { label: "Ensinamentos", path: "/ensinamentos?tab=caminhos" },
               { label: "Iniciante" }
             ]} 
           />
@@ -118,7 +118,7 @@ export default function IniciantePage() {
                   title={lesson.title}
                   description={lesson.description}
                   duration={lesson.duration}
-                  path={`/formacao/iniciante/${lesson.id}`}
+                  path={`/ensinamentos/caminhos/iniciante/${lesson.id}`}
                   lessonNumber={lesson.number}
                   isCompleted={completedLessons.includes(lesson.id)}
                   isLocked={lesson.isLocked}
