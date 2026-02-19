@@ -10,10 +10,10 @@ import { ArticleLayout } from "@/components/learning/article-layout";
 // ArticleLayout accepts meta with: title, slug, tema, level?, readingTime, tags[], excerpt, publishedAt
 
 interface Props {
-  params: {
+  params: Promise<{
     categoria: string;
     slug: string;
-  };
+  }>;
 }
 
 // ── Static params ─────────────────────────────────────────────────────────────
@@ -25,7 +25,8 @@ export async function generateStaticParams() {
 // ── Metadata ─────────────────────────────────────────────────────────────────
 
 export async function generateMetadata({ params }: Props) {
-  const article = getArticle(params.categoria, params.slug);
+  const { categoria, slug } = await params;
+  const article = getArticle(categoria, slug);
   if (!article) return {};
   return {
     title: `${article.title} | Ensinamentos`,
@@ -49,23 +50,24 @@ const CATEGORIA_LABELS: Record<string, string> = {
   escritura: "Escritura",
 };
 
-export default function ArticlePage({ params }: Props) {
-  const article = getArticle(params.categoria, params.slug);
+export default async function ArticlePage({ params }: Props) {
+  const { categoria, slug } = await params;
+  const article = getArticle(categoria, slug);
   if (!article) notFound();
 
-  const related = getRelatedArticles(params.categoria, params.slug, 3);
-  const categoriaLabel = CATEGORIA_LABELS[params.categoria] ?? params.categoria;
+  const related = getRelatedArticles(categoria, slug, 3);
+  const categoriaLabel = CATEGORIA_LABELS[categoria] ?? categoria;
 
   return (
     <ArticleLayout
       meta={article}
       related={related}
-      relatedBasePath={`/ensinamentos/${params.categoria}`}
+      relatedBasePath={`/ensinamentos/${categoria}`}
       breadcrumbBase={[
         { label: "Ensinamentos", path: "/ensinamentos" },
         {
           label: categoriaLabel,
-          path: `/ensinamentos?tema=${params.categoria}`,
+          path: `/ensinamentos?tema=${categoria}`,
         },
       ]}
     >

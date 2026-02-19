@@ -10,10 +10,10 @@ import { ArticleLayout } from "@/components/learning/article-layout";
 // ArticleLayout accepts meta with: title, slug, tema, level?, readingTime, tags[], excerpt, publishedAt
 
 interface Props {
-  params: {
+  params: Promise<{
     path: string;   // "iniciante" | "intermediario" | "avancado"
     slug: string;
-  };
+  }>;
 }
 
 // ── Static params ─────────────────────────────────────────────────────────────
@@ -25,10 +25,11 @@ export async function generateStaticParams() {
 // ── Metadata ─────────────────────────────────────────────────────────────────
 
 export async function generateMetadata({ params }: Props) {
-  const lesson = getCaminhoLesson(params.path, params.slug);
+  const { path, slug } = await params;
+  const lesson = getCaminhoLesson(path, slug);
   if (!lesson) return {};
   return {
-    title: `${lesson.title} | Caminhos · ${capitalize(params.path)}`,
+    title: `${lesson.title} | Caminhos · ${capitalize(path)}`,
     description: lesson.excerpt,
     openGraph: {
       title: lesson.title,
@@ -49,22 +50,23 @@ function capitalize(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
-export default function CaminhoLessonPage({ params }: Props) {
-  const lesson = getCaminhoLesson(params.path, params.slug);
+export default async function CaminhoLessonPage({ params }: Props) {
+  const { path, slug } = await params;
+  const lesson = getCaminhoLesson(path, slug);
   if (!lesson) notFound();
 
   // Build sibling lessons for the sidebar (related = others in same path)
-  const siblings = getCaminhoLessons(params.path).filter(
-    (l) => l.slug !== params.slug
+  const siblings = getCaminhoLessons(path).filter(
+    (l) => l.slug !== slug
   );
 
-  const pathLabel = PATH_LABELS[params.path] ?? capitalize(params.path);
+  const pathLabel = PATH_LABELS[path] ?? capitalize(path);
 
   return (
     <ArticleLayout
       meta={lesson}
       related={siblings.slice(0, 3)}
-      relatedBasePath={`/ensinamentos/caminhos/${params.path}`}
+      relatedBasePath={`/ensinamentos/caminhos/${path}`}
       breadcrumbBase={[
         { label: "Ensinamentos", path: "/ensinamentos" },
         {
@@ -73,7 +75,7 @@ export default function CaminhoLessonPage({ params }: Props) {
         },
         {
           label: pathLabel,
-          path: `/ensinamentos/caminhos/${params.path}`,
+          path: `/ensinamentos/caminhos/${path}`,
         },
       ]}
     >
