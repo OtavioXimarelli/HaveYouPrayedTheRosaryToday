@@ -1,26 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Mail, Lock, User, Eye, EyeOff, ArrowRight, Info } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Lock, User, Eye, EyeOff, ArrowRight, Shield } from "lucide-react";
 
-interface AuthModalProps {
+export interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
   mode: "login" | "signup";
   onSwitchMode: () => void;
-  onLogin: (email: string, password: string) => Promise<void>;
-  onSignup: (name: string, email: string, password: string) => Promise<void>;
+  onLogin: (username: string, password: string) => Promise<void>;
+  onSignup: (username: string, password: string) => Promise<void>;
 }
 
 export function AuthModal({
@@ -31,13 +24,11 @@ export function AuthModal({
   onLogin,
   onSignup,
 }: AuthModalProps) {
-  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
+    username: "",
     password: "",
     confirmPassword: "",
   });
@@ -46,240 +37,224 @@ export function AuthModal({
     e.preventDefault();
     setError(null);
 
-    if (mode === "signup" && formData.password !== formData.confirmPassword) {
-      setError("As senhas não coincidem.");
+    if (!formData.username.trim()) {
+      setError("Informe seu nome de usuário.");
       return;
     }
     if (formData.password.length < 6) {
       setError("A senha deve ter pelo menos 6 caracteres.");
       return;
     }
+    if (mode === "signup" && formData.password !== formData.confirmPassword) {
+      setError("As senhas não coincidem.");
+      return;
+    }
 
     setIsSubmitting(true);
     try {
       if (mode === "signup") {
-        await onSignup(formData.name, formData.email, formData.password);
+        await onSignup(formData.username.trim(), formData.password);
       } else {
-        await onLogin(formData.email, formData.password);
+        await onLogin(formData.username.trim(), formData.password);
       }
-      // reset form on success
-      setFormData({ name: "", email: "", password: "", confirmPassword: "" });
-    } catch (err) {
-      setError("Algo deu errado. Tente novamente.");
+      setFormData({ username: "", password: "", confirmPassword: "" });
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : null;
+      setError(msg ?? "Algo deu errado. Tente novamente.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleInputChange = (field: string, value: string) => {
+  const handleInput = (field: keyof typeof formData, value: string) => {
     setError(null);
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSkip = () => {
-    onClose();
-    router.push("/dashboard");
-  };
+  const isLogin = mode === "login";
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md bg-white border-2 border-blue-200">
-        <DialogHeader>
-          <div className="flex justify-center mb-4 animate-scale-in">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg animate-pulse-gold">
-              <span className="text-3xl">📿</span>
-            </div>
-          </div>
-          <DialogTitle className="text-2xl font-bold text-center text-blue-900">
-            {mode === "login" ? "Bem-vindo de volta!" : "Junte-se a nós"}
-          </DialogTitle>
-          <DialogDescription className="text-center text-blue-700">
-            {mode === "login"
-              ? "Entre para continuar sua jornada de oração"
-              : "Crie sua conta e comece a rezar conosco"}
-          </DialogDescription>
-        </DialogHeader>
+      <DialogContent className="p-0 border-0 bg-transparent shadow-none max-w-sm w-full overflow-visible [&>button]:hidden">
+        {/* ── Card ── */}
+        <div className="relative rounded-2xl overflow-hidden bg-slate-900/95 backdrop-blur-2xl border border-yellow-500/20 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.8)]">
 
-        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-          {/* localStorage disclaimer */}
-          <div className="flex items-start gap-2 px-3 py-2.5 rounded-xl bg-blue-50 border border-blue-100 text-xs text-blue-700">
-            <Info className="w-4 h-4 mt-0.5 flex-shrink-0 text-blue-400" />
-            <span>
-              Seus dados são salvos <strong>apenas neste dispositivo</strong>.
-              Limpar o cache do navegador apagará sua conta local.
-            </span>
+          {/* Gold top accent bar */}
+          <div className="h-1 w-full bg-gradient-to-r from-yellow-700 via-yellow-400 to-yellow-700" />
+
+          {/* Subtle background glow */}
+          <div className="absolute inset-0 pointer-events-none" aria-hidden>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32 bg-yellow-500/5 rounded-full blur-3xl" />
           </div>
 
-          {mode === "signup" && (
-            <div className="space-y-2 animate-slide-up">
-              <Label htmlFor="name" className="text-blue-900 font-semibold">
-                Nome completo
-              </Label>
-              <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-blue-400" />
-                <Input
-                  id="name"
-                  type="text"
-                  placeholder="Seu nome"
-                  value={formData.name}
-                  onChange={(e) => handleInputChange("name", e.target.value)}
-                  className="pl-10 border-blue-200 focus:border-blue-400 focus:ring-blue-400"
-                  required
-                />
-              </div>
-            </div>
-          )}
+          <div className="relative px-8 pt-8 pb-7">
 
-          <div className="space-y-2 animate-slide-up animate-delay-100">
-            <Label htmlFor="email" className="text-blue-900 font-semibold">
-              Email
-            </Label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-blue-400" />
-              <Input
-                id="email"
-                type="email"
-                placeholder="seu@email.com"
-                value={formData.email}
-                onChange={(e) => handleInputChange("email", e.target.value)}
-                className="pl-10 border-blue-200 focus:border-blue-400 focus:ring-blue-400"
-                required
-              />
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="password" className="text-blue-900 font-semibold">
-              Senha
-            </Label>
-            <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-blue-400" />
-              <Input
-                id="password"
-                type={showPassword ? "text" : "password"}
-                placeholder="••••••••"
-                value={formData.password}
-                onChange={(e) => handleInputChange("password", e.target.value)}
-                className="pl-10 pr-10 border-blue-200 focus:border-blue-400 focus:ring-blue-400"
-                required
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-blue-400 hover:text-blue-600 transition-colors"
-              >
-                {showPassword ? (
-                  <EyeOff className="w-5 h-5" />
-                ) : (
-                  <Eye className="w-5 h-5" />
-                )}
-              </button>
-            </div>
-          </div>
-
-          {mode === "signup" && (
-            <div className="space-y-2">
-              <Label htmlFor="confirmPassword" className="text-blue-900 font-semibold">
-                Confirmar senha
-              </Label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-blue-400" />
-                <Input
-                  id="confirmPassword"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="••••••••"
-                  value={formData.confirmPassword}
-                  onChange={(e) =>
-                    handleInputChange("confirmPassword", e.target.value)
-                  }
-                  className="pl-10 border-blue-200 focus:border-blue-400 focus:ring-blue-400"
-                  required
-                />
-              </div>
-            </div>
-          )}
-
-          {mode === "login" && (
-            <div className="flex justify-end">
-              {/* TODO: Implement password recovery when backend is connected */}
-              <span className="text-sm text-blue-400 font-medium cursor-not-allowed select-none">
-                Esqueceu a senha?
-              </span>
-            </div>
-          )}
-
-          {error && (
-            <p className="text-sm text-red-600 font-medium text-center">{error}</p>
-          )}
-
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-6 shadow-lg hover:shadow-xl transition-all disabled:opacity-60"
-          >
-            {isSubmitting
-              ? "Aguarde…"
-              : mode === "login"
-              ? "Entrar"
-              : "Criar conta"}
-          </Button>
-
-          {/* Social login — coming soon
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-blue-200"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white text-blue-600 font-medium">
-                ou continue com
-              </span>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            Google button — TODO
-            Facebook button — TODO
-          </div>
-          */}
-
-          <div className="text-center text-sm text-blue-700 mt-4">
-            {mode === "login" ? (
-              <>
-                Ainda não tem uma conta?{" "}
-                <button
-                  type="button"
-                  onClick={onSwitchMode}
-                  className="text-blue-600 hover:text-blue-800 font-bold transition-colors"
-                >
-                  Cadastre-se
-                </button>
-              </>
-            ) : (
-              <>
-                Já tem uma conta?{" "}
-                <button
-                  type="button"
-                  onClick={onSwitchMode}
-                  className="text-blue-600 hover:text-blue-800 font-bold transition-colors"
-                >
-                  Entrar
-                </button>
-              </>
-            )}
-          </div>
-
-          {/* Skip Button */}
-          <div className="pt-4 border-t border-blue-200">
-            <Button
-              type="button"
-              variant="ghost"
-              onClick={handleSkip}
-              className="w-full text-blue-600 hover:text-blue-800 hover:bg-blue-50 font-semibold transition-all group"
+            {/* Close button */}
+            <button
+              onClick={onClose}
+              aria-label="Fechar"
+              className="absolute top-4 right-4 w-7 h-7 rounded-full text-slate-500 hover:text-slate-300 hover:bg-slate-800 flex items-center justify-center transition-colors text-lg leading-none"
             >
-              Pular por enquanto e explorar
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
+              ×
+            </button>
+
+            {/* Icon + Title */}
+            <div className="flex flex-col items-center gap-3 mb-6">
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border border-yellow-500/30 flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+                <span className="text-2xl select-none">📿</span>
+              </div>
+              <div className="text-center">
+                <h2 className="font-cinzel font-bold text-xl text-white tracking-wide">
+                  {isLogin ? "Bem-vindo de volta" : "Criar conta"}
+                </h2>
+                <p className="text-slate-400 text-sm mt-1">
+                  {isLogin
+                    ? "Entre para continuar sua jornada"
+                    : "Junte-se à nossa comunidade de oração"}
+                </p>
+              </div>
+            </div>
+
+            {/* Disclaimer */}
+            <div className="flex items-start gap-2.5 px-3.5 py-2.5 rounded-xl bg-yellow-500/5 border border-yellow-500/15 mb-5">
+              <Shield className="w-4 h-4 text-yellow-500/60 mt-0.5 flex-shrink-0" />
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Conta local — dados salvos{" "}
+                <span className="text-yellow-400/80 font-medium">apenas neste dispositivo</span>.
+                Limpar o cache apaga a conta.
+              </p>
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleSubmit} className="space-y-4">
+
+              {/* Username */}
+              <div className="space-y-1.5">
+                <Label
+                  htmlFor="auth-username"
+                  className="text-sm font-medium text-slate-300"
+                >
+                  Nome de usuário
+                </Label>
+                <div className="relative">
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                  <Input
+                    id="auth-username"
+                    type="text"
+                    autoComplete="username"
+                    placeholder="peregrino123"
+                    value={formData.username}
+                    onChange={(e) => handleInput("username", e.target.value)}
+                    data-testid="auth-username"
+                    className="pl-9 bg-slate-800/60 border-slate-700/60 text-white placeholder:text-slate-600 focus-visible:border-yellow-500/50 focus-visible:ring-yellow-500/20 focus-visible:ring-2 rounded-xl h-11 transition-colors"
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Password */}
+              <div className="space-y-1.5">
+                <Label
+                  htmlFor="auth-password"
+                  className="text-sm font-medium text-slate-300"
+                >
+                  Senha
+                </Label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                  <Input
+                    id="auth-password"
+                    type={showPassword ? "text" : "password"}
+                    autoComplete={isLogin ? "current-password" : "new-password"}
+                    placeholder="••••••••"
+                    value={formData.password}
+                    onChange={(e) => handleInput("password", e.target.value)}
+                    data-testid="auth-password"
+                    className="pl-9 pr-10 bg-slate-800/60 border-slate-700/60 text-white placeholder:text-slate-600 focus-visible:border-yellow-500/50 focus-visible:ring-yellow-500/20 focus-visible:ring-2 rounded-xl h-11 transition-colors"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((v) => !v)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors"
+                    aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+
+              {/* Confirm Password (signup only) */}
+              {!isLogin && (
+                <div className="space-y-1.5">
+                  <Label
+                    htmlFor="auth-confirm"
+                    className="text-sm font-medium text-slate-300"
+                  >
+                    Confirmar senha
+                  </Label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                    <Input
+                      id="auth-confirm"
+                      type={showPassword ? "text" : "password"}
+                      autoComplete="new-password"
+                      placeholder="••••••••"
+                      value={formData.confirmPassword}
+                      onChange={(e) => handleInput("confirmPassword", e.target.value)}
+                      data-testid="auth-confirm-password"
+                      className="pl-9 bg-slate-800/60 border-slate-700/60 text-white placeholder:text-slate-600 focus-visible:border-yellow-500/50 focus-visible:ring-yellow-500/20 focus-visible:ring-2 rounded-xl h-11 transition-colors"
+                      required
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* Error */}
+              {error && (
+                <p className="text-sm text-red-400 font-medium text-center bg-red-500/10 border border-red-500/20 rounded-xl px-3 py-2">
+                  {error}
+                </p>
+              )}
+
+              {/* Submit */}
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                data-testid="auth-submit"
+                className="w-full h-11 rounded-full bg-gradient-to-r from-yellow-600 to-yellow-500 text-slate-900 font-cinzel font-bold tracking-wide hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:from-yellow-500 hover:to-yellow-400 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed mt-1"
+              >
+                {isSubmitting ? "Aguarde…" : isLogin ? "Entrar" : "Criar conta"}
+              </Button>
+
+              {/* Switch mode */}
+              <p className="text-center text-sm text-slate-500">
+                {isLogin ? "Não tem uma conta? " : "Já tem uma conta? "}
+                <button
+                  type="button"
+                  onClick={onSwitchMode}
+                  className="text-yellow-500 hover:text-yellow-400 font-semibold transition-colors"
+                  data-testid="auth-switch-mode"
+                >
+                  {isLogin ? "Cadastre-se" : "Entrar"}
+                </button>
+              </p>
+
+              {/* Skip */}
+              <div className="pt-3 border-t border-slate-800">
+                <button
+                  type="button"
+                  onClick={onClose}
+                  data-testid="auth-skip"
+                  className="w-full flex items-center justify-center gap-1.5 text-sm text-slate-500 hover:text-slate-300 font-medium transition-colors group py-1"
+                >
+                  Explorar sem conta
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       </DialogContent>
     </Dialog>
   );

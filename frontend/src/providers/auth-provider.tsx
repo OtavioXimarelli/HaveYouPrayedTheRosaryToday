@@ -13,15 +13,17 @@ import { AuthModal } from "@/components/auth-modal";
 
 export interface AuthUser {
   id: string;
+  /** username chosen at signup */
   name: string;
-  email: string;
+  /** SHA-256 hex digest of the password — never the plaintext */
+  passwordHash: string;
 }
 
 interface AuthContextValue {
   user: AuthUser | null;
   isLoggedIn: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  signup: (name: string, email: string, password: string) => Promise<void>;
+  login: (username: string, password: string) => Promise<void>;
+  signup: (username: string, password: string) => Promise<void>;
   logout: () => void;
   openAuthModal: (mode?: "login" | "signup") => void;
 }
@@ -34,6 +36,16 @@ const STORAGE_KEY = "rosario-user";
 
 function generateUserId(): string {
   return `user-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+}
+
+/** SHA-256 hash via Web Crypto API (available in all modern browsers + Node 18+) */
+async function sha256(text: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(text);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  return Array.from(new Uint8Array(hashBuffer))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
 }
 
 // ─── Provider ─────────────────────────────────────────────────────────────────
@@ -53,13 +65,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const login = useCallback(async (email: string, _password: string) => {
-    // localStorage-based: try to match a stored session by email
+  const login = useCallback(async (username: string, password: string) => {
+    const hash = await sha256(password);
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         const storedUser: AuthUser = JSON.parse(stored);
-        if (storedUser.email.toLowerCase() === email.toLowerCase()) {
+        if (
+          storedUser.name.toLowerCase() === username.toLowerCase() &&
+          storedUser.passwordHash === hash
+        ) {
           setUser(storedUser);
           setModalOpen(false);
           return;
@@ -68,26 +83,33 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch {
       // ignore
     }
-    // Fallback: create a minimal session from the email
+    throw new Error("Usuário ou senha incorretos.");
+  }, []);
+
+  const signup = useCallback(async (username: string, password: string) => {
+    // Prevent duplicate usernames
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        const storedUser: AuthUser = JSON.parse(stored);
+        if (storedUser.name.toLowerCase() === username.toLowerCase()) {
+          throw new Error("Este nome de usuário já está em uso.");
+        }
+      }
+    } catch (e) {
+      if (e instanceof Error && e.message.includes("nome de usuário")) throw e;
+    }
+
+    const hash = await sha256(password);
     const newUser: AuthUser = {
       id: generateUserId(),
-      name: email.split("@")[0],
-      email,
+      name: username,
+      passwordHash: hash,
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(newUser));
     setUser(newUser);
     setModalOpen(false);
   }, []);
-
-  const signup = useCallback(
-    async (name: string, email: string, _password: string) => {
-      const newUser: AuthUser = { id: generateUserId(), name, email };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(newUser));
-      setUser(newUser);
-      setModalOpen(false);
-    },
-    []
-  );
 
   const logout = useCallback(() => {
     localStorage.removeItem(STORAGE_KEY);
@@ -127,3 +149,4 @@ export function useAuth(): AuthContextValue {
   if (!ctx) throw new Error("useAuth must be used within an <AuthProvider>");
   return ctx;
 }
+
