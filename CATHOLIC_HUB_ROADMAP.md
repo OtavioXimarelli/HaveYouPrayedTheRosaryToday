@@ -1,7 +1,7 @@
 # 🙏 Catholic Hub - MVP Roadmap & Implementation Plan
 
-**Last Updated:** February 18, 2026  
-**Status:** Frontend MVP - Content Architecture Complete, Backend Not Started  
+**Last Updated:** June 2025  
+**Status:** Frontend MVP — Unified `/ensinamentos` hub live, MDX pipeline active, first content written, Backend Not Started  
 **Vision:** Digital companion for Catholic spiritual life - prayer tracking + accessible Church teachings
 
 ---
@@ -55,32 +55,45 @@ Validate that users want accessible Church teachings alongside prayer tracking�
 
 Rosário Vivo synthesizes Church teachings into accessible content—think digital Catholic compendium, not online university.
 
-### 1. `/ensinamentos` - Teachings Hub 📚
-**What it is**: Browse Catholic teachings by topic - like a reference library
+### 1. `/ensinamentos` - Unified Teachings Hub 📚 ✅ IMPLEMENTED
+**What it is**: Single canonical hub — combines topic browsing AND suggested learning paths
 
-**Categories (structure exists, content minimal):**
-- **Santos** (Saints & Church Fathers)
-- **Teologia** (Catholic Theology)
-- **História** (Church History)
-- **Escritura** (Sacred Scripture)
-- **Maria** (Mariology)
-- **Sacramentos** (Sacraments)
-- **Orações** (Prayers & Devotions)
+**Tab 1 — Explorar** (default):
+- Bento grid of 7 topic cards (Santos, Teologia, História, Escritura, Maria, Sacramentos, Orações)
+- Horizontal pill filter to narrow by topic (client-side, URL-synced via `?tema=`)
+- Clicking a card goes to `/ensinamentos/{tema}` category listing
+- `TODO`: evolve pill filter into dropdown submenu with sub-topic hierarchy
 
-**User Experience**: Click any topic → read → explore related topics. No progress tracking, no required order.
+**Tab 2 — Caminhos Sugeridos**:
+- 4 learning path cards (Iniciante, Intermediário, Avançado, Santos do Rosário)
+- Progress overview panel (shown only when logged in — currently mocked)
+- Clicking a path goes to `/ensinamentos/caminhos/{path}`
 
-### 2. `/formacao` - Spiritual Formation Guide 🌱
-**What it is**: Organized pathways through teachings (NOT formal courses)
+**URL scheme:** `?tab=explorar|caminhos` and `?tema=todos|santos|teologia|...`
 
-**Paths (structure exists, minimal content):**
-- **Iniciante** - Basic Rosary & Marian devotion guide
-- **Intermediário** - Deeper contemplative practices
-- **Avançado** - Advanced theology and consecration
-- **Santos** - Learn from saints' spiritual methods
+**Individual articles:** `/ensinamentos/{categoria}/{slug}` — dynamic, SSG with `generateStaticParams`
 
-**User Experience**: Suggested reading order with optional progress tracking. Still exploratory, just more organized.
+**Individual lessons:** `/ensinamentos/caminhos/{path}/{slug}` — dynamic, SSG with `generateStaticParams`
 
-**Key Difference from Ensinamentos**: Same teachings, different organization. Think "suggested path" vs "browse freely."
+**Content categories (MDX files in `frontend/content/ensinamentos/`):**
+- **Santos** — 5 articles written ✅
+- **Teologia** — empty, ready
+- **História** — empty, ready
+- **Escritura** — empty, ready
+- **Maria** — empty, ready
+- **Sacramentos** — empty, ready
+- **Orações** — empty, ready
+
+**Caminhos content (`frontend/content/ensinamentos/caminhos/`):**
+- **Iniciante** — 5 lessons written ✅
+- **Intermediário** — empty, ready
+- **Avançado** — empty, ready
+
+### ~~2. `/formacao`~~ — REMOVED & REDIRECTED ✅
+`/formacao` has been deleted. All old URLs redirect permanently:
+- `/formacao` → `/ensinamentos?tab=caminhos`
+- `/formacao/santos` → `/ensinamentos/santos`
+- `/formacao/:path*` → `/ensinamentos/caminhos/:path*`
 
 ### 3. `/ferramentas` - Prayer Tools (Future)
 **What it will be**: Practical digital prayer aids
@@ -127,15 +140,16 @@ Rosário Vivo synthesizes Church teachings into accessible content—think digit
 - [x] Mistérios do Dia - Daily mysteries overview
 - [x] História - Rosary history page
 - [x] Orações Tradicionais - Traditional prayers
-- [x] `/ensinamentos` - Hub page with 7 category cards
-- [x] `/ensinamentos/santos` - Saints category page (structure, minimal content)
-- [x] `/ensinamentos/teologia` - Theology category page (structure, minimal content)
-- [x] `/ensinamentos/historia` - History category page (structure, minimal content)
-- [x] `/formacao` - Hub page with 4 learning paths
-- [x] `/formacao/iniciante` - Beginner path page with 5 lesson cards
-- [x] `/formacao/santos` - Saints path page
+- [x] `/ensinamentos` - Unified hub (tab switcher: Explorar + Caminhos Sugeridos, pill filter, URL state)
+- [x] `/ensinamentos/{categoria}` - Category pages (santos, teologia, historia, + others)
+- [x] `/ensinamentos/{categoria}/{slug}` - **Dynamic article pages (MDX, SSG) ✅ NEW**
+- [x] `/ensinamentos/caminhos/iniciante` - Beginner path page with 5 lesson cards
+- [x] `/ensinamentos/caminhos/intermediario` - Intermediate path page
+- [x] `/ensinamentos/caminhos/avancado` - Advanced path page
+- [x] `/ensinamentos/caminhos/{path}/{slug}` - **Dynamic lesson pages (MDX, SSG) ✅ NEW**
 - [x] `/ferramentas` - Tools placeholder page
 - [x] `/recursos` - Resources placeholder page
+- [x] ~~`/formacao`~~ - **DELETED, redirects in place ✅ NEW**
 
 **Reusable Components:**
 - [x] `PageHeader` - Consistent headers with icon, title, subtitle
@@ -144,12 +158,22 @@ Rosário Vivo synthesizes Church teachings into accessible content—think digit
 - [x] `LockedContent` - Content gating UI (non-functional, visual only)
 - [x] `ProgressBar` - Visual progress indicator
 - [x] `LessonCard` - Lesson preview cards
+- [x] `ArticleLayout` - **Full MDX article layout with sidebar, breadcrumb, tags, reading time ✅ NEW**
 - [x] `AuthModal` - Login/signup modal (UI only, no backend)
 - [x] `CheckInModal` - Daily check-in modal (localStorage)
 - [x] `StreakCounter` - Streak visualization
 - [x] `HeroSection` - Landing hero with animations
 - [x] `NavigationWrapper` - Responsive nav system
 - [x] UI components from shadcn (Button, Card, Dialog, etc.)
+
+**MDX Content Pipeline (NEW ✅):**
+- [x] `@next/mdx` + `@mdx-js/loader` + `@mdx-js/react` installed
+- [x] `gray-matter` + `next-mdx-remote` installed
+- [x] `next.config.js` updated with `withMDX`, `pageExtensions`, `outputFileTracingIncludes: content/**`
+- [x] `frontend/src/lib/content.ts` — server-side fs helpers: `getArticlesByTema`, `getArticle`, `getAllArticleParams`, `getCaminhoLessons`, `getCaminhoLesson`, `getAllCaminhoParams`, `getRelatedArticles`
+- [x] `frontend/content/ensinamentos/{7 categories}` + `caminhos/{3 paths}` folder structure
+- [x] 5 Santos articles written (São Domingos, São Luís de Montfort, Padre Pio, João Paulo II, Santa Teresinha)
+- [x] 5 Iniciante lessons written (O que é Rosário, Papel de Maria, Oração Repetitiva, Hábito Diário, Vencendo Distrações)
 
 ### ❌ NOT Implemented (Exists as Code Structure Only)
 
@@ -165,13 +189,35 @@ Rosário Vivo synthesizes Church teachings into accessible content—think digit
 - ❌ Docker Compose exists but backend doesn't work
 - ❌ Only frontend container is functional
 
+### ✅ Recently Completed (this sprint)
+
+**Route Consolidation:**
+- [x] Collapsed `/formacao` + `/ensinamentos` into a single unified hub at `/ensinamentos`
+- [x] Tab switcher: `Explorar` (bento grid + pill filter) and `Caminhos Sugeridos` (guided paths)
+- [x] Migrated all `/formacao/*` pages to `/ensinamentos/caminhos/*`
+- [x] Permanent redirects added to `next.config.js`; `/formacao` folder deleted
+
+**MDX Content Pipeline:**
+- [x] Installed `@next/mdx`, `gray-matter`, `next-mdx-remote`
+- [x] `next.config.js` configured with `withMDX` wrapper + `outputFileTracingIncludes`
+- [x] `src/lib/content.ts` — server-side helpers for reading/listing MDX content
+- [x] `ArticleLayout` component — breadcrumb, reading time, tags, MDX body, related sidebar
+- [x] Dynamic `[categoria]/[slug]` and `caminhos/[path]/[slug]` pages with `generateStaticParams`
+- [x] 5 Santos articles + 5 Iniciante lessons written
+
 ### 🔄 In Progress / Next Priority
 
 **Content Writing (Highest Priority):**
-- [ ] Write actual articles for `/ensinamentos` categories
-- [ ] Write actual lessons for `/formacao` paths
-- [ ] Implement `[slug]` dynamic routes to display content
-- [ ] Add markdown/MDX support for rich content
+- [ ] Write 10+ more Santos articles
+- [ ] Write 3 Maria articles (Imaculada Conceição, Assunção, Nossa Senhora de Fátima)
+- [ ] Write 5 Intermediário lessons
+- [ ] Write 5 articles for Teologia category
+- [ ] Update category listing pages (`/ensinamentos/santos`, etc.) to read from MDX files via `getArticlesByTema()`
+
+**UX Polish:**
+- [ ] Category listing pages: render real article cards from `lib/content.ts` instead of static mock cards
+- [ ] Caminhos path pages: render real lesson cards from `getCaminhoLessons()` instead of hardcoded lesson arrays
+- [ ] Add prose typography styles to `globals.css` or Tailwind config for MDX body rendering
 
 **Tools Development (Frontend Only - localStorage):**
 - [ ] Interactive Rosary Guide with bead tracker
@@ -190,34 +236,43 @@ Rosário Vivo synthesizes Church teachings into accessible content—think digit
 
 ## 📅 Realistic Timeline (Next 8 Weeks)
 
-### Weeks 1-3: Content Creation (Frontend MVP)
-**Goal**: Fill ensinamentos and formacao with actual content
+### ✅ Phase 1: Content Pipeline (COMPLETE)
+**Goal**: MDX infrastructure + unified routes + first real content
 
-- [ ] Write 20+ articles for Ensinamentos (Santos, Teologia, Maria priority)
-- [ ] Write 5 Iniciante lessons with full content
-- [ ] Write 3 Intermediário lessons
-- [ ] Implement `[slug]` dynamic routing for content pages
-- [ ] Add MDX or markdown rendering
-- [ ] Content metadata (reading time, related topics, tags)
+- [x] Unified `/ensinamentos` hub (collapsed `/formacao` into it with redirects)
+- [x] MDX pipeline (`@next/mdx`, `gray-matter`, `next-mdx-remote`)
+- [x] `lib/content.ts` static helpers (getArticlesByTema, getArticle, getCaminhoLessons, etc.)
+- [x] `ArticleLayout` component with breadcrumb, tags, reading time, related sidebar
+- [x] Dynamic `[categoria]/[slug]` and `caminhos/[path]/[slug]` pages with `generateStaticParams`
+- [x] 5 Santos articles written (São Domingos, São Luís de Montfort, Padre Pio, João Paulo II, Santa Teresinha)
+- [x] 5 Iniciante lessons written (O que é Rosário, Papel de Maria, Oração Repetitiva, Hábito Diário, Vencendo Distrações)
 
-**Content Structure:**
+**Content structure (`frontend/content/ensinamentos/`):**
 ```
-content/
-├── ensinamentos/
-│   ├── santos/
-│   │   ├── sao-domingo.md
-│   │   ├── sao-luis-de-montfort.md
-│   │   └── ... (10+ more)
-│   ├── teologia/
-│   ├── maria/
-│   └── ...
-└── formacao/
-    ├── iniciante/
-    │   ├── 01-o-que-e-rosario.md
-    │   ├── 02-papel-de-maria.md
-    │   └── ... (5 total)
-    └── ...
+content/ensinamentos/
+├── santos/           ← 5 articles ✅
+├── teologia/         ← empty, ready
+├── historia/         ← empty, ready
+├── oracoes/          ← empty, ready
+├── sacramentos/      ← empty, ready
+├── maria/            ← empty, ready
+├── escritura/        ← empty, ready
+└── caminhos/
+    ├── iniciante/    ← 5 lessons ✅
+    ├── intermediario/← empty, ready
+    └── avancado/     ← empty, ready
 ```
+
+### Phase 2: Content Scaling + UX Wiring (Next)
+**Goal**: Fill remaining categories, wire listing pages to real MDX data
+
+- [ ] Write 10+ more Santos articles
+- [ ] Write 3+ Maria articles (Imaculada Conceição, Assunção, Nossa Senhora de Fátima)
+- [ ] Write 5 Intermediário lessons
+- [ ] Write 5+ Teologia articles
+- [ ] Update `/ensinamentos/santos` (and other category pages) to use `getArticlesByTema()` instead of hardcoded cards
+- [ ] Update caminhos path pages to use `getCaminhoLessons()` instead of hardcoded lesson arrays
+- [ ] Add Tailwind Typography plugin or custom CSS for MDX body prose styling
 
 ### Weeks 4-5: Prayer Tools (Frontend Only)
 **Goal**: Build interactive prayer features without backend
@@ -267,32 +322,32 @@ content/
 
 ```
 frontend/src/app/
-├── page.tsx                      # Landing page
-├── about/page.tsx                # About page
-├── dashboard/page.tsx            # Dashboard (mock data)
-├── como-rezar/page.tsx           # How to pray
-├── misterios-do-dia/page.tsx     # Daily mysteries
-├── historia/page.tsx             # Rosary history
-├── oracoes-tradicionais/page.tsx # Traditional prayers
+├── page.tsx                                    # Landing page
+├── about/page.tsx                              # About page
+├── dashboard/page.tsx                          # Dashboard (mock data)
+├── como-rezar/page.tsx                         # How to pray
+├── misterios-do-dia/page.tsx                   # Daily mysteries
+├── historia/page.tsx                           # Rosary history
+├── oracoes-tradicionais/page.tsx               # Traditional prayers
 ├── ensinamentos/
-│   ├── page.tsx                  # Hub page
-│   ├── santos/page.tsx           # Santos category
-│   ├── teologia/page.tsx         # Theology category
-│   ├── historia/page.tsx         # History category
-│   ├── escritura/page.tsx        # Scripture category (minimal)
-│   ├── maria/page.tsx            # Mary category (minimal)
-│   ├── sacramentos/page.tsx      # Sacraments category (minimal)
-│   └── oracoes/page.tsx          # Prayers category (minimal)
-├── formacao/
-│   ├── page.tsx                  # Hub page
-│   ├── iniciante/
-│   │   ├── page.tsx              # Path overview
-│   │   └── [slug]/page.tsx       # NOT YET IMPLEMENTED
-│   ├── intermediario/page.tsx    # Path overview
-│   ├── avancado/page.tsx         # Path overview
-│   └── santos/page.tsx           # Saints path overview
-├── ferramentas/page.tsx          # Tools placeholder
-└── recursos/page.tsx             # Resources placeholder
+│   ├── page.tsx                                # Unified hub (?tab=explorar|caminhos, ?tema=...)
+│   ├── [categoria]/
+│   │   ├── (page.tsx)                          # Category listing (santos/, teologia/, etc.)
+│   │   └── [slug]/page.tsx                     # Dynamic MDX article page ✅
+│   ├── santos/page.tsx                         # Saints category listing
+│   ├── teologia/page.tsx                       # Theology category listing
+│   ├── historia/page.tsx                       # History category listing
+│   ├── escritura/page.tsx                      # Scripture category (minimal)
+│   ├── maria/page.tsx                          # Mary category (minimal)
+│   ├── sacramentos/page.tsx                    # Sacraments category (minimal)
+│   ├── oracoes/page.tsx                        # Prayers category (minimal)
+│   └── caminhos/
+│       ├── iniciante/page.tsx                  # Beginner path overview
+│       ├── intermediario/page.tsx              # Intermediate path overview
+│       ├── avancado/page.tsx                   # Advanced path overview
+│       └── [path]/[slug]/page.tsx              # Dynamic MDX lesson page ✅
+├── ferramentas/page.tsx                        # Tools placeholder
+└── recursos/page.tsx                           # Resources placeholder
 ```
 
 ### Data Flow (Current vs Future)
