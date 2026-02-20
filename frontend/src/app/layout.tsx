@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { QueryProvider } from "@/providers/query-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
+import { AuthProvider } from "@/providers/auth-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { NavigationWrapper } from "@/components/navigation-wrapper";
 
@@ -53,9 +54,11 @@ export default function RootLayout({
       <body className="font-manrope antialiased">
         <ThemeProvider defaultTheme="system" storageKey="rosario-theme">
           <QueryProvider>
-            <NavigationWrapper />
-            {children}
-            <Toaster />
+            <AuthProvider>
+              <NavigationWrapper />
+              {children}
+              <Toaster />
+            </AuthProvider>
           </QueryProvider>
         </ThemeProvider>
       </body>

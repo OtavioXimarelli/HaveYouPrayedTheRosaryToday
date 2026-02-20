@@ -3,7 +3,7 @@
  *
  * This file implements the Service/Repository pattern for the frontend.
  * Currently uses mock data and localStorage, but is designed to be
- * seamlessly replaced with actual API calls to the Java Spring Boot backend.
+ * seamlessly replaced with actual API calls to the NestJS backend.
  *
  * All functions simulate network latency with delays.
  */

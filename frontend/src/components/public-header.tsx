@@ -1,21 +1,19 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { BookOpen, History, Sparkles, ScrollText, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { AuthModal } from "./auth-modal";
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "@/providers/theme-provider";
+import { useAuth, AUTH_DISABLED } from "@/providers/auth-provider";
 
 export function PublicHeader() {
-  const router = useRouter();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [authModalOpen, setAuthModalOpen] = useState(false);
-  const [authMode, setAuthMode] = useState<"login" | "signup">("signup");
   const { resolvedTheme, setTheme } = useTheme();
+  const { openAuthModal } = useAuth();
 
   const toggleTheme = () => {
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
@@ -30,23 +28,17 @@ export function PublicHeader() {
   }, []);
 
   const openSignup = () => {
-    setAuthMode("signup");
-    setAuthModalOpen(true);
+    openAuthModal("signup");
     setMobileMenuOpen(false);
   };
 
   const openLogin = () => {
-    setAuthMode("login");
-    setAuthModalOpen(true);
+    openAuthModal("login");
     setMobileMenuOpen(false);
   };
 
-  const switchMode = () => {
-    setAuthMode(authMode === "login" ? "signup" : "login");
-  };
-
   const navigateTo = (path: string) => {
-    router.push(path);
+    window.location.href = path;
     setMobileMenuOpen(false);
   };
 
@@ -119,24 +111,37 @@ export function PublicHeader() {
                 <Moon className="absolute h-4 w-4 rotate-90 scale-0 text-gold-400 transition-transform duration-300 dark:rotate-0 dark:scale-100" />
               </button>
 
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={openLogin}
-                className="rounded-full border-gold-500/20 hover:border-gold-500/40 hover:bg-gold-500/5"
-                data-testid="header-login"
-              >
-                Entrar
-              </Button>
+              {AUTH_DISABLED ? (
+                <Button
+                  size="sm"
+                  onClick={() => navigateTo("/dashboard")}
+                  className="rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow font-cinzel font-semibold"
+                  data-testid="header-dashboard"
+                >
+                  Acessar Agora
+                </Button>
+              ) : (
+                <>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={openLogin}
+                    className="rounded-full border-gold-500/20 hover:border-gold-500/40 hover:bg-gold-500/5"
+                    data-testid="header-login"
+                  >
+                    Entrar
+                  </Button>
 
-              <Button
-                size="sm"
-                onClick={openSignup}
-                className="rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow font-cinzel font-semibold"
-                data-testid="header-signup"
-              >
-                Começar
-              </Button>
+                  <Button
+                    size="sm"
+                    onClick={openSignup}
+                    className="rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow font-cinzel font-semibold"
+                    data-testid="header-signup"
+                  >
+                    Começar
+                  </Button>
+                </>
+              )}
             </div>
 
             {/* Mobile Menu Button */}
@@ -191,22 +196,34 @@ export function PublicHeader() {
               </div>
 
               <div className="flex flex-col gap-2 pt-4 border-t border-gold-500/10">
-                <Button
-                  variant="outline"
-                  onClick={openLogin}
-                  className="w-full rounded-full border-gold-500/20"
-                  data-testid="mobile-login"
-                >
-                  Entrar
-                </Button>
+                {AUTH_DISABLED ? (
+                  <Button
+                    onClick={() => navigateTo("/dashboard")}
+                    className="w-full rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue font-cinzel font-semibold"
+                    data-testid="mobile-dashboard"
+                  >
+                    Acessar Agora
+                  </Button>
+                ) : (
+                  <>
+                    <Button
+                      variant="outline"
+                      onClick={openLogin}
+                      className="w-full rounded-full border-gold-500/20"
+                      data-testid="mobile-login"
+                    >
+                      Entrar
+                    </Button>
 
-                <Button
-                  onClick={openSignup}
-                  className="w-full rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue font-cinzel font-semibold"
-                  data-testid="mobile-signup"
-                >
-                  Começar Agora
-                </Button>
+                    <Button
+                      onClick={openSignup}
+                      className="w-full rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue font-cinzel font-semibold"
+                      data-testid="mobile-signup"
+                    >
+                      Começar Agora
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
           )}
@@ -216,12 +233,6 @@ export function PublicHeader() {
       {/* Spacer to prevent content from going under fixed header */}
       <div className="h-16 sm:h-20" />
 
-      <AuthModal
-        isOpen={authModalOpen}
-        onClose={() => setAuthModalOpen(false)}
-        mode={authMode}
-        onSwitchMode={switchMode}
-      />
     </>
   );
 }

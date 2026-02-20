@@ -4,12 +4,12 @@ import { useRouter } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
-import { LockedContent } from "@/components/locked-content";
 import { Crown, ArrowRight } from "lucide-react";
+import { AUTH_DISABLED } from "@/providers/auth-provider";
 
 export default function MariaPage() {
   const router = useRouter();
-  const isLoggedIn = false;
+  const LOCKED = AUTH_DISABLED ? false : true;
 
   const topics = [
     {
@@ -24,35 +24,35 @@ export default function MariaPage() {
       title: "A Maternidade Espiritual de Maria",
       description: "Maria, mãe de todos os cristãos. Sua intercessão e cuidado por nós.",
       articles: 4,
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "dogmas-marianos",
       title: "Os Dogmas Marianos",
       description: "Imaculada Conceição, Assunção, Maternidade Divina e Virgindade Perpétua.",
       articles: 5,
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "aparicoes",
       title: "Aparições de Nossa Senhora",
       description: "Fatima, Lourdes, Guadalupe e outras aparições aprovadas pela Igreja.",
       articles: 8,
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "devoção-pratica",
       title: "Práticas Devocionais",
       description: "Como venerar Maria: Rosário, escapulário, consagração e outras formas de devoção.",
       articles: 6,
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "consagracao",
       title: "Consagração Total a Maria",
       description: "A jornada espiritual de se consagrar completamente a Maria e a Jesus.",
       articles: 7,
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
   ];
 
@@ -138,18 +138,6 @@ export default function MariaPage() {
           </section>
 
           {/* Member CTA */}
-          {!isLoggedIn && (
-            <LockedContent
-              title="Aprofunde sua devoção mariana"
-              description="Crie sua conta gratuita para acessar conteúdo completo sobre Maria na fé católica."
-              featureList={[
-                "Estudo bíblico sobre Maria",
-                "Os dogmas marianos explicados",
-                "História das aparições",
-                "Guias de consagração a Maria",
-              ]}
-            />
-          )}
         </div>
       </main>
     </PageTransition>

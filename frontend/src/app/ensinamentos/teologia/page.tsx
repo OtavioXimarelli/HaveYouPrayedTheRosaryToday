@@ -4,12 +4,12 @@ import { useRouter } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
-import { LockedContent } from "@/components/locked-content";
 import { BookOpen, ArrowRight } from "lucide-react";
+import { AUTH_DISABLED } from "@/providers/auth-provider";
 
 export default function TeologiaPage() {
   const router = useRouter();
-  const isLoggedIn = false;
+  const LOCKED = AUTH_DISABLED ? false : true;
 
   const articles = [
     {
@@ -24,28 +24,28 @@ export default function TeologiaPage() {
       title: "A Encarnação do Verbo",
       description: "Jesus Cristo, verdadeiro Deus e verdadeiro Homem. O significado teológico da Encarnação.",
       category: "Cristologia",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "salvacao",
       title: "Mistério da Salvação",
       description: "Redenção através de Cristo. Como compreendemos a salvação na fé católica.",
       category: "Soteriologia",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "graça",
       title: "A Graça Divina",
       description: "O que é graça? Como a graça age em nossas vidas e nos transforma.",
       category: "Fundamentos",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "maria-teologia",
       title: "Maria na Teologia Católica",
       description: "Dogmas marianos e o papel de Maria na história da salvação.",
       category: "Mariologia",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
   ];
 
@@ -130,18 +130,6 @@ export default function TeologiaPage() {
           </section>
 
           {/* Member CTA */}
-          {!isLoggedIn && (
-            <LockedContent
-              title="Acesse todos os artigos"
-              description="Crie sua conta gratuita para ler artigos completos sobre teologia católica."
-              featureList={[
-                "Artigos detalhados sobre doutrina",
-                "Explicações acessíveis de mistérios",
-                "Referências em documentos da Igreja",
-                "Reflexões para aprofundar a fé",
-              ]}
-            />
-          )}
         </div>
       </main>
     </PageTransition>

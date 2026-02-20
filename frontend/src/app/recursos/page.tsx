@@ -4,16 +4,16 @@ import { useRouter } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
-import { LockedContent } from "@/components/locked-content";
 import { Button } from "@/components/ui/button";
 import { 
   Download, Book, Link2, FileText, ExternalLink,
   ArrowRight, ChevronRight, BookOpen, ScrollText, FileDown
 } from "lucide-react";
+import { AUTH_DISABLED } from "@/providers/auth-provider";
 
 export default function RecursosPage() {
   const router = useRouter();
-  const isLoggedIn = false;
+  const LOCKED = AUTH_DISABLED ? false : true;
 
   const categories = [
     {
@@ -24,7 +24,7 @@ export default function RecursosPage() {
       gradient: "from-emerald-500 to-emerald-600",
       count: "12 arquivos",
       path: "/recursos/downloads",
-      isLocked: !isLoggedIn
+      isLocked: LOCKED
     },
     {
       id: "biblioteca",
@@ -34,7 +34,7 @@ export default function RecursosPage() {
       gradient: "from-blue-500 to-blue-600",
       count: "8 documentos",
       path: "/recursos/biblioteca",
-      isLocked: !isLoggedIn
+      isLocked: LOCKED
     },
     {
       id: "links",
@@ -55,7 +55,7 @@ export default function RecursosPage() {
       type: "Carta Apostólica",
       year: "2002",
       description: "O documento que introduziu os Mistérios Luminosos",
-      isLocked: !isLoggedIn
+      isLocked: LOCKED
     },
     {
       title: "O Segredo do Rosário",
@@ -63,7 +63,7 @@ export default function RecursosPage() {
       type: "Livro",
       year: "1710",
       description: "Clássico sobre os frutos e métodos do Rosário",
-      isLocked: !isLoggedIn
+      isLocked: LOCKED
     },
     {
       title: "Catecismo - Seção Mariana",
@@ -71,8 +71,8 @@ export default function RecursosPage() {
       type: "Catecismo",
       year: "1992",
       description: "O que a Igreja ensina sobre Maria",
-      isLocked: !isLoggedIn
-    }
+      isLocked: LOCKED
+    },
   ];
 
   const externalLinks = [
@@ -127,7 +127,7 @@ export default function RecursosPage() {
                   
                   {cat.isLocked && (
                     <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-semibold mb-2 inline-block">
-                      Requer login
+                      Em breve
                     </span>
                   )}
                   
@@ -174,7 +174,7 @@ export default function RecursosPage() {
                         <span className="text-xs text-muted-foreground">{resource.year}</span>
                         {resource.isLocked && (
                           <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-semibold">
-                            Requer login
+                            Em breve
                           </span>
                         )}
                       </div>
@@ -234,18 +234,6 @@ export default function RecursosPage() {
           </section>
 
           {/* CTA for non-logged users */}
-          {!isLoggedIn && (
-            <LockedContent
-              title="Acesse a biblioteca completa"
-              description="Crie sua conta gratuita para baixar todos os recursos, salvar favoritos e receber atualizações."
-              featureList={[
-                "Downloads de cartões e novenas",
-                "Documentos papais completos",
-                "Escritos de santos em PDF",
-                "Atualizações de novos recursos"
-              ]}
-            />
-          )}
         </div>
       </main>
     </PageTransition>

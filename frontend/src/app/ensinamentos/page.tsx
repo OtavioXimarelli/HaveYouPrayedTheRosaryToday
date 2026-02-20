@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
-import { LockedContent } from "@/components/locked-content";
 import {
   Users,
   BookOpen,
@@ -14,12 +13,12 @@ import {
   Crown,
   Book,
   ArrowRight,
-  Lock,
 } from "lucide-react";
+import { AUTH_DISABLED } from "@/providers/auth-provider";
 
 export default function EnsinamentosPage() {
   const router = useRouter();
-  const isLoggedIn = false;
+  const LOCKED = AUTH_DISABLED ? false : true;
 
   const topics = [
     {
@@ -30,7 +29,8 @@ export default function EnsinamentosPage() {
       gradient: "from-emerald-500 to-emerald-600",
       bgGradient: "from-emerald-500/10 to-emerald-600/5",
       borderColor: "border-emerald-500/20",
-      articles: 12,
+      articles: 5,
+      isSoon: false,
       isLocked: false,
       path: "/ensinamentos/santos",
       gridSpan: "sm:col-span-2 sm:row-span-2",
@@ -43,8 +43,9 @@ export default function EnsinamentosPage() {
       gradient: "from-blue-500 to-blue-600",
       bgGradient: "from-blue-500/10 to-blue-600/5",
       borderColor: "border-blue-500/20",
-      articles: 8,
-      isLocked: !isLoggedIn,
+      articles: 0,
+      isSoon: true,
+      isLocked: LOCKED,
       path: "/ensinamentos/teologia",
       gridSpan: "sm:col-span-1",
     },
@@ -56,8 +57,9 @@ export default function EnsinamentosPage() {
       gradient: "from-purple-500 to-purple-600",
       bgGradient: "from-purple-500/10 to-purple-600/5",
       borderColor: "border-purple-500/20",
-      articles: 15,
-      isLocked: !isLoggedIn,
+      articles: 0,
+      isSoon: true,
+      isLocked: LOCKED,
       path: "/ensinamentos/historia",
       gridSpan: "sm:col-span-2",
     },
@@ -69,8 +71,9 @@ export default function EnsinamentosPage() {
       gradient: "from-rose-500 to-rose-600",
       bgGradient: "from-rose-500/10 to-rose-600/5",
       borderColor: "border-rose-500/20",
-      articles: 10,
-      isLocked: !isLoggedIn,
+      articles: 0,
+      isSoon: true,
+      isLocked: LOCKED,
       path: "/ensinamentos/oracoes",
       gridSpan: "sm:col-span-1",
     },
@@ -82,8 +85,9 @@ export default function EnsinamentosPage() {
       gradient: "from-amber-500 to-amber-600",
       bgGradient: "from-amber-500/10 to-amber-600/5",
       borderColor: "border-amber-500/20",
-      articles: 7,
-      isLocked: !isLoggedIn,
+      articles: 0,
+      isSoon: true,
+      isLocked: LOCKED,
       path: "/ensinamentos/sacramentos",
       gridSpan: "sm:col-span-1",
     },
@@ -95,8 +99,9 @@ export default function EnsinamentosPage() {
       gradient: "from-gold-500 to-gold-600",
       bgGradient: "from-gold-500/10 to-gold-600/5",
       borderColor: "border-gold-500/20",
-      articles: 11,
-      isLocked: !isLoggedIn,
+      articles: 0,
+      isSoon: true,
+      isLocked: LOCKED,
       path: "/ensinamentos/maria",
       gridSpan: "sm:col-span-1",
     },
@@ -108,8 +113,9 @@ export default function EnsinamentosPage() {
       gradient: "from-indigo-500 to-indigo-600",
       bgGradient: "from-indigo-500/10 to-indigo-600/5",
       borderColor: "border-indigo-500/20",
-      articles: 13,
-      isLocked: !isLoggedIn,
+      articles: 0,
+      isSoon: true,
+      isLocked: LOCKED,
       path: "/ensinamentos/escritura",
       gridSpan: "sm:col-span-3",
     },
@@ -139,7 +145,7 @@ export default function EnsinamentosPage() {
                     Aprofunde Sua Fé
                   </h2>
                   <p className="text-gold-600 dark:text-gold-400 font-medium">
-                    Conteúdos para membros
+                    Explore nossa biblioteca de conteúdos
                   </p>
                 </div>
               </div>
@@ -156,9 +162,9 @@ export default function EnsinamentosPage() {
               {topics.map((topic) => (
                 <div
                   key={topic.id}
-                  onClick={() => !topic.isLocked && router.push(topic.path)}
+                  onClick={() => !topic.isSoon && router.push(topic.path)}
                   className={`group p-6 sm:p-8 rounded-3xl transition-all duration-300 ${topic.gridSpan} ${
-                    topic.isLocked
+                    topic.isSoon
                       ? "glass opacity-70 cursor-not-allowed"
                       : `bg-gradient-to-br ${topic.bgGradient} border ${topic.borderColor} cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:shadow-gold-500/10`
                   }`}
@@ -167,25 +173,18 @@ export default function EnsinamentosPage() {
                   <div className="flex flex-col h-full">
                     <div className="flex items-start gap-4 mb-4">
                       <div
-                        className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${topic.gradient} flex items-center justify-center shadow-lg flex-shrink-0 ${
-                          topic.isLocked ? "opacity-50" : "group-hover:scale-110 transition-transform"
-                        }`}
+                        className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${topic.gradient} flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform`}
                       >
                         <topic.icon className="w-7 h-7 text-white" />
                       </div>
                       <div className="flex-1">
-                        {topic.isLocked && (
-                          <div className="flex items-center gap-1 mb-1">
-                            <Lock className="w-3 h-3 text-muted-foreground" />
-                            <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-semibold">
-                              Membros
-                            </span>
-                          </div>
+                        {topic.isSoon && (
+                          <span className="text-xs px-2 py-0.5 rounded-full bg-gold-500/20 text-gold-600 dark:text-gold-400 font-semibold inline-block mb-1">
+                            Em breve
+                          </span>
                         )}
                         <h3
-                          className={`font-cinzel font-bold text-lg sm:text-xl leading-tight ${
-                            topic.isLocked ? "text-muted-foreground" : "text-foreground group-hover:text-gold-600 dark:group-hover:text-gold-400"
-                          } transition-colors`}
+                          className="font-cinzel font-bold text-lg sm:text-xl leading-tight text-foreground group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors"
                         >
                           {topic.title}
                         </h3>
@@ -198,9 +197,11 @@ export default function EnsinamentosPage() {
 
                     <div className="flex items-center justify-between pt-4 border-t border-gold-500/10">
                       <span className="text-xs font-semibold text-gold-600 dark:text-gold-400">
-                        {topic.articles} artigos
+                        {topic.isSoon
+                          ? "Em breve"
+                          : `${topic.articles} ${topic.articles === 1 ? "artigo" : "artigos"}`}
                       </span>
-                      {!topic.isLocked && (
+                      {!topic.isSoon && (
                         <span className="flex items-center gap-1 text-gold-600 dark:text-gold-400 text-sm font-medium group-hover:gap-2 transition-all">
                           Explorar
                           <ArrowRight className="w-4 h-4" />
@@ -212,21 +213,6 @@ export default function EnsinamentosPage() {
               ))}
             </div>
           </section>
-
-          {/* Member CTA */}
-          {!isLoggedIn && (
-            <LockedContent
-              title="Acesse todos os ensinamentos"
-              description="Crie sua conta gratuita para explorar artigos completos sobre doutrina católica, vidas de santos, história da Igreja e muito mais."
-              featureList={[
-                "Artigos detalhados sobre teologia católica",
-                "Biografias de santos e padres da Igreja",
-                "Ensinos sobre os sacramentos",
-                "Conexões entre a Bíblia e o Rosário",
-                "Devoções e práticas espirituais",
-              ]}
-            />
-          )}
         </div>
       </main>
     </PageTransition>

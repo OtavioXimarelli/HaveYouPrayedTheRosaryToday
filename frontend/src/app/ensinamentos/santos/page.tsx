@@ -4,12 +4,12 @@ import { useRouter } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
-import { LockedContent } from "@/components/locked-content";
 import { Users, Calendar, ArrowRight } from "lucide-react";
+import { AUTH_DISABLED } from "@/providers/auth-provider";
 
 export default function SantosPage() {
   const router = useRouter();
-  const isLoggedIn = false;
+  const LOCKED = AUTH_DISABLED ? false : true;
 
   const saints = [
     {
@@ -28,7 +28,7 @@ export default function SantosPage() {
       period: "1673-1716",
       description: "Autor do famoso 'Segredo do Rosário' e 'Tratado da Verdadeira Devoção'. Grande missionário mariano.",
       topics: ["Devoção Mariana", "Rosário", "Espiritualidade"],
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "padre-pio",
@@ -37,7 +37,7 @@ export default function SantosPage() {
       period: "1887-1968",
       description: "Rezava até 40 terços por dia. Conhecido por milagres, confissão e vida de oração profunda.",
       topics: ["Oração", "Milagres", "Espiritualidade"],
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "joao-paulo-ii",
@@ -46,7 +46,7 @@ export default function SantosPage() {
       period: "1920-2005",
       description: "Introduziu os Mistérios Luminosos em 2002. Devotíssimo de Maria e grande apóstolo do Rosário.",
       topics: ["Papa", "Rosário", "Devoção Mariana"],
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "santa-teresinha",
@@ -55,7 +55,7 @@ export default function SantosPage() {
       period: "1873-1897",
       description: "O Pequeno Caminho de confiança e amor. Carmelita que dedicou sua vida à oração pelo mundo.",
       topics: ["Contemplação", "Santidade", "Oração"],
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
   ];
 
@@ -155,18 +155,6 @@ export default function SantosPage() {
           </section>
 
           {/* Member CTA */}
-          {!isLoggedIn && (
-            <LockedContent
-              title="Leia as histórias completas"
-              description="Crie sua conta gratuita para acessar biografias completas, ensinamentos e reflexões sobre a vida destes grandes santos."
-              featureList={[
-                "Biografias detalhadas de cada santo",
-                "Seus ensinamentos sobre o Rosário",
-                "Milagres e graças",
-                "Aplicação prática em nossas vidas",
-              ]}
-            />
-          )}
         </div>
       </main>
     </PageTransition>

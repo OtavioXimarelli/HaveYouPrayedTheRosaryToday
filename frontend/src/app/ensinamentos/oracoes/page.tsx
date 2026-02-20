@@ -4,12 +4,12 @@ import { useRouter } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
-import { LockedContent } from "@/components/locked-content";
 import { Heart, ArrowRight } from "lucide-react";
+import { AUTH_DISABLED } from "@/providers/auth-provider";
 
 export default function OracoesPage() {
   const router = useRouter();
-  const isLoggedIn = false;
+  const LOCKED = AUTH_DISABLED ? false : true;
 
   const methods = [
     {
@@ -24,35 +24,35 @@ export default function OracoesPage() {
       title: "Oração Contemplativa",
       description: "Aprender a meditar nos mistérios. Técnicas de contemplação ensinadas pelos santos.",
       type: "Método",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "novenas",
       title: "Novenas",
       description: "Orações estruturadas em 9 dias. Novenas a Jesus, Maria, santos e para intenções especiais.",
       type: "Prática",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "litanias",
       title: "Ladainhas (Litanias)",
       description: "Litania de Loreto, do Sagrado Coração e outras. Oração comunitária tradicional.",
       type: "Oração",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "oracoes-tradicionais",
       title: "Orações Tradicionais",
       description: "Ave-Maria, Pai-Nosso, Gloria, Salve Rainha e outras orações essenciais do católico.",
       type: "Oração",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "meditacao",
       title: "Meditação e Lectio Divina",
       description: "Método tradicional de meditar a Palavra de Deus. Aproximar-se de Jesus através da Bíblia.",
       type: "Método",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
   ];
 
@@ -137,18 +137,6 @@ export default function OracoesPage() {
           </section>
 
           {/* Member CTA */}
-          {!isLoggedIn && (
-            <LockedContent
-              title="Acesse todos os métodos"
-              description="Crie sua conta gratuita para aprender diferentes práticas de oração e devoção."
-              featureList={[
-                "Guias completos de oração",
-                "Orações tradicionais em português",
-                "Técnicas de meditação",
-                "Novenas e litanias",
-              ]}
-            />
-          )}
         </div>
       </main>
     </PageTransition>

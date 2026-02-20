@@ -4,12 +4,12 @@ import { useRouter } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
-import { LockedContent } from "@/components/locked-content";
 import { Crown } from "lucide-react";
+import { AUTH_DISABLED } from "@/providers/auth-provider";
 
 export default function AvancadoPage() {
   const router = useRouter();
-  const isLoggedIn = false;
+  const LOCKED = AUTH_DISABLED ? false : true;
 
   const lessons = [
     { id: "teologia-mariana", number: 1, title: "Teologia Mariana Essencial", duration: "35 min" },
@@ -61,17 +61,6 @@ export default function AvancadoPage() {
               </ul>
             </div>
           </section>
-
-          <LockedContent
-            title="Caminho Avançado"
-            description="Explore os mistérios mais profundos da devoção mariana. Este conteúdo requer uma conta gratuita."
-            featureList={[
-              "Teologia mariana aprofundada",
-              "Guia de consagração a Maria",
-              "Aspectos místicos do Rosário",
-              "Como liderar orações em grupo"
-            ]}
-          />
         </div>
       </main>
     </PageTransition>

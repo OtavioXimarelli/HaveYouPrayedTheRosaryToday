@@ -4,12 +4,12 @@ import { useRouter } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
-import { LockedContent } from "@/components/locked-content";
 import { BookOpen, ArrowRight } from "lucide-react";
+import { AUTH_DISABLED } from "@/providers/auth-provider";
 
 export default function EscrituraPage() {
   const router = useRouter();
-  const isLoggedIn = false;
+  const LOCKED = AUTH_DISABLED ? false : true;
 
   const articles = [
     {
@@ -24,49 +24,49 @@ export default function EscrituraPage() {
       title: "A Visitação - Lc 1:39-56",
       description: "Maria visita Isabel. A primeira pregação do evangelho a um bebê.",
       mystery: "Mistério Gozoso",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "encarnacao",
       title: "A Encarnação - Jo 1:1-14",
       description: "O Verbo se fez carne. Mistério central da fé cristã.",
       mystery: "Fundamento",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "matrimonio-caná",
       title: "Casamento de Caná - Jo 2:1-11",
       description: "Primeiro milagre de Jesus, realizado por intercessão de Maria.",
       mystery: "Mistério Luminoso",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "ressurreicao",
       title: "A Ressurreição de Cristo - 1Co 15:1-28",
       description: "Coração da fé cristã. Maria contempla a vitória do Filho.",
       mystery: "Mistério Glorioso",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "pentecostes",
       title: "Pentecostes - At 2:1-4",
       description: "Maria permanecia no Cenáculo orando com os apóstolos.",
       mystery: "Mistério Glorioso",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "assuncao",
       title: "A Assunção de Maria - Ap 12:1-17",
       description: "A mulher vestida de sol. Interpretação bíblica da Assunção.",
       mystery: "Mistério Glorioso",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "paixao",
       title: "A Paixão de Cristo - Mt 26-27",
       description: "Maria ao pé da cruz. Sua compaixão e maternidade espiritual.",
       mystery: "Mistério Doloroso",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
   ];
 
@@ -151,18 +151,6 @@ export default function EscrituraPage() {
           </section>
 
           {/* Member CTA */}
-          {!isLoggedIn && (
-            <LockedContent
-              title="Aprofunde sua compreensão bíblica"
-              description="Crie sua conta gratuita para ler reflexões completas sobre cada passagem bíblica nos mistérios."
-              featureList={[
-                "Análise de cada passagem bíblica",
-                "Conexão entre mistérios e Escritura",
-                "Meditações para contemplação",
-                "Rosário Scriptural com textos completos",
-              ]}
-            />
-          )}
         </div>
       </main>
     </PageTransition>

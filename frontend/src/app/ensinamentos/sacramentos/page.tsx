@@ -4,12 +4,12 @@ import { useRouter } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
-import { LockedContent } from "@/components/locked-content";
 import { Zap, ArrowRight } from "lucide-react";
+import { AUTH_DISABLED } from "@/providers/auth-provider";
 
 export default function SacramentosPage() {
   const router = useRouter();
-  const isLoggedIn = false;
+  const LOCKED = AUTH_DISABLED ? false : true;
 
   const sacraments = [
     {
@@ -24,42 +24,42 @@ export default function SacramentosPage() {
       title: "Confirmação",
       description: "Fortalecimento da fé recebida no Batismo. Efusão do Espírito Santo na vida adulta.",
       effect: "Força do Espírito Santo",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "eucaristia",
       title: "Eucaristia",
       description: "O Corpo e Sangue de Cristo. Alimento espiritual e sacrifício renovado.",
       effect: "Comunhão com Cristo",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "penitencia",
       title: "Penitência (Confissão)",
       description: "Reconciliação com Deus. Perdão dos pecados e restauração da graça.",
       effect: "Perdão e paz",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "unccao-enfermos",
       title: "Unção dos Enfermos",
       description: "Conforto e graça para quem sofre. Preparação para o encontro com Deus.",
       effect: "Consolo e cura espiritual",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "ordem",
       title: "Ordem (Ordenação)",
       description: "Consagração ao serviço de Deus. Ordenação de bispos, padres e diáconos.",
       effect: "Graça sacramental para ministério",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "matrimonio",
       title: "Matrimônio",
       description: "Consagração do amor. União de homem e mulher sob a bênção de Deus.",
       effect: "Graça para santificação da família",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
   ];
 
@@ -145,18 +145,6 @@ export default function SacramentosPage() {
           </section>
 
           {/* Member CTA */}
-          {!isLoggedIn && (
-            <LockedContent
-              title="Aprofunde sua compreensão dos sacramentos"
-              description="Crie sua conta gratuita para ler artigos detalhados sobre cada sacramento."
-              featureList={[
-                "Explicação teológica de cada sacramento",
-                "Significado espiritual e efeitos",
-                "Ensinamentos dos papas",
-                "Como melhor participar dos sacramentos",
-              ]}
-            />
-          )}
         </div>
       </main>
     </PageTransition>

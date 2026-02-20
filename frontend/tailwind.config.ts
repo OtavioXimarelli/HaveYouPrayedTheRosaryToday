@@ -134,6 +134,22 @@ const config: Config = {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
+        "modal-in": {
+          from: { opacity: "0", transform: "translate(-50%, -47%) scale(0.95)" },
+          to:   { opacity: "1", transform: "translate(-50%, -50%) scale(1)" },
+        },
+        "modal-out": {
+          from: { opacity: "1", transform: "translate(-50%, -50%) scale(1)" },
+          to:   { opacity: "0", transform: "translate(-50%, -48%) scale(0.97)" },
+        },
+        "overlay-in": {
+          from: { opacity: "0" },
+          to:   { opacity: "1" },
+        },
+        "overlay-out": {
+          from: { opacity: "1" },
+          to:   { opacity: "0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -144,6 +160,10 @@ const config: Config = {
         "shimmer": "shimmer 3s ease-in-out infinite",
         "glow": "glow 2s ease-in-out infinite",
         "float": "float 3s ease-in-out infinite",
+        "modal-in": "modal-in 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "modal-out": "modal-out 0.16s ease-in forwards",
+        "overlay-in": "overlay-in 0.2s ease-out forwards",
+        "overlay-out": "overlay-out 0.18s ease-in forwards",
       },
     },
   },
