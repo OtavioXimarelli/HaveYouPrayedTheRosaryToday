@@ -1,230 +1,254 @@
-# Rosário Vivo (Living Rosary)
+# Rosário Vivo
 
-> Catholic spiritual platform to track daily Rosary practice, learn the Mysteries, and grow in prayer with a community.
+> Plataforma espiritual católica para acompanhar a prática diária do Rosário, aprender os Mistérios e crescer na oração.
 
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
 [![NestJS](https://img.shields.io/badge/NestJS-10-red?logo=nestjs)](https://nestjs.com/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-7.0-green?logo=mongodb)](https://www.mongodb.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](https://www.docker.com/)
+[![PWA](https://img.shields.io/badge/PWA-Enabled-purple?logo=pwa)](https://web.dev/progressive-web-apps/)
 
-## 🎯 Mission & Purpose
+---
 
-**Rosário Vivo exists to help Catholics pray the Rosary faithfully, learn its mysteries deeply, and live a daily life of prayer and charity in communion with the Universal Church.**
+## Missão
 
-### Our Vision
+**Rosário Vivo existe para ajudar católicos a rezar o Rosário fielmente, aprender seus mistérios profundamente e viver uma vida diária de oração e caridade em comunhão com a Igreja Universal.**
 
-The Rosary is not merely a devotional practice—it is a meditation on the life of Christ through the eyes of His Mother. By contemplating the mysteries of Christ's life, death, and resurrection, we draw closer to God and fulfill the Church's mission to evangelize, sanctify, and serve.
+> "Nunca se perderá quem rezar o Rosário todos os dias. Esta é uma afirmação que assinavaria com meu sangue."  
+> — **São Luís de Montfort**
 
-This platform seeks to:
+> "O Rosário é a 'arma' para estes tempos."  
+> — **São Padre Pio**
 
-1. **Foster fidelity in prayer** — Equip believers to pray the Rosary daily with consistency, reverence, and understanding.
-2. **Provide formation in the faith** — Offer clear, faithful teaching rooted in Scripture, Tradition, and the Magisterium.
-3. **Build communion in prayer** — Unite Catholics worldwide in shared devotion, intercession, and spiritual encouragement.
+---
 
-### Rooted in Scripture and Tradition
+## ✨ O que está disponível
 
-- **Mary's mission**: "Blessed are you among women, and blessed is the fruit of your womb" (Luke 1:42)
-- **Christ entrusts Mary to the Church**: "Behold, your mother" (John 19:27)
-- **The call to constant prayer**: "Pray without ceasing" (1 Thessalonians 5:17)
-- **The Rosary as meditation on Christ**: *Catechism of the Catholic Church* 971, 2678
+### Oração & Acompanhamento
+- **Check-in diário** — registre sua oração com seleção de Mistério, intenções e reflexão
+- **Histórico pessoal** — calendário semanal e linha do tempo das orações realizadas
+- **Sequência (streak)** — acompanhamento da consistência de oração
+- **Mistérios do dia** — rotação automática (Joyful/Sorrowful/Glorious/Luminous) com referências bíblicas
 
-### Guided by the Saints
+### Conteúdo & Formação
+- **Como Rezar** — guia passo a passo completo
+- **Orações Tradicionais** — textos completos (Ave Maria, Pai Nosso, Glória, Salve Rainha e mais)
+- **Ensinamentos** — biblioteca com Escritura, Teologia, História, Maria, Sacramentos, Santos e Orações
+- **Caminhos de Aprendizado** — trilhas Iniciante, Intermediário e Avançado com lições progressivas
+- **Biblioteca de Recursos** — documentos papais, escritos de santos e links úteis
+- **Ferramentas** — calculadora de novena e contador de terço
 
-> "The Rosary is the 'weapon' for these times."  
-> — **St. Padre Pio**
+### Design & Experiência
+- Tema **dark/light** com persistência — "Cathedral Night" e "Sacred Cream"
+- Design system: glassmorfismo sagrado, dourado metálico, Cinzel + Manrope
+- PWA instalável (service worker + manifest)
+- Totalmente responsivo — mobile-first
 
-> "Give me an army saying the Rosary and I will conquer the world."  
-> — **Blessed Pope Pius IX**
+---
 
-> "The Rosary is the book of the blind, where souls see and there enact the greatest drama of love the world has ever known; it is the book of the simple, which initiates them into mysteries and knowledge more satisfying than the education of other men."  
-> — **Venerable Fulton J. Sheen**
-
-> "Never will anyone who says his Rosary every day be led astray. This is a statement that I would gladly sign with my blood."  
-> — **St. Louis de Montfort**
-
-> "The greatest method of praying is to pray the Rosary."  
-> — **St. Francis de Sales**
-
-### The Church's Mission
-
-The Second Vatican Council teaches that all the faithful are called to holiness and to participate in the Church's evangelizing mission (*Lumen Gentium* 40-41). The Rosary serves as a practical means to:
-
-- **Evangelize** — Share the Gospel through witness and prayer
-- **Sanctify** — Grow in holiness through contemplation of Christ
-- **Serve** — Intercede for the needs of the world and the Church
-
-**Rosário Vivo** is a small but earnest response to this universal call—a digital tool to help modern Catholics live their faith more deeply in a distracted world.
-
-## ✨ Highlights
-
-### Available Today
-- **Daily Check-ins** with mystery selection
-- **Streak Tracking** for prayer consistency
-- **Educational Content** on the Rosary, Mysteries, and history
-- **Traditional Prayers** (full texts)
-
-### In Progress
-- **Interactive Rosary Guide** with timer and steps
-- **Spiritual Journal** for intentions and reflections
-- **Resource Library** (PDFs, documents)
-- **Community Feed** for sharing and praying together
-
-## 📁 Project Structure
+## 🗂 Estrutura do Projeto
 
 ```
-├── frontend/               # Next.js (App Router)
+rosario-vivo/
+├── frontend/               # Next.js 16 (App Router)
 │   ├── src/
-│   │   ├── app/            # Pages
-│   │   ├── components/     # UI components
-│   │   ├── services/       # API client
-│   │   └── hooks/          # Custom hooks
+│   │   ├── app/            # Páginas e rotas
+│   │   │   ├── dashboard/        # Painel do usuário
+│   │   │   ├── ensinamentos/     # Biblioteca de conteúdo
+│   │   │   ├── misterios-do-dia/ # Mistérios diários
+│   │   │   ├── oracoes-tradicionais/
+│   │   │   ├── como-rezar/
+│   │   │   ├── recursos/
+│   │   │   └── ferramentas/
+│   │   ├── components/     # Componentes reutilizáveis
+│   │   ├── providers/      # AuthProvider, ThemeProvider, QueryProvider
+│   │   ├── services/       # API client + mock data (localStorage)
+│   │   ├── hooks/          # use-rosary, use-toast
+│   │   └── types/
 │   └── Dockerfile
 │
-├── backend/                # NestJS API
-│   ├── src/
-│   │   └── modules/
-│   │       ├── auth/       # JWT auth
-│   │       ├── users/      # User management
-│   │       ├── checkins/   # Prayer check-ins
-│   │       └── prayers/    # Prayer requests
-│   ├── docker/             # Mongo init scripts
+├── backend/                # NestJS 10
+│   ├── src/modules/
+│   │   ├── auth/           # JWT + Passport
+│   │   ├── users/          # Perfis de usuário
+│   │   ├── checkins/       # Registro de orações
+│   │   └── prayers/        # Intenções de oração
 │   └── Dockerfile
 │
-├── docker-compose.yml      # Local dev
-└── docker-compose.prod.yml # Production
+├── docker-compose.yml      # Dev local (full stack)
+├── docker-compose.prod.yml # Produção
+└── pnpm-workspace.yaml     # Monorepo
 ```
 
-## 🚀 Quick Start (Local)
+---
 
-### Prerequisites
+## 🚀 Início Rápido
+
+### Pré-requisitos
 - Node.js 20+
 - pnpm 10+
 - Docker & Docker Compose
 
-### 1) Install dependencies
+### 1. Instalar dependências
 
 ```bash
 pnpm install
 ```
 
-### 2) Start MongoDB
+### 2. Rodar ambiente completo (recomendado)
 
 ```bash
+pnpm dev
+```
+
+Ou separadamente:
+
+```bash
+# Terminal 1 — Backend + MongoDB
 docker-compose up -d mongodb
+pnpm dev:backend
+
+# Terminal 2 — Frontend
+pnpm dev:frontend
 ```
 
-### 3) Run the apps
+### 3. Acessar
 
-```bash
-# Terminal 1
-pnpm --filter backend start:dev
+| Serviço  | URL                          |
+|----------|------------------------------|
+| Frontend | http://localhost:3000        |
+| API      | http://localhost:3001/api    |
+| Swagger  | http://localhost:3001/api/docs |
 
-# Terminal 2
-pnpm --filter frontend dev
-```
+> **Nota MVP**: `AUTH_DISABLED=true` está ativo no frontend — todas as funcionalidades estão liberadas sem necessidade de login. Para ativar o fluxo de autenticação completo, altere o flag em `src/providers/auth-provider.tsx`.
 
-### 4) Access
-
-| Service | URL |
-|---------|-----|
-| Frontend | http://localhost:3000 |
-| API | http://localhost:3001/api |
-| Swagger | http://localhost:3001/api/docs |
+---
 
 ## 🐳 Docker
 
-### Local (full stack)
-
 ```bash
-docker-compose up -d --build
+# Dev local (full stack)
+pnpm docker:dev
+
+# Produção
+pnpm docker:prod
 ```
 
-### Production
+---
 
-```bash
-docker-compose -f docker-compose.prod.yml up -d --build
-```
+## ☁️ Deploy com Coolify
 
-## ☁️ Coolify Deployment
+1. Crie um recurso **Docker Compose** no Coolify
+2. Aponte para `docker-compose.prod.yml`
+3. Configure as variáveis de ambiente
+4. Configure os domínios:
 
-1. Create a **Docker Compose** resource in Coolify
-2. Point it to `docker-compose.prod.yml`
-3. Configure environment variables
-4. Map domains:
+| Serviço  | Domínio              | Porta |
+|----------|----------------------|-------|
+| Frontend | seudominio.com       | 3000  |
+| Backend  | api.seudominio.com   | 3001  |
 
-| Service | Domain | Port |
-|---------|--------|------|
-| Frontend | yourdomain.com | 3000 |
-| Backend | api.yourdomain.com | 3001 |
-
-### Required Environment Variables
+### Variáveis de Ambiente Necessárias
 
 ```env
 # MongoDB
 MONGO_ROOT_USER=rosary_admin
-MONGO_ROOT_PASSWORD=<secure-password>
+MONGO_ROOT_PASSWORD=<senha-segura>
 
 # Auth
-JWT_SECRET=<min-32-character-secret>
+JWT_SECRET=<segredo-min-32-caracteres>
 
 # URLs
-FRONTEND_URL=https://yourdomain.com
-NEXT_PUBLIC_API_URL=https://api.yourdomain.com/api
+FRONTEND_URL=https://seudominio.com
+NEXT_PUBLIC_API_URL=https://api.seudominio.com/api
 ```
 
-> ⚠️ Use strong passwords and never commit `.env` files.
+> ⚠️ Nunca comite arquivos `.env`. Use senhas fortes em produção.
 
-## 📡 API Reference (Summary)
+---
 
-### Authentication
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/auth/register` | Create account |
-| POST | `/api/auth/login` | Login |
+## 📡 API Reference
+
+### Autenticação
+| Método | Endpoint              | Descrição       |
+|--------|-----------------------|-----------------|
+| POST   | `/api/auth/register`  | Criar conta     |
+| POST   | `/api/auth/login`     | Login           |
 
 ### Check-ins
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/checkins` | Create check-in |
-| GET | `/api/checkins/feed` | Community feed |
-| GET | `/api/checkins/today` | Today's check-in |
-| GET | `/api/checkins/my` | User history |
-| POST | `/api/checkins/:id/amen` | Toggle Amen |
-| POST | `/api/checkins/:id/comments` | Add comment |
+| Método | Endpoint                    | Descrição             |
+|--------|-----------------------------|-----------------------|
+| POST   | `/api/checkins`             | Registrar oração      |
+| GET    | `/api/checkins/today`       | Check-in de hoje      |
+| GET    | `/api/checkins/my`          | Histórico pessoal     |
+| GET    | `/api/checkins/feed`        | Feed da comunidade    |
+| POST   | `/api/checkins/:id/amen`    | Toggle Amém           |
 
-### Prayer Requests
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/prayers` | Create request |
-| GET | `/api/prayers` | List requests |
-| POST | `/api/prayers/:id/pray` | Mark praying |
-| POST | `/api/prayers/:id/answered` | Mark answered |
-| GET | `/api/prayers/testimonials` | Testimonials |
+### Intenções de Oração
+| Método | Endpoint                      | Descrição            |
+|--------|-------------------------------|----------------------|
+| POST   | `/api/prayers`                | Criar intenção       |
+| GET    | `/api/prayers`                | Listar intenções     |
+| POST   | `/api/prayers/:id/pray`       | Marcar que rezou     |
+| POST   | `/api/prayers/:id/answered`   | Marcar como atendida |
 
-### User
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/users/me` | Get profile |
-| PUT | `/api/users/me` | Update profile |
-| GET | `/api/users/me/stats` | Get stats |
+### Usuário
+| Método | Endpoint              | Descrição          |
+|--------|-----------------------|--------------------|
+| GET    | `/api/users/me`       | Perfil             |
+| PUT    | `/api/users/me`       | Atualizar perfil   |
+| GET    | `/api/users/me/stats` | Estatísticas       |
 
-## 🛠 Tech Stack
+---
 
-| Layer | Technology |
-|-------|------------|
-| **Frontend** | Next.js 16, TypeScript, Tailwind CSS, TanStack Query |
-| **Backend** | NestJS 10, Mongoose, Passport JWT, Swagger |
-| **Database** | MongoDB 7 |
-| **Deployment** | Docker, Coolify |
+## 🛠 Stack Tecnológica
 
-## 🔒 Security Checklist
+| Camada         | Tecnologia                                        |
+|----------------|---------------------------------------------------|
+| **Frontend**   | Next.js 16, TypeScript, Tailwind CSS, Radix UI    |
+| **Estado**     | TanStack Query v5, localStorage (MVP)             |
+| **Backend**    | NestJS 10, Mongoose, Passport JWT, Swagger        |
+| **Banco**      | MongoDB 7                                         |
+| **Deploy**     | Docker, Coolify                                   |
+| **PWA**        | next-pwa, Workbox                                 |
 
-- [ ] Set `JWT_SECRET` to a 32+ character secret
-- [ ] Use strong MongoDB credentials
-- [ ] Enable HTTPS in production
-- [ ] Keep dependencies updated
-- [ ] Never commit `.env` files
+---
 
-## 📄 License
+## 🗺 Roadmap
 
-MIT © 2024
+### MVP — Em andamento (`feat/frontend-mvp`)
+- [x] Check-in diário com seleção de Mistério e intenções
+- [x] Dashboard com histórico pessoal e calendário semanal
+- [x] Biblioteca completa de ensinamentos (7 temas + 3 trilhas)
+- [x] Orações tradicionais e guia de oração
+- [x] Design system: glassmorfismo, tema dark/light, animações
+- [x] PWA instalável
+- [x] Feature flag `AUTH_DISABLED` para MVP sem login
+
+### Próximas fases
+- [ ] Autenticação completa (registro, login, perfil)
+- [ ] Persitência em backend (substituir localStorage)
+- [ ] Feed da comunidade e intenções compartilhadas
+- [ ] Guia interativo de oração com timer e passos
+- [ ] Diário de reflexões espirituais
+- [ ] Notificações push de lembrete
+- [ ] Modo offline completo
+- [ ] Animação do terço durante a oração
+
+---
+
+## 📖 Fontes de Conteúdo
+
+Todo conteúdo religioso é baseado em fontes oficiais:
+
+- **Santa Sé (Vaticano)**: [vatican.va/special/rosary](https://www.vatican.va/special/rosary/)
+- **Rosarium Virginis Mariae** — Papa São João Paulo II (16 de outubro de 2002)
+- **Catecismo da Igreja Católica** — §971, §2678
+- **CNBB** — traduções para o português brasileiro
+
+---
+
+## 📄 Licença
+
+MIT © 2026 Rosário Vivo
