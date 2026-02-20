@@ -1,7 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -76,6 +81,14 @@ export function AuthModal({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="p-0 border-0 bg-transparent shadow-none max-w-sm w-full overflow-visible [&>button]:hidden">
+        <DialogTitle className="sr-only">
+          {isLogin ? "Bem-vindo de volta" : "Criar conta"}
+        </DialogTitle>
+        <DialogDescription className="sr-only">
+          {isLogin
+            ? "Entre para continuar sua jornada"
+            : "Junte-se à nossa comunidade de oração"}
+        </DialogDescription>
         {/* ── Card ── */}
         <div className="relative rounded-2xl overflow-hidden bg-slate-900/95 backdrop-blur-2xl border border-yellow-500/20 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.8)]">
 

@@ -33,9 +33,18 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 const STORAGE_KEY = "rosario-user";
+const AUTH_DISABLED = true;
 
 function generateUserId(): string {
   return `user-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+}
+
+function createGuestUser(): AuthUser {
+  return {
+    id: "guest",
+    name: "Peregrino",
+    passwordHash: "",
+  };
 }
 
 /** SHA-256 hash via Web Crypto API (available in all modern browsers + Node 18+) */
@@ -57,18 +66,42 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // Hydrate from localStorage on mount (client-side only)
   useEffect(() => {
+    if (AUTH_DISABLED) {
+      setUser(createGuestUser());
+      return;
+    }
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) setUser(JSON.parse(stored));
+      if (stored) {
+        const parsed = JSON.parse(stored) as Partial<AuthUser> | null;
+        const isValid =
+          !!parsed &&
+          typeof parsed.name === "string" &&
+          typeof parsed.passwordHash === "string" &&
+          typeof parsed.id === "string";
+        if (isValid) {
+          setUser(parsed as AuthUser);
+        } else {
+          localStorage.removeItem(STORAGE_KEY);
+        }
+      }
     } catch {
       // ignore malformed data
     }
   }, []);
 
   const login = useCallback(async (username: string, password: string) => {
+    if (AUTH_DISABLED) {
+      setUser(createGuestUser());
+      setModalOpen(false);
+      return;
+    }
     const hash = await sha256(password);
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
+      if (!stored) {
+        throw new Error("Nenhuma conta local encontrada. Crie uma conta primeiro.");
+      }
       if (stored) {
         const storedUser: AuthUser = JSON.parse(stored);
         if (
@@ -87,6 +120,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const signup = useCallback(async (username: string, password: string) => {
+    if (AUTH_DISABLED) {
+      setUser(createGuestUser());
+      setModalOpen(false);
+      return;
+    }
     // Prevent duplicate usernames
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
@@ -112,11 +150,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const logout = useCallback(() => {
+    if (AUTH_DISABLED) {
+      setUser(createGuestUser());
+      return;
+    }
     localStorage.removeItem(STORAGE_KEY);
     setUser(null);
   }, []);
 
   const openAuthModal = useCallback((mode: "login" | "signup" = "login") => {
+    if (AUTH_DISABLED) return;
     setModalMode(mode);
     setModalOpen(true);
   }, []);
@@ -127,17 +170,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, isLoggedIn: !!user, login, signup, logout, openAuthModal }}
+      value={{
+        user,
+        isLoggedIn: AUTH_DISABLED ? true : !!user,
+        login,
+        signup,
+        logout,
+        openAuthModal,
+      }}
     >
       {children}
-      <AuthModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        mode={modalMode}
-        onSwitchMode={switchMode}
-        onLogin={login}
-        onSignup={signup}
-      />
+      {!AUTH_DISABLED && (
+        <AuthModal
+          isOpen={modalOpen}
+          onClose={() => setModalOpen(false)}
+          mode={modalMode}
+          onSwitchMode={switchMode}
+          onLogin={login}
+          onSignup={signup}
+        />
+      )}
     </AuthContext.Provider>
   );
 }
