@@ -4,13 +4,12 @@ import { useRouter } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
-import { LockedContent } from "@/components/locked-content";
 import { Scroll, ArrowRight, Calendar } from "lucide-react";
-import { useAuth } from "@/providers/auth-provider";
+import { AUTH_DISABLED } from "@/providers/auth-provider";
 
 export default function HistoriaPage() {
   const router = useRouter();
-  const { isLoggedIn } = useAuth();
+  const LOCKED = AUTH_DISABLED ? false : true;
 
   const topics = [
     {
@@ -25,35 +24,35 @@ export default function HistoriaPage() {
       title: "Era das Perseguições",
       description: "Mártires cristãos que selaram sua fé com sangue. Testemunhos de coragem.",
       period: "100-313 d.C.",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "constantino",
       title: "Constantinismo e Cristandade",
       description: "A Igreja nos primeiros séculos de paz. Desenvolvimento da liturgia e tradição.",
       period: "313-1054 d.C.",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "idade-media",
       title: "Idade Média",
       description: "A fé no coração da sociedade medieval. Catedrais, mosteiros e grandes santos.",
       period: "1054-1517",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "reformas",
       title: "Reforma Católica",
       description: "Resposta da Igreja aos desafios. Renovação espiritual e Concílio de Trento.",
       period: "1517-1648",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
     {
       id: "modernidade",
       title: "Igreja na Modernidade",
       description: "Séculos XIX e XX. Desafios modernos e intervenção de papas santos.",
       period: "1648 até hoje",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
     },
   ];
 
@@ -137,18 +136,6 @@ export default function HistoriaPage() {
           </section>
 
           {/* Member CTA */}
-          {!isLoggedIn && (
-            <LockedContent
-              title="Explore a história completa"
-              description="Crie sua conta gratuita para ler artigos detalhados sobre cada período histórico."
-              featureList={[
-                "Artigos sobre cada período histórico",
-                "Biografias de papas e santos",
-                "Aparições de Nossa Senhora",
-                "Milagres e eventos marcantes",
-              ]}
-            />
-          )}
         </div>
       </main>
     </PageTransition>

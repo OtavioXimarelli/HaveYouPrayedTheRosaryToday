@@ -8,11 +8,11 @@ import { ProgressBar } from "@/components/learning/progress-bar";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { useAuth } from "@/providers/auth-provider";
+import { AUTH_DISABLED } from "@/providers/auth-provider";
 
 export default function IniciantePage() {
   const router = useRouter();
-  const { isLoggedIn } = useAuth();
+  const LOCKED = AUTH_DISABLED ? false : true;
 
   // Mock data
   const completedLessons: string[] = []; // Would come from localStorage
@@ -32,7 +32,7 @@ export default function IniciantePage() {
       title: "O Papel de Maria na Salvação",
       description: "Entenda por que a Igreja honra Maria e como ela nos conduz a Jesus através do Rosário.",
       duration: "20 min",
-      isLocked: !isLoggedIn ? false : false
+      isLocked: LOCKED ? false : false
     },
     {
       id: "poder-oracao-repetitiva",
@@ -40,7 +40,7 @@ export default function IniciantePage() {
       title: "O Poder da Oração Repetitiva",
       description: "Aprenda como a repetição contemplativa transforma o coração e aproxima de Deus.",
       duration: "15 min",
-      isLocked: !isLoggedIn
+      isLocked: LOCKED
     },
     {
       id: "habito-diario",
@@ -48,7 +48,7 @@ export default function IniciantePage() {
       title: "Construindo um Hábito Diário",
       description: "Estratégias práticas para incorporar o Rosário na sua rotina diária.",
       duration: "12 min",
-      isLocked: !isLoggedIn
+      isLocked: LOCKED
     },
     {
       id: "vencendo-distracoes",
@@ -56,7 +56,7 @@ export default function IniciantePage() {
       title: "Vencendo as Distrações na Oração",
       description: "Técnicas dos santos para manter o foco e aprofundar a meditação durante o Rosário.",
       duration: "18 min",
-      isLocked: !isLoggedIn
+      isLocked: LOCKED
     }
   ];
 

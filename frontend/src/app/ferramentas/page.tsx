@@ -4,17 +4,15 @@ import { useRouter } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
-import { LockedContent } from "@/components/locked-content";
-import { Button } from "@/components/ui/button";
 import { 
   Timer, Edit3, Compass, Heart, Play, ArrowRight,
   Pause, Volume2, Moon, Sun, ChevronRight
 } from "lucide-react";
-import { useAuth } from "@/providers/auth-provider";
+import { AUTH_DISABLED } from "@/providers/auth-provider";
 
 export default function FerramentasPage() {
   const router = useRouter();
-  const { isLoggedIn } = useAuth();
+  const LOCKED = AUTH_DISABLED ? false : true;
 
   const tools = [
     {
@@ -40,7 +38,7 @@ export default function FerramentasPage() {
       borderColor: "border-blue-500/20",
       features: ["Entradas diárias", "Calendário de reflexões", "Exportar para PDF"],
       path: "/ferramentas/diario",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
       status: "Em breve"
     },
     {
@@ -53,7 +51,7 @@ export default function FerramentasPage() {
       borderColor: "border-purple-500/20",
       features: ["Tempos customizáveis", "Alertas suaves", "Modo silencioso"],
       path: "/ferramentas/temporizador",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
       status: "Em breve"
     },
     {
@@ -66,7 +64,7 @@ export default function FerramentasPage() {
       borderColor: "border-rose-500/20",
       features: ["Compartilhar intenções", "Rezar pelos outros", "Categorias"],
       path: "/ferramentas/intencoes",
-      isLocked: !isLoggedIn,
+      isLocked: LOCKED,
       status: "Em breve"
     }
   ];
@@ -132,7 +130,7 @@ export default function FerramentasPage() {
                         )}
                         {tool.isLocked && (
                           <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-semibold">
-                            Requer login
+                            Em breve
                           </span>
                         )}
                       </div>
@@ -185,18 +183,6 @@ export default function FerramentasPage() {
           </section>
 
           {/* CTA for non-logged users */}
-          {!isLoggedIn && (
-            <LockedContent
-              title="Acesse todas as ferramentas"
-              description="Crie sua conta gratuita para usar todas as ferramentas de oração e salvar seu progresso."
-              featureList={[
-                "Guia interativo completo",
-                "Diário espiritual ilimitado",
-                "Temporizador personalizado",
-                "Participar do mural de intenções"
-              ]}
-            />
-          )}
         </div>
       </main>
     </PageTransition>
