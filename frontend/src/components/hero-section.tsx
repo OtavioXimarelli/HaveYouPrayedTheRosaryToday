@@ -5,19 +5,15 @@ import { Sparkles, Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTodayStatus } from "@/hooks/use-rosary";
 import { CheckInModal } from "./check-in-modal";
-import { ComingSoonModal } from "./coming-soon-modal";
 import { StreakCounter } from "./streak-counter";
+import { useAuth } from "@/providers/auth-provider";
 
 export function HeroSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [comingSoonModalOpen, setComingSoonModalOpen] = useState(false);
   const { data: status, isLoading } = useTodayStatus();
+  const { openAuthModal } = useAuth();
 
   const hasPrayed = status?.hasPrayed ?? false;
-
-  const handlePrayClick = () => {
-    setComingSoonModalOpen(true);
-  };
 
   return (
     <section className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden">
@@ -147,18 +143,14 @@ export function HeroSection() {
               </a>
 
               {/* Path 3: Track & Grow (Signup CTA) */}
-              <a
-                href="#cta"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.querySelector('[data-testid="cta-section"]')?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="group relative p-6 glass rounded-lg border border-gold-500/30 hover:border-gold-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/20"
+              <button
+                onClick={() => openAuthModal("signup")}
+                className="group relative p-6 glass rounded-lg border border-gold-500/30 hover:border-gold-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/20 text-left w-full"
               >
                 <div className="text-3xl mb-3">⭐</div>
                 <h3 className="font-cinzel font-bold text-lg text-white mb-2">Rastrear & Crescer</h3>
                 <p className="text-sm text-slate-300">Crie sua conta gratuita</p>
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -180,12 +172,6 @@ export function HeroSection() {
       </div>
 
       <CheckInModal open={isModalOpen} onOpenChange={setIsModalOpen} />
-      
-      <ComingSoonModal
-        isOpen={comingSoonModalOpen}
-        onClose={() => setComingSoonModalOpen(false)}
-        featureName="Funcionalidade de Check-in / Comunidade"
-      />
     </section>
   );
 }

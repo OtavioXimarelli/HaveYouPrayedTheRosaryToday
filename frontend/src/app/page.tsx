@@ -1,9 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { HeroSection } from "@/components/hero-section";
-import { AuthModal } from "@/components/auth-modal";
 import { PageTransition } from "@/components/page-transition";
 import { 
   Heart, Users, Calendar, Sparkles, Check,
@@ -11,20 +9,13 @@ import {
   Timer, Edit3, Library, Cross, Globe, TrendingUp, Shield
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/providers/auth-provider";
 
 export default function HomePage() {
   const router = useRouter();
-  const [authModalOpen, setAuthModalOpen] = useState(false);
-  const [authMode, setAuthMode] = useState<"login" | "signup">("signup");
+  const { openAuthModal } = useAuth();
 
-  const openSignup = () => {
-    setAuthMode("signup");
-    setAuthModalOpen(true);
-  };
-
-  const switchMode = () => {
-    setAuthMode(authMode === "login" ? "signup" : "login");
-  };
+  const openSignup = () => openAuthModal("signup");
 
   return (
     <PageTransition>
@@ -193,7 +184,7 @@ export default function HomePage() {
 
             {/* Path 3: Track & Community */}
             <div className="group p-8 rounded-3xl bg-gradient-to-br from-gold-500/10 to-gold-600/5 border border-gold-500/30 hover:-translate-y-2 transition-all duration-300 cursor-pointer relative"
-              onClick={() => setAuthModalOpen(true)}
+              onClick={() => openAuthModal("signup")}
             >
               <div className="absolute -top-3 -right-3 inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gold-500 text-sacred-blue font-cinzel font-bold text-xs">
                 ⭐ RECOMENDADO
@@ -208,7 +199,7 @@ export default function HomePage() {
               <Button
                 onClick={(e) => {
                   e.stopPropagation();
-                  setAuthModalOpen(true);
+                  openAuthModal("signup");
                 }}
                 className="rounded-full px-6 py-2 text-sm font-cinzel font-bold bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow transition-all"
               >
@@ -409,12 +400,6 @@ export default function HomePage() {
         </div>
       </footer>
 
-      <AuthModal
-        isOpen={authModalOpen}
-        onClose={() => setAuthModalOpen(false)}
-        mode={authMode}
-        onSwitchMode={switchMode}
-      />
     </main>
     </PageTransition>
   );

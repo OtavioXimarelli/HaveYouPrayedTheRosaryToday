@@ -3,20 +3,21 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { Home, BookOpen, History, Sparkles, ScrollText, ChevronDown, Play, LayoutDashboard, GraduationCap, Compass, Library } from "lucide-react";
-import { AuthModal } from "./auth-modal";
 import { ComingSoonModal } from "./coming-soon-modal";
+import { CheckInModal } from "./check-in-modal";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "@/providers/theme-provider";
+import { useAuth } from "@/providers/auth-provider";
 
 export function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
-  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const { openAuthModal } = useAuth();
+  const [checkInOpen, setCheckInOpen] = useState(false);
   const [comingSoonModalOpen, setComingSoonModalOpen] = useState(false);
   const [comingSoonFeature, setComingSoonFeature] = useState("");
-  const [authMode, setAuthMode] = useState<"login" | "signup">("login");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [explorarOpen, setExplorarOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -54,16 +55,24 @@ export function Navbar() {
   };
 
   const openLogin = () => {
-    showComingSoon("Login");
+    setMobileMenuOpen(false);
+    setExplorarOpen(false);
+    openAuthModal("login");
   };
 
   const openSignup = () => {
-    showComingSoon("Cadastro");
+    setMobileMenuOpen(false);
+    setExplorarOpen(false);
+    openAuthModal("signup");
   };
 
-  const switchMode = () => {
-    setAuthMode(authMode === "login" ? "signup" : "login");
+  const openCheckIn = () => {
+    setMobileMenuOpen(false);
+    setExplorarOpen(false);
+    setCheckInOpen(true);
   };
+
+  const switchMode = () => {}; // handled by AuthProvider
 
   const navigateTo = (path: string) => {
     router.push(path);
@@ -72,14 +81,14 @@ export function Navbar() {
   };
 
   const explorarLinks = [
-    { label: "Como Rezar", description: "Aprenda passo a passo", icon: BookOpen, path: "/como-rezar", isPublic: true },
-    { label: "História", description: "Origens e tradição", icon: History, path: "/historia", isPublic: true },
-    { label: "Mistérios do Dia", description: "Meditações diárias", icon: Sparkles, path: "/misterios-do-dia", isPublic: true },
-    { label: "Orações", description: "Textos tradicionais", icon: ScrollText, path: "/oracoes-tradicionais", isPublic: true },
-    { label: "Ensinamentos", description: "Aprenda sobre a fé", icon: GraduationCap, path: "/ensinamentos", isPublic: false },
-    { label: "Ferramentas", description: "Recursos interativos", icon: Compass, path: "/ferramentas", isPublic: false },
-    { label: "Sobre", description: "Nossa missão e valores", icon: BookOpen, path: "/about", isPublic: true },
-    { label: "Recursos", description: "Biblioteca e downloads", icon: Library, path: "/recursos", isPublic: false },
+    { label: "Como Rezar", description: "Aprenda passo a passo", icon: BookOpen, path: "/como-rezar", isPublic: true, isSoon: false },
+    { label: "História", description: "Origens e tradição", icon: History, path: "/historia", isPublic: true, isSoon: false },
+    { label: "Mistérios do Dia", description: "Meditações diárias", icon: Sparkles, path: "/misterios-do-dia", isPublic: true, isSoon: false },
+    { label: "Orações", description: "Textos tradicionais", icon: ScrollText, path: "/oracoes-tradicionais", isPublic: true, isSoon: false },
+    { label: "Ensinamentos", description: "Aprenda sobre a fé", icon: GraduationCap, path: "/ensinamentos", isPublic: false, isSoon: false },
+    { label: "Ferramentas", description: "Recursos interativos", icon: Compass, path: "/ferramentas", isPublic: false, isSoon: true },
+    { label: "Sobre", description: "Nossa missão e valores", icon: BookOpen, path: "/about", isPublic: true, isSoon: false },
+    { label: "Recursos", description: "Biblioteca e downloads", icon: Library, path: "/recursos", isPublic: false, isSoon: true },
   ];
 
   const isOnContentPage = explorarLinks.some(link => pathname === link.path);
@@ -152,6 +161,11 @@ export function Navbar() {
                             ⭐ Membros
                           </span>
                         )}
+                        {link.isSoon && (
+                          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-500/30 text-slate-300 font-semibold">
+                            Em breve
+                          </span>
+                        )}
                       </div>
                       <span className="text-xs text-white/50">{link.description}</span>
                     </div>
@@ -180,13 +194,12 @@ export function Navbar() {
 
         {/* Começar CTA */}
         <button
-          onClick={() => showComingSoon("Funcionalidade de Check-in / Comunidade")}
+          onClick={openCheckIn}
           className="relative flex items-center gap-2 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue font-cinzel font-bold text-xs sm:text-sm tracking-wide hover:shadow-[0_0_20px_-5px_rgba(212,175,55,0.5)] transition-all"
           data-testid="navbar-comecar"
         >
           <Play className="w-4 h-4" />
           <span>Começar</span>
-          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-sacred-blue animate-pulse shadow-lg" title="Em desenvolvimento" />
         </button>
       </nav>
 
@@ -229,7 +242,7 @@ export function Navbar() {
 
               {/* Central CTA — elevated gold pill */}
               <button
-                onClick={() => showComingSoon("Funcionalidade de Check-in / Comunidade")}
+                onClick={openCheckIn}
                 className="flex flex-col items-center justify-center -mt-3 group"
                 data-testid="mobile-tab-comecar"
               >
@@ -307,6 +320,11 @@ export function Navbar() {
                           Membros
                         </span>
                       )}
+                      {link.isSoon && (
+                        <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-500/30 text-slate-300 font-semibold whitespace-nowrap">
+                          Em breve
+                        </span>
+                      )}
                     </div>
                     <span className="text-[11px] text-white/40">{link.description}</span>
                   </div>
@@ -317,13 +335,8 @@ export function Navbar() {
         </div>
       )}
 
-      <AuthModal
-        isOpen={authModalOpen}
-        onClose={() => setAuthModalOpen(false)}
-        mode={authMode}
-        onSwitchMode={switchMode}
-      />
-      
+      <CheckInModal open={checkInOpen} onOpenChange={setCheckInOpen} />
+
       <ComingSoonModal
         isOpen={comingSoonModalOpen}
         onClose={() => setComingSoonModalOpen(false)}

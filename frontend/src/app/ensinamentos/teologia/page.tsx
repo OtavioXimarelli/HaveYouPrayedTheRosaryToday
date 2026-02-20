@@ -6,10 +6,11 @@ import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
 import { LockedContent } from "@/components/locked-content";
 import { BookOpen, ArrowRight } from "lucide-react";
+import { useAuth } from "@/providers/auth-provider";
 
 export default function TeologiaPage() {
   const router = useRouter();
-  const isLoggedIn = false;
+  const { isLoggedIn } = useAuth();
 
   const articles = [
     {

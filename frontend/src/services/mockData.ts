@@ -2,7 +2,7 @@
  * Mock Data Store
  * 
  * Simulates a database for development purposes.
- * This will be replaced by actual API calls to the Java Spring Boot backend.
+ * This will be replaced by actual API calls to the NestJS backend.
  */
 
 import {

@@ -16,10 +16,11 @@ import {
   ArrowRight,
   Lock,
 } from "lucide-react";
+import { useAuth } from "@/providers/auth-provider";
 
 export default function EnsinamentosPage() {
   const router = useRouter();
-  const isLoggedIn = false;
+  const { isLoggedIn } = useAuth();
 
   const topics = [
     {
@@ -30,7 +31,8 @@ export default function EnsinamentosPage() {
       gradient: "from-emerald-500 to-emerald-600",
       bgGradient: "from-emerald-500/10 to-emerald-600/5",
       borderColor: "border-emerald-500/20",
-      articles: 12,
+      articles: 5,
+      isSoon: false,
       isLocked: false,
       path: "/ensinamentos/santos",
       gridSpan: "sm:col-span-2 sm:row-span-2",
@@ -43,7 +45,8 @@ export default function EnsinamentosPage() {
       gradient: "from-blue-500 to-blue-600",
       bgGradient: "from-blue-500/10 to-blue-600/5",
       borderColor: "border-blue-500/20",
-      articles: 8,
+      articles: 0,
+      isSoon: true,
       isLocked: !isLoggedIn,
       path: "/ensinamentos/teologia",
       gridSpan: "sm:col-span-1",
@@ -56,7 +59,8 @@ export default function EnsinamentosPage() {
       gradient: "from-purple-500 to-purple-600",
       bgGradient: "from-purple-500/10 to-purple-600/5",
       borderColor: "border-purple-500/20",
-      articles: 15,
+      articles: 0,
+      isSoon: true,
       isLocked: !isLoggedIn,
       path: "/ensinamentos/historia",
       gridSpan: "sm:col-span-2",
@@ -69,7 +73,8 @@ export default function EnsinamentosPage() {
       gradient: "from-rose-500 to-rose-600",
       bgGradient: "from-rose-500/10 to-rose-600/5",
       borderColor: "border-rose-500/20",
-      articles: 10,
+      articles: 0,
+      isSoon: true,
       isLocked: !isLoggedIn,
       path: "/ensinamentos/oracoes",
       gridSpan: "sm:col-span-1",
@@ -82,7 +87,8 @@ export default function EnsinamentosPage() {
       gradient: "from-amber-500 to-amber-600",
       bgGradient: "from-amber-500/10 to-amber-600/5",
       borderColor: "border-amber-500/20",
-      articles: 7,
+      articles: 0,
+      isSoon: true,
       isLocked: !isLoggedIn,
       path: "/ensinamentos/sacramentos",
       gridSpan: "sm:col-span-1",
@@ -95,7 +101,8 @@ export default function EnsinamentosPage() {
       gradient: "from-gold-500 to-gold-600",
       bgGradient: "from-gold-500/10 to-gold-600/5",
       borderColor: "border-gold-500/20",
-      articles: 11,
+      articles: 0,
+      isSoon: true,
       isLocked: !isLoggedIn,
       path: "/ensinamentos/maria",
       gridSpan: "sm:col-span-1",
@@ -108,7 +115,8 @@ export default function EnsinamentosPage() {
       gradient: "from-indigo-500 to-indigo-600",
       bgGradient: "from-indigo-500/10 to-indigo-600/5",
       borderColor: "border-indigo-500/20",
-      articles: 13,
+      articles: 0,
+      isSoon: true,
       isLocked: !isLoggedIn,
       path: "/ensinamentos/escritura",
       gridSpan: "sm:col-span-3",
@@ -198,9 +206,11 @@ export default function EnsinamentosPage() {
 
                     <div className="flex items-center justify-between pt-4 border-t border-gold-500/10">
                       <span className="text-xs font-semibold text-gold-600 dark:text-gold-400">
-                        {topic.articles} artigos
+                        {topic.isSoon
+                          ? "Em breve"
+                          : `${topic.articles} ${topic.articles === 1 ? "artigo" : "artigos"}`}
                       </span>
-                      {!topic.isLocked && (
+                      {!topic.isLocked && !topic.isSoon && (
                         <span className="flex items-center gap-1 text-gold-600 dark:text-gold-400 text-sm font-medium group-hover:gap-2 transition-all">
                           Explorar
                           <ArrowRight className="w-4 h-4" />

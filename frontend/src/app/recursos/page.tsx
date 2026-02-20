@@ -11,9 +11,11 @@ import {
   ArrowRight, ChevronRight, BookOpen, ScrollText, FileDown
 } from "lucide-react";
 
+import { useAuth } from "@/providers/auth-provider";
+
 export default function RecursosPage() {
   const router = useRouter();
-  const isLoggedIn = false;
+  const { isLoggedIn } = useAuth();
 
   const categories = [
     {

@@ -10,10 +10,11 @@ import {
   Timer, Edit3, Compass, Heart, Play, ArrowRight,
   Pause, Volume2, Moon, Sun, ChevronRight
 } from "lucide-react";
+import { useAuth } from "@/providers/auth-provider";
 
 export default function FerramentasPage() {
   const router = useRouter();
-  const isLoggedIn = false;
+  const { isLoggedIn } = useAuth();
 
   const tools = [
     {

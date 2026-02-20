@@ -8,13 +8,14 @@ import { ProgressBar } from "@/components/learning/progress-bar";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { useAuth } from "@/providers/auth-provider";
 
 export default function IniciantePage() {
   const router = useRouter();
+  const { isLoggedIn } = useAuth();
 
   // Mock data
   const completedLessons: string[] = []; // Would come from localStorage
-  const isLoggedIn = false;
 
   const lessons = [
     {

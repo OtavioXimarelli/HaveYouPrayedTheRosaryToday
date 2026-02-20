@@ -6,10 +6,11 @@ import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
 import { LockedContent } from "@/components/locked-content";
 import { Crown } from "lucide-react";
+import { useAuth } from "@/providers/auth-provider";
 
 export default function AvancadoPage() {
   const router = useRouter();
-  const isLoggedIn = false;
+  const { isLoggedIn } = useAuth();
 
   const lessons = [
     { id: "teologia-mariana", number: 1, title: "Teologia Mariana Essencial", duration: "35 min" },

@@ -8,10 +8,11 @@ import { ProgressBar } from "@/components/learning/progress-bar";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
 import { LockedContent } from "@/components/locked-content";
 import { BookOpen } from "lucide-react";
+import { useAuth } from "@/providers/auth-provider";
 
 export default function IntermediarioPage() {
   const router = useRouter();
-  const isLoggedIn = false;
+  const { isLoggedIn } = useAuth();
 
   const lessons = [
     {

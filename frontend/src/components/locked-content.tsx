@@ -2,7 +2,7 @@
 
 import { Lock, Heart, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import { useAuth } from "@/providers/auth-provider";
 
 interface LockedContentProps {
   title: string;
@@ -17,7 +17,7 @@ export function LockedContent({
   featureList = [],
   variant = "default" 
 }: LockedContentProps) {
-  const router = useRouter();
+  const { openAuthModal } = useAuth();
 
   if (variant === "minimal") {
     return (
@@ -29,7 +29,7 @@ export function LockedContent({
         <Button
           variant="outline"
           size="sm"
-          onClick={() => router.push("/")}
+          onClick={() => openAuthModal("login")}
           className="rounded-full border-gold-500/30 text-gold-600 dark:text-gold-400 hover:bg-gold-500/10"
           data-testid="locked-content-login-btn"
         >
@@ -44,7 +44,7 @@ export function LockedContent({
       <div className="relative overflow-hidden rounded-2xl" data-testid="locked-content-card">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/80 to-background z-10 flex items-end justify-center pb-8">
           <Button
-            onClick={() => router.push("/")}
+            onClick={() => openAuthModal("signup")}
             className="rounded-full px-6 py-5 text-sm font-cinzel font-bold bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow transition-all"
             data-testid="locked-content-card-btn"
           >
@@ -92,7 +92,7 @@ export function LockedContent({
         <div className="flex flex-col sm:flex-row gap-3">
           <Button
             size="lg"
-            onClick={() => router.push("/")}
+            onClick={() => openAuthModal("signup")}
             className="rounded-full px-8 py-6 text-base font-cinzel font-bold bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow-lg transition-all"
             data-testid="locked-signup-btn"
           >
@@ -102,7 +102,7 @@ export function LockedContent({
           <Button
             size="lg"
             variant="outline"
-            onClick={() => router.push("/")}
+            onClick={() => openAuthModal("login")}
             className="rounded-full px-8 py-6 text-base font-semibold border-white/20 text-white hover:bg-white/10"
             data-testid="locked-login-btn"
           >

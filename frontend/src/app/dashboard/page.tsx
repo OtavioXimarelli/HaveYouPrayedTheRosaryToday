@@ -15,6 +15,7 @@ import {
 import { getUserStats, getFeed } from "@/services/api";
 import { ComingSoonModal } from "@/components/coming-soon-modal";
 import { PageTransition } from "@/components/page-transition";
+import { useAuth } from "@/providers/auth-provider";
 
 /* ─── Mystery visual mapping ─── */
 const mysteryColors: Record<MysteryType, { bg: string; text: string; gradient: string; icon: string }> = {
@@ -53,11 +54,13 @@ const mysteryNames: Record<MysteryType, string> = {
 
 export default function DashboardPage() {
   const router = useRouter();
+  const { user } = useAuth();
   const [stats, setStats] = useState<UserStats | null>(null);
   const [recentActivity, setRecentActivity] = useState<CheckIn[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
+  const [storageBannerDismissed, setStorageBannerDismissed] = useState(false);
 
   const todaysMystery = getTodaysMystery();
   const mysteryInfo = getMysteryInfo(todaysMystery);
@@ -76,10 +79,13 @@ export default function DashboardPage() {
         console.error("Error loading dashboard data:", error);
       } finally {
         setLoading(false);
-        setComingSoonOpen(true);
       }
     }
     loadData();
+
+    // Hydrate banner dismissal from localStorage
+    const dismissed = localStorage.getItem("rosario-banner-dismissed");
+    if (dismissed) setStorageBannerDismissed(true);
 
     const interval = setInterval(() => setCurrentTime(new Date()), 60000);
     return () => clearInterval(interval);
@@ -166,6 +172,27 @@ export default function DashboardPage() {
       <main className="relative z-10 pt-6 pb-24 md:pt-10 md:pb-32 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto w-full max-w-6xl space-y-6 md:space-y-10">
 
+          {/* ═══════════ LOCAL STORAGE BANNER ═══════════ */}
+          {!storageBannerDismissed && (
+            <div className="flex items-start gap-3 px-4 py-3 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-400 animate-fade-up">
+              <span className="text-lg flex-shrink-0">⚠️</span>
+              <p className="text-sm leading-relaxed flex-1">
+                <strong>Armazenamento local:</strong> seus dados de oração são salvos apenas neste dispositivo e navegador.
+                Limpar o cache ou usar outro dispositivo não mostrará seu histórico.
+              </p>
+              <button
+                onClick={() => {
+                  localStorage.setItem("rosario-banner-dismissed", "1");
+                  setStorageBannerDismissed(true);
+                }}
+                className="text-amber-500 hover:text-amber-700 dark:hover:text-amber-200 font-bold text-lg leading-none flex-shrink-0 transition-colors"
+                aria-label="Fechar aviso"
+              >
+                ×
+              </button>
+            </div>
+          )}
+
           {/* ═══════════ HEADER ═══════════ */}
           <header className="animate-fade-up">
             {/* Stylized date badge */}
@@ -195,7 +222,7 @@ export default function DashboardPage() {
             <h1 className="text-2xl sm:text-3xl lg:text-5xl font-cinzel font-bold text-foreground leading-tight">
               {getGreeting()},{" "}
               <span className="bg-gradient-to-r from-gold-500 to-gold-600 bg-clip-text text-transparent">
-                Peregrino
+                {user?.name ?? "Peregrino"}
               </span>
             </h1>
 

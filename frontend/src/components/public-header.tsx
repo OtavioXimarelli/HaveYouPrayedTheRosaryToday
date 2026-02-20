@@ -1,21 +1,19 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { BookOpen, History, Sparkles, ScrollText, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { AuthModal } from "./auth-modal";
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "@/providers/theme-provider";
+import { useAuth } from "@/providers/auth-provider";
 
 export function PublicHeader() {
-  const router = useRouter();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [authModalOpen, setAuthModalOpen] = useState(false);
-  const [authMode, setAuthMode] = useState<"login" | "signup">("signup");
   const { resolvedTheme, setTheme } = useTheme();
+  const { openAuthModal } = useAuth();
 
   const toggleTheme = () => {
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
@@ -30,23 +28,17 @@ export function PublicHeader() {
   }, []);
 
   const openSignup = () => {
-    setAuthMode("signup");
-    setAuthModalOpen(true);
+    openAuthModal("signup");
     setMobileMenuOpen(false);
   };
 
   const openLogin = () => {
-    setAuthMode("login");
-    setAuthModalOpen(true);
+    openAuthModal("login");
     setMobileMenuOpen(false);
   };
 
-  const switchMode = () => {
-    setAuthMode(authMode === "login" ? "signup" : "login");
-  };
-
   const navigateTo = (path: string) => {
-    router.push(path);
+    window.location.href = path;
     setMobileMenuOpen(false);
   };
 
@@ -216,12 +208,6 @@ export function PublicHeader() {
       {/* Spacer to prevent content from going under fixed header */}
       <div className="h-16 sm:h-20" />
 
-      <AuthModal
-        isOpen={authModalOpen}
-        onClose={() => setAuthModalOpen(false)}
-        mode={authMode}
-        onSwitchMode={switchMode}
-      />
     </>
   );
 }
