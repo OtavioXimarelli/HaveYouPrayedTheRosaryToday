@@ -6,7 +6,7 @@ import { BookOpen, History, Sparkles, ScrollText, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "@/providers/theme-provider";
-import { useAuth } from "@/providers/auth-provider";
+import { useAuth, AUTH_DISABLED } from "@/providers/auth-provider";
 
 export function PublicHeader() {
   const pathname = usePathname();
@@ -111,24 +111,37 @@ export function PublicHeader() {
                 <Moon className="absolute h-4 w-4 rotate-90 scale-0 text-gold-400 transition-transform duration-300 dark:rotate-0 dark:scale-100" />
               </button>
 
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={openLogin}
-                className="rounded-full border-gold-500/20 hover:border-gold-500/40 hover:bg-gold-500/5"
-                data-testid="header-login"
-              >
-                Entrar
-              </Button>
+              {AUTH_DISABLED ? (
+                <Button
+                  size="sm"
+                  onClick={() => navigateTo("/dashboard")}
+                  className="rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow font-cinzel font-semibold"
+                  data-testid="header-dashboard"
+                >
+                  Acessar Agora
+                </Button>
+              ) : (
+                <>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={openLogin}
+                    className="rounded-full border-gold-500/20 hover:border-gold-500/40 hover:bg-gold-500/5"
+                    data-testid="header-login"
+                  >
+                    Entrar
+                  </Button>
 
-              <Button
-                size="sm"
-                onClick={openSignup}
-                className="rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow font-cinzel font-semibold"
-                data-testid="header-signup"
-              >
-                Começar
-              </Button>
+                  <Button
+                    size="sm"
+                    onClick={openSignup}
+                    className="rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow font-cinzel font-semibold"
+                    data-testid="header-signup"
+                  >
+                    Começar
+                  </Button>
+                </>
+              )}
             </div>
 
             {/* Mobile Menu Button */}
@@ -183,22 +196,34 @@ export function PublicHeader() {
               </div>
 
               <div className="flex flex-col gap-2 pt-4 border-t border-gold-500/10">
-                <Button
-                  variant="outline"
-                  onClick={openLogin}
-                  className="w-full rounded-full border-gold-500/20"
-                  data-testid="mobile-login"
-                >
-                  Entrar
-                </Button>
+                {AUTH_DISABLED ? (
+                  <Button
+                    onClick={() => navigateTo("/dashboard")}
+                    className="w-full rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue font-cinzel font-semibold"
+                    data-testid="mobile-dashboard"
+                  >
+                    Acessar Agora
+                  </Button>
+                ) : (
+                  <>
+                    <Button
+                      variant="outline"
+                      onClick={openLogin}
+                      className="w-full rounded-full border-gold-500/20"
+                      data-testid="mobile-login"
+                    >
+                      Entrar
+                    </Button>
 
-                <Button
-                  onClick={openSignup}
-                  className="w-full rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue font-cinzel font-semibold"
-                  data-testid="mobile-signup"
-                >
-                  Começar Agora
-                </Button>
+                    <Button
+                      onClick={openSignup}
+                      className="w-full rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue font-cinzel font-semibold"
+                      data-testid="mobile-signup"
+                    >
+                      Começar Agora
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
           )}

@@ -34,9 +34,10 @@ import {
 interface CheckInModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  onSuccess?: () => void;
 }
 
-export function CheckInModal({ open, onOpenChange }: CheckInModalProps) {
+export function CheckInModal({ open, onOpenChange, onSuccess }: CheckInModalProps) {
   const todaysMystery = getTodaysMystery();
   
   const [mystery, setMystery] = useState<MysteryType>(todaysMystery);
@@ -64,6 +65,7 @@ export function CheckInModal({ open, onOpenChange }: CheckInModalProps) {
       });
 
       setShowSuccess(true);
+      onSuccess?.();
       
       setTimeout(() => {
         setShowSuccess(false);
@@ -94,7 +96,7 @@ export function CheckInModal({ open, onOpenChange }: CheckInModalProps) {
   if (showSuccess) {
     return (
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="sm:max-w-md bg-gradient-to-br from-navy to-navy-dark border-gold/30">
+        <DialogContent className="sm:max-w-md bg-gradient-to-br from-slate-900 to-slate-800 border-yellow-500/30">
           <div className="flex flex-col items-center justify-center py-12 text-center animate-fade-in">
             <div className="w-20 h-20 bg-gold rounded-full flex items-center justify-center mb-6 animate-scale-in animate-pulse-gold">
               <Sparkles className="w-10 h-10 text-navy-dark" />
@@ -113,12 +115,12 @@ export function CheckInModal({ open, onOpenChange }: CheckInModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-lg bg-white dark:bg-navy-darker max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-lg bg-slate-900/95 backdrop-blur-2xl border border-yellow-500/20 max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-2xl text-navy dark:text-white flex items-center gap-2">
-            <span>💿</span> Registrar seu Terço
+          <DialogTitle className="text-2xl font-cinzel text-white flex items-center gap-2">
+            <span>📿</span> Registrar seu Terço
           </DialogTitle>
-          <DialogDescription>
+          <DialogDescription className="text-slate-400">
             Compartilhe sua experiência de oração com a comunidade.
           </DialogDescription>
         </DialogHeader>
@@ -126,7 +128,7 @@ export function CheckInModal({ open, onOpenChange }: CheckInModalProps) {
         <div className="space-y-6 py-4">
           {/* Mystery Selection */}
           <div className="space-y-2 animate-slide-up">
-            <Label htmlFor="mystery" className="text-navy dark:text-white font-medium">
+            <Label htmlFor="mystery" className="text-white font-medium">
               Qual Mistério você rezou?
             </Label>
             <Select value={mystery} onValueChange={(v) => setMystery(v as MysteryType)}>
@@ -155,7 +157,7 @@ export function CheckInModal({ open, onOpenChange }: CheckInModalProps) {
 
           {/* Reflection */}
           <div className="space-y-2 animate-slide-up animate-delay-100">
-            <Label htmlFor="reflection" className="text-navy dark:text-white font-medium">
+            <Label htmlFor="reflection" className="text-white font-medium">
               O que tocou seu coração hoje?{" "}
               <span className="text-muted-foreground font-normal">(opcional)</span>
             </Label>
@@ -174,7 +176,7 @@ export function CheckInModal({ open, onOpenChange }: CheckInModalProps) {
 
           {/* Intentions */}
           <div className="space-y-3 animate-slide-up animate-delay-200">
-            <Label className="text-navy dark:text-white font-medium">
+            <Label className="text-white font-medium">
               Intenções da Oração
             </Label>
             <div className="flex flex-wrap gap-2">
@@ -204,10 +206,9 @@ export function CheckInModal({ open, onOpenChange }: CheckInModalProps) {
             Cancelar
           </Button>
           <Button
-            variant="gold"
             onClick={handleSubmit}
             disabled={submitMutation.isPending}
-            className="sm:flex-1"
+            className="sm:flex-1 bg-gradient-to-r from-yellow-600 to-yellow-500 text-slate-900 font-cinzel font-bold hover:shadow-lg transition-all rounded-lg"
           >
             {submitMutation.isPending ? (
               <>

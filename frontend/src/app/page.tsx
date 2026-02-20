@@ -194,7 +194,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-2xl font-cinzel font-bold text-foreground mb-2">Quero rastrear e crescer</h3>
               <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                Crie sua conta 100% grátis: rastreie sequências, acesse tudo, junte-se a milhares de católicos.
+                Acesse seu painel pessoal: rastreie sequências, explore todo o conteúdo e junte-se à comunidade.
               </p>
               <Button
                 onClick={(e) => {
@@ -203,7 +203,7 @@ export default function HomePage() {
                 }}
                 className="rounded-full px-6 py-2 text-sm font-cinzel font-bold bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow transition-all"
               >
-                Criar conta grátis
+                Acessar Dashboard
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </div>

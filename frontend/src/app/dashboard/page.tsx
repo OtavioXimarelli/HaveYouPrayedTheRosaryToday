@@ -12,8 +12,10 @@ import { Button } from "@/components/ui/button";
 import {
   UserStats, CheckIn, getTodaysMystery, getMysteryInfo, MysteryType
 } from "@/types";
-import { getUserStats, getFeed } from "@/services/api";
+import { getUserStats } from "@/services/api";
+import { getStoredCheckIns } from "@/services/mockData";
 import { ComingSoonModal } from "@/components/coming-soon-modal";
+import { CheckInModal } from "@/components/check-in-modal";
 import { PageTransition } from "@/components/page-transition";
 import { useAuth } from "@/providers/auth-provider";
 
@@ -56,11 +58,12 @@ export default function DashboardPage() {
   const router = useRouter();
   const { user } = useAuth();
   const [stats, setStats] = useState<UserStats | null>(null);
-  const [recentActivity, setRecentActivity] = useState<CheckIn[]>([]);
+  const [userCheckIns, setUserCheckIns] = useState<CheckIn[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
   const [storageBannerDismissed, setStorageBannerDismissed] = useState(false);
+  const [checkInModalOpen, setCheckInModalOpen] = useState(false);
 
   const todaysMystery = getTodaysMystery();
   const mysteryInfo = getMysteryInfo(todaysMystery);
@@ -69,12 +72,9 @@ export default function DashboardPage() {
   useEffect(() => {
     async function loadData() {
       try {
-        const [statsData, feedData] = await Promise.all([
-          getUserStats(),
-          getFeed(),
-        ]);
+        const statsData = await getUserStats();
         setStats(statsData);
-        setRecentActivity(feedData.checkIns.slice(0, 5));
+        setUserCheckIns(getStoredCheckIns());
       } catch (error) {
         console.error("Error loading dashboard data:", error);
       } finally {
@@ -90,6 +90,12 @@ export default function DashboardPage() {
     const interval = setInterval(() => setCurrentTime(new Date()), 60000);
     return () => clearInterval(interval);
   }, []);
+
+  const refreshData = async () => {
+    const statsData = await getUserStats();
+    setStats(statsData);
+    setUserCheckIns(getStoredCheckIns());
+  };
 
   /* ─── Helpers ─── */
   const getGreeting = () => {
@@ -110,6 +116,10 @@ export default function DashboardPage() {
     ? new Date(stats.lastCheckIn).toDateString() === new Date().toDateString()
     : false;
 
+  const checkInDateSet = new Set(
+    userCheckIns.map((c) => new Date(c.createdAt).toDateString())
+  );
+
   const getWeekDays = () => {
     const today = new Date();
     const days = [];
@@ -123,16 +133,19 @@ export default function DashboardPage() {
           .slice(0, 3),
         dayNum: date.getDate(),
         isToday: date.toDateString() === today.toDateString(),
-        hasCheckIn:
-          i === 0
-            ? hasCheckedInToday
-            : (stats?.currentStreak ?? 0) > i,
+        hasCheckIn: checkInDateSet.has(date.toDateString()),
       });
     }
     return days;
   };
 
-  const weeklyProgress = Math.min(stats?.currentStreak ?? 0, 7);
+  const weeklyProgress = (() => {
+    const today = new Date();
+    const startOfWeek = new Date(today);
+    startOfWeek.setDate(today.getDate() - 6);
+    startOfWeek.setHours(0, 0, 0, 0);
+    return userCheckIns.filter((c) => new Date(c.createdAt) >= startOfWeek).length;
+  })();
 
   /* ─── Loading state ─── */
   if (loading) {
@@ -423,15 +436,26 @@ export default function DashboardPage() {
                         </span>
                       </div>
                     ) : (
-                      <Button
-                        size="lg"
-                        onClick={() => router.push("/como-rezar")}
-                        className="group w-full sm:w-auto px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-cinzel font-bold tracking-wide rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow-lg transition-shadow duration-300 border-2 border-gold-400/50"
-                        data-testid="start-prayer-btn"
-                      >
-                        <span>Rezar Agora</span>
-                        <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                      </Button>
+                      <div className="flex flex-col sm:flex-row gap-3">
+                        <Button
+                          size="lg"
+                          onClick={() => setCheckInModalOpen(true)}
+                          className="group w-full sm:w-auto px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-cinzel font-bold tracking-wide rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow-lg transition-shadow duration-300 border-2 border-gold-400/50"
+                          data-testid="start-prayer-btn"
+                        >
+                          <CheckCircle2 className="w-5 h-5 mr-2" />
+                          <span>Registrar Oração</span>
+                        </Button>
+                        <Button
+                          size="lg"
+                          variant="outline"
+                          onClick={() => router.push("/como-rezar")}
+                          className="group w-full sm:w-auto px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-semibold rounded-full border-white/30 text-white/90 hover:bg-white/10 transition-all"
+                        >
+                          <BookOpen className="w-4 h-4 mr-2" />
+                          <span>Ver Guia</span>
+                        </Button>
+                      </div>
                     )}
                   </div>
 
@@ -583,7 +607,7 @@ export default function DashboardPage() {
             <div className="p-5 sm:p-6 rounded-3xl glass sacred-border">
               <div className="flex items-center justify-between mb-5">
                 <h3 className="font-cinzel font-bold text-foreground text-base sm:text-lg">
-                  Atividade Recente
+                  Meu Histórico de Orações
                 </h3>
                 <button
                   className="text-sm text-gold-600 dark:text-gold-400 font-semibold hover:underline flex items-center gap-1 min-h-[44px] min-w-[44px] justify-end"
@@ -594,9 +618,9 @@ export default function DashboardPage() {
                 </button>
               </div>
 
-              {recentActivity.length > 0 ? (
+              {userCheckIns.length > 0 ? (
                 <div className="space-y-3">
-                  {recentActivity.map((activity) => {
+                  {userCheckIns.slice(0, 5).map((activity) => {
                     const style = mysteryColors[activity.mystery];
                     return (
                       <div
@@ -642,15 +666,14 @@ export default function DashboardPage() {
                     <Clock className="w-7 h-7 sm:w-8 sm:h-8 text-muted-foreground" />
                   </div>
                   <p className="text-muted-foreground text-sm sm:text-base mb-4">
-                    Nenhuma atividade recente
+                    Você ainda não registrou nenhuma oração
                   </p>
                   <Button
-                    variant="outline"
-                    onClick={() => router.push("/como-rezar")}
-                    className="rounded-full px-6 py-3 min-h-[44px]"
+                    onClick={() => setCheckInModalOpen(true)}
+                    className="rounded-full px-6 py-3 min-h-[44px] bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue font-cinzel font-bold hover:shadow-gold-glow transition-all"
                     data-testid="activity-start-praying"
                   >
-                    Começar a rezar
+                    Registrar Primeira Oração
                   </Button>
                 </div>
               )}
@@ -669,7 +692,7 @@ export default function DashboardPage() {
                 </div>
                 <div>
                   <h3 className="font-cinzel font-bold text-foreground text-lg">Recursos para Membros</h3>
-                  <p className="text-gold-600 dark:text-gold-400 text-sm">Crie sua conta gratuita para acessar</p>
+                  <p className="text-gold-600 dark:text-gold-400 text-sm">Explore conteúdos exclusivos</p>
                 </div>
               </div>
 
@@ -720,11 +743,11 @@ export default function DashboardPage() {
                   100% gratuito • Projeto open-source • Comunidade de fé
                 </p>
                 <Button
-                  onClick={() => router.push("/")}
+                  onClick={() => router.push("/ensinamentos")}
                   className="rounded-full px-6 py-5 text-sm font-cinzel font-bold bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow transition-all"
-                  data-testid="member-signup-btn"
+                  data-testid="member-explore-btn"
                 >
-                  Criar conta gratuita
+                  Explorar Ensinamentos
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
@@ -760,6 +783,11 @@ export default function DashboardPage() {
         </div>
       </main>
 
+      <CheckInModal
+        open={checkInModalOpen}
+        onOpenChange={setCheckInModalOpen}
+        onSuccess={refreshData}
+      />
       <ComingSoonModal
         isOpen={comingSoonOpen}
         onClose={() => setComingSoonOpen(false)}

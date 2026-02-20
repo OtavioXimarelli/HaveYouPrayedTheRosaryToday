@@ -142,14 +142,14 @@ export function HeroSection() {
                 <p className="text-sm text-slate-300">Explore ensinamentos da fé</p>
               </a>
 
-              {/* Path 3: Track & Grow (Signup CTA) */}
+              {/* Path 3: Track & Grow (Dashboard CTA) */}
               <button
                 onClick={() => openAuthModal("signup")}
                 className="group relative p-6 glass rounded-lg border border-gold-500/30 hover:border-gold-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/20 text-left w-full"
               >
                 <div className="text-3xl mb-3">⭐</div>
                 <h3 className="font-cinzel font-bold text-lg text-white mb-2">Rastrear & Crescer</h3>
-                <p className="text-sm text-slate-300">Crie sua conta gratuita</p>
+                <p className="text-sm text-slate-300">Acesse seu painel pessoal</p>
               </button>
             </div>
           </div>

@@ -33,7 +33,7 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 const STORAGE_KEY = "rosario-user";
-const AUTH_DISABLED = true;
+export const AUTH_DISABLED = true;
 
 function generateUserId(): string {
   return `user-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
@@ -159,7 +159,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const openAuthModal = useCallback((mode: "login" | "signup" = "login") => {
-    if (AUTH_DISABLED) return;
+    if (AUTH_DISABLED) {
+      window.location.href = "/dashboard";
+      return;
+    }
     setModalMode(mode);
     setModalOpen(true);
   }, []);
