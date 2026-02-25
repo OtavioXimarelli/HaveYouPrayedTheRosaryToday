@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Lock, User, Eye, EyeOff, ArrowRight, Shield } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export interface AuthModalProps {
   isOpen: boolean;
@@ -29,6 +30,7 @@ export function AuthModal({
   onLogin,
   onSignup,
 }: AuthModalProps) {
+  const t = useTranslations("Auth");
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -43,15 +45,15 @@ export function AuthModal({
     setError(null);
 
     if (!formData.username.trim()) {
-      setError("Informe seu nome de usuário.");
+      setError(t("errors.usernameRequired"));
       return;
     }
     if (formData.password.length < 6) {
-      setError("A senha deve ter pelo menos 6 caracteres.");
+      setError(t("errors.passwordLength"));
       return;
     }
     if (mode === "signup" && formData.password !== formData.confirmPassword) {
-      setError("As senhas não coincidem.");
+      setError(t("errors.passwordMismatch"));
       return;
     }
 
@@ -65,7 +67,7 @@ export function AuthModal({
       setFormData({ username: "", password: "", confirmPassword: "" });
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : null;
-      setError(msg ?? "Algo deu errado. Tente novamente.");
+      setError(msg ?? t("errors.generic"));
     } finally {
       setIsSubmitting(false);
     }
@@ -77,17 +79,16 @@ export function AuthModal({
   };
 
   const isLogin = mode === "login";
+  const m = isLogin ? "login" : "signup";
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="p-0 border-0 bg-transparent shadow-none max-w-sm w-full overflow-visible [&>button]:hidden">
         <DialogTitle className="sr-only">
-          {isLogin ? "Bem-vindo de volta" : "Criar conta"}
+          {t(`${m}.title`)}
         </DialogTitle>
         <DialogDescription className="sr-only">
-          {isLogin
-            ? "Entre para continuar sua jornada"
-            : "Junte-se à nossa comunidade de oração"}
+          {t(`${m}.subtitle`)}
         </DialogDescription>
         {/* ── Card ── */}
         <div className="relative rounded-2xl overflow-hidden bg-slate-900/95 backdrop-blur-2xl border border-yellow-500/20 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.8)]">
@@ -118,12 +119,10 @@ export function AuthModal({
               </div>
               <div className="text-center">
                 <h2 className="font-cinzel font-bold text-xl text-white tracking-wide">
-                  {isLogin ? "Bem-vindo de volta" : "Criar conta"}
+                  {t(`${m}.title`)}
                 </h2>
                 <p className="text-slate-400 text-sm mt-1">
-                  {isLogin
-                    ? "Entre para continuar sua jornada"
-                    : "Junte-se à nossa comunidade de oração"}
+                  {t(`${m}.subtitle`)}
                 </p>
               </div>
             </div>
@@ -132,9 +131,7 @@ export function AuthModal({
             <div className="flex items-start gap-2.5 px-3.5 py-2.5 rounded-xl bg-yellow-500/5 border border-yellow-500/15 mb-5">
               <Shield className="w-4 h-4 text-yellow-500/60 mt-0.5 flex-shrink-0" />
               <p className="text-xs text-slate-400 leading-relaxed">
-                Conta local — dados salvos{" "}
-                <span className="text-yellow-400/80 font-medium">apenas neste dispositivo</span>.
-                Limpar o cache apaga a conta.
+                {t("disclaimer")}
               </p>
             </div>
 
@@ -147,7 +144,7 @@ export function AuthModal({
                   htmlFor="auth-username"
                   className="text-sm font-medium text-slate-300"
                 >
-                  Nome de usuário
+                  {t("fields.username")}
                 </Label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
@@ -155,7 +152,7 @@ export function AuthModal({
                     id="auth-username"
                     type="text"
                     autoComplete="username"
-                    placeholder="peregrino123"
+                    placeholder={t("fields.usernamePlaceholder")}
                     value={formData.username}
                     onChange={(e) => handleInput("username", e.target.value)}
                     data-testid="auth-username"
@@ -171,7 +168,7 @@ export function AuthModal({
                   htmlFor="auth-password"
                   className="text-sm font-medium text-slate-300"
                 >
-                  Senha
+                  {t("fields.password")}
                 </Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
@@ -179,7 +176,7 @@ export function AuthModal({
                     id="auth-password"
                     type={showPassword ? "text" : "password"}
                     autoComplete={isLogin ? "current-password" : "new-password"}
-                    placeholder="••••••••"
+                    placeholder={t("fields.passwordPlaceholder")}
                     value={formData.password}
                     onChange={(e) => handleInput("password", e.target.value)}
                     data-testid="auth-password"
@@ -204,7 +201,7 @@ export function AuthModal({
                     htmlFor="auth-confirm"
                     className="text-sm font-medium text-slate-300"
                   >
-                    Confirmar senha
+                    {t("fields.confirmPassword")}
                   </Label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
@@ -212,7 +209,7 @@ export function AuthModal({
                       id="auth-confirm"
                       type={showPassword ? "text" : "password"}
                       autoComplete="new-password"
-                      placeholder="••••••••"
+                      placeholder={t("fields.passwordPlaceholder")}
                       value={formData.confirmPassword}
                       onChange={(e) => handleInput("confirmPassword", e.target.value)}
                       data-testid="auth-confirm-password"
@@ -237,19 +234,19 @@ export function AuthModal({
                 data-testid="auth-submit"
                 className="w-full h-11 rounded-full bg-gradient-to-r from-yellow-600 to-yellow-500 text-slate-900 font-cinzel font-bold tracking-wide hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:from-yellow-500 hover:to-yellow-400 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed mt-1"
               >
-                {isSubmitting ? "Aguarde…" : isLogin ? "Entrar" : "Criar conta"}
+                {isSubmitting ? t("waiting") : t(`${m}.btn`)}
               </Button>
 
               {/* Switch mode */}
               <p className="text-center text-sm text-slate-500">
-                {isLogin ? "Não tem uma conta? " : "Já tem uma conta? "}
+                {t(`${m}.switch`)}
                 <button
                   type="button"
                   onClick={onSwitchMode}
                   className="text-yellow-500 hover:text-yellow-400 font-semibold transition-colors"
                   data-testid="auth-switch-mode"
                 >
-                  {isLogin ? "Cadastre-se" : "Entrar"}
+                  {t(`${m}.switchBtn`)}
                 </button>
               </p>
 
@@ -261,7 +258,7 @@ export function AuthModal({
                   data-testid="auth-skip"
                   className="w-full flex items-center justify-center gap-1.5 text-sm text-slate-500 hover:text-slate-300 font-medium transition-colors group py-1"
                 >
-                  Explorar sem conta
+                  {t("skip")}
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                 </button>
               </div>

@@ -2,6 +2,7 @@
 
 import { Flame, Trophy, Calendar } from "lucide-react";
 import { UserStats } from "@/types";
+import { useTranslations } from "next-intl";
 
 interface StreakCounterProps {
   stats: UserStats;
@@ -10,6 +11,7 @@ interface StreakCounterProps {
 
 export function StreakCounter({ stats, variant = "compact" }: StreakCounterProps) {
   const { currentStreak, longestStreak, totalCheckIns } = stats;
+  const t = useTranslations("Streak");
 
   if (variant === "compact") {
     return (
@@ -19,11 +21,11 @@ export function StreakCounter({ stats, variant = "compact" }: StreakCounterProps
             <Flame className="w-4 h-4 text-white" />
           </div>
           <span className="font-cinzel font-bold text-foreground text-lg">{currentStreak}</span>
-          <span className="text-muted-foreground text-sm">dias seguidos</span>
+          <span className="text-muted-foreground text-sm">{t("days")}</span>
         </div>
         {currentStreak >= 7 && (
           <span className="text-xs bg-gold-500/20 text-gold-600 dark:text-gold-400 px-3 py-1 rounded-full font-semibold">
-            Pegando fogo!
+            {t("fire")}
           </span>
         )}
       </div>
@@ -35,18 +37,18 @@ export function StreakCounter({ stats, variant = "compact" }: StreakCounterProps
       <StatItem
         icon={<Flame className="w-6 h-6 text-orange-500" />}
         value={currentStreak}
-        label="Sequência Atual"
+        label={t("current")}
         highlight={currentStreak >= 7}
       />
       <StatItem
         icon={<Trophy className="w-6 h-6 text-gold-500" />}
         value={longestStreak}
-        label="Melhor Sequência"
+        label={t("longest")}
       />
       <StatItem
         icon={<Calendar className="w-6 h-6 text-blue-500" />}
         value={totalCheckIns}
-        label="Total de Orações"
+        label={t("total")}
       />
     </div>
   );

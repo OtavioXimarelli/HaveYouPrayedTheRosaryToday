@@ -1,120 +1,85 @@
-# Rosário App - Product Requirements Document
+# Rosário App - Product Requirements Document (PRD)
 
-## Original Problem Statement
-Modern UI/UX redesign for a Catholic Rosary prayer tracking app with:
-1. Real dark and light theme with personality using colors inspired by the Rosary theme (deep blues, purples, and golds)
-2. Fully functional frontend with intuitive UI
-3. Mix of ornate/rich decorative elements and glass-morphism
-4. Universal accessibility for all ages (like the Catholic Church)
-5. Pages to update: Landing page and "About Rosary" section pages
-6. **All religious content must come from official sources (Vatican)**
+## 1. Project Overview
+Rosário Vivo / Living Rosary is a high-performance Catholic spirituality platform designed to help users track their spiritual journey, specifically the Rosary prayer, while providing deep theological content and community connection. It blends traditional sacred aesthetics ("Modern Cathedral") with modern web technology.
 
-## User Personas
-- **Traditional Catholics**: Older users who appreciate the sacred aesthetic and need larger text/clear navigation
-- **Young Catholics**: Tech-savvy users who appreciate modern design with smooth animations
-- **Families**: Users who pray together and need accessible, welcoming design
-- **New to Rosary**: Users learning about the Rosary who need clear guidance
+## 2. Core Pillars
 
-## Core Requirements (Static)
-- Next.js 14 frontend with TypeScript
-- NestJS backend with MongoDB
-- Dark/Light theme system with persistence
-- Responsive design for all devices
-- Accessibility compliance (WCAG AA)
-- Portuguese (Brazilian) language
-- **Official Vatican content sources**
+### 2.1 Full Bilingual Localization (EN & PT-BR)
+*   **Complete Content Coverage**: 100% of the site (UI, metadata/SEO, articles, prayers, and community content) must be available in both English (EN) and Brazilian Portuguese (PT-BR).
+*   **Infrastructure**: Managed via `next-intl` for routing and UI strings. Articles use a structured `/content/[locale]/` directory.
+*   **Official Sources**: 
+    *   **Vatican**: All religious content must follow official Vatican standards (vatican.va).
+    *   **PT-BR**: Follow CNBB (Conferência Nacional dos Bispos do Brasil) standards.
+    *   **EN**: Follow USCCB or official Catholic Bible/Vatican English translations.
 
-## What's Been Implemented (January 2026)
+### 2.2 Style Consistency & Layout Integrity
+*   **Sacred Modern Aesthetic**: Strict adherence to "Modern Cathedral" style (Glass-morphism + Ornate Gold).
+*   **Responsive Design**: Zero broken styles across all breakpoints (Mobile, Tablet, Desktop).
+*   **Design System Consistency**:
+    *   **Typography**: Cinzel for headings (Sacred), Manrope for body (Modern).
+    *   **Color Palette**: Sacred Blue (#0F172A), Metallic Gold (#D4AF37), Sacred Cream (#FFFCF5).
+    *   **Spacing**: Generous spacing (2-3x default) to avoid "cheap" cramped looks.
+*   **Theme Continuity**: Dark and Light modes must be perfectly balanced for WCAG AA contrast.
 
-### Theme System
-- [x] ThemeProvider with system preference detection
-- [x] Theme toggle component with sun/moon icons
-- [x] LocalStorage persistence for theme preference
-- [x] CSS variables for light/dark modes
-- [x] "Sacred Cream" light theme (#FFFCF5)
-- [x] "Cathedral Night" dark theme (#020617)
+### 2.3 Performance Optimization
+*   **Performance Targets**: 90+ Lighthouse scores for Performance, Accessibility, Best Practices, and SEO.
+*   **Core Web Vitals**: Minimize LCP and CLS through image optimization and proper font loading.
+*   **Technical Implementation**:
+    *   Next.js `standalone` output for efficient containerization.
+    *   Offline capability via PWA (`next-pwa`).
+    *   Aggressive caching and lazy loading of components/images.
 
-### Typography
-- [x] Cinzel font for headings (sacred, traditional feel)
-- [x] Manrope font for body text (modern readability)
-- [x] Google Fonts integration
+### 2.4 Concise & User-Friendly UI/UX
+*   **Navigation**: Floating pill navbar (desktop) and optimized mobile header.
+*   **Interaction Design**: Intuitive modals with gold glow effects and micro-animations (Framer Motion).
+*   **Simplicity**: Focus on ease of use for all ages (Youth to Elderly).
+*   **Accessibility**: WCAG AA compliance, 44px minimum touch targets, and keyboard navigation.
 
-### Landing Page Redesign
-- [x] Bento Grid layout with asymmetrical cards
-- [x] Floating pill navbar at bottom (desktop)
-- [x] Mobile header with hamburger menu
-- [x] Hero section with rosary icon and CTA
-- [x] "About Rosary" section with interactive cards
-- [x] Community section with feature highlights
-- [x] CTA section with gold accents
-- [x] Redesigned footer with navigation links
+## 3. User Personas
+*   **Traditional Catholics**: Older users who appreciate sacred aesthetics and need large text/clear navigation.
+*   **Young Catholics**: Tech-savvy users who appreciate modern design and smooth animations.
+*   **Families**: Users who pray together and need welcoming design.
+*   **New to Rosary**: Users learning the faith who need clear, step-by-step guidance.
 
-### Content Pages (Vatican Sources)
-- [x] /como-rezar - Step-by-step prayer guide
-- [x] /historia - History timeline of the Rosary
-- [x] /misterios-do-dia - Daily mysteries with official Vatican scripture references
-- [x] /oracoes-tradicionais - Traditional prayers from Vatican sources
+## 4. Technical Requirements
+*   **Frontend**: Next.js 14/15, TypeScript, Tailwind CSS, Shadcn UI (customized).
+*   **Backend**: NestJS, MongoDB (Mongoose).
+*   **State/Data**: React Query for data fetching, LocalStorage for theme persistence.
+*   **Deployment**: Docker-based, standalone output.
 
-### Official Vatican Content Integration
-- [x] All mysteries sourced from vatican.va/special/rosary
-- [x] Scripture references from Rosarium Virginis Mariae (2002)
-- [x] Official prayer texts following CNBB standards
-- [x] Source attribution on all content pages
-- [x] Latin prayer names included for reference
-
-### Design System
-- [x] Created STYLE_GUIDE.md with comprehensive design documentation
-- [x] Color palette with Sacred Blue, Metallic Gold, Sacred Cream
-- [x] Component specifications (buttons, cards, navigation)
-- [x] Animation and effect guidelines
-- [x] Accessibility requirements documented
-
-### Components
-- [x] PageHeader - Consistent header for content pages
-- [x] ThemeToggle - Dark/light mode switcher
-- [x] Navbar - Floating pill (desktop) + header (mobile)
-- [x] Glass-morphism cards with sacred borders
-- [x] Gold glow effects on buttons
-
-## Backlog / Future Features
+## 5. Implementation Roadmap
 
 ### P0 (Critical)
-- [ ] Backend integration testing
-- [ ] User authentication flow
-- [ ] Check-in functionality
+- [ ] Full English content translation for all existing PT-BR pages.
+- [ ] Backend integration and authentication flow.
+- [ ] Check-in and Rosary tracking functionality.
+- [ ] Ensure all Vatican sources are attributed and localized.
 
 ### P1 (High Priority)
-- [ ] Dashboard page redesign
-- [ ] Community feed styling
-- [ ] Prayer request feature
-- [ ] Streak counter enhancements
+- [ ] Dashboard redesign with high performance and clean UI.
+- [ ] Community feed styling following "Modern Cathedral" aesthetic.
+- [ ] Prayer request feature.
+- [ ] PWA offline support for prayers.
 
 ### P2 (Medium Priority)
-- [ ] Audio prayers feature
-- [ ] Push notifications
-- [ ] Offline mode support
-- [ ] Multiple language support
+- [ ] Audio prayers feature.
+- [ ] Push notifications for prayer reminders.
+- [ ] Teaching Hub (/ensinamentos) expansion with 7 categories.
 
 ### P3 (Nice to Have)
-- [ ] Rosary bead animation during prayer
-- [ ] Dark mode auto-schedule
-- [ ] Sharing to social media
-- [ ] Family/group prayer sessions
+- [ ] Rosary bead animation during prayer (Framer Motion).
+- [ ] Dark mode auto-schedule.
+- [ ] Family/group prayer sessions.
 
-## Branch Information
-- Branch: `feature/ui-redesign-landing-pages`
-- Created: January 2026
-- Status: Complete - Ready for review
+## 6. Content Sources
+- Vatican Holy See: [vatican.va/special/rosary/](https://www.vatican.va/special/rosary/)
+- Rosarium Virginis Mariae: Pope Saint John Paul II (2002)
+- CNBB (Conferência Nacional dos Bispos do Brasil) for PT-BR
+- Official Vatican English translations for EN
 
-## Technical Notes
-- All changes are on feature branch (not main)
-- Frontend build compiles successfully
-- All frontend tests passing
-- Theme persistence working across reloads
-- Mobile responsive design verified
-- **Official Vatican content verified and attributed**
-
-## Content Sources
-- Vatican Holy See: https://www.vatican.va/special/rosary/
-- Rosarium Virginis Mariae: Pope Saint John Paul II (October 16, 2002)
-- CNBB (Conferência Nacional dos Bispos do Brasil) for Portuguese translations
+## 7. Design Guidelines Ref (from STYLE_GUIDE.md)
+*   **Borders**: `sacred-border` (Gold-tinted, 20% opacity).
+*   **Effects**: Glass-morphism (backdrop-blur 12-24px), Gold Glow.
+*   **Buttons**: Pill-shaped with gold gradients and micro-animations.
+*   **Transitions**: Never use `transition: all` (breaks transforms). Specific properties only.

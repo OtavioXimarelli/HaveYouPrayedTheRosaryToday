@@ -1,19 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import { BookOpen, History, Sparkles, ScrollText, Menu, X } from "lucide-react";
+import { usePathname, useRouter } from "@/i18n/routing";
+import { BookOpen, History, Sparkles, ScrollText, Menu, X, Globe, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "@/providers/theme-provider";
 import { useAuth, AUTH_DISABLED } from "@/providers/auth-provider";
+import { useTranslations, useLocale } from "next-intl";
+import { useRef } from "react";
 
 export function PublicHeader() {
   const pathname = usePathname();
+  const locale = useLocale();
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
   const { openAuthModal } = useAuth();
+  const t = useTranslations("PublicHeader");
+  const navT = useTranslations("Navbar");
+  const langRef = useRef<HTMLDivElement>(null);
 
   const toggleTheme = () => {
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
@@ -27,6 +35,21 @@ export function PublicHeader() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(event.target as Node)) {
+        setLangOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const changeLanguage = (newLocale: string) => {
+    router.replace(pathname as any, { locale: newLocale as any });
+    setLangOpen(false);
+  };
+
   const openSignup = () => {
     openAuthModal("signup");
     setMobileMenuOpen(false);
@@ -38,15 +61,15 @@ export function PublicHeader() {
   };
 
   const navigateTo = (path: string) => {
-    window.location.href = path;
+    router.push(path as any);
     setMobileMenuOpen(false);
   };
 
   const navLinks = [
-    { label: "Como Rezar", icon: BookOpen, path: "/como-rezar" },
-    { label: "História", icon: History, path: "/historia" },
-    { label: "Mistérios", icon: Sparkles, path: "/misterios-do-dia" },
-    { label: "Orações", icon: ScrollText, path: "/oracoes-tradicionais" },
+    { label: navT("howToPray"), icon: BookOpen, path: "/como-rezar" },
+    { label: navT("history"), icon: History, path: "/historia" },
+    { label: navT("mysteries"), icon: Sparkles, path: "/misterios-do-dia" },
+    { label: navT("prayers"), icon: ScrollText, path: "/oracoes-tradicionais" },
   ];
 
   return (
@@ -101,10 +124,44 @@ export function PublicHeader() {
 
             {/* Desktop Actions */}
             <div className="hidden md:flex items-center gap-3">
+              {/* Language Switcher */}
+              <div className="relative" ref={langRef}>
+                <button
+                  onClick={() => setLangOpen(!langOpen)}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border transition-all duration-300 ${
+                    langOpen 
+                      ? "bg-gold-500/10 border-gold-500/30 text-gold-600 dark:text-gold-400" 
+                      : "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  }`}
+                  aria-label="Change language"
+                >
+                  <Globe className="w-4 h-4" />
+                  <span className="text-xs font-bold uppercase">{locale}</span>
+                  <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${langOpen ? "rotate-180" : ""}`} />
+                </button>
+
+                {langOpen && (
+                  <div className="absolute top-full mt-2 right-0 w-40 bg-sacred-cream dark:bg-slate-900 rounded-xl border border-gold-500/10 shadow-xl overflow-hidden p-1 z-[60] animate-in fade-in slide-in-from-top-2">
+                    <button
+                      onClick={() => changeLanguage("pt")}
+                      className={`flex items-center gap-2 w-full px-3 py-2.5 rounded-lg text-xs font-medium transition-colors ${locale === 'pt' ? "bg-gold-500/10 text-gold-600 dark:text-gold-400" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"}`}
+                    >
+                      <span className="text-base">🇧🇷</span> Português
+                    </button>
+                    <button
+                      onClick={() => changeLanguage("en")}
+                      className={`flex items-center gap-2 w-full px-3 py-2.5 rounded-lg text-xs font-medium transition-colors ${locale === 'en' ? "bg-gold-500/10 text-gold-600 dark:text-gold-400" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"}`}
+                    >
+                      <span className="text-base">🇺🇸</span> English
+                    </button>
+                  </div>
+                )}
+              </div>
+
               <button
                 onClick={toggleTheme}
                 className="w-9 h-9 rounded-full glass sacred-border flex items-center justify-center hover:shadow-gold-glow transition-all duration-300"
-                aria-label="Alternar tema"
+                aria-label={t("theme")}
                 data-testid="theme-toggle"
               >
                 <Sun className="h-4 w-4 rotate-0 scale-100 text-gold-600 transition-transform duration-300 dark:-rotate-90 dark:scale-0" />
@@ -118,7 +175,7 @@ export function PublicHeader() {
                   className="rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow font-cinzel font-semibold"
                   data-testid="header-dashboard"
                 >
-                  Acessar Agora
+                  {t("accessNow")}
                 </Button>
               ) : (
                 <>
@@ -129,7 +186,7 @@ export function PublicHeader() {
                     className="rounded-full border-gold-500/20 hover:border-gold-500/40 hover:bg-gold-500/5"
                     data-testid="header-login"
                   >
-                    Entrar
+                    {t("login")}
                   </Button>
 
                   <Button
@@ -138,95 +195,24 @@ export function PublicHeader() {
                     className="rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow font-cinzel font-semibold"
                     data-testid="header-signup"
                   >
-                    Começar
+                    {t("start")}
                   </Button>
                 </>
               )}
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Actions */}
             <div className="flex md:hidden items-center gap-2">
               <button
                 onClick={toggleTheme}
                 className="w-9 h-9 rounded-full glass sacred-border flex items-center justify-center"
-                aria-label="Alternar tema"
+                aria-label={t("theme")}
               >
                 <Sun className="h-4 w-4 rotate-0 scale-100 text-gold-600 transition-transform duration-300 dark:-rotate-90 dark:scale-0" />
                 <Moon className="absolute h-4 w-4 rotate-90 scale-0 text-gold-400 transition-transform duration-300 dark:rotate-0 dark:scale-100" />
               </button>
-
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="w-9 h-9 rounded-full glass sacred-border flex items-center justify-center"
-                aria-label="Menu"
-                data-testid="mobile-menu-button"
-              >
-                {mobileMenuOpen ? (
-                  <X className="w-5 h-5 text-foreground" />
-                ) : (
-                  <Menu className="w-5 h-5 text-foreground" />
-                )}
-              </button>
             </div>
           </div>
-
-          {/* Mobile Menu */}
-          {mobileMenuOpen && (
-            <div className="md:hidden border-t border-gold-500/10 py-4 animate-fade-in">
-              <div className="space-y-1 mb-4">
-                {navLinks.map((link) => {
-                  const Icon = link.icon;
-                  const isActive = pathname === link.path;
-                  return (
-                    <button
-                      key={link.path}
-                      onClick={() => navigateTo(link.path)}
-                      className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all ${
-                        isActive
-                          ? "bg-gold-500/10 text-gold-600 dark:text-gold-400 font-medium"
-                          : "text-muted-foreground hover:bg-muted/50"
-                      }`}
-                      data-testid={`mobile-nav-${link.path.replace("/", "")}`}
-                    >
-                      <Icon className="w-5 h-5" />
-                      <span>{link.label}</span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              <div className="flex flex-col gap-2 pt-4 border-t border-gold-500/10">
-                {AUTH_DISABLED ? (
-                  <Button
-                    onClick={() => navigateTo("/dashboard")}
-                    className="w-full rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue font-cinzel font-semibold"
-                    data-testid="mobile-dashboard"
-                  >
-                    Acessar Agora
-                  </Button>
-                ) : (
-                  <>
-                    <Button
-                      variant="outline"
-                      onClick={openLogin}
-                      className="w-full rounded-full border-gold-500/20"
-                      data-testid="mobile-login"
-                    >
-                      Entrar
-                    </Button>
-
-                    <Button
-                      onClick={openSignup}
-                      className="w-full rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue font-cinzel font-semibold"
-                      data-testid="mobile-signup"
-                    >
-                      Começar Agora
-                    </Button>
-                  </>
-                )}
-              </div>
-            </div>
-          )}
         </nav>
       </header>
 

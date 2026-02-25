@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useSubmitCheckIn } from "@/hooks/use-rosary";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslations } from "next-intl";
 import {
   MysteryType,
   IntentionTag,
@@ -26,46 +27,47 @@ interface CheckInModalProps {
   onSuccess?: () => void;
 }
 
-const MYSTERY_META: Record<
-  MysteryType,
-  { emoji: string; gradient: string; ring: string; bg: string; label: string; days: string }
-> = {
-  joyful: {
-    emoji: "☀️",
-    gradient: "from-amber-500 to-yellow-500",
-    ring: "ring-amber-400/60",
-    bg: "bg-amber-500/10",
-    label: "Gozosos",
-    days: "Seg & Sáb",
-  },
-  sorrowful: {
-    emoji: "✝️",
-    gradient: "from-purple-500 to-violet-600",
-    ring: "ring-purple-400/60",
-    bg: "bg-purple-500/10",
-    label: "Dolorosos",
-    days: "Ter & Sex",
-  },
-  glorious: {
-    emoji: "👑",
-    gradient: "from-yellow-500 to-amber-600",
-    ring: "ring-yellow-400/60",
-    bg: "bg-yellow-500/10",
-    label: "Gloriosos",
-    days: "Dom & Qua",
-  },
-  luminous: {
-    emoji: "💧",
-    gradient: "from-sky-500 to-blue-600",
-    ring: "ring-sky-400/60",
-    bg: "bg-sky-500/10",
-    label: "Luminosos",
-    days: "Quinta-feira",
-  },
-};
-
 export function CheckInModal({ open, onOpenChange, onSuccess }: CheckInModalProps) {
   const todaysMystery = getTodaysMystery();
+  const t = useTranslations("CheckIn");
+
+  const MYSTERY_META: Record<
+    MysteryType,
+    { emoji: string; gradient: string; ring: string; bg: string; label: string; days: string }
+  > = {
+    joyful: {
+      emoji: "☀️",
+      gradient: "from-amber-500 to-yellow-500",
+      ring: "ring-amber-400/60",
+      bg: "bg-amber-500/10",
+      label: t("mysteries.joyful.label"),
+      days: t("mysteries.joyful.days"),
+    },
+    sorrowful: {
+      emoji: "✝️",
+      gradient: "from-purple-500 to-violet-600",
+      ring: "ring-purple-400/60",
+      bg: "bg-purple-500/10",
+      label: t("mysteries.sorrowful.label"),
+      days: t("mysteries.sorrowful.days"),
+    },
+    glorious: {
+      emoji: "👑",
+      gradient: "from-yellow-500 to-amber-600",
+      ring: "ring-yellow-400/60",
+      bg: "bg-yellow-500/10",
+      label: t("mysteries.glorious.label"),
+      days: t("mysteries.glorious.days"),
+    },
+    luminous: {
+      emoji: "💧",
+      gradient: "from-sky-500 to-blue-600",
+      ring: "ring-sky-400/60",
+      bg: "bg-sky-500/10",
+      label: t("mysteries.luminous.label"),
+      days: t("mysteries.luminous.days"),
+    },
+  };
 
   const [mystery, setMystery] = useState<MysteryType>(todaysMystery);
   const [reflection, setReflection] = useState("");
@@ -101,14 +103,14 @@ export function CheckInModal({ open, onOpenChange, onSuccess }: CheckInModalProp
       }, 2800);
 
       toast({
-        title: "Terço registrado! 🙏",
-        description: "Sua oração foi salva. Que Deus te abençoe.",
+        title: t("success.toastTitle"),
+        description: t("success.toastDesc"),
         variant: "success",
       });
     } catch (error) {
       toast({
-        title: "Erro",
-        description: error instanceof Error ? error.message : "Algo deu errado",
+        title: t("error.title"),
+        description: error instanceof Error ? error.message : t("error.generic"),
         variant: "destructive",
       });
     }
@@ -119,8 +121,8 @@ export function CheckInModal({ open, onOpenChange, onSuccess }: CheckInModalProp
     return (
       <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogContent className="sm:max-w-sm bg-slate-900/98 backdrop-blur-2xl border border-yellow-500/20 rounded-2xl">
-          <DialogTitle className="sr-only">Oração Registrada</DialogTitle>
-          <DialogDescription className="sr-only">Seu terço foi registrado com sucesso.</DialogDescription>
+          <DialogTitle className="sr-only">{t("success.title")}</DialogTitle>
+          <DialogDescription className="sr-only">{t("success.desc")}</DialogDescription>
           <div className="flex flex-col items-center justify-center py-10 text-center gap-5">
             <div className="relative">
               <div className="w-24 h-24 rounded-full bg-gradient-to-br from-yellow-500 to-amber-600 flex items-center justify-center shadow-2xl shadow-yellow-500/30 animate-pulse">
@@ -132,10 +134,10 @@ export function CheckInModal({ open, onOpenChange, onSuccess }: CheckInModalProp
             </div>
             <div>
               <h2 className="text-2xl font-cinzel font-bold text-white mb-2">
-                Ave Maria! 🙏
+                {t("success.title")}
               </h2>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                Seu terço foi registrado.<br />Que Nossa Senhora interceda por você.
+              <p className="text-slate-400 text-sm leading-relaxed whitespace-pre-line">
+                {t("success.desc")}
               </p>
             </div>
           </div>
@@ -156,10 +158,10 @@ export function CheckInModal({ open, onOpenChange, onSuccess }: CheckInModalProp
             </div>
             <div>
               <DialogTitle className="text-lg font-cinzel font-bold text-white leading-tight">
-                Registrar Terço
+                {t("title")}
               </DialogTitle>
               <DialogDescription className="text-slate-400 text-xs mt-0.5">
-                Registre sua oração de hoje
+                {t("subtitle")}
               </DialogDescription>
             </div>
           </div>
@@ -171,7 +173,7 @@ export function CheckInModal({ open, onOpenChange, onSuccess }: CheckInModalProp
           {/* Mystery Cards */}
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">
-              Qual mistério você rezou?
+              {t("mystery")}
             </p>
             <div className="grid grid-cols-2 gap-3">
               {MYSTERIES.map((m) => {
@@ -190,7 +192,7 @@ export function CheckInModal({ open, onOpenChange, onSuccess }: CheckInModalProp
                   >
                     {isToday && (
                       <span className="absolute top-2 right-2 text-[10px] px-1.5 py-0.5 rounded-full bg-yellow-500/20 text-yellow-400 font-bold uppercase tracking-wide">
-                        Hoje
+                        {t("today")}
                       </span>
                     )}
                     <div
@@ -218,7 +220,7 @@ export function CheckInModal({ open, onOpenChange, onSuccess }: CheckInModalProp
           {/* Intentions */}
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">
-              Intenções <span className="normal-case font-normal text-slate-600">(opcional)</span>
+              {t("intentions")} <span className="normal-case font-normal text-slate-600">{t("optional")}</span>
             </p>
             <div className="flex flex-wrap gap-2">
               {INTENTION_TAGS.map((tag) => {
@@ -234,7 +236,7 @@ export function CheckInModal({ open, onOpenChange, onSuccess }: CheckInModalProp
                     }`}
                   >
                     <span>{tag.emoji}</span>
-                    <span>{tag.label}</span>
+                    <span>{t(`intentionTags.${tag.value}`)}</span>
                   </button>
                 );
               })}
@@ -244,10 +246,10 @@ export function CheckInModal({ open, onOpenChange, onSuccess }: CheckInModalProp
           {/* Reflection */}
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">
-              Reflexão <span className="normal-case font-normal text-slate-600">(opcional)</span>
+              {t("reflection")} <span className="normal-case font-normal text-slate-600">{t("optional")}</span>
             </p>
             <Textarea
-              placeholder="O que tocou seu coração durante a oração?"
+              placeholder={t("placeholder")}
               value={reflection}
               onChange={(e) => setReflection(e.target.value)}
               maxLength={500}
@@ -267,7 +269,7 @@ export function CheckInModal({ open, onOpenChange, onSuccess }: CheckInModalProp
             onClick={() => onOpenChange(false)}
             className="text-slate-500 hover:text-slate-300 text-sm transition-colors flex-shrink-0"
           >
-            Cancelar
+            {t("cancel")}
           </button>
           <Button
             onClick={handleSubmit}
@@ -277,11 +279,11 @@ export function CheckInModal({ open, onOpenChange, onSuccess }: CheckInModalProp
             {submitMutation.isPending ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                Registrando…
+                {t("submitting")}
               </>
             ) : (
               <>
-                Registrar Oração
+                {t("submit")}
                 <ChevronRight className="w-4 h-4 ml-1" />
               </>
             )}
