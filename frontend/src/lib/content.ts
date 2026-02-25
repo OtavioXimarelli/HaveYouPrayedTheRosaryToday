@@ -1,24 +1,13 @@
 /**
  * Content helpers - reads MDX files from /content at build time using fs + gray-matter.
  * All functions are server-side only (Node.js fs). Do NOT import in client components.
- *
- * Frontmatter schema:
- *   title:       string   - Article/lesson title
- *   slug:        string   - URL-safe identifier (matches filename without .mdx)
- *   tema:        string   - Category key (santos | teologia | historia | ...)
- *   level:       string   - "iniciante" | "intermediario" | "avancado" (optional)
- *   readingTime: string   - e.g. "10 min"
- *   tags:        string[] - Topic tags
- *   order:       number   - Sort order within a caminho (optional)
- *   excerpt:     string   - Short summary shown in cards
- *   publishedAt: string   - ISO date string
  */
 
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-const CONTENT_ROOT = path.join(process.cwd(), "content", "ensinamentos");
+const CONTENT_ROOT = path.join(process.cwd(), "content");
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -55,13 +44,17 @@ function getMdxFiles(dir: string): string[] {
   return fs.readdirSync(dir).filter((f) => f.endsWith(".mdx"));
 }
 
+function getRootForLocale(locale: string): string {
+  return path.join(CONTENT_ROOT, locale, "ensinamentos");
+}
+
 // ─── Ensinamentos (tema-based articles) ──────────────────────────────────────
 
 /**
- * Get all articles for a given tema category.
+ * Get all articles for a given tema category and locale.
  */
-export function getArticlesByTema(tema: string): ArticleMeta[] {
-  const dir = path.join(CONTENT_ROOT, tema);
+export function getArticlesByTema(tema: string, locale: string = "pt"): ArticleMeta[] {
+  const dir = path.join(getRootForLocale(locale), tema);
   return getMdxFiles(dir)
     .map((file) => {
       const { data } = readMdx(path.join(dir, file));
@@ -71,40 +64,46 @@ export function getArticlesByTema(tema: string): ArticleMeta[] {
 }
 
 /**
- * Get a single article by tema + slug.
+ * Get a single article by tema + slug + locale.
  */
-export function getArticle(tema: string, slug: string): Article | null {
-  const filePath = path.join(CONTENT_ROOT, tema, `${slug}.mdx`);
+export function getArticle(tema: string, slug: string, locale: string = "pt"): Article | null {
+  const filePath = path.join(getRootForLocale(locale), tema, `${slug}.mdx`);
   if (!fs.existsSync(filePath)) return null;
   const { data, content } = readMdx(filePath);
   return { ...data, content };
 }
 
 /**
- * Get all [tema, slug] pairs for generateStaticParams.
+ * Get all [locale, tema, slug] pairs for generateStaticParams.
  */
-export function getAllArticleParams(): { categoria: string; slug: string }[] {
-  const temas = fs.existsSync(CONTENT_ROOT)
-    ? fs.readdirSync(CONTENT_ROOT, { withFileTypes: true })
-        .filter((d) => d.isDirectory() && d.name !== "caminhos")
-        .map((d) => d.name)
-    : [];
+export function getAllArticleParams(): { locale: string; categoria: string; slug: string }[] {
+  const locales = ["pt", "en"];
+  
+  return locales.flatMap(locale => {
+    const root = getRootForLocale(locale);
+    const temas = fs.existsSync(root)
+      ? fs.readdirSync(root, { withFileTypes: true })
+          .filter((d) => d.isDirectory() && d.name !== "caminhos")
+          .map((d) => d.name)
+      : [];
 
-  return temas.flatMap((tema) =>
-    getMdxFiles(path.join(CONTENT_ROOT, tema)).map((file) => ({
-      categoria: tema,
-      slug: file.replace(".mdx", ""),
-    }))
-  );
+    return temas.flatMap((tema) =>
+      getMdxFiles(path.join(root, tema)).map((file) => ({
+        locale,
+        categoria: tema,
+        slug: file.replace(".mdx", ""),
+      }))
+    );
+  });
 }
 
 // ─── Caminhos (guided path lessons) ─────────────────────────────────────────
 
 /**
- * Get all lessons for a given caminho path, sorted by `order`.
+ * Get all lessons for a given caminho path and locale, sorted by `order`.
  */
-export function getCaminhoLessons(caminho: string): ArticleMeta[] {
-  const dir = path.join(CONTENT_ROOT, "caminhos", caminho);
+export function getCaminhoLessons(caminho: string, locale: string = "pt"): ArticleMeta[] {
+  const dir = path.join(getRootForLocale(locale), "caminhos", caminho);
   return getMdxFiles(dir)
     .map((file) => {
       const { data } = readMdx(path.join(dir, file));
@@ -114,33 +113,38 @@ export function getCaminhoLessons(caminho: string): ArticleMeta[] {
 }
 
 /**
- * Get a single lesson by caminho + slug.
+ * Get a single lesson by caminho + slug + locale.
  */
-export function getCaminhoLesson(caminho: string, slug: string): Article | null {
-  const filePath = path.join(CONTENT_ROOT, "caminhos", caminho, `${slug}.mdx`);
+export function getCaminhoLesson(caminho: string, slug: string, locale: string = "pt"): Article | null {
+  const filePath = path.join(getRootForLocale(locale), "caminhos", caminho, `${slug}.mdx`);
   if (!fs.existsSync(filePath)) return null;
   const { data, content } = readMdx(filePath);
   return { ...data, content };
 }
 
 /**
- * Get all [path, slug] pairs for generateStaticParams.
+ * Get all [locale, path, slug] pairs for generateStaticParams.
  */
-export function getAllCaminhoParams(): { path: string; slug: string }[] {
+export function getAllCaminhoParams(): { locale: string; path: string; slug: string }[] {
+  const locales = ["pt", "en"];
   const caminhos = ["iniciante", "intermediario", "avancado"];
-  return caminhos.flatMap((caminho) =>
-    getMdxFiles(path.join(CONTENT_ROOT, "caminhos", caminho)).map((file) => ({
-      path: caminho,
-      slug: file.replace(".mdx", ""),
-    }))
+  
+  return locales.flatMap(locale => 
+    caminhos.flatMap((caminho) =>
+      getMdxFiles(path.join(getRootForLocale(locale), "caminhos", caminho)).map((file) => ({
+        locale,
+        path: caminho,
+        slug: file.replace(".mdx", ""),
+      }))
+    )
   );
 }
 
 /**
- * Get related articles in the same tema (excluding current slug).
+ * Get related articles in the same tema (excluding current slug) for a locale.
  */
-export function getRelatedArticles(tema: string, currentSlug: string, limit = 3): ArticleMeta[] {
-  return getArticlesByTema(tema)
+export function getRelatedArticles(tema: string, currentSlug: string, locale: string = "pt", limit = 3): ArticleMeta[] {
+  return getArticlesByTema(tema, locale)
     .filter((a) => a.slug !== currentSlug)
     .slice(0, limit);
 }

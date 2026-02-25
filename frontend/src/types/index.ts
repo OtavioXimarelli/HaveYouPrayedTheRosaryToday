@@ -89,6 +89,7 @@ export interface MysteryInfo {
   type: MysteryType;
   name: string;
   description: string;
+  descriptionEn?: string;
   day: number[]; // 0 = Sunday, 1 = Monday, etc.
 }
 
@@ -97,24 +98,28 @@ export const MYSTERIES: MysteryInfo[] = [
     type: "joyful",
     name: "Mistérios Gozosos",
     description: "Refletindo sobre a alegria da Encarnação",
+    descriptionEn: "Reflecting on the joy of the Incarnation",
     day: [1, 6], // Segunda, Sábado
   },
   {
     type: "sorrowful",
     name: "Mistérios Dolorosos",
     description: "Meditando sobre a paixão e sacrifício de Cristo",
+    descriptionEn: "Meditating on the passion and sacrifice of Christ",
     day: [2, 5], // Terça, Sexta
   },
   {
     type: "glorious",
     name: "Mistérios Gloriosos",
     description: "Celebrando a Ressurreição e a glória",
+    descriptionEn: "Celebrating the Resurrection and glory",
     day: [0, 3], // Domingo, Quarta
   },
   {
     type: "luminous",
     name: "Mistérios Luminosos",
     description: "Os mistérios da luz no ministério de Cristo",
+    descriptionEn: "The mysteries of light in the ministry of Christ",
     day: [4], // Quinta
   },
 ];

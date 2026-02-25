@@ -1,7 +1,7 @@
 {
-  "name": "Rosário Vivo - Viva sua fé, cada dia",
+  "name": "Rosário Vivo | Living Rosary",
   "short_name": "Rosário Vivo",
-  "description": "Guias, métodos dos santos e práticas de oração para viver o Rosário diariamente. Comunidade aberta, gratuita e open-source.",
+  "description": "Viva sua fé, cada dia. Live your faith, every day. Catholic Rosary platform.",
   "start_url": "/?source=pwa",
   "display": "standalone",
   "background_color": "#F8F4EE",

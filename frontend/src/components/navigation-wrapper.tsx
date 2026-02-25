@@ -1,34 +1,41 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/i18n/routing";
 import { PublicHeader } from "./public-header";
 import { Navbar } from "./navbar";
+import { MobileNav } from "./mobile-nav";
+import { OnboardingModal } from "./onboarding-modal";
+import { useAuth } from "@/providers/auth-provider";
 
 export function NavigationWrapper() {
   const pathname = usePathname();
-  
-  // Check if user is authenticated (you'll need to implement proper auth check)
-  // For now, we'll just check if we're on the dashboard page
-  const isAuthenticated = false; // TODO: Replace with actual auth check
+  const { isLoggedIn } = useAuth();
   
   // Public pages that should show the header-style navigation
-  const publicPages = ["/", "/como-rezar", "/historia", "/misterios-do-dia", "/oracoes-tradicionais"];
-  const isPublicPage = publicPages.includes(pathname);
+  const publicPages = ["/", "/como-rezar", "/historia", "/misterios-do-dia", "/oracoes-tradicionais", "/about"];
+  const isPublicPage = publicPages.includes(pathname as string);
   
   // Only show floating navbar on dashboard when authenticated
   const isDashboardPage = pathname === "/dashboard";
-  const shouldShowFloatingNav = isDashboardPage && isAuthenticated;
+  const shouldShowFloatingNav = isDashboardPage && isLoggedIn;
   
-  // Show public header for all public pages regardless of auth status
-  if (isPublicPage) {
+  const renderNav = () => {
+    if (isPublicPage) {
+      return <PublicHeader />;
+    }
+    
+    if (shouldShowFloatingNav) {
+      return <Navbar />;
+    }
+    
     return <PublicHeader />;
-  }
-  
-  // Show floating navbar only on dashboard when authenticated
-  if (shouldShowFloatingNav) {
-    return <Navbar />;
-  }
-  
-  // For other authenticated pages, show public header (can be customized later)
-  return <PublicHeader />;
+  };
+
+  return (
+    <>
+      <OnboardingModal />
+      {renderNav()}
+      <MobileNav />
+    </>
+  );
 }

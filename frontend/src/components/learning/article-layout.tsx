@@ -1,8 +1,9 @@
 "use client";
 
 import { Clock, Tag, ArrowLeft, BookOpen } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 import { BreadcrumbNav } from "./breadcrumb-nav";
+import { useTranslations, useLocale } from "next-intl";
 
 interface ArticleMeta {
   title: string;
@@ -35,31 +36,6 @@ interface ArticleLayoutProps {
   relatedBasePath?: string;
 }
 
-const TEMA_LABELS: Record<string, string> = {
-  santos: "Santos",
-  teologia: "Teologia",
-  historia: "História",
-  oracoes: "Orações",
-  sacramentos: "Sacramentos",
-  maria: "Maria",
-  escritura: "Escritura",
-};
-
-const LEVEL_LABELS: Record<string, { label: string; color: string }> = {
-  iniciante: {
-    label: "Iniciante",
-    color: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
-  },
-  intermediario: {
-    label: "Intermediário",
-    color: "bg-gold-500/15 text-gold-700 dark:text-gold-400 border-gold-500/30",
-  },
-  avancado: {
-    label: "Avançado",
-    color: "bg-purple-500/15 text-purple-700 dark:text-purple-400 border-purple-500/30",
-  },
-};
-
 export function ArticleLayout({
   meta,
   children,
@@ -68,8 +44,27 @@ export function ArticleLayout({
   relatedBasePath,
 }: ArticleLayoutProps) {
   const router = useRouter();
+  const t = useTranslations("Article");
+  const teachingsT = useTranslations("Teachings");
+  const locale = useLocale();
+
+  const LEVEL_LABELS: Record<string, { label: string; color: string }> = {
+    iniciante: {
+      label: teachingsT("pathLabels.iniciante"),
+      color: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
+    },
+    intermediario: {
+      label: teachingsT("pathLabels.intermediario"),
+      color: "bg-gold-500/15 text-gold-700 dark:text-gold-400 border-gold-500/30",
+    },
+    avancado: {
+      label: teachingsT("pathLabels.avancado"),
+      color: "bg-purple-500/15 text-purple-700 dark:text-purple-400 border-purple-500/30",
+    },
+  };
+
   const levelInfo = meta.level ? LEVEL_LABELS[meta.level] : null;
-  const temaLabel = TEMA_LABELS[meta.tema] ?? meta.tema;
+  const temaLabel = teachingsT(`topics.${meta.tema}.title` as any);
 
   const breadcrumbItems = [
     ...breadcrumbBase,
@@ -126,7 +121,7 @@ export function ArticleLayout({
                   {meta.tags.join(", ")}
                 </span>
                 <span className="ml-auto text-xs">
-                  {new Date(meta.publishedAt).toLocaleDateString("pt-BR", {
+                  {new Date(meta.publishedAt).toLocaleDateString(locale === 'pt' ? "pt-BR" : "en-US", {
                     day: "numeric",
                     month: "long",
                     year: "numeric",
@@ -134,6 +129,29 @@ export function ArticleLayout({
                 </span>
               </div>
             </header>
+
+            {/* Quick Wisdom Summary Box */}
+            <div className="mb-10 p-6 rounded-[2rem] glass border-gold-500/20 bg-gradient-to-br from-gold-500/5 to-transparent relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-gold-500/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <BookOpen className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-cinzel font-bold text-lg text-foreground mb-2">
+                    {t("summaryTitle")}
+                  </h3>
+                  <div className="text-sm text-muted-foreground leading-relaxed">
+                    {meta.excerpt.split('. ').map((sentence, i) => (
+                      <div key={i} className="flex items-start gap-2 mb-1.5">
+                        <div className="w-1.5 h-1.5 rounded-full bg-gold-500 mt-1.5 flex-shrink-0" />
+                        <span>{sentence}{sentence.endsWith('.') ? '' : '.'}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
 
             {/* MDX Body */}
             <div className="prose prose-neutral dark:prose-invert prose-lg max-w-none
@@ -159,7 +177,7 @@ export function ArticleLayout({
                 className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-gold-600 dark:hover:text-gold-400 transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
-                Voltar
+                {t("back")}
               </button>
             </div>
           </article>
@@ -169,7 +187,7 @@ export function ArticleLayout({
             <aside className="lg:w-72 xl:w-80 flex-shrink-0">
               <div className="sticky top-24">
                 <h3 className="font-cinzel text-sm font-bold uppercase tracking-widest text-muted-foreground mb-4">
-                  Leituras Relacionadas
+                  {t("related")}
                 </h3>
                 <div className="flex flex-col gap-3">
                   {related.map((item) => (

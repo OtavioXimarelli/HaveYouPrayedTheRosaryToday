@@ -3,6 +3,7 @@
 import { Lock, Heart, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/providers/auth-provider";
+import { useTranslations } from "next-intl";
 
 interface LockedContentProps {
   title: string;
@@ -18,6 +19,7 @@ export function LockedContent({
   variant = "default" 
 }: LockedContentProps) {
   const { openAuthModal } = useAuth();
+  const t = useTranslations("LockedContent");
 
   if (variant === "minimal") {
     return (
@@ -33,7 +35,7 @@ export function LockedContent({
           className="rounded-full border-gold-500/30 text-gold-600 dark:text-gold-400 hover:bg-gold-500/10"
           data-testid="locked-content-login-btn"
         >
-          Entrar para desbloquear
+          {t("loginToUnlock")}
         </Button>
       </div>
     );
@@ -49,7 +51,7 @@ export function LockedContent({
             data-testid="locked-content-card-btn"
           >
             <Lock className="w-4 h-4 mr-2" />
-            Entrar para ver conteúdo completo
+            {t("viewFull")}
           </Button>
         </div>
         <div className="blur-sm pointer-events-none select-none p-6 glass sacred-border rounded-2xl">
@@ -72,7 +74,7 @@ export function LockedContent({
           </div>
           <div>
             <h3 className="text-xl sm:text-2xl font-cinzel font-bold">{title}</h3>
-            <p className="text-white/60 text-sm">Conteúdo para membros</p>
+            <p className="text-white/60 text-sm">{t("memberContent")}</p>
           </div>
         </div>
 
@@ -96,7 +98,7 @@ export function LockedContent({
             className="rounded-full px-8 py-6 text-base font-cinzel font-bold bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow-lg transition-all"
             data-testid="locked-signup-btn"
           >
-            Criar conta gratuita
+            {t("createFree")}
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
           <Button
@@ -106,12 +108,12 @@ export function LockedContent({
             className="rounded-full px-8 py-6 text-base font-semibold border-white/20 text-white hover:bg-white/10"
             data-testid="locked-login-btn"
           >
-            Já tenho conta
+            {t("alreadyHave")}
           </Button>
         </div>
 
         <p className="text-white/40 text-xs mt-4 text-center sm:text-left">
-          100% gratuito • Projeto open-source • Comunidade de fé
+          {t("footer")}
         </p>
       </div>
     </div>

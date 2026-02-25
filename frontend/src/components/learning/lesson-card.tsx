@@ -1,7 +1,8 @@
 "use client";
 
 import { Check, Clock, Lock, ArrowRight } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 
 interface LessonCardProps {
   title: string;
@@ -25,6 +26,7 @@ export function LessonCard({
   icon = "📖"
 }: LessonCardProps) {
   const router = useRouter();
+  const t = useTranslations("Lesson");
 
   const handleClick = () => {
     if (!isLocked) {
@@ -69,12 +71,12 @@ export function LessonCard({
           <div className="flex items-center gap-2 mb-1">
             {isCompleted && (
               <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-semibold">
-                Concluído
+                {t("completed")}
               </span>
             )}
             {isLocked && (
               <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-semibold">
-                Requer login
+                {t("locked")}
               </span>
             )}
           </div>

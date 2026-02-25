@@ -1,5 +1,8 @@
-/** @type {import('next').NextConfig} */
 const path = require('path');
+const createNextIntlPlugin = require('next-intl/plugin');
+ 
+const withNextIntl = createNextIntlPlugin();
+
 const withPWA = require('next-pwa')({
   dest: 'public',
   disable: process.env.NODE_ENV === 'development',
@@ -28,6 +31,7 @@ const withMDX = require('@next/mdx')({
   },
 });
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
   outputFileTracingRoot: path.join(__dirname, '..'),
@@ -35,7 +39,6 @@ const nextConfig = {
     '/': ['./public/**/*', './content/**/*'],
   },
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-  // Empty turbopack config to silence the webpack/turbopack warning in Next.js 16
   turbopack: {},
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api',
@@ -61,4 +64,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPWA(withMDX(nextConfig));
+module.exports = withNextIntl(withPWA(withMDX(nextConfig)));
