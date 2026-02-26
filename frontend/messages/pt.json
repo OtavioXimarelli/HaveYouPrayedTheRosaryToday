@@ -94,13 +94,40 @@
     "actions": {
       "howToPray": "Como Rezar",
       "mysteries": "Mistérios",
-      "teachings": "Formação",
+      "teachings": "Ensinamentos",
       "resources": "Recursos",
       "history": "Histórico"
     },
     "quote": {
       "text": "“Reze o Rosário todos os dias para obter a paz no mundo e o fim da guerra.”",
       "author": "Nossa Senhora de Fátima"
+    },
+    "sections": {
+      "todaysMysteries": "Mistérios de Hoje",
+      "mysteryCount": "5 Mistérios para Meditar",
+      "continueJourney": "Continue sua Jornada",
+      "continueJourneyDesc": "Retome de onde parou",
+      "prayerLife": "Sua Vida de Oração",
+      "prayerLifeDesc": "Acompanhe seu progresso espiritual",
+      "quickAccess": "Acesso Rápido",
+      "totalDays": "dias no total",
+      "bestWeek": "melhor semana",
+      "avgPerWeek": "média semanal",
+      "viewAll": "Ver Tudo",
+      "startPath": "Iniciar Caminho",
+      "suggestedForYou": "Sugerido para Você",
+      "dailyVerse": "Versículo do Dia",
+      "explore": "Explore o Rosário Vivo"
+    },
+    "suggested": {
+      "pathTitle": "Primeiros Passos",
+      "pathDesc": "Comece sua jornada espiritual com as bases da fé católica e a oração do Rosário.",
+      "santosTitle": "Vidas dos Santos",
+      "santosDesc": "Conheça os santos que viveram a fé de forma heroica.",
+      "oracoesTitle": "Orações Tradicionais",
+      "oracoesDesc": "Aprenda as orações da tradição católica.",
+      "ensinamentosTitle": "Ensinamentos",
+      "ensinamentosDesc": "Aprofunde seu conhecimento da doutrina da fé."
     }
   },
   "HowToPray": {
@@ -1311,4 +1338,4 @@
     "amen": "Amém",
     "commentPlaceholder": "Adicione uma palavra de encorajamento..."
   }
-}
+}\n

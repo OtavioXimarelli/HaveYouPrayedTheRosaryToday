@@ -101,6 +101,33 @@
     "quote": {
       "text": "“Pray the Rosary every day to obtain peace for the world and the end of the war.”",
       "author": "Our Lady of Fatima"
+    },
+    "sections": {
+      "todaysMysteries": "Today's Mysteries",
+      "mysteryCount": "5 Mysteries to Meditate",
+      "continueJourney": "Continue Your Journey",
+      "continueJourneyDesc": "Pick up where you left off",
+      "prayerLife": "Your Prayer Life",
+      "prayerLifeDesc": "Track your spiritual progress",
+      "quickAccess": "Quick Access",
+      "totalDays": "total days",
+      "bestWeek": "best week",
+      "avgPerWeek": "weekly avg",
+      "viewAll": "View All",
+      "startPath": "Start Path",
+      "suggestedForYou": "Suggested for You",
+      "dailyVerse": "Verse of the Day",
+      "explore": "Explore Rosário Vivo"
+    },
+    "suggested": {
+      "pathTitle": "First Steps",
+      "pathDesc": "Begin your spiritual journey with the foundations of Catholic faith and the Rosary prayer.",
+      "santosTitle": "Lives of the Saints",
+      "santosDesc": "Discover the saints who lived the faith heroically.",
+      "oracoesTitle": "Traditional Prayers",
+      "oracoesDesc": "Learn the prayers of Catholic tradition.",
+      "ensinamentosTitle": "Teachings",
+      "ensinamentosDesc": "Deepen your knowledge of the doctrine of the faith."
     }
   },
   "HowToPray": {
@@ -1275,4 +1302,4 @@
     "amen": "Amen",
     "commentPlaceholder": "Add a word of encouragement..."
   }
-}
+}\n
