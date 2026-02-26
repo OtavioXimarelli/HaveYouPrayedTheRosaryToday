@@ -566,23 +566,23 @@
       "desc": "We are preparing special content on this topic. Check back soon!"
     },
     "pathLabels": {
-      "iniciante": "Beginner",
-      "intermediario": "Intermediate",
-      "avancado": "Advanced",
+      "primeiros-passos": "First Steps",
+      "aprofundando": "Deepening the Mystery",
+      "misterios-vivos": "Living Mysteries",
       "sugeridos": "Suggested Paths"
     },
     "pathPages": {
-      "lessons": "Lessons",
-      "progress": "Path Progress",
+      "lessons": "Reflections",
+      "progress": "Journey Progress",
       "welcome": "Welcome to the beginning",
-      "content": "Path content",
+      "content": "Content",
       "nextStep": "Next step",
-      "nextStepDesc": "After completing the beginner path, continue your journey on the intermediate path.",
-      "nextStepBtn": "View Intermediate Path",
-      "iniciante": {
-        "title": "Beginner Path",
+      "nextStepDesc": "After taking your First Steps, continue your journey by deepening the mysteries.",
+      "nextStepBtn": "Deepening the Mystery",
+      "primeiros-passos": {
+        "title": "First Steps",
         "subtitle": "Foundations of faith and prayer",
-        "meta": "5 lessons • ~80 minutes",
+        "meta": "5 reflections • ~80 minutes",
         "desc": "This path was created for those who are starting or wish to revisit the foundations of the Rosary. By the end, you will have a solid understanding and a deeper prayer practice.",
         "l1": { "title": "What is the Rosary?", "desc": "Discover the origin, structure, and deep meaning of this millenary prayer that unites millions of Catholics." },
         "l2": { "title": "The Role of Mary in Salvation", "desc": "Understand why the Church honors Mary and how she leads us to Jesus through the Rosary." },
@@ -590,26 +590,26 @@
         "l4": { "title": "Building a Daily Habit", "desc": "Practical strategies to incorporate the Rosary into your daily routine." },
         "l5": { "title": "Overcoming Distractions in Prayer", "desc": "Saints' techniques to maintain focus and deepen meditation." }
       },
-      "intermediario": {
-        "title": "Intermediate Path",
-        "subtitle": "Deepening contemplation",
-        "meta": "5 lessons • ~125 minutes",
+      "aprofundando": {
+        "title": "Deepening the Mystery",
+        "subtitle": "Contemplation and sacramental life",
+        "meta": "5 reflections • ~125 minutes",
         "desc": "For those who already know the Rosary and wish to deepen their contemplative practice, connecting prayer with the Bible, liturgy, and the sacramental life of the Church.",
         "l1": { "title": "Contemplative Prayer and the Rosary", "desc": "Learn to move from vocal prayer to deep contemplation of the mysteries." },
         "l2": { "title": "Liturgical Year and the Rosary", "desc": "Connect your Rosary practice with the Church's seasons and feasts." },
         "l3": { "title": "Biblical Roots of the Mysteries", "desc": "Explore the biblical passages of each mystery in depth." },
         "l4": { "title": "The Rosary and the Sacraments", "desc": "Discover the relationship between the Rosary and sacramental life." },
-        "l5": { "title": "Maria in the Holy Scriptures", "desc": "Complete biblical study on Mary's presence in the Bible." }
+        "l5": { "title": "Mary in the Holy Scriptures", "desc": "Complete biblical study on Mary's presence in the Bible." }
       },
-      "avancado": {
-        "title": "Advanced Path",
-        "subtitle": "Deep mysteries of Mary",
-        "meta": "5 lessons • ~158 minutes",
+      "misterios-vivos": {
+        "title": "Living Mysteries",
+        "subtitle": "The mystical depth of Mary",
+        "meta": "5 reflections • ~158 minutes",
         "l1": { "title": "Essential Marian Theology" },
         "l2": { "title": "Total Consecration to Mary" },
         "l3": { "title": "Mystical Aspects of the Rosary" },
         "l4": { "title": "The Rosary and Social Doctrine" },
-        "l5": { "title": "Leading Rosary in Community" }
+        "l5": { "title": "Living the Rosary in Community" }
       }
     },
     "tools": {

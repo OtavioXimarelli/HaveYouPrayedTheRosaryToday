@@ -36,6 +36,15 @@ Rosário Vivo / Living Rosary is a high-performance Catholic spirituality platfo
 *   **Simplicity**: Focus on ease of use for all ages (Youth to Elderly).
 *   **Accessibility**: WCAG AA compliance, 44px minimum touch targets, and keyboard navigation.
 
+### 2.5 Content Philosophy: Guide, Not a Course
+*   **No Formal Classes**: Content must not be structured as classical sequential courses with "lessons" (e.g., beginner, intermediate, advanced) or academic classes.
+*   **Terminology**: 
+    *   Avoid terms like "Lesson" (Aula), "Course" (Curso), or levels ("Iniciante", "Avançado").
+    *   Use spiritual/journey terms like "Reflection" (Reflexão), "Teaching" (Ensinamento), "Step" (Passo), or "Meditation" (Meditação).
+    *   Paths should be thematic (e.g., "Primeiros Passos" / "Fundamentos", "Aprofundando o Mistério") rather than skill-based.
+*   **Official Teachings**: The content represents teachings directly from the Holy See, the Catechism, and official Catholic doctrine, rather than a formal curriculum or certification.
+*   **Self-Paced Exploration**: The platform acts as a digital Catholic compendium and companion guide where users browse topics freely based on their current spiritual needs.
+
 ## 3. User Personas
 *   **Traditional Catholics**: Older users who appreciate sacred aesthetics and need large text/clear navigation.
 *   **Young Catholics**: Tech-savvy users who appreciate modern design and smooth animations.

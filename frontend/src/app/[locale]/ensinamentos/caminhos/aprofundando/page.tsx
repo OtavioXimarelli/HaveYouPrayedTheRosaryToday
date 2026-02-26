@@ -11,7 +11,7 @@ import { AUTH_DISABLED } from "@/providers/auth-provider";
 
 import { useTranslations } from "next-intl";
 
-export default function IntermediarioPage() {
+export default function AprofundandoPage() {
   const router = useRouter();
   const t = useTranslations("Teachings");
   const LOCKED = AUTH_DISABLED ? false : true;
@@ -20,40 +20,40 @@ export default function IntermediarioPage() {
     {
       id: "oracao-contemplativa",
       number: 1,
-      title: t("pathPages.intermediario.l1.title"),
-      description: t("pathPages.intermediario.l1.desc"),
+      title: t("pathPages.aprofundando.l1.title"),
+      description: t("pathPages.aprofundando.l1.desc"),
       duration: "25 min",
       isLocked: LOCKED
     },
     {
       id: "ano-liturgico",
       number: 2,
-      title: t("pathPages.intermediario.l2.title"),
-      description: t("pathPages.intermediario.l2.desc"),
+      title: t("pathPages.aprofundando.l2.title"),
+      description: t("pathPages.aprofundando.l2.desc"),
       duration: "20 min",
       isLocked: LOCKED
     },
     {
       id: "raizes-biblicas",
       number: 3,
-      title: t("pathPages.intermediario.l3.title"),
-      description: t("pathPages.intermediario.l3.desc"),
+      title: t("pathPages.aprofundando.l3.title"),
+      description: t("pathPages.aprofundando.l3.desc"),
       duration: "30 min",
       isLocked: LOCKED
     },
     {
       id: "rosario-sacramentos",
       number: 4,
-      title: t("pathPages.intermediario.l4.title"),
-      description: t("pathPages.intermediario.l4.desc"),
+      title: t("pathPages.aprofundando.l4.title"),
+      description: t("pathPages.aprofundando.l4.desc"),
       duration: "22 min",
       isLocked: LOCKED
     },
     {
       id: "maria-escrituras",
       number: 5,
-      title: t("pathPages.intermediario.l5.title"),
-      description: t("pathPages.intermediario.l5.desc"),
+      title: t("pathPages.aprofundando.l5.title"),
+      description: t("pathPages.aprofundando.l5.desc"),
       duration: "28 min",
       isLocked: LOCKED
     }
@@ -66,8 +66,8 @@ export default function IntermediarioPage() {
     <PageTransition>
       <main className="min-h-screen bg-background">
         <PageHeader
-          title={t("pathPages.intermediario.title")}
-          subtitle={t("pathPages.intermediario.subtitle")}
+          title={t("pathPages.aprofundando.title")}
+          subtitle={t("pathPages.aprofundando.subtitle")}
           icon="📖"
         />
 
@@ -75,7 +75,7 @@ export default function IntermediarioPage() {
           <BreadcrumbNav
             items={[
               { label: t("breadcrumb"), path: "/ensinamentos?tab=caminhos" },
-              { label: t("pathLabels.intermediario") }
+              { label: t("pathLabels.aprofundando") }
             ]}
           />
 
@@ -87,12 +87,12 @@ export default function IntermediarioPage() {
                   <BookOpen className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-cinzel font-bold text-foreground">{t("pathPages.intermediario.subtitle")}</h2>
-                  <p className="text-blue-600 dark:text-blue-400 text-sm font-medium">{t("pathPages.intermediario.meta")}</p>
+                  <h2 className="text-xl font-cinzel font-bold text-foreground">{t("pathPages.aprofundando.subtitle")}</h2>
+                  <p className="text-blue-600 dark:text-blue-400 text-sm font-medium">{t("pathPages.aprofundando.meta")}</p>
                 </div>
               </div>
               <p className="text-muted-foreground leading-relaxed">
-                {t("pathPages.intermediario.desc")}
+                {t("pathPages.aprofundando.desc")}
               </p>
             </div>
           </section>
@@ -121,7 +121,7 @@ export default function IntermediarioPage() {
                   lessonNumber={lesson.number}
                   isCompleted={completedLessons.includes(lesson.id)}
                   isLocked={lesson.isLocked}
-                  path={`/ensinamentos/caminhos/intermediario/${lesson.id}`}
+                  path={`/ensinamentos/caminhos/aprofundando/${lesson.id}`}
                 />
               ))}
             </div>

@@ -12,7 +12,7 @@ import { AUTH_DISABLED } from "@/providers/auth-provider";
 
 import { useTranslations } from "next-intl";
 
-export default function IniciantePage() {
+export default function PrimeirosPassosPage() {
   const router = useRouter();
   const t = useTranslations("Teachings");
   const LOCKED = AUTH_DISABLED ? false : true;
@@ -24,40 +24,40 @@ export default function IniciantePage() {
     {
       id: "o-que-e-rosario",
       number: 1,
-      title: t("pathPages.iniciante.l1.title"),
-      description: t("pathPages.iniciante.l1.desc"),
+      title: t("pathPages.primeiros-passos.l1.title"),
+      description: t("pathPages.primeiros-passos.l1.desc"),
       duration: "15 min",
       isLocked: false
     },
     {
       id: "papel-de-maria",
       number: 2,
-      title: t("pathPages.iniciante.l2.title"),
-      description: t("pathPages.iniciante.l2.desc"),
+      title: t("pathPages.primeiros-passos.l2.title"),
+      description: t("pathPages.primeiros-passos.l2.desc"),
       duration: "20 min",
       isLocked: false
     },
     {
       id: "poder-oracao-repetitiva",
       number: 3,
-      title: t("pathPages.iniciante.l3.title"),
-      description: t("pathPages.iniciante.l3.desc"),
+      title: t("pathPages.primeiros-passos.l3.title"),
+      description: t("pathPages.primeiros-passos.l3.desc"),
       duration: "15 min",
       isLocked: LOCKED
     },
     {
       id: "habito-diario",
       number: 4,
-      title: t("pathPages.iniciante.l4.title"),
-      description: t("pathPages.iniciante.l4.desc"),
+      title: t("pathPages.primeiros-passos.l4.title"),
+      description: t("pathPages.primeiros-passos.l4.desc"),
       duration: "12 min",
       isLocked: LOCKED
     },
     {
       id: "vencendo-distracoes",
       number: 5,
-      title: t("pathPages.iniciante.l5.title"),
-      description: t("pathPages.iniciante.l5.desc"),
+      title: t("pathPages.primeiros-passos.l5.title"),
+      description: t("pathPages.primeiros-passos.l5.desc"),
       duration: "18 min",
       isLocked: LOCKED
     }
@@ -69,8 +69,8 @@ export default function IniciantePage() {
     <PageTransition>
       <main className="min-h-screen bg-background">
         <PageHeader
-          title={t("pathPages.iniciante.title")}
-          subtitle={t("pathPages.iniciante.subtitle")}
+          title={t("pathPages.primeiros-passos.title")}
+          subtitle={t("pathPages.primeiros-passos.subtitle")}
           icon="✨"
         />
 
@@ -78,7 +78,7 @@ export default function IniciantePage() {
           <BreadcrumbNav 
             items={[
               { label: t("breadcrumb"), path: "/ensinamentos?tab=caminhos" },
-              { label: t("pathLabels.iniciante") }
+              { label: t("pathLabels.primeiros-passos") }
             ]} 
           />
 
@@ -91,11 +91,11 @@ export default function IniciantePage() {
                 </div>
                 <div>
                   <h2 className="text-xl font-cinzel font-bold text-foreground">{t("pathPages.welcome")}</h2>
-                  <p className="text-emerald-600 dark:text-emerald-400 text-sm font-medium">{t("pathPages.iniciante.meta")}</p>
+                  <p className="text-emerald-600 dark:text-emerald-400 text-sm font-medium">{t("pathPages.primeiros-passos.meta")}</p>
                 </div>
               </div>
               <p className="text-muted-foreground leading-relaxed">
-                {t("pathPages.iniciante.desc")}
+                {t("pathPages.primeiros-passos.desc")}
               </p>
             </div>
           </section>
@@ -121,7 +121,7 @@ export default function IniciantePage() {
                   title={lesson.title}
                   description={lesson.description}
                   duration={lesson.duration}
-                  path={`/ensinamentos/caminhos/iniciante/${lesson.id}`}
+                  path={`/ensinamentos/caminhos/primeiros-passos/${lesson.id}`}
                   lessonNumber={lesson.number}
                   isCompleted={completedLessons.includes(lesson.id)}
                   isLocked={lesson.isLocked}
@@ -141,7 +141,7 @@ export default function IniciantePage() {
               </p>
               <Button
                 size="lg"
-                onClick={() => router.push("/ensinamentos/caminhos/intermediario")}
+                onClick={() => router.push("/ensinamentos/caminhos/aprofundando")}
                 className="rounded-full px-8 py-6 text-base font-cinzel font-bold bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:shadow-lg transition-all"
                 data-testid="next-path-btn"
               >

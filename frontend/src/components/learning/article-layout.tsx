@@ -49,16 +49,16 @@ export function ArticleLayout({
   const locale = useLocale();
 
   const LEVEL_LABELS: Record<string, { label: string; color: string }> = {
-    iniciante: {
-      label: teachingsT("pathLabels.iniciante"),
+    "primeiros-passos": {
+      label: teachingsT("pathLabels.primeiros-passos"),
       color: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
     },
-    intermediario: {
-      label: teachingsT("pathLabels.intermediario"),
+    aprofundando: {
+      label: teachingsT("pathLabels.aprofundando"),
       color: "bg-gold-500/15 text-gold-700 dark:text-gold-400 border-gold-500/30",
     },
-    avancado: {
-      label: teachingsT("pathLabels.avancado"),
+    "misterios-vivos": {
+      label: teachingsT("pathLabels.misterios-vivos"),
       color: "bg-purple-500/15 text-purple-700 dark:text-purple-400 border-purple-500/30",
     },
   };

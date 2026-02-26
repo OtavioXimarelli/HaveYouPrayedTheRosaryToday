@@ -566,23 +566,23 @@
       "desc": "Estamos preparando conteúdos especiais sobre este tema. Volte em breve para conferir!"
     },
     "pathLabels": {
-      "iniciante": "Iniciante",
-      "intermediario": "Intermediário",
-      "avancado": "Avançado",
+      "primeiros-passos": "Primeiros Passos",
+      "aprofundando": "Aprofundando o Mistério",
+      "misterios-vivos": "Mistérios Vivos",
       "sugeridos": "Caminhos Sugeridos"
     },
     "pathPages": {
-      "lessons": "Lições",
-      "progress": "Progresso do caminho",
+      "lessons": "Reflexões",
+      "progress": "Progresso na jornada",
       "welcome": "Bem-vindo ao início",
-      "content": "Conteúdo do caminho",
+      "content": "Conteúdo",
       "nextStep": "Próximo passo",
-      "nextStepDesc": "Após completar o caminho iniciante, continue sua jornada no caminho intermediário.",
-      "nextStepBtn": "Ver Caminho Intermediário",
-      "iniciante": {
-        "title": "Caminho Iniciante",
+      "nextStepDesc": "Após percorrer os Primeiros Passos, continue sua jornada aprofundando os mistérios.",
+      "nextStepBtn": "Aprofundando o Mistério",
+      "primeiros-passos": {
+        "title": "Primeiros Passos",
         "subtitle": "Fundamentos da fé e oração",
-        "meta": "5 lições • ~80 minutos",
+        "meta": "5 reflexões • ~80 minutos",
         "desc": "Este caminho foi criado para quem está começando ou deseja revisitar os fundamentos do Rosário. Ao final, você terá uma compreensão sólida e uma prática de oração mais profunda.",
         "l1": { "title": "O que é o Rosário?", "desc": "Descubra a origem, estrutura e significado profundo desta oração milenar que une milhões de católicos." },
         "l2": { "title": "O Papel de Maria na Salvação", "desc": "Entenda por que a Igreja honra Maria e como ela nos conduz a Jesus através do Rosário." },
@@ -590,10 +590,10 @@
         "l4": { "title": "Construindo um Hábito Diário", "desc": "Estratégias práticas para incorporar o Rosário na sua rotina diária." },
         "l5": { "title": "Vencendo as Distrações na Oração", "desc": "Técnicas dos santos para manter o foco e aprofundar na meditação." }
       },
-      "intermediario": {
-        "title": "Caminho Intermediário",
-        "subtitle": "Aprofundando a contemplação",
-        "meta": "5 lições • ~125 minutos",
+      "aprofundando": {
+        "title": "Aprofundando o Mistério",
+        "subtitle": "Contemplação e vida sacramental",
+        "meta": "5 reflexões • ~125 minutos",
         "desc": "Para quem já conhece o Rosário e deseja aprofundar sua prática contemplativa, conectando a oração com a Bíblia, a liturgia e a vida sacramental da Igreja.",
         "l1": { "title": "Oração Contemplativa e o Rosário", "desc": "Aprenda a passar da oração vocal para a contemplação profunda dos mistérios." },
         "l2": { "title": "Ano Litúrgico e o Rosário", "desc": "Conecte sua prática do Rosário com os tempos e festas da Igreja." },
@@ -601,15 +601,15 @@
         "l4": { "title": "Rosário e os Sacramentos", "desc": "Descubra a relação entre o Rosário e a vida sacramental." },
         "l5": { "title": "Maria nas Sagradas Escrituras", "desc": "Estudo bíblico completo sobre a presença de Maria na Bíblia." }
       },
-      "avancado": {
-        "title": "Caminho Avançado",
-        "subtitle": "Mistérios profundos de Maria",
-        "meta": "5 lições • ~158 minutos",
+      "misterios-vivos": {
+        "title": "Mistérios Vivos",
+        "subtitle": "A profundidade mística de Maria",
+        "meta": "5 reflexões • ~158 minutos",
         "l1": { "title": "Teologia Mariana Essencial" },
         "l2": { "title": "Consagração Total a Maria" },
         "l3": { "title": "Aspectos Místicos do Rosário" },
         "l4": { "title": "Rosário e Doutrina Social" },
-        "l5": { "title": "Liderando Rosário em Comunidade" }
+        "l5": { "title": "Vivendo o Rosário em Comunidade" }
       }
     },
     "tools": {

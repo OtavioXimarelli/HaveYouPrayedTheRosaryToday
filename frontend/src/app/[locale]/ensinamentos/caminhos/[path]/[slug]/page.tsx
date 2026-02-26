@@ -13,7 +13,7 @@ import { getTranslations } from "next-intl/server";
 interface Props {
   params: Promise<{
     locale: string;
-    path: string;   // "iniciante" | "intermediario" | "avancado"
+    path: string;   // "primeiros-passos" | "aprofundando" | "misterios-vivos"
     slug: string;
   }>;
 }
