@@ -48,19 +48,6 @@ const mysteryColors: Record<MysteryType, { bg: string; text: string; gradient: s
   },
 };
 
-const mysteryNames: Record<MysteryType, string> = {
-  joyful: "Gozosos",
-  sorrowful: "Dolorosos",
-  glorious: "Gloriosos",
-  luminous: "Luminosos",
-};
-
-const mysteryNamesEn: Record<MysteryType, string> = {
-  joyful: "Joyful",
-  sorrowful: "Sorrowful",
-  glorious: "Glorious",
-  luminous: "Luminous",
-};
 
 export default function DashboardPage() {
   const t = useTranslations("Dashboard");
@@ -157,12 +144,20 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center space-y-4 animate-fade-in">
-          <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center animate-pulse-gold">
-            <span className="text-3xl">📿</span>
+      <div className="min-h-screen bg-background relative noise-overlay flex items-center justify-center">
+        <div className="pointer-events-none absolute inset-0" aria-hidden>
+          <div className="absolute inset-0 bg-gradient-radial-gold opacity-20 dark:opacity-10" />
+        </div>
+        <div className="relative z-10 text-center space-y-6 animate-fade-in">
+          <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center animate-pulse-gold shadow-gold-glow">
+            <span className="text-4xl">📿</span>
           </div>
-          <p className="text-muted-foreground text-base">{commonT("loading")}</p>
+          <div className="space-y-2">
+            <p className="text-foreground font-cinzel font-bold text-lg">{commonT("loading")}</p>
+            <div className="w-32 h-1 mx-auto rounded-full bg-muted overflow-hidden">
+              <div className="h-full w-1/2 rounded-full bg-gradient-to-r from-gold-500 to-gold-600 animate-shimmer" />
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -171,7 +166,11 @@ export default function DashboardPage() {
   return (
     <PageTransition>
       <div className="min-h-screen bg-background relative noise-overlay" data-testid="dashboard-page">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-radial-gold opacity-40 dark:opacity-20" aria-hidden />
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <div className="absolute inset-0 bg-gradient-radial-gold opacity-30 dark:opacity-15" />
+        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-gold-500/5 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-sacred-blue/10 dark:bg-gold-500/5 rounded-full blur-[100px] translate-x-1/3 translate-y-1/3" />
+      </div>
 
       <main className="relative z-10 pt-8 pb-24 md:pt-16 md:pb-32 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto w-full max-w-6xl space-y-8 md:space-y-16">
@@ -359,11 +358,15 @@ export default function DashboardPage() {
           </div>
 
           <section className="animate-fade-up animate-delay-500">
-            <div className="p-10 sm:p-16 md:p-20 rounded-[3rem] bg-gradient-to-br from-sacred-blue to-slate-950 text-white relative overflow-hidden shadow-2xl">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(212,175,55,0.05)_0%,transparent_70%)]" />
+            <div className="p-10 sm:p-16 md:p-20 rounded-[3rem] relative overflow-hidden shadow-sacred">
+              <div className="absolute inset-0 bg-gradient-to-br from-sacred-blue via-slate-900 to-sacred-blue-dark" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_rgba(212,175,55,0.08)_0%,transparent_50%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,_rgba(212,175,55,0.06)_0%,transparent_50%)]" />
+              <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-500/30 to-transparent" />
+              <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent" />
               <div className="relative z-10 max-w-3xl mx-auto text-center">
                 <div className="w-20 h-1 bg-gold-500 mx-auto mb-10 rounded-full" />
-                <blockquote className="text-2xl sm:text-3xl md:text-4xl font-cinzel leading-relaxed mb-8 italic">
+                <blockquote className="text-2xl sm:text-3xl md:text-4xl font-cinzel leading-relaxed mb-8 italic text-white">
                   {t("quote.text")}
                 </blockquote>
                 <cite className="text-gold-400 font-bold uppercase tracking-[0.2em] text-sm sm:text-base not-italic">{t("quote.author")}</cite>

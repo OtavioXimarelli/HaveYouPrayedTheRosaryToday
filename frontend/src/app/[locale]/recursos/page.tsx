@@ -26,27 +26,27 @@ export default function RecursosPage() {
   const documents = [
     {
       title: "Rosarium Virginis Mariae",
-      author: locale === 'pt' ? "Papa São João Paulo II" : "Pope Saint John Paul II",
+      author: t('documents.0.author'),
       year: "2002",
-      description: locale === 'pt' ? "Carta Apostólica sobre o Santo Rosário que introduziu os Mistérios Luminosos." : "Apostolic Letter on the Holy Rosary that introduced the Luminous Mysteries.",
+      description: t('documents.0.description'),
       icon: FileText,
       gradient: "from-gold-500 to-gold-600",
       url: locale === 'pt' ? "https://www.vatican.va/content/john-paul-ii/pt/apost_letters/2002/documents/hf_jp-ii_apl_20021016_rosarium-virginis-mariae.html" : "https://www.vatican.va/content/john-paul-ii/en/apost_letters/2002/documents/hf_jp-ii_apl_20021016_rosarium-virginis-mariae.html",
     },
     {
-      title: locale === 'pt' ? "Catecismo da Igreja Católica" : "Catechism of the Catholic Church",
-      author: locale === 'pt' ? "Santa Sé" : "Holy See",
+      title: t('documents.1.title'),
+      author: t('documents.1.author'),
       year: "1992",
-      description: locale === 'pt' ? "Exposição completa da doutrina da Igreja Católica." : "Complete exposition of the doctrine of the Catholic Church.",
+      description: t('documents.1.description'),
       icon: ShieldCheck,
       gradient: "from-blue-500 to-blue-600",
       url: locale === 'pt' ? "https://www.vatican.va/archive/ccc_portuguese/index_pt.htm" : "https://www.vatican.va/archive/ENG0015/_INDEX.HTM",
     },
     {
       title: "Marialis Cultus",
-      author: locale === 'pt' ? "Papa São Paulo VI" : "Pope Saint Paul VI",
+      author: t('documents.2.author'),
       year: "1974",
-      description: locale === 'pt' ? "Exortação Apostólica para a reta ordenação e desenvolvimento do culto à Bem-aventurada Virgem Maria." : "Apostolic Exhortation for the right ordering and development of devotion to the Blessed Virgin Mary.",
+      description: t('documents.2.description'),
       icon: FileText,
       gradient: "from-purple-500 to-purple-600",
       url: locale === 'pt' ? "https://www.vatican.va/content/paul-vi/pt/apost_exhortations/documents/hf_p-vi_exh_19740202_marialis-cultus.html" : "https://www.vatican.va/content/paul-vi/en/apost_exhortations/documents/hf_p-vi_exh_19740202_marialis-cultus.html",
@@ -55,19 +55,19 @@ export default function RecursosPage() {
 
   const downloads = [
     {
-      title: locale === 'pt' ? "Guia de Orações (PDF)" : "Prayer Guide (PDF)",
+      title: t('downloads.0.title'),
       size: "2.4 MB",
-      description: locale === 'pt' ? "Compilado com as orações do Rosário e as meditações dos mistérios." : "Compiled with Rosary prayers and meditations on the mysteries.",
+      description: t('downloads.0.description'),
     },
     {
-      title: locale === 'pt' ? "Estampas para Impressão" : "Printable Holy Cards",
+      title: t('downloads.1.title'),
       size: "15 MB",
-      description: locale === 'pt' ? "Imagens de alta qualidade de Nossa Senhora e Santos devotos do Rosário." : "High-quality images of Our Lady and Saints devoted to the Rosary.",
+      description: t('downloads.1.description'),
     },
     {
-      title: locale === 'pt' ? "Planilha de Exame de Consciência" : "Examination of Conscience Guide",
+      title: t('downloads.2.title'),
       size: "0.5 MB",
-      description: locale === 'pt' ? "Guia prático para preparação para o Sacramento da Reconciliação." : "Practical guide for preparation for the Sacrament of Reconciliation.",
+      description: t('downloads.2.description'),
     }
   ];
 
@@ -177,10 +177,10 @@ export default function RecursosPage() {
             <h3 className="text-xl font-cinzel font-bold text-foreground mb-6">{t("usefulLinks")}</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
-                { label: "Vatican News", url: "https://www.vaticannews.va/pt.html" },
-                { label: "CNBB", url: "https://www.cnbb.org.br/" },
-                { label: "Liturgia das Horas", url: "https://www.liturgiadiaria.org.br/" },
-                { label: "Apostolado da Oração", url: "https://www.popesprayer.va/pt-pt/" }
+                { label: t('links.0'), url: "https://www.vaticannews.va/pt.html" },
+                { label: t('links.1'), url: "https://www.cnbb.org.br/" },
+                { label: t('links.2'), url: "https://www.liturgiadiaria.org.br/" },
+                { label: t('links.3'), url: "https://www.popesprayer.va/pt-pt/" }
               ].map((link, i) => (
                 <a
                   key={i}

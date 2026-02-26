@@ -296,22 +296,22 @@ export default function ComoRezarPage() {
                 <div className="blur-sm pointer-events-none select-none">
                   <div className="p-5 rounded-xl bg-gold-500/10 border border-gold-500/20 mb-4">
                     <h3 className="font-cinzel font-bold text-foreground mb-2">
-                      📖 Exemplo prático detalhado
+                      {t("montfort.lockedTitle")}
                     </h3>
                     <p className="text-muted-foreground text-sm">
-                      Aprenda passo a passo como aplicar este método em cada mistério, com exemplos práticos de como meditar a Anunciação, o Nascimento de Jesus e mais...
+                      {t("montfort.lockedDesc")}
                     </p>
                   </div>
 
                   <div className="p-4 rounded-xl bg-card border border-border mb-4">
                     <p className="text-muted-foreground text-sm">
-                      + Guia completo de meditação para cada um dos 20 mistérios
+                      {t("montfort.lockedItems.0")}
                     </p>
                     <p className="text-muted-foreground text-sm mt-2">
-                      + Técnicas avançadas de contemplação
+                      {t("montfort.lockedItems.1")}
                     </p>
                     <p className="text-muted-foreground text-sm mt-2">
-                      + Citações completas dos escritos de São Luís de Montfort
+                      {t("montfort.lockedItems.2")}
                     </p>
                   </div>
                 </div>
@@ -349,7 +349,7 @@ export default function ComoRezarPage() {
 
               <div className="p-5 rounded-xl bg-muted/50 border border-border">
                 <h3 className="font-cinzel font-bold text-lg text-foreground mb-4">
-                  Princípios essenciais:
+                  {t("padrePio.principles")}
                 </h3>
                 
                 <div className="space-y-3">
@@ -384,22 +384,22 @@ export default function ComoRezarPage() {
                 <div className="blur-sm pointer-events-none select-none">
                   <div className="p-5 rounded-xl bg-sacred-blue/10 border border-sacred-blue/20 mb-4">
                     <h3 className="font-cinzel font-bold text-foreground mb-2">
-                      ✨ Como Padre Pio rezava exatamente
+                      {t("padrePio.lockedTitle")}
                     </h3>
                     <p className="text-muted-foreground text-sm">
-                      Descubra os gestos, pausas e visualizações específicas que Padre Pio usava durante cada parte do Rosário...
+                      {t("padrePio.lockedDesc")}
                     </p>
                   </div>
 
                   <div className="p-4 rounded-xl bg-card border border-border mb-4">
                     <p className="text-muted-foreground text-sm">
-                      + Suas práticas devocionais secretas
+                      {t("padrePio.lockedItems.0")}
                     </p>
                     <p className="text-muted-foreground text-sm mt-2">
-                      + Testemunhos de conversão através do Rosário
+                      {t("padrePio.lockedItems.1")}
                     </p>
                     <p className="text-muted-foreground text-sm mt-2">
-                      + Citações completas e ensinamentos pessoais
+                      {t("padrePio.lockedItems.2")}
                     </p>
                   </div>
                 </div>

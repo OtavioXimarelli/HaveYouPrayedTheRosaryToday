@@ -27,26 +27,24 @@ export default function OracoesPage() {
   };
 
   // Official prayers from Vatican sources
+  // Latin texts are universal; locale-dependent text comes from translation files
   const prayers = [
     {
       icon: "✝",
-      title: "Sinal da Cruz",
-      subtitle: "Início e fim do Rosário",
+      title: t("prayers.0.title"),
+      subtitle: t("prayers.0.subtitle"),
       latinTitle: "Signum Crucis",
       latin: `In nomine Patris,
 et Filii,
 et Spiritus Sancti.
 Amen.`,
-      text: `Em nome do Pai,
-e do Filho
-e do Espírito Santo.
-Amém.`,
+      text: t("prayers.0.text"),
       highlight: false
     },
     {
       icon: "📖",
-      title: "Credo Apostólico",
-      subtitle: "Rezado no crucifixo — Símbolo dos Apóstolos",
+      title: t("prayers.1.title"),
+      subtitle: t("prayers.1.subtitle"),
       latinTitle: "Symbolum Apostolorum",
       latin: `Credo in Deum Patrem omnipotentem,
 Creatorem caeli et terrae,
@@ -68,33 +66,13 @@ remissionem peccatorum,
 carnis resurrectionem,
 vitam aeternam.
 Amen.`,
-      text: `Creio em Deus Pai todo-poderoso,
-Criador do céu e da terra.
-
-E em Jesus Cristo, seu único Filho, nosso Senhor,
-que foi concebido pelo poder do Espírito Santo;
-nasceu da Virgem Maria;
-padeceu sob Pôncio Pilatos,
-foi crucificado, morto e sepultado;
-desceu à mansão dos mortos;
-ressuscitou ao terceiro dia;
-subiu aos céus;
-está sentado à direita de Deus Pai todo-poderoso,
-de onde há de vir a julgar os vivos e os mortos.
-
-Creio no Espírito Santo;
-na Santa Igreja Católica;
-na comunhão dos santos;
-na remissão dos pecados;
-na ressurreição da carne;
-na vida eterna.
-Amém.`,
+      text: t("prayers.1.text"),
       highlight: true
     },
     {
       icon: "👨",
-      title: "Pai Nosso",
-      subtitle: "Oração do Senhor — antes de cada dezena",
+      title: t("prayers.2.title"),
+      subtitle: t("prayers.2.subtitle"),
       latinTitle: "Pater Noster",
       latin: `Pater noster, qui es in caelis,
 sanctificetur nomen tuum.
@@ -108,25 +86,14 @@ sicut et nos dimittimus debitoribus nostris.
 Et ne nos inducas in tentationem,
 sed libera nos a malo.
 Amen.`,
-      text: `Pai nosso que estais nos céus,
-santificado seja o vosso Nome,
-venha a nós o vosso Reino,
-seja feita a vossa vontade
-assim na terra como no céu.
-
-O pão nosso de cada dia nos dai hoje,
-perdoai-nos as nossas ofensas
-assim como nós perdoamos a quem nos tem ofendido,
-e não nos deixeis cair em tentação,
-mas livrai-nos do mal.
-Amém.`,
+      text: t("prayers.2.text"),
       source: "Mt 6, 9-13 / Lc 11, 2-4",
       highlight: false
     },
     {
       icon: "👸",
-      title: "Ave Maria",
-      subtitle: "Saudação Angélica — dez vezes em cada dezena",
+      title: t("prayers.3.title"),
+      subtitle: t("prayers.3.subtitle"),
       latinTitle: "Ave Maria",
       latin: `Ave Maria, gratia plena,
 Dominus tecum.
@@ -137,22 +104,14 @@ Sancta Maria, Mater Dei,
 ora pro nobis peccatoribus,
 nunc et in hora mortis nostrae.
 Amen.`,
-      text: `Ave Maria, cheia de graça,
-o Senhor é convosco,
-bendita sois vós entre as mulheres
-e bendito é o fruto do vosso ventre, Jesus.
-
-Santa Maria, Mãe de Deus,
-rogai por nós pecadores,
-agora e na hora da nossa morte.
-Amém.`,
+      text: t("prayers.3.text"),
       source: "Lc 1, 28.42",
       highlight: true
     },
     {
       icon: "✨",
-      title: "Glória ao Pai",
-      subtitle: "Doxologia Menor — após cada dezena",
+      title: t("prayers.4.title"),
+      subtitle: t("prayers.4.subtitle"),
       latinTitle: "Gloria Patri",
       latin: `Gloria Patri,
 et Filio,
@@ -162,32 +121,22 @@ Sicut erat in principio,
 et nunc et semper,
 et in saecula saeculorum.
 Amen.`,
-      text: `Glória ao Pai,
-e ao Filho
-e ao Espírito Santo.
-
-Como era no princípio,
-agora e sempre.
-Amém.`,
+      text: t("prayers.4.text"),
       highlight: false
     },
     {
       icon: "🔥",
-      title: "Oração de Fátima",
-      subtitle: "Jaculatória — após cada Glória",
+      title: t("prayers.5.title"),
+      subtitle: t("prayers.5.subtitle"),
       latinTitle: "Oratio Fatimae",
-      text: `Ó meu Jesus,
-perdoai-nos e livrai-nos do fogo do inferno;
-levai as almas todas para o céu,
-principalmente as que mais precisarem
-da vossa misericórdia.`,
-      note: "Esta oração foi ensinada por Nossa Senhora aos três pastorinhos de Fátima em 13 de julho de 1917, após a visão do inferno.",
+      text: t("prayers.5.text"),
+      note: t("prayers.5.note"),
       highlight: true
     },
     {
       icon: "👑",
-      title: "Salve Rainha",
-      subtitle: "Salve Regina — ao final do Rosário",
+      title: t("prayers.6.title"),
+      subtitle: t("prayers.6.subtitle"),
       latinTitle: "Salve Regina",
       latin: `Salve, Regina, Mater misericordiae,
 vita, dulcedo, et spes nostra, salve.
@@ -208,35 +157,13 @@ V. Ora pro nobis, sancta Dei Genetrix.
 R. Ut digni efficiamur promissionibus Christi.
 
 Amen.`,
-      text: `Salve, Rainha, Mãe de misericórdia,
-vida, doçura e esperança nossa, salve!
-
-A vós bradamos,
-os degredados filhos de Eva.
-
-A vós suspiramos,
-gemendo e chorando neste vale de lágrimas.
-
-Eia, pois, advogada nossa,
-esses vossos olhos misericordiosos a nós volvei.
-
-E depois deste desterro,
-mostrai-nos Jesus,
-bendito fruto do vosso ventre.
-
-Ó clemente, ó piedosa,
-ó doce sempre Virgem Maria.
-
-V. Rogai por nós, Santa Mãe de Deus.
-R. Para que sejamos dignos das promessas de Cristo.
-
-Amém.`,
+      text: t("prayers.6.text"),
       highlight: false
     },
     {
       icon: "🙏",
-      title: "Oração Final",
-      subtitle: "Coleta — após a Salve Rainha",
+      title: t("prayers.7.title"),
+      subtitle: t("prayers.7.subtitle"),
       latinTitle: "Oratio conclusiva",
       latin: `Deus, cuius Unigenitus
 per vitam, mortem et resurrectionem suam
@@ -248,17 +175,7 @@ et quod promittunt assequamur.
 
 Per Christum Dominum nostrum.
 Amen.`,
-      text: `Ó Deus, cujo Filho Unigênito,
-por sua vida, morte e ressurreição,
-nos obteve o prêmio da salvação eterna:
-concedei-nos, nós vos suplicamos,
-que meditando estes mistérios
-do Santíssimo Rosário da Bem-aventurada Virgem Maria,
-imitemos o que eles contêm
-e alcancemos o que eles prometem.
-
-Por Cristo, nosso Senhor.
-Amém.`,
+      text: t("prayers.7.text"),
       highlight: true
     }
   ];

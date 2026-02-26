@@ -1,6 +1,7 @@
 "use client";
 
 import { PageHeader } from "@/components/page-header";
+import { PageTransition } from "@/components/page-transition";
 import { Heart, Users, BookOpen, Sparkles, Shield, Zap } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -65,7 +66,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <>
+    <PageTransition>
       <PageHeader
         title={t("title")}
         subtitle={t("subtitle")}
@@ -369,6 +370,6 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
-    </>
+    </PageTransition>
   );
 }
