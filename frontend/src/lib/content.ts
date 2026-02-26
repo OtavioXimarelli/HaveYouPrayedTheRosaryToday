@@ -127,7 +127,7 @@ export function getCaminhoLesson(caminho: string, slug: string, locale: string =
  */
 export function getAllCaminhoParams(): { locale: string; path: string; slug: string }[] {
   const locales = ["pt", "en"];
-  const caminhos = ["iniciante", "intermediario", "avancado"];
+  const caminhos = ["primeiros-passos", "aprofundando", "misterios-vivos"];
   
   return locales.flatMap(locale => 
     caminhos.flatMap((caminho) =>

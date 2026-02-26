@@ -9,25 +9,25 @@ import { AUTH_DISABLED } from "@/providers/auth-provider";
 
 import { useTranslations } from "next-intl";
 
-export default function AvancadoPage() {
+export default function MisteriosVivosPage() {
   const router = useRouter();
   const t = useTranslations("Teachings");
   const LOCKED = AUTH_DISABLED ? false : true;
 
   const lessons = [
-    { id: "teologia-mariana", number: 1, title: t("pathPages.avancado.l1.title"), duration: "35 min" },
-    { id: "consagracao-total", number: 2, title: t("pathPages.avancado.l2.title"), duration: "40 min" },
-    { id: "aspectos-misticos", number: 3, title: t("pathPages.avancado.l3.title"), duration: "30 min" },
-    { id: "doutrina-social", number: 4, title: t("pathPages.avancado.l4.title"), duration: "25 min" },
-    { id: "lideranca-oracao", number: 5, title: t("pathPages.avancado.l5.title"), duration: "28 min" }
+    { id: "teologia-mariana", number: 1, title: t("pathPages.misterios-vivos.l1.title"), duration: "35 min" },
+    { id: "consagracao-total", number: 2, title: t("pathPages.misterios-vivos.l2.title"), duration: "40 min" },
+    { id: "aspectos-misticos", number: 3, title: t("pathPages.misterios-vivos.l3.title"), duration: "30 min" },
+    { id: "doutrina-social", number: 4, title: t("pathPages.misterios-vivos.l4.title"), duration: "25 min" },
+    { id: "lideranca-oracao", number: 5, title: t("pathPages.misterios-vivos.l5.title"), duration: "28 min" }
   ];
 
   return (
     <PageTransition>
       <main className="min-h-screen bg-background">
         <PageHeader
-          title={t("pathPages.avancado.title")}
-          subtitle={t("pathPages.avancado.subtitle")}
+          title={t("pathPages.misterios-vivos.title")}
+          subtitle={t("pathPages.misterios-vivos.subtitle")}
           icon="👑"
         />
 
@@ -35,7 +35,7 @@ export default function AvancadoPage() {
           <BreadcrumbNav 
             items={[
               { label: t("breadcrumb"), path: "/ensinamentos?tab=caminhos" },
-              { label: t("pathLabels.avancado") }
+              { label: t("pathLabels.misterios-vivos") }
             ]} 
           />
 
@@ -48,7 +48,7 @@ export default function AvancadoPage() {
                 </div>
                 <div>
                   <h2 className="text-xl font-cinzel font-bold text-foreground">{t("pathPages.content")}</h2>
-                  <p className="text-purple-600 dark:text-purple-400 text-sm font-medium">{t("pathPages.avancado.meta")}</p>
+                  <p className="text-purple-600 dark:text-purple-400 text-sm font-medium">{t("pathPages.misterios-vivos.meta")}</p>
                 </div>
               </div>
               <ul className="space-y-2">

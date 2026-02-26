@@ -49,16 +49,16 @@ export function ArticleLayout({
   const locale = useLocale();
 
   const LEVEL_LABELS: Record<string, { label: string; color: string }> = {
-    iniciante: {
-      label: teachingsT("pathLabels.iniciante"),
+    "primeiros-passos": {
+      label: teachingsT("pathLabels.primeiros-passos"),
       color: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
     },
-    intermediario: {
-      label: teachingsT("pathLabels.intermediario"),
+    aprofundando: {
+      label: teachingsT("pathLabels.aprofundando"),
       color: "bg-gold-500/15 text-gold-700 dark:text-gold-400 border-gold-500/30",
     },
-    avancado: {
-      label: teachingsT("pathLabels.avancado"),
+    "misterios-vivos": {
+      label: teachingsT("pathLabels.misterios-vivos"),
       color: "bg-purple-500/15 text-purple-700 dark:text-purple-400 border-purple-500/30",
     },
   };
@@ -130,42 +130,46 @@ export function ArticleLayout({
               </div>
             </header>
 
-            {/* Quick Wisdom Summary Box */}
-            <div className="mb-10 p-6 rounded-[2rem] glass border-gold-500/20 bg-gradient-to-br from-gold-500/5 to-transparent relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gold-500/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center flex-shrink-0 shadow-lg">
-                  <BookOpen className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-cinzel font-bold text-lg text-foreground mb-2">
-                    {t("summaryTitle")}
-                  </h3>
-                  <div className="text-sm text-muted-foreground leading-relaxed">
-                    {meta.excerpt.split('. ').map((sentence, i) => (
-                      <div key={i} className="flex items-start gap-2 mb-1.5">
-                        <div className="w-1.5 h-1.5 rounded-full bg-gold-500 mt-1.5 flex-shrink-0" />
-                        <span>{sentence}{sentence.endsWith('.') ? '' : '.'}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+            {/* Introductory Card */}
+            <div className="mb-12 p-6 sm:p-8 rounded-2xl border border-gold-500/15 bg-gradient-to-br from-gold-500/[0.04] to-transparent">
+              <p className="text-muted-foreground text-[1.1rem] leading-[1.9] italic">
+                {meta.excerpt}
+              </p>
             </div>
 
             {/* MDX Body */}
-            <div className="prose prose-neutral dark:prose-invert prose-lg max-w-none
-              prose-headings:font-cinzel prose-headings:text-foreground
-              prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
-              prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-              prose-p:text-muted-foreground prose-p:leading-relaxed
-              prose-a:text-gold-600 dark:prose-a:text-gold-400 prose-a:no-underline hover:prose-a:underline
-              prose-strong:text-foreground
-              prose-blockquote:border-gold-500 prose-blockquote:text-muted-foreground
-              prose-code:text-gold-700 dark:prose-code:text-gold-300
-              prose-pre:bg-muted prose-pre:border prose-pre:border-border
-              prose-ul:text-muted-foreground prose-ol:text-muted-foreground
-              prose-hr:border-border/50
+            <div className="
+              prose prose-lg dark:prose-invert max-w-none
+              
+              prose-headings:font-cinzel prose-headings:text-foreground prose-headings:tracking-wide
+              prose-h2:text-2xl prose-h2:mt-14 prose-h2:mb-5 prose-h2:pb-3 prose-h2:border-b prose-h2:border-gold-500/20
+              prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4
+              prose-h4:text-lg prose-h4:mt-8 prose-h4:mb-3
+
+              prose-p:text-muted-foreground prose-p:leading-[1.85] prose-p:mb-6 prose-p:text-[1.05rem]
+              prose-a:text-gold-600 dark:prose-a:text-gold-400 prose-a:no-underline hover:prose-a:underline prose-a:font-medium
+              prose-strong:text-foreground prose-strong:font-semibold
+              prose-em:text-foreground/80
+
+              prose-blockquote:border-l-4 prose-blockquote:border-gold-500 prose-blockquote:bg-gold-500/5 prose-blockquote:rounded-r-xl prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:my-8 prose-blockquote:not-italic
+              prose-blockquote:text-foreground/80 prose-blockquote:text-[1rem] prose-blockquote:leading-relaxed
+              [&_blockquote_p]:before:content-none [&_blockquote_p]:after:content-none
+
+              prose-ul:text-muted-foreground prose-ul:my-6 prose-ul:space-y-2
+              prose-ol:text-muted-foreground prose-ol:my-6 prose-ol:space-y-2
+              prose-li:text-[1.05rem] prose-li:leading-relaxed
+              [&_ul_li]:marker:text-gold-500 [&_ol_li]:marker:text-gold-500 [&_ol_li]:marker:font-semibold
+
+              prose-hr:border-border/30 prose-hr:my-12
+
+              prose-table:border prose-table:border-border/50 prose-table:rounded-xl prose-table:overflow-hidden
+              prose-th:bg-muted/50 prose-th:font-cinzel prose-th:text-sm prose-th:uppercase prose-th:tracking-wider prose-th:text-foreground/70
+              prose-td:text-muted-foreground prose-td:border-border/30
+
+              prose-code:text-gold-700 dark:prose-code:text-gold-300 prose-code:font-normal prose-code:before:content-none prose-code:after:content-none
+              prose-pre:bg-muted/50 prose-pre:border prose-pre:border-border/50 prose-pre:rounded-2xl
+
+              prose-img:rounded-2xl prose-img:shadow-lg prose-img:my-8
             ">
               {children}
             </div>

@@ -60,6 +60,22 @@ const nextConfig = {
         destination: '/ensinamentos/caminhos/:path*',
         permanent: true,
       },
+      // Caminho path renames (PRD §2.5 — thematic naming)
+      {
+        source: '/:locale/ensinamentos/caminhos/iniciante/:slug*',
+        destination: '/:locale/ensinamentos/caminhos/primeiros-passos/:slug*',
+        permanent: true,
+      },
+      {
+        source: '/:locale/ensinamentos/caminhos/intermediario/:slug*',
+        destination: '/:locale/ensinamentos/caminhos/aprofundando/:slug*',
+        permanent: true,
+      },
+      {
+        source: '/:locale/ensinamentos/caminhos/avancado/:slug*',
+        destination: '/:locale/ensinamentos/caminhos/misterios-vivos/:slug*',
+        permanent: true,
+      },
     ];
   },
 };
