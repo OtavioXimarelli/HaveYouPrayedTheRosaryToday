@@ -8,8 +8,10 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { useFeed, useAddAmen, useAddComment } from "@/hooks/use-rosary";
 import { CheckIn, getMysteryInfo, INTENTION_TAGS } from "@/types";
 import { formatRelativeTime, getInitials, cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 export function CommunityFeed() {
+  const t = useTranslations("CommunityFeed");
   const { data, isLoading, error } = useFeed();
 
   if (isLoading) {
@@ -17,7 +19,7 @@ export function CommunityFeed() {
       <section className="py-16 px-4 bg-gray-50 dark:bg-navy-darker">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-2xl font-bold text-navy dark:text-white mb-8 text-center">
-            Orações da Comunidade
+            {t("title")}
           </h2>
           <div className="space-y-4">
             {[1, 2, 3].map((i) => (
@@ -44,7 +46,7 @@ export function CommunityFeed() {
     return (
       <section className="py-16 px-4 bg-gray-50 dark:bg-navy-darker">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-red-500">Falha ao carregar o feed da comunidade</p>
+          <p className="text-red-500">{t("error")}</p>
         </div>
       </section>
     );
@@ -55,10 +57,10 @@ export function CommunityFeed() {
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-navy dark:text-white mb-3">
-            Orações da Comunidade
+            {t("title")}
           </h2>
           <p className="text-muted-foreground">
-            Reze junto com fiéis ao redor do mundo 🌍
+            {t("subtitle")}
           </p>
         </div>
 
@@ -72,7 +74,7 @@ export function CommunityFeed() {
           <div className="text-center py-12">
             <div className="text-6xl mb-4">🙏</div>
             <p className="text-muted-foreground">
-              Nenhuma oração ainda. Seja o primeiro a compartilhar!
+              {t("empty")}
             </p>
           </div>
         )}
@@ -84,6 +86,7 @@ export function CommunityFeed() {
 function FeedCard({ checkIn }: { checkIn: CheckIn }) {
   const [showComments, setShowComments] = useState(false);
   const [newComment, setNewComment] = useState("");
+  const t = useTranslations("CommunityFeed");
   
   const amenMutation = useAddAmen();
   const commentMutation = useAddComment();
@@ -135,7 +138,7 @@ function FeedCard({ checkIn }: { checkIn: CheckIn }) {
             </span>
           </div>
           <p className="text-sm text-muted-foreground">
-            Rezou os{" "}
+            {t("prayedThe")}{" "}
             <span className="text-gold font-medium">{mysteryInfo.name}</span>
           </p>
         </div>
@@ -186,7 +189,7 @@ function FeedCard({ checkIn }: { checkIn: CheckIn }) {
                 className={cn("w-5 h-5", checkIn.hasUserAmened && "fill-current")}
               />
               <span>{checkIn.amens}</span>
-              <span className="text-muted-foreground">Amém</span>
+              <span className="text-muted-foreground">{t("amen")}</span>
             </Button>
 
             <Button
@@ -229,7 +232,7 @@ function FeedCard({ checkIn }: { checkIn: CheckIn }) {
             {/* New comment input */}
             <div className="flex gap-2">
               <Input
-                placeholder="Adicione uma palavra de encorajamento..."
+                placeholder={t("commentPlaceholder")}
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSubmitComment()}

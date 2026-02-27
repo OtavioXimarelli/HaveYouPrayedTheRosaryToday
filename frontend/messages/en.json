@@ -101,6 +101,33 @@
     "quote": {
       "text": "“Pray the Rosary every day to obtain peace for the world and the end of the war.”",
       "author": "Our Lady of Fatima"
+    },
+    "sections": {
+      "todaysMysteries": "Today's Mysteries",
+      "mysteryCount": "5 Mysteries to Meditate",
+      "continueJourney": "Continue Your Journey",
+      "continueJourneyDesc": "Pick up where you left off",
+      "prayerLife": "Your Prayer Life",
+      "prayerLifeDesc": "Track your spiritual progress",
+      "quickAccess": "Quick Access",
+      "totalDays": "total days",
+      "bestWeek": "best week",
+      "avgPerWeek": "weekly avg",
+      "viewAll": "View All",
+      "startPath": "Start Path",
+      "suggestedForYou": "Suggested for You",
+      "dailyVerse": "Verse of the Day",
+      "explore": "Explore Rosário Vivo"
+    },
+    "suggested": {
+      "pathTitle": "First Steps",
+      "pathDesc": "Begin your spiritual journey with the foundations of Catholic faith and the Rosary prayer.",
+      "santosTitle": "Lives of the Saints",
+      "santosDesc": "Discover the saints who lived the faith heroically.",
+      "oracoesTitle": "Traditional Prayers",
+      "oracoesDesc": "Learn the prayers of Catholic tradition.",
+      "ensinamentosTitle": "Teachings",
+      "ensinamentosDesc": "Deepen your knowledge of the doctrine of the faith."
     }
   },
   "HowToPray": {
@@ -135,7 +162,11 @@
       "step4": {
         "title": "Hail Mary (3x)",
         "description": "On the next three beads, pray three Hail Marys:",
-        "list": ["For faith", "For hope", "For charity"]
+        "list": [
+          "For faith",
+          "For hope",
+          "For charity"
+        ]
       },
       "step5": {
         "title": "Glory Be",
@@ -151,10 +182,22 @@
         "title": "Pray a Decade",
         "description": "For each mystery, pray:",
         "list": [
-          {"count": "1x", "text": "Our Father (on the large bead)"},
-          {"count": "10x", "text": "Hail Mary (on the 10 small beads)"},
-          {"count": "1x", "text": "Glory Be"},
-          {"count": "1x", "text": "O My Jesus (Fatima prayer)"}
+          {
+            "count": "1x",
+            "text": "Our Father (on the large bead)"
+          },
+          {
+            "count": "10x",
+            "text": "Hail Mary (on the 10 small beads)"
+          },
+          {
+            "count": "1x",
+            "text": "Glory Be"
+          },
+          {
+            "count": "1x",
+            "text": "O My Jesus (Fatima prayer)"
+          }
         ]
       },
       "step8": {
@@ -187,11 +230,27 @@
       "badge": "Full Content Available",
       "description": "Saint Louis Mary Grignion de Montfort (1673-1716), great apostle of the Rosary, taught a special method to make prayer more contemplative. His method divides each Hail Mary into three parts to deepen the meditation.",
       "items": [
-        {"title": "First Hail Marys: The Fact", "description": "Visualize the biblical event of the mystery"},
-        {"title": "Following Hail Marys: The Virtues", "description": "Contemplate the virtues of Jesus and Mary"},
-        {"title": "Last Hail Marys: The Application", "description": "Apply the teachings to your life"}
+        {
+          "title": "First Hail Marys: The Fact",
+          "description": "Visualize the biblical event of the mystery"
+        },
+        {
+          "title": "Following Hail Marys: The Virtues",
+          "description": "Contemplate the virtues of Jesus and Mary"
+        },
+        {
+          "title": "Last Hail Marys: The Application",
+          "description": "Apply the teachings to your life"
+        }
       ],
-      "cta": "Create account to see full content"
+      "cta": "Create account to see full content",
+      "lockedTitle": "📖 Detailed practical example",
+      "lockedDesc": "Learn step by step how to apply this method to each mystery, with practical examples of meditating on the Annunciation, the Birth of Jesus, and more...",
+      "lockedItems": [
+        "+ Complete meditation guide for each of the 20 mysteries",
+        "+ Advanced contemplation techniques",
+        "+ Full quotes from the writings of St. Louis de Montfort"
+      ]
     },
     "padrePio": {
       "title": "Method of Saint Padre Pio of Pietrelcina",
@@ -204,7 +263,15 @@
         "Trust Mary completely",
         "Pray with daily perseverance"
       ],
-      "cta": "Join the community to learn more"
+      "cta": "Join the community to learn more",
+      "principles": "Essential principles:",
+      "lockedTitle": "✨ How Padre Pio prayed exactly",
+      "lockedDesc": "Discover the specific gestures, pauses, and visualizations Padre Pio used during each part of the Rosary...",
+      "lockedItems": [
+        "+ His secret devotional practices",
+        "+ Testimonies of conversion through the Rosary",
+        "+ Full quotes and personal teachings"
+      ]
     },
     "cta": {
       "title": "Deepen your prayer life",
@@ -289,10 +356,22 @@
     ],
     "popes": {
       "title": "Popes and the Holy Rosary",
-      "leo": { "name": "Pope Leo XIII", "description": "Wrote 12 encyclicals on the Rosary and called it \"the most excellent form of prayer\"" },
-      "pius": { "name": "Pope Pius XI", "description": "Called the Rosary \"the compendium of the entire Gospel\"" },
-      "paul": { "name": "Pope Paul VI", "description": "Dedicated the apostolic exhortation \"Marialis Cultus\" to the Rosary" },
-      "francis": { "name": "Pope Francis", "description": "Always carries a rosary in his pocket and encourages the faithful to pray in families" }
+      "leo": {
+        "name": "Pope Leo XIII",
+        "description": "Wrote 12 encyclicals on the Rosary and called it \"the most excellent form of prayer\""
+      },
+      "pius": {
+        "name": "Pope Pius XI",
+        "description": "Called the Rosary \"the compendium of the entire Gospel\""
+      },
+      "paul": {
+        "name": "Pope Paul VI",
+        "description": "Dedicated the apostolic exhortation \"Marialis Cultus\" to the Rosary"
+      },
+      "francis": {
+        "name": "Pope Francis",
+        "description": "Always carries a rosary in his pocket and encourages the faithful to pray in families"
+      }
     },
     "cta": {
       "title": "Continue your journey of faith",
@@ -322,11 +401,31 @@
         "subtitle": "The Infancy of Jesus",
         "days": "Monday and Saturday",
         "items": [
-          { "title": "The Annunciation of the Angel to Mary", "scripture": "Lk 1:26-27", "quote": "In the sixth month the angel Gabriel was sent from God to a city of Galilee named Nazareth, to a virgin betrothed to a man whose name was Joseph, of the house of David; and the virgin's name was Mary." },
-          { "title": "The Visitation of Mary to Elizabeth", "scripture": "Lk 1:39-42", "quote": "In those days Mary arose and went with haste into the hill country, to a city of Judah, and she entered the house of Zechariah and greeted Elizabeth." },
-          { "title": "The Birth of Jesus in Bethlehem", "scripture": "Lk 2:1-7", "quote": "And while they were there, the time came for her to be delivered. And she gave birth to her first-born son and wrapped him in swaddling cloths, and laid him in a manger." },
-          { "title": "The Presentation of Jesus in the Temple", "scripture": "Lk 2:21-24", "quote": "And when the time came for their purification according to the law of Moses, they brought him up to Jerusalem to present him to the Lord." },
-          { "title": "The Finding of Jesus in the Temple", "scripture": "Lk 2:41-47", "quote": "After three days they found him in the temple, sitting among the teachers, listening to them and asking them questions." }
+          {
+            "title": "The Annunciation of the Angel to Mary",
+            "scripture": "Lk 1:26-27",
+            "quote": "In the sixth month the angel Gabriel was sent from God to a city of Galilee named Nazareth, to a virgin betrothed to a man whose name was Joseph, of the house of David; and the virgin's name was Mary."
+          },
+          {
+            "title": "The Visitation of Mary to Elizabeth",
+            "scripture": "Lk 1:39-42",
+            "quote": "In those days Mary arose and went with haste into the hill country, to a city of Judah, and she entered the house of Zechariah and greeted Elizabeth."
+          },
+          {
+            "title": "The Birth of Jesus in Bethlehem",
+            "scripture": "Lk 2:1-7",
+            "quote": "And while they were there, the time came for her to be delivered. And she gave birth to her first-born son and wrapped him in swaddling cloths, and laid him in a manger."
+          },
+          {
+            "title": "The Presentation of Jesus in the Temple",
+            "scripture": "Lk 2:21-24",
+            "quote": "And when the time came for their purification according to the law of Moses, they brought him up to Jerusalem to present him to the Lord."
+          },
+          {
+            "title": "The Finding of Jesus in the Temple",
+            "scripture": "Lk 2:41-47",
+            "quote": "After three days they found him in the temple, sitting among the teachers, listening to them and asking them questions."
+          }
         ]
       },
       "luminosos": {
@@ -335,11 +434,31 @@
         "days": "Thursday",
         "note": "Introduced by Saint John Paul II in 2002 (Rosarium Virginis Mariae)",
         "items": [
-          { "title": "The Baptism of Jesus in the Jordan", "scripture": "Mt 3:16-17", "quote": "And when Jesus was baptized, he went up immediately from the water, and behold, the heavens were opened and he saw the Spirit of God descending like a dove, and alighting on him." },
-          { "title": "The Wedding at Cana", "scripture": "Jn 2:1-5", "quote": "His mother said to the servants, 'Do whatever he tells you.'" },
-          { "title": "The Proclamation of the Kingdom of God", "scripture": "Mk 1:15", "quote": "The time is fulfilled, and the kingdom of God is at hand; repent, and believe in the gospel." },
-          { "title": "The Transfiguration of Jesus", "scripture": "Mt 17:1-2", "quote": "And he was transfigured before them, and his face shone like the sun, and his garments became white as light." },
-          { "title": "The Institution of the Eucharist", "scripture": "Mt 26:26", "quote": "Now as they were eating, Jesus took bread, and blessed, and broke it, and gave it to the disciples and said, 'Take, eat; this is my body.'" }
+          {
+            "title": "The Baptism of Jesus in the Jordan",
+            "scripture": "Mt 3:16-17",
+            "quote": "And when Jesus was baptized, he went up immediately from the water, and behold, the heavens were opened and he saw the Spirit of God descending like a dove, and alighting on him."
+          },
+          {
+            "title": "The Wedding at Cana",
+            "scripture": "Jn 2:1-5",
+            "quote": "His mother said to the servants, 'Do whatever he tells you.'"
+          },
+          {
+            "title": "The Proclamation of the Kingdom of God",
+            "scripture": "Mk 1:15",
+            "quote": "The time is fulfilled, and the kingdom of God is at hand; repent, and believe in the gospel."
+          },
+          {
+            "title": "The Transfiguration of Jesus",
+            "scripture": "Mt 17:1-2",
+            "quote": "And he was transfigured before them, and his face shone like the sun, and his garments became white as light."
+          },
+          {
+            "title": "The Institution of the Eucharist",
+            "scripture": "Mt 26:26",
+            "quote": "Now as they were eating, Jesus took bread, and blessed, and broke it, and gave it to the disciples and said, 'Take, eat; this is my body.'"
+          }
         ]
       },
       "dolorosos": {
@@ -347,11 +466,31 @@
         "subtitle": "The Passion of Jesus",
         "days": "Tuesday and Friday",
         "items": [
-          { "title": "The Agony of Jesus in the Garden", "scripture": "Mt 26:36-39", "quote": "My Father, if it be possible, let this cup pass from me; nevertheless, not as I will, but as thou wilt." },
-          { "title": "The Scourging of Jesus at the Pillar", "scripture": "Mt 27:26", "quote": "Then he released for them Barabbas, and having scourged Jesus, delivered him to be crucified." },
-          { "title": "The Crowning with Thorns", "scripture": "Mt 27:27-29", "quote": "And plaiting a crown of thorns they put it on his head, and put a reed in his right hand. And kneeling before him they mocked him, saying, 'Hail, King of the Jews!'" },
-          { "title": "The Carrying of the Cross", "scripture": "Mk 15:21-22", "quote": "And they compelled a passer-by, Simon of Cyrene, who was coming in from the country, to carry his cross. And they brought him to the place called Golgotha." },
-          { "title": "The Crucifixion and Death of Jesus", "scripture": "Lk 23:33-46", "quote": "Father, into thy hands I commit my spirit! And having said this he breathed his last." }
+          {
+            "title": "The Agony of Jesus in the Garden",
+            "scripture": "Mt 26:36-39",
+            "quote": "My Father, if it be possible, let this cup pass from me; nevertheless, not as I will, but as thou wilt."
+          },
+          {
+            "title": "The Scourging of Jesus at the Pillar",
+            "scripture": "Mt 27:26",
+            "quote": "Then he released for them Barabbas, and having scourged Jesus, delivered him to be crucified."
+          },
+          {
+            "title": "The Crowning with Thorns",
+            "scripture": "Mt 27:27-29",
+            "quote": "And plaiting a crown of thorns they put it on his head, and put a reed in his right hand. And kneeling before him they mocked him, saying, 'Hail, King of the Jews!'"
+          },
+          {
+            "title": "The Carrying of the Cross",
+            "scripture": "Mk 15:21-22",
+            "quote": "And they compelled a passer-by, Simon of Cyrene, who was coming in from the country, to carry his cross. And they brought him to the place called Golgotha."
+          },
+          {
+            "title": "The Crucifixion and Death of Jesus",
+            "scripture": "Lk 23:33-46",
+            "quote": "Father, into thy hands I commit my spirit! And having said this he breathed his last."
+          }
         ]
       },
       "gloriosos": {
@@ -359,11 +498,31 @@
         "subtitle": "The Glory of Christ and Mary",
         "days": "Wednesday and Sunday",
         "items": [
-          { "title": "The Resurrection of Jesus", "scripture": "Lk 24:1-5", "quote": "Why do you seek the living among the dead? He is not here, but has risen." },
-          { "title": "The Ascension of Jesus into Heaven", "scripture": "Mk 16:19", "quote": "So then the Lord Jesus, after he had spoken to them, was taken up into heaven, and sat down at the right hand of God." },
-          { "title": "The Descent of the Holy Spirit", "scripture": "Acts 2:1-4", "quote": "And there appeared to them tongues as of fire, distributed and resting on each one of them. And they were all filled with the Holy Spirit." },
-          { "title": "The Assumption of Mary into Heaven", "scripture": "Lk 1:48-49", "quote": "For behold, henceforth all generations will call me blessed; for he who is mighty has done great things for me." },
-          { "title": "The Coronation of Mary as Queen of Heaven and Earth", "scripture": "Rev 12:1", "quote": "And a great portent appeared in heaven, a woman clothed with the sun, with the moon under her feet, and on her head a crown of twelve stars." }
+          {
+            "title": "The Resurrection of Jesus",
+            "scripture": "Lk 24:1-5",
+            "quote": "Why do you seek the living among the dead? He is not here, but has risen."
+          },
+          {
+            "title": "The Ascension of Jesus into Heaven",
+            "scripture": "Mk 16:19",
+            "quote": "So then the Lord Jesus, after he had spoken to them, was taken up into heaven, and sat down at the right hand of God."
+          },
+          {
+            "title": "The Descent of the Holy Spirit",
+            "scripture": "Acts 2:1-4",
+            "quote": "And there appeared to them tongues as of fire, distributed and resting on each one of them. And they were all filled with the Holy Spirit."
+          },
+          {
+            "title": "The Assumption of Mary into Heaven",
+            "scripture": "Lk 1:48-49",
+            "quote": "For behold, henceforth all generations will call me blessed; for he who is mighty has done great things for me."
+          },
+          {
+            "title": "The Coronation of Mary as Queen of Heaven and Earth",
+            "scripture": "Rev 12:1",
+            "quote": "And a great portent appeared in heaven, a woman clothed with the sun, with the moon under her feet, and on her head a crown of twelve stars."
+          }
         ]
       }
     },
@@ -477,6 +636,49 @@
       "latin": "Latin",
       "scripture": "Scripture reference:",
       "history": "Historical note:"
+    },
+    "prayers": {
+      "0": {
+        "title": "Sign of the Cross",
+        "subtitle": "Beginning and end of the Rosary",
+        "text": "In the name of the Father,\nand of the Son,\nand of the Holy Spirit.\nAmen."
+      },
+      "1": {
+        "title": "Apostles' Creed",
+        "subtitle": "Prayed on the crucifix — Symbol of the Apostles",
+        "text": "I believe in God,\nthe Father Almighty,\nCreator of heaven and earth,\nand in Jesus Christ, His only Son, our Lord,\nwho was conceived by the Holy Spirit,\nborn of the Virgin Mary,\nsuffered under Pontius Pilate,\nwas crucified, died and was buried;\nHe descended into hell;\non the third day He rose again from the dead;\nHe ascended into heaven,\nand is seated at the right hand of God the Father Almighty;\nfrom there He will come to judge the living and the dead.\n\nI believe in the Holy Spirit,\nthe Holy Catholic Church,\nthe communion of Saints,\nthe forgiveness of sins,\nthe resurrection of the body,\nand life everlasting.\nAmen."
+      },
+      "2": {
+        "title": "Our Father",
+        "subtitle": "The Lord's Prayer — before each decade",
+        "text": "Our Father, who art in heaven,\nhallowed be Thy name;\nThy kingdom come,\nThy will be done\non earth as it is in heaven.\n\nGive us this day our daily bread,\nand forgive us our trespasses,\nas we forgive those who trespass against us;\nand lead us not into temptation,\nbut deliver us from evil.\nAmen."
+      },
+      "3": {
+        "title": "Hail Mary",
+        "subtitle": "Angelic Salutation — ten times in each decade",
+        "text": "Hail Mary, full of grace,\nthe Lord is with thee;\nblessed art thou among women,\nand blessed is the fruit of thy womb, Jesus.\n\nHoly Mary, Mother of God,\npray for us sinners,\nnow and at the hour of our death.\nAmen."
+      },
+      "4": {
+        "title": "Glory Be",
+        "subtitle": "Minor Doxology — after each decade",
+        "text": "Glory be to the Father,\nand to the Son,\nand to the Holy Spirit.\n\nAs it was in the beginning,\nis now, and ever shall be,\nworld without end.\nAmen."
+      },
+      "5": {
+        "title": "Fatima Prayer",
+        "subtitle": "Ejaculation — after each Glory Be",
+        "text": "O my Jesus,\nforgive us our sins,\nsave us from the fires of hell;\nlead all souls to Heaven,\nespecially those in most need\nof Thy mercy.",
+        "note": "This prayer was taught by Our Lady to the three shepherd children of Fatima on July 13, 1917, after the vision of hell."
+      },
+      "6": {
+        "title": "Hail Holy Queen",
+        "subtitle": "Salve Regina — at the end of the Rosary",
+        "text": "Hail, Holy Queen, Mother of Mercy,\nour life, our sweetness and our hope!\n\nTo thee do we cry,\npoor banished children of Eve.\n\nTo thee do we send up our sighs,\nmourning and weeping in this valley of tears.\n\nTurn, then, most gracious Advocate,\nthine eyes of mercy toward us;\n\nand after this, our exile,\nshow unto us the blessed fruit\nof thy womb, Jesus.\n\nO clement, O loving,\nO sweet Virgin Mary.\n\nV. Pray for us, O holy Mother of God.\nR. That we may be made worthy of the promises of Christ.\n\nAmen."
+      },
+      "7": {
+        "title": "Closing Prayer",
+        "subtitle": "Collect — after the Hail Holy Queen",
+        "text": "O God, whose Only Begotten Son,\nby His life, Death, and Resurrection,\nhas purchased for us the rewards of eternal life:\ngrant, we beseech Thee,\nthat by meditating upon these mysteries\nof the Most Holy Rosary of the Blessed Virgin Mary,\nwe may imitate what they contain\nand obtain what they promise.\n\nThrough Christ our Lord.\nAmen."
+      }
     }
   },
   "About": {
@@ -492,45 +694,127 @@
     "principles": {
       "title": "Our Principles",
       "subtitle": "Six pillars that guide every decision, every feature, every word in Living Rosary",
-      "p1": { "title": "Authentic Faith", "desc": "We connect people to the living tradition of the Catholic Church, rooted in the Rosary prayer as a path of spiritual transformation." },
-      "p2": { "title": "Global Community", "desc": "We create a space where Catholics from all parts of the world pray together, share intentions, and grow spiritually connected." },
-      "p3": { "title": "Accessible Teachings", "desc": "We synthesize Holy See documents, writings of saints, and Catholic theology into clear content—no courses, just Church wisdom within reach." },
-      "p4": { "title": "Sacred Simplicity", "desc": "We transform technology into a prayer tool, keeping the focus on the essence: personal contact with God and Mary." },
-      "p5": { "title": "Faith Integrity", "desc": "All content is based on the Doctrine of the Catholic Church, validated and guided by solid pastoral principles." },
-      "p6": { "title": "Accessibility", "desc": "Free, open to all, without intrusive ads. Faith should not have economic or digital barriers." }
+      "p1": {
+        "title": "Authentic Faith",
+        "desc": "We connect people to the living tradition of the Catholic Church, rooted in the Rosary prayer as a path of spiritual transformation."
+      },
+      "p2": {
+        "title": "Global Community",
+        "desc": "We create a space where Catholics from all parts of the world pray together, share intentions, and grow spiritually connected."
+      },
+      "p3": {
+        "title": "Accessible Teachings",
+        "desc": "We synthesize Holy See documents, writings of saints, and Catholic theology into clear content—no courses, just Church wisdom within reach."
+      },
+      "p4": {
+        "title": "Sacred Simplicity",
+        "desc": "We transform technology into a prayer tool, keeping the focus on the essence: personal contact with God and Mary."
+      },
+      "p5": {
+        "title": "Faith Integrity",
+        "desc": "All content is based on the Doctrine of the Catholic Church, validated and guided by solid pastoral principles."
+      },
+      "p6": {
+        "title": "Accessibility",
+        "desc": "Free, open to all, without intrusive ads. Faith should not have economic or digital barriers."
+      }
     },
     "offer": {
       "title": "What We Offer",
-      "track": { "title": "Track", "desc": "Register your daily rosary, track your consistency streaks, see your spiritual growth reflected in numbers that matter." },
-      "explore": { "title": "Explore", "desc": "Navigate through synthesized Catholic teachings: theology, Church history, lives of saints, sacraments—all based on official Holy See sources." },
-      "pray": { "title": "Pray Well", "desc": "Access prayer guides, explore different Rosary methods, and discover tools that help you pray with greater devotion and awareness." },
-      "connect": { "title": "Connect", "desc": "Join a global community of Catholics, share prayer intentions, and know that you never pray alone, but with a family of faith." }
+      "track": {
+        "title": "Track",
+        "desc": "Register your daily rosary, track your consistency streaks, see your spiritual growth reflected in numbers that matter."
+      },
+      "explore": {
+        "title": "Explore",
+        "desc": "Navigate through synthesized Catholic teachings: theology, Church history, lives of saints, sacraments—all based on official Holy See sources."
+      },
+      "pray": {
+        "title": "Pray Well",
+        "desc": "Access prayer guides, explore different Rosary methods, and discover tools that help you pray with greater devotion and awareness."
+      },
+      "connect": {
+        "title": "Connect",
+        "desc": "Join a global community of Catholics, share prayer intentions, and know that you never pray alone, but with a family of faith."
+      }
     },
     "journey": {
       "title": "Our Journey",
-      "j1": { "year": "2024", "title": "Birth of a Vision", "desc": "Living Rosary started as a simple idea: a rosary tracker that connected people to their daily faith." },
-      "j2": { "year": "2025", "title": "From Tracker to Hub", "desc": "We recognized that Catholics wanted more. Not just tracking—learning, growing, and communing in faith." },
-      "j3": { "year": "2026", "title": "Synthesis of Tradition", "desc": "Living Rosary becomes an accessible compendium of the Church: we synthesize Holy See documents, teachings of saints, and theology into practical content." }
+      "j1": {
+        "year": "2024",
+        "title": "Birth of a Vision",
+        "desc": "Living Rosary started as a simple idea: a rosary tracker that connected people to their daily faith."
+      },
+      "j2": {
+        "year": "2025",
+        "title": "From Tracker to Hub",
+        "desc": "We recognized that Catholics wanted more. Not just tracking—learning, growing, and communing in faith."
+      },
+      "j3": {
+        "year": "2026",
+        "title": "Synthesis of Tradition",
+        "desc": "Living Rosary becomes an accessible compendium of the Church: we synthesize Holy See documents, teachings of saints, and theology into practical content."
+      }
     },
     "different": {
       "title": "Why We Are Different",
-      "d1": { "title": "Based on Official Sources", "desc": "All content comes from Holy See documents, the Catechism, writings of recognized saints, and Church-approved theology. We don't invent—we synthesize what the Church already teaches." },
-      "d2": { "title": "Free Navigation", "desc": "No mandatory paths or sequential lessons. Explore the teachings you want, when you want—like browsing a digital compendium of the Catholic faith." },
-      "d3": { "title": "Always Free and Open", "desc": "Living Rosary is an open-source project driven by faith, not profit. Church teachings belong to everyone—we don't charge to access them." },
-      "d4": { "title": "No Ads, No Invasive Tracking", "desc": "Your prayer is sacred. We don't monetize it with targeted ads, sell your data, or create consumer profiles." }
+      "d1": {
+        "title": "Based on Official Sources",
+        "desc": "All content comes from Holy See documents, the Catechism, writings of recognized saints, and Church-approved theology. We don't invent—we synthesize what the Church already teaches."
+      },
+      "d2": {
+        "title": "Free Navigation",
+        "desc": "No mandatory paths or sequential lessons. Explore the teachings you want, when you want—like browsing a digital compendium of the Catholic faith."
+      },
+      "d3": {
+        "title": "Always Free and Open",
+        "desc": "Living Rosary is an open-source project driven by faith, not profit. Church teachings belong to everyone—we don't charge to access them."
+      },
+      "d4": {
+        "title": "No Ads, No Invasive Tracking",
+        "desc": "Your prayer is sacred. We don't monetize it with targeted ads, sell your data, or create consumer profiles."
+      }
     },
     "faq": {
       "title": "Frequently Asked Questions",
       "subtitle": "Quick answers about Living Rosary",
-      "q1": { "q": "Why do I need to create an account if the service is free?", "a": "Great question! We ask for a simple account (just email and password) for two reasons: to protect the community from spam and to offer personalized features. With an account, you can track your prayer streak, save favorite content, and access exclusive member resources. It also helps us understand which teachings are most useful, improving the service for everyone. We promise never to sell your data or send spam—your account is just your gateway to a richer experience." },
-      "q2": { "q": "What can I access without an account? What needs registration?", "a": "Without account (public): How to Pray, History of the Rosary, Daily Mysteries, and Traditional Prayers are completely open.\n\nWith free account: Streak tracking, full Teachings (saints, theology, sacraments), Prayer Tools, personalized Dashboard, and community access. Creating an account is fast and remains free forever." },
-      "q3": { "q": "Is the content really from the Catholic Church?", "a": "Yes, absolutely. All our content is based on official sources: Catechism of the Catholic Church, papal documents (encyclicals, exhortations), writings of recognized saint doctors, and Holy See-approved theology. We don't create doctrines—we just synthesize what the Church has taught for centuries, making it accessible in digital format." },
-      "q4": { "q": "Is my data safe? Do you sell information?", "a": "We never sell data. We collect only the essential: email for login, aggregated (anonymous) usage statistics to improve the service, and your personal preferences (streaks, favorites) stored securely. There are no targeted ads, third-party tracking, or consumer profiles. Your prayer life is private and sacred." },
-      "q5": { "q": "Can I use it offline or do I need internet?", "a": "Currently, Living Rosary requires an internet connection to load content and sync your progress. We are working on offline features (prayer cache, downloaded content) for future versions. For now, a stable connection ensures the best experience." },
-      "q6": { "q": "Why is it open source? Can I contribute?", "a": "Living Rosary is open source because we believe faith tools should be transparent and collaborative. The code is available on GitHub for anyone to review, learn, or contribute. If you are a developer, designer, or Catholic theology expert, your help is welcome! We accept code contributions, content suggestions, and improvements.", "github": "View on GitHub" },
-      "q7": { "q": "Is it available in other languages?", "a": "Currently, Living Rosary is in Portuguese and English. We plan to expand to Spanish and other languages in the future. The infrastructure is prepared for internationalization—it's just a matter of translating the content while maintaining theological fidelity." },
-      "q8": { "q": "Is there a mobile app?", "a": "For now, Living Rosary works as a web app (PWA - Progressive Web App), accessible via browser on your phone. You can add it to your device's home screen for an experience similar to a native app. Native apps for iOS and Android are on our long-term roadmap." },
-      "q9": { "q": "Will it always be free or will it become paid in the future?", "a": "Living Rosary will always be free. Our commitment is to keep all essential features accessible to all at no cost. In the future, we may introduce optional premium features (like live classes, spiritual consultancies, exclusive content), but the platform's core—prayer, teachings, and community—will remain free." }
+      "q1": {
+        "q": "Why do I need to create an account if the service is free?",
+        "a": "Great question! We ask for a simple account (just email and password) for two reasons: to protect the community from spam and to offer personalized features. With an account, you can track your prayer streak, save favorite content, and access exclusive member resources. It also helps us understand which teachings are most useful, improving the service for everyone. We promise never to sell your data or send spam—your account is just your gateway to a richer experience."
+      },
+      "q2": {
+        "q": "What can I access without an account? What needs registration?",
+        "a": "Without account (public): How to Pray, History of the Rosary, Daily Mysteries, and Traditional Prayers are completely open.\n\nWith free account: Streak tracking, full Teachings (saints, theology, sacraments), Prayer Tools, personalized Dashboard, and community access. Creating an account is fast and remains free forever."
+      },
+      "q3": {
+        "q": "Is the content really from the Catholic Church?",
+        "a": "Yes, absolutely. All our content is based on official sources: Catechism of the Catholic Church, papal documents (encyclicals, exhortations), writings of recognized saint doctors, and Holy See-approved theology. We don't create doctrines—we just synthesize what the Church has taught for centuries, making it accessible in digital format."
+      },
+      "q4": {
+        "q": "Is my data safe? Do you sell information?",
+        "a": "We never sell data. We collect only the essential: email for login, aggregated (anonymous) usage statistics to improve the service, and your personal preferences (streaks, favorites) stored securely. There are no targeted ads, third-party tracking, or consumer profiles. Your prayer life is private and sacred."
+      },
+      "q5": {
+        "q": "Can I use it offline or do I need internet?",
+        "a": "Currently, Living Rosary requires an internet connection to load content and sync your progress. We are working on offline features (prayer cache, downloaded content) for future versions. For now, a stable connection ensures the best experience."
+      },
+      "q6": {
+        "q": "Why is it open source? Can I contribute?",
+        "a": "Living Rosary is open source because we believe faith tools should be transparent and collaborative. The code is available on GitHub for anyone to review, learn, or contribute. If you are a developer, designer, or Catholic theology expert, your help is welcome! We accept code contributions, content suggestions, and improvements.",
+        "github": "View on GitHub"
+      },
+      "q7": {
+        "q": "Is it available in other languages?",
+        "a": "Currently, Living Rosary is in Portuguese and English. We plan to expand to Spanish and other languages in the future. The infrastructure is prepared for internationalization—it's just a matter of translating the content while maintaining theological fidelity."
+      },
+      "q8": {
+        "q": "Is there a mobile app?",
+        "a": "For now, Living Rosary works as a web app (PWA - Progressive Web App), accessible via browser on your phone. You can add it to your device's home screen for an experience similar to a native app. Native apps for iOS and Android are on our long-term roadmap."
+      },
+      "q9": {
+        "q": "Will it always be free or will it become paid in the future?",
+        "a": "Living Rosary will always be free. Our commitment is to keep all essential features accessible to all at no cost. In the future, we may introduce optional premium features (like live classes, spiritual consultancies, exclusive content), but the platform's core—prayer, teachings, and community—will remain free."
+      }
     },
     "cta": {
       "title": "Ready to Start?",
@@ -549,15 +833,36 @@
       "desc": "Explore articles, teachings, and reflections on Catholic doctrine, Church history, lives of saints, and more. Everything designed to deepen your knowledge and faith."
     },
     "topics": {
-      "santos": { "title": "Saints & Masters", "desc": "Inspiring lives of saints who were devoted to Mary. Learn their teachings and prayer methods." },
-      "teologia": { "title": "Catholic Theology", "desc": "Foundations of faith: Trinity, incarnation, salvation, and Church doctrine." },
-      "historia": { "title": "Church History", "desc": "Two thousand years of faith: from the apostles to today. Apparitions, miracles, and Church history." },
-      "oracoes": { "title": "Prayer Methods", "desc": "Traditional prayer methods: rosary, novenas, contemplative meditation, and more." },
-      "sacramentos": { "title": "Sacraments", "desc": "Understand the 7 sacraments: Baptism, Eucharist, Penance, Anointing of the Sick, and more." },
-      "maria": { "title": "Marian Devotion", "desc": "The role of Mary in salvation. Marian dogmas and devotion to the Mother of God." },
-      "escritura": { "title": "Holy Scripture", "desc": "Discover the Bible through the mysteries of the Rosary. Connections between Testaments and the mysteries." }
+      "santos": {
+        "title": "Saints & Masters",
+        "desc": "Inspiring lives of saints who were devoted to Mary. Learn their teachings and prayer methods."
+      },
+      "teologia": {
+        "title": "Catholic Theology",
+        "desc": "Foundations of faith: Trinity, incarnation, salvation, and Church doctrine."
+      },
+      "historia": {
+        "title": "Church History",
+        "desc": "Two thousand years of faith: from the apostles to today. Apparitions, miracles, and Church history."
+      },
+      "oracoes": {
+        "title": "Prayer Methods",
+        "desc": "Traditional prayer methods: rosary, novenas, contemplative meditation, and more."
+      },
+      "sacramentos": {
+        "title": "Sacraments",
+        "desc": "Understand the 7 sacraments: Baptism, Eucharist, Penance, Anointing of the Sick, and more."
+      },
+      "maria": {
+        "title": "Marian Devotion",
+        "desc": "The role of Mary in salvation. Marian dogmas and devotion to the Mother of God."
+      },
+      "escritura": {
+        "title": "Holy Scripture",
+        "desc": "Discover the Bible through the mysteries of the Rosary. Connections between Testaments and the mysteries."
+      }
     },
-      "article": "article",
+    "article": "article",
     "articles": "articles",
     "available": "Available Articles",
     "exploreMore": "Explore deep content about {topic}. Articles that help you better understand the mysteries and teachings of the Catholic Church in an accessible way.",
@@ -584,32 +889,72 @@
         "subtitle": "Foundations of faith and prayer",
         "meta": "5 reflections • ~80 minutes",
         "desc": "This path was created for those who are starting or wish to revisit the foundations of the Rosary. By the end, you will have a solid understanding and a deeper prayer practice.",
-        "l1": { "title": "What is the Rosary?", "desc": "Discover the origin, structure, and deep meaning of this millenary prayer that unites millions of Catholics." },
-        "l2": { "title": "The Role of Mary in Salvation", "desc": "Understand why the Church honors Mary and how she leads us to Jesus through the Rosary." },
-        "l3": { "title": "The Power of Repetitive Prayer", "desc": "Learn how contemplative repetition transforms the heart and brings us closer to God." },
-        "l4": { "title": "Building a Daily Habit", "desc": "Practical strategies to incorporate the Rosary into your daily routine." },
-        "l5": { "title": "Overcoming Distractions in Prayer", "desc": "Saints' techniques to maintain focus and deepen meditation." }
+        "l1": {
+          "title": "What is the Rosary?",
+          "desc": "Discover the origin, structure, and deep meaning of this millenary prayer that unites millions of Catholics."
+        },
+        "l2": {
+          "title": "The Role of Mary in Salvation",
+          "desc": "Understand why the Church honors Mary and how she leads us to Jesus through the Rosary."
+        },
+        "l3": {
+          "title": "The Power of Repetitive Prayer",
+          "desc": "Learn how contemplative repetition transforms the heart and brings us closer to God."
+        },
+        "l4": {
+          "title": "Building a Daily Habit",
+          "desc": "Practical strategies to incorporate the Rosary into your daily routine."
+        },
+        "l5": {
+          "title": "Overcoming Distractions in Prayer",
+          "desc": "Saints' techniques to maintain focus and deepen meditation."
+        }
       },
       "aprofundando": {
         "title": "Deepening the Mystery",
         "subtitle": "Contemplation and sacramental life",
         "meta": "5 reflections • ~125 minutes",
         "desc": "For those who already know the Rosary and wish to deepen their contemplative practice, connecting prayer with the Bible, liturgy, and the sacramental life of the Church.",
-        "l1": { "title": "Contemplative Prayer and the Rosary", "desc": "Learn to move from vocal prayer to deep contemplation of the mysteries." },
-        "l2": { "title": "Liturgical Year and the Rosary", "desc": "Connect your Rosary practice with the Church's seasons and feasts." },
-        "l3": { "title": "Biblical Roots of the Mysteries", "desc": "Explore the biblical passages of each mystery in depth." },
-        "l4": { "title": "The Rosary and the Sacraments", "desc": "Discover the relationship between the Rosary and sacramental life." },
-        "l5": { "title": "Mary in the Holy Scriptures", "desc": "Complete biblical study on Mary's presence in the Bible." }
+        "l1": {
+          "title": "Contemplative Prayer and the Rosary",
+          "desc": "Learn to move from vocal prayer to deep contemplation of the mysteries."
+        },
+        "l2": {
+          "title": "Liturgical Year and the Rosary",
+          "desc": "Connect your Rosary practice with the Church's seasons and feasts."
+        },
+        "l3": {
+          "title": "Biblical Roots of the Mysteries",
+          "desc": "Explore the biblical passages of each mystery in depth."
+        },
+        "l4": {
+          "title": "The Rosary and the Sacraments",
+          "desc": "Discover the relationship between the Rosary and sacramental life."
+        },
+        "l5": {
+          "title": "Mary in the Holy Scriptures",
+          "desc": "Complete biblical study on Mary's presence in the Bible."
+        }
       },
       "misterios-vivos": {
         "title": "Living Mysteries",
         "subtitle": "The mystical depth of Mary",
         "meta": "5 reflections • ~158 minutes",
-        "l1": { "title": "Essential Marian Theology" },
-        "l2": { "title": "Total Consecration to Mary" },
-        "l3": { "title": "Mystical Aspects of the Rosary" },
-        "l4": { "title": "The Rosary and Social Doctrine" },
-        "l5": { "title": "Living the Rosary in Community" }
+        "l1": {
+          "title": "Essential Marian Theology"
+        },
+        "l2": {
+          "title": "Total Consecration to Mary"
+        },
+        "l3": {
+          "title": "Mystical Aspects of the Rosary"
+        },
+        "l4": {
+          "title": "The Rosary and Social Doctrine"
+        },
+        "l5": {
+          "title": "Living the Rosary in Community"
+        }
       }
     },
     "tools": {
@@ -637,7 +982,42 @@
       "downloadMaterials": "Download Materials",
       "downloadSubtitle": "Take your faith into the physical world",
       "downloadNow": "Download now",
-      "usefulLinks": "Useful Links"
+      "usefulLinks": "Useful Links",
+      "documents": {
+        "0": {
+          "author": "Pope Saint John Paul II",
+          "description": "Apostolic Letter on the Holy Rosary that introduced the Luminous Mysteries."
+        },
+        "1": {
+          "title": "Catechism of the Catholic Church",
+          "author": "Holy See",
+          "description": "Complete exposition of the doctrine of the Catholic Church."
+        },
+        "2": {
+          "author": "Pope Saint Paul VI",
+          "description": "Apostolic Exhortation for the right ordering and development of devotion to the Blessed Virgin Mary."
+        }
+      },
+      "downloads": {
+        "0": {
+          "title": "Prayer Guide (PDF)",
+          "description": "Compiled with Rosary prayers and meditations on the mysteries."
+        },
+        "1": {
+          "title": "Printable Holy Cards",
+          "description": "High-quality images of Our Lady and Saints devoted to the Rosary."
+        },
+        "2": {
+          "title": "Examination of Conscience Guide",
+          "description": "Practical guide for preparation for the Sacrament of Reconciliation."
+        }
+      },
+      "links": {
+        "0": "Vatican News",
+        "1": "CNBB",
+        "2": "Liturgy of the Hours",
+        "3": "Apostleship of Prayer"
+      }
     }
   },
   "CheckIn": {
@@ -663,10 +1043,22 @@
       "generic": "Something went wrong"
     },
     "mysteries": {
-      "joyful": { "label": "Joyful", "days": "Mon & Sat" },
-      "sorrowful": { "label": "Sorrowful", "days": "Tue & Fri" },
-      "glorious": { "label": "Glorious", "days": "Sun & Wed" },
-      "luminous": { "label": "Luminous", "days": "Thursday" }
+      "joyful": {
+        "label": "Joyful",
+        "days": "Mon & Sat"
+      },
+      "sorrowful": {
+        "label": "Sorrowful",
+        "days": "Tue & Fri"
+      },
+      "glorious": {
+        "label": "Glorious",
+        "days": "Sun & Wed"
+      },
+      "luminous": {
+        "label": "Luminous",
+        "days": "Thursday"
+      }
     },
     "intentionTags": {
       "family": "Family",
@@ -814,10 +1206,22 @@
       },
       "explore": "Explore Now (No Login)",
       "cards": {
-        "howToPray": { "title": "How to Pray", "desc": "Step-by-step guide" },
-        "mysteries": { "title": "Mysteries", "desc": "Daily meditations" },
-        "history": { "title": "History", "desc": "Origin and tradition" },
-        "prayers": { "title": "Prayers", "desc": "Full texts" }
+        "howToPray": {
+          "title": "How to Pray",
+          "desc": "Step-by-step guide"
+        },
+        "mysteries": {
+          "title": "Mysteries",
+          "desc": "Daily meditations"
+        },
+        "history": {
+          "title": "History",
+          "desc": "Origin and tradition"
+        },
+        "prayers": {
+          "title": "Prayers",
+          "desc": "Full texts"
+        }
       }
     },
     "start": {
@@ -845,10 +1249,22 @@
       "title": "Why Living Rosary?",
       "subtitle": "More than an app, we are your companion on the spiritual journey",
       "items": [
-        { "title": "Track your progress", "desc": "Follow streaks, total rosaries prayed, and celebrate achievements" },
-        { "title": "Learn about the faith", "desc": "Access teachings, lives of saints, theology, and Church history" },
-        { "title": "Join the community", "desc": "Share intentions and pray along with thousands of Catholics worldwide" },
-        { "title": "100% Free & Open-Source", "desc": "No payments, no ads, no monetization. Just faith and community" }
+        {
+          "title": "Track your progress",
+          "desc": "Follow streaks, total rosaries prayed, and celebrate achievements"
+        },
+        {
+          "title": "Learn about the faith",
+          "desc": "Access teachings, lives of saints, theology, and Church history"
+        },
+        {
+          "title": "Join the community",
+          "desc": "Share intentions and pray along with thousands of Catholics worldwide"
+        },
+        {
+          "title": "100% Free & Open-Source",
+          "desc": "No payments, no ads, no monetization. Just faith and community"
+        }
       ]
     },
     "cta": {
@@ -876,5 +1292,14 @@
       "credits": "Made with faith and love • {year} • Living Rosary",
       "quote": "\"Pray the Rosary every day to obtain peace for the world\" - Our Lady of Fatima"
     }
+  },
+  "CommunityFeed": {
+    "title": "Community Prayers",
+    "subtitle": "Pray alongside the faithful around the world 🌍",
+    "error": "Failed to load the community feed",
+    "empty": "No prayers yet. Be the first to share!",
+    "prayedThe": "Prayed the",
+    "amen": "Amen",
+    "commentPlaceholder": "Add a word of encouragement..."
   }
-}
+}\n

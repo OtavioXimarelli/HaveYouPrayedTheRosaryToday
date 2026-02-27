@@ -94,13 +94,40 @@
     "actions": {
       "howToPray": "Como Rezar",
       "mysteries": "Mistérios",
-      "teachings": "Formação",
+      "teachings": "Ensinamentos",
       "resources": "Recursos",
       "history": "Histórico"
     },
     "quote": {
       "text": "“Reze o Rosário todos os dias para obter a paz no mundo e o fim da guerra.”",
       "author": "Nossa Senhora de Fátima"
+    },
+    "sections": {
+      "todaysMysteries": "Mistérios de Hoje",
+      "mysteryCount": "5 Mistérios para Meditar",
+      "continueJourney": "Continue sua Jornada",
+      "continueJourneyDesc": "Retome de onde parou",
+      "prayerLife": "Sua Vida de Oração",
+      "prayerLifeDesc": "Acompanhe seu progresso espiritual",
+      "quickAccess": "Acesso Rápido",
+      "totalDays": "dias no total",
+      "bestWeek": "melhor semana",
+      "avgPerWeek": "média semanal",
+      "viewAll": "Ver Tudo",
+      "startPath": "Iniciar Caminho",
+      "suggestedForYou": "Sugerido para Você",
+      "dailyVerse": "Versículo do Dia",
+      "explore": "Explore o Rosário Vivo"
+    },
+    "suggested": {
+      "pathTitle": "Primeiros Passos",
+      "pathDesc": "Comece sua jornada espiritual com as bases da fé católica e a oração do Rosário.",
+      "santosTitle": "Vidas dos Santos",
+      "santosDesc": "Conheça os santos que viveram a fé de forma heroica.",
+      "oracoesTitle": "Orações Tradicionais",
+      "oracoesDesc": "Aprenda as orações da tradição católica.",
+      "ensinamentosTitle": "Ensinamentos",
+      "ensinamentosDesc": "Aprofunde seu conhecimento da doutrina da fé."
     }
   },
   "HowToPray": {
@@ -135,7 +162,11 @@
       "step4": {
         "title": "Ave Maria (3x)",
         "description": "Nas três contas seguintes, reze três Ave Marias:",
-        "list": ["Pela fé", "Pela esperança", "Pela caridade"]
+        "list": [
+          "Pela fé",
+          "Pela esperança",
+          "Pela caridade"
+        ]
       },
       "step5": {
         "title": "Glória ao Pai",
@@ -151,10 +182,22 @@
         "title": "Reze uma Dezena",
         "description": "Para cada mistério, reze:",
         "list": [
-          {"count": "1x", "text": "Pai Nosso (na conta grande)"},
-          {"count": "10x", "text": "Ave Maria (nas 10 contas pequenas)"},
-          {"count": "1x", "text": "Glória ao Pai"},
-          {"count": "1x", "text": "Ó meu Jesus (oração de Fátima)"}
+          {
+            "count": "1x",
+            "text": "Pai Nosso (na conta grande)"
+          },
+          {
+            "count": "10x",
+            "text": "Ave Maria (nas 10 contas pequenas)"
+          },
+          {
+            "count": "1x",
+            "text": "Glória ao Pai"
+          },
+          {
+            "count": "1x",
+            "text": "Ó meu Jesus (oração de Fátima)"
+          }
         ]
       },
       "step8": {
@@ -187,11 +230,27 @@
       "badge": "Conteúdo Completo Disponível",
       "description": "São Luís Maria Grignon de Montfort (1673-1716), grande apóstolo do Rosário, ensinou um método especial para tornar a oração mais contemplativa. Seu método divide cada Ave Maria em três partes para aprofundar a meditação.",
       "items": [
-        {"title": "Primeiras Ave Marias: O Fato", "description": "Visualize o acontecimento bíblico do mistério"},
-        {"title": "Ave Marias seguintes: As Virtudes", "description": "Contemple as virtudes de Jesus e Maria"},
-        {"title": "Últimas Ave Marias: A Aplicação", "description": "Aplique os ensinamentos à sua vida"}
+        {
+          "title": "Primeiras Ave Marias: O Fato",
+          "description": "Visualize o acontecimento bíblico do mistério"
+        },
+        {
+          "title": "Ave Marias seguintes: As Virtudes",
+          "description": "Contemple as virtudes de Jesus e Maria"
+        },
+        {
+          "title": "Últimas Ave Marias: A Aplicação",
+          "description": "Aplique os ensinamentos à sua vida"
+        }
       ],
-      "cta": "Criar conta para ver conteúdo completo"
+      "cta": "Criar conta para ver conteúdo completo",
+      "lockedTitle": "📖 Exemplo prático detalhado",
+      "lockedDesc": "Aprenda passo a passo como aplicar este método em cada mistério, com exemplos práticos de como meditar a Anunciação, o Nascimento de Jesus e mais...",
+      "lockedItems": [
+        "+ Guia completo de meditação para cada um dos 20 mistérios",
+        "+ Técnicas avançadas de contemplação",
+        "+ Citações completas dos escritos de São Luís de Montfort"
+      ]
     },
     "padrePio": {
       "title": "Método de São Padre Pio de Pietrelcina",
@@ -204,7 +263,15 @@
         "Confie totalmente em Maria",
         "Reze com perseverança diária"
       ],
-      "cta": "Junte-se à comunidade para aprender mais"
+      "cta": "Junte-se à comunidade para aprender mais",
+      "principles": "Princípios essenciais:",
+      "lockedTitle": "✨ Como Padre Pio rezava exatamente",
+      "lockedDesc": "Descubra os gestos, pausas e visualizações específicas que Padre Pio usava durante cada parte do Rosário...",
+      "lockedItems": [
+        "+ Suas práticas devocionais secretas",
+        "+ Testemunhos de conversão através do Rosário",
+        "+ Citações completas e ensinamentos pessoais"
+      ]
     },
     "cta": {
       "title": "Aprofunde sua vida de oração",
@@ -289,10 +356,22 @@
     ],
     "popes": {
       "title": "Papas e o Santo Rosário",
-      "leo": { "name": "Papa Leão XIII", "description": "Escreveu 12 encíclicas sobre o Rosário e o chamou de \"a mais excelente forma de oração\"" },
-      "pius": { "name": "Papa Pio XI", "description": "Chamou o Rosário de \"o compêndio de todo o Evangelho\"" },
-      "paul": { "name": "Papa Paulo VI", "description": "Dedicou a exortação apostólica \"Marialis Cultus\" ao Rosário" },
-      "francis": { "name": "Papa Francisco", "description": "Sempre carrega um terço no bolso e incentiva os fiéis a rezarem em família" }
+      "leo": {
+        "name": "Papa Leão XIII",
+        "description": "Escreveu 12 encíclicas sobre o Rosário e o chamou de \"a mais excelente forma de oração\""
+      },
+      "pius": {
+        "name": "Papa Pio XI",
+        "description": "Chamou o Rosário de \"o compêndio de todo o Evangelho\""
+      },
+      "paul": {
+        "name": "Papa Paulo VI",
+        "description": "Dedicou a exortação apostólica \"Marialis Cultus\" ao Rosário"
+      },
+      "francis": {
+        "name": "Papa Francisco",
+        "description": "Sempre carrega um terço no bolso e incentiva os fiéis a rezarem em família"
+      }
     },
     "cta": {
       "title": "Continue sua jornada de fé",
@@ -322,11 +401,31 @@
         "subtitle": "A Infância de Jesus",
         "days": "Segunda-feira e Sábado",
         "items": [
-          { "title": "A Anunciação do Anjo a Maria", "scripture": "Lc 1, 26-27", "quote": "No sexto mês, o anjo Gabriel foi enviado por Deus a uma cidade da Galileia chamada Nazaré, a uma virgem desposada com um homem chamado José, da casa de Davi; e o nome da virgem era Maria." },
-          { "title": "A Visitação de Maria a Isabel", "scripture": "Lc 1, 39-42", "quote": "Naqueles dias, Maria partiu para a região montanhosa, dirigindo-se apressadamente a uma cidade de Judá. Entrou na casa de Zacarias e saudou Isabel." },
-          { "title": "O Nascimento de Jesus em Belém", "scripture": "Lc 2, 1-7", "quote": "E enquanto estavam em Belém, completaram-se os dias para o parto, e ela deu à luz o seu filho primogênito, envolveu-o em faixas e deitou-o numa manjedoura." },
-          { "title": "A Apresentação de Jesus no Templo", "scripture": "Lc 2, 21-24", "quote": "Quando se completaram os dias da purificação, segundo a Lei de Moisés, levaram-no a Jerusalém para o apresentar ao Senhor." },
-          { "title": "O Encontro de Jesus no Templo", "scripture": "Lc 2, 41-47", "quote": "Depois de três dias, encontraram-no no Templo, sentado no meio dos doutores, ouvindo-os e interrogando-os." }
+          {
+            "title": "A Anunciação do Anjo a Maria",
+            "scripture": "Lc 1, 26-27",
+            "quote": "No sexto mês, o anjo Gabriel foi enviado por Deus a uma cidade da Galileia chamada Nazaré, a uma virgem desposada com um homem chamado José, da casa de Davi; e o nome da virgem era Maria."
+          },
+          {
+            "title": "A Visitação de Maria a Isabel",
+            "scripture": "Lc 1, 39-42",
+            "quote": "Naqueles dias, Maria partiu para a região montanhosa, dirigindo-se apressadamente a uma cidade de Judá. Entrou na casa de Zacarias e saudou Isabel."
+          },
+          {
+            "title": "O Nascimento de Jesus em Belém",
+            "scripture": "Lc 2, 1-7",
+            "quote": "E enquanto estavam em Belém, completaram-se os dias para o parto, e ela deu à luz o seu filho primogênito, envolveu-o em faixas e deitou-o numa manjedoura."
+          },
+          {
+            "title": "A Apresentação de Jesus no Templo",
+            "scripture": "Lc 2, 21-24",
+            "quote": "Quando se completaram os dias da purificação, segundo a Lei de Moisés, levaram-no a Jerusalém para o apresentar ao Senhor."
+          },
+          {
+            "title": "O Encontro de Jesus no Templo",
+            "scripture": "Lc 2, 41-47",
+            "quote": "Depois de três dias, encontraram-no no Templo, sentado no meio dos doutores, ouvindo-os e interrogando-os."
+          }
         ]
       },
       "luminosos": {
@@ -335,11 +434,31 @@
         "days": "Quinta-feira",
         "note": "Introduzidos por São João Paulo II em 2002 (Rosarium Virginis Mariae)",
         "items": [
-          { "title": "O Batismo de Jesus no Jordão", "scripture": "Mt 3, 16-17", "quote": "Batizado Jesus, saiu logo da água. E eis que os céus se abriram e viu o Espírito de Deus descendo como pomba e vindo sobre ele." },
-          { "title": "As Bodas de Caná", "scripture": "Jo 2, 1-5", "quote": "A mãe de Jesus disse aos serventes: 'Fazei tudo o que ele vos disser.'" },
-          { "title": "O Anúncio do Reino de Deus", "scripture": "Mc 1, 15", "quote": "O tempo está cumprido e o Reino de Deus está próximo. Arrependei-vos e crede no Evangelho." },
-          { "title": "A Transfiguração de Jesus", "scripture": "Mt 17, 1-2", "quote": "Jesus foi transfigurado diante deles; o seu rosto brilhou como o sol e as suas vestes tornaram-se brancas como a luz." },
-          { "title": "A Instituição da Eucaristia", "scripture": "Mt 26, 26", "quote": "Enquanto comiam, Jesus tomou o pão, abençoou-o, partiu-o e deu-o aos discípulos, dizendo: 'Tomai, comei; isto é o meu corpo.'" }
+          {
+            "title": "O Batismo de Jesus no Jordão",
+            "scripture": "Mt 3, 16-17",
+            "quote": "Batizado Jesus, saiu logo da água. E eis que os céus se abriram e viu o Espírito de Deus descendo como pomba e vindo sobre ele."
+          },
+          {
+            "title": "As Bodas de Caná",
+            "scripture": "Jo 2, 1-5",
+            "quote": "A mãe de Jesus disse aos serventes: 'Fazei tudo o que ele vos disser.'"
+          },
+          {
+            "title": "O Anúncio do Reino de Deus",
+            "scripture": "Mc 1, 15",
+            "quote": "O tempo está cumprido e o Reino de Deus está próximo. Arrependei-vos e crede no Evangelho."
+          },
+          {
+            "title": "A Transfiguração de Jesus",
+            "scripture": "Mt 17, 1-2",
+            "quote": "Jesus foi transfigurado diante deles; o seu rosto brilhou como o sol e as suas vestes tornaram-se brancas como a luz."
+          },
+          {
+            "title": "A Instituição da Eucaristia",
+            "scripture": "Mt 26, 26",
+            "quote": "Enquanto comiam, Jesus tomou o pão, abençoou-o, partiu-o e deu-o aos discípulos, dizendo: 'Tomai, comei; isto é o meu corpo.'"
+          }
         ]
       },
       "dolorosos": {
@@ -347,11 +466,31 @@
         "subtitle": "A Paixão de Jesus",
         "days": "Terça-feira e Sexta-feira",
         "items": [
-          { "title": "A Agonia de Jesus no Horto das Oliveiras", "scripture": "Mt 26, 36-39", "quote": "Meu Pai, se é possível, afaste-se de mim este cálice! Todavia, não seja como eu quero, mas como tu queres." },
-          { "title": "A Flagelação de Jesus", "scripture": "Mt 27, 26", "quote": "Então Pilatos libertou Barrabás; e, depois de mandar açoitar Jesus, entregou-o para ser crucificado." },
-          { "title": "A Coroação de Espinhos", "scripture": "Mt 27, 27-29", "quote": "Tecendo uma coroa de espinhos, puseram-na em sua cabeça e uma cana em sua mão direita. Ajoelhando-se diante dele, zombavam: 'Salve, rei dos judeus!'" },
-          { "title": "Jesus carrega a Cruz", "scripture": "Mc 15, 21-22", "quote": "Requisitaram um passante, Simão de Cirene, que voltava do campo, para carregar a cruz de Jesus. E conduziram-no ao lugar chamado Gólgota." },
-          { "title": "A Crucificação e Morte de Jesus", "scripture": "Lc 23, 33-46", "quote": "Pai, nas tuas mãos entrego o meu espírito. E, dizendo isto, expirou." }
+          {
+            "title": "A Agonia de Jesus no Horto das Oliveiras",
+            "scripture": "Mt 26, 36-39",
+            "quote": "Meu Pai, se é possível, afaste-se de mim este cálice! Todavia, não seja como eu quero, mas como tu queres."
+          },
+          {
+            "title": "A Flagelação de Jesus",
+            "scripture": "Mt 27, 26",
+            "quote": "Então Pilatos libertou Barrabás; e, depois de mandar açoitar Jesus, entregou-o para ser crucificado."
+          },
+          {
+            "title": "A Coroação de Espinhos",
+            "scripture": "Mt 27, 27-29",
+            "quote": "Tecendo uma coroa de espinhos, puseram-na em sua cabeça e uma cana em sua mão direita. Ajoelhando-se diante dele, zombavam: 'Salve, rei dos judeus!'"
+          },
+          {
+            "title": "Jesus carrega a Cruz",
+            "scripture": "Mc 15, 21-22",
+            "quote": "Requisitaram um passante, Simão de Cirene, que voltava do campo, para carregar a cruz de Jesus. E conduziram-no ao lugar chamado Gólgota."
+          },
+          {
+            "title": "A Crucificação e Morte de Jesus",
+            "scripture": "Lc 23, 33-46",
+            "quote": "Pai, nas tuas mãos entrego o meu espírito. E, dizendo isto, expirou."
+          }
         ]
       },
       "gloriosos": {
@@ -359,11 +498,31 @@
         "subtitle": "A Glória de Cristo e de Maria",
         "days": "Quarta-feira e Domingo",
         "items": [
-          { "title": "A Ressurreição de Jesus", "scripture": "Lc 24, 1-5", "quote": "Por que buscais entre os mortos aquele que está vivo? Ele não está aqui, ressuscitou!" },
-          { "title": "A Ascensão de Jesus ao Céu", "scripture": "Mc 16, 19", "quote": "Depois de falar com eles, o Senhor Jesus foi elevado ao céu e sentou-se à direita de Deus." },
-          { "title": "A Descida do Espírito Santo", "scripture": "At 2, 1-4", "quote": "Apareceram-lhes línguas como de fogo, que se repartiram e pousaram sobre cada um deles. Todos ficaram cheios do Espírito Santo." },
-          { "title": "A Assunção de Maria ao Céu", "scripture": "Lc 1, 48-49", "quote": "Todas as gerações me chamarão bem-aventurada, porque o Todo-Poderoso fez grandes coisas em meu favor." },
-          { "title": "A Coroação de Maria como Rainha do Céu e da Terra", "scripture": "Ap 12, 1", "quote": "Apareceu no céu um grande sinal: uma Mulher vestida de sol, tendo a lua debaixo dos pés e sobre a cabeça uma coroa de doze estrelas." }
+          {
+            "title": "A Ressurreição de Jesus",
+            "scripture": "Lc 24, 1-5",
+            "quote": "Por que buscais entre os mortos aquele que está vivo? Ele não está aqui, ressuscitou!"
+          },
+          {
+            "title": "A Ascensão de Jesus ao Céu",
+            "scripture": "Mc 16, 19",
+            "quote": "Depois de falar com eles, o Senhor Jesus foi elevado ao céu e sentou-se à direita de Deus."
+          },
+          {
+            "title": "A Descida do Espírito Santo",
+            "scripture": "At 2, 1-4",
+            "quote": "Apareceram-lhes línguas como de fogo, que se repartiram e pousaram sobre cada um deles. Todos ficaram cheios do Espírito Santo."
+          },
+          {
+            "title": "A Assunção de Maria ao Céu",
+            "scripture": "Lc 1, 48-49",
+            "quote": "Todas as gerações me chamarão bem-aventurada, porque o Todo-Poderoso fez grandes coisas em meu favor."
+          },
+          {
+            "title": "A Coroação de Maria como Rainha do Céu e da Terra",
+            "scripture": "Ap 12, 1",
+            "quote": "Apareceu no céu um grande sinal: uma Mulher vestida de sol, tendo a lua debaixo dos pés e sobre a cabeça uma coroa de doze estrelas."
+          }
         ]
       }
     },
@@ -477,6 +636,49 @@
       "latin": "Latim",
       "scripture": "Referência bíblica:",
       "history": "Nota histórica:"
+    },
+    "prayers": {
+      "0": {
+        "title": "Sinal da Cruz",
+        "subtitle": "Início e fim do Rosário",
+        "text": "Em nome do Pai,\ne do Filho\ne do Espírito Santo.\nAmém."
+      },
+      "1": {
+        "title": "Credo Apostólico",
+        "subtitle": "Rezado no crucifixo — Símbolo dos Apóstolos",
+        "text": "Creio em Deus Pai todo-poderoso,\nCriador do céu e da terra.\n\nE em Jesus Cristo, seu único Filho, nosso Senhor,\nque foi concebido pelo poder do Espírito Santo;\nnasceu da Virgem Maria;\npadeceu sob Pôncio Pilatos,\nfoi crucificado, morto e sepultado;\ndesceu à mansão dos mortos;\nressuscitou ao terceiro dia;\nsubiu aos céus;\nestá sentado à direita de Deus Pai todo-poderoso,\nde onde há de vir a julgar os vivos e os mortos.\n\nCreio no Espírito Santo;\nna Santa Igreja Católica;\nna comunhão dos santos;\nna remissão dos pecados;\nna ressurreição da carne;\nna vida eterna.\nAmém."
+      },
+      "2": {
+        "title": "Pai Nosso",
+        "subtitle": "Oração do Senhor — antes de cada dezena",
+        "text": "Pai nosso que estais nos céus,\nsantificado seja o vosso Nome,\nvenha a nós o vosso Reino,\nseja feita a vossa vontade\nassim na terra como no céu.\n\nO pão nosso de cada dia nos dai hoje,\nperdoai-nos as nossas ofensas\nassim como nós perdoamos a quem nos tem ofendido,\ne não nos deixeis cair em tentação,\nmas livrai-nos do mal.\nAmém."
+      },
+      "3": {
+        "title": "Ave Maria",
+        "subtitle": "Saudação Angélica — dez vezes em cada dezena",
+        "text": "Ave Maria, cheia de graça,\no Senhor é convosco,\nbendita sois vós entre as mulheres\ne bendito é o fruto do vosso ventre, Jesus.\n\nSanta Maria, Mãe de Deus,\nrogai por nós pecadores,\nagora e na hora da nossa morte.\nAmém."
+      },
+      "4": {
+        "title": "Glória ao Pai",
+        "subtitle": "Doxologia Menor — após cada dezena",
+        "text": "Glória ao Pai,\ne ao Filho\ne ao Espírito Santo.\n\nComo era no princípio,\nagora e sempre.\nAmém."
+      },
+      "5": {
+        "title": "Oração de Fátima",
+        "subtitle": "Jaculatória — após cada Glória",
+        "text": "Ó meu Jesus,\nperdoai-nos e livrai-nos do fogo do inferno;\nlevai as almas todas para o céu,\nprincipalmente as que mais precisarem\nda vossa misericórdia.",
+        "note": "Esta oração foi ensinada por Nossa Senhora aos três pastorinhos de Fátima em 13 de julho de 1917, após a visão do inferno."
+      },
+      "6": {
+        "title": "Salve Rainha",
+        "subtitle": "Salve Regina — ao final do Rosário",
+        "text": "Salve, Rainha, Mãe de misericórdia,\nvida, doçura e esperança nossa, salve!\n\nA vós bradamos,\nos degredados filhos de Eva.\n\nA vós suspiramos,\ngemendo e chorando neste vale de lágrimas.\n\nEia, pois, advogada nossa,\nesses vossos olhos misericordiosos a nós volvei.\n\nE depois deste desterro,\nmostrai-nos Jesus,\nbendito fruto do vosso ventre.\n\nÓ clemente, ó piedosa,\nó doce sempre Virgem Maria.\n\nV. Rogai por nós, Santa Mãe de Deus.\nR. Para que sejamos dignos das promessas de Cristo.\n\nAmém."
+      },
+      "7": {
+        "title": "Oração Final",
+        "subtitle": "Coleta — após a Salve Rainha",
+        "text": "Ó Deus, cujo Filho Unigênito,\npor sua vida, morte e ressurreição,\nnos obteve o prêmio da salvação eterna:\nconcedei-nos, nós vos suplicamos,\nque meditando estes mistérios\ndo Santíssimo Rosário da Bem-aventurada Virgem Maria,\nimitemos o que eles contêm\ne alcancemos o que eles prometem.\n\nPor Cristo, nosso Senhor.\nAmém."
+      }
     }
   },
   "About": {
@@ -492,45 +694,127 @@
     "principles": {
       "title": "Nossos Princípios",
       "subtitle": "Seis pilares que guiam cada decisão, cada funcionalidade, cada palavra em Rosário Vivo",
-      "p1": { "title": "Fé Autêntica", "desc": "Conectamos as pessoas à tradição viva da Igreja Católica, radicada na oração do Rosário como caminho de transformação espiritual." },
-      "p2": { "title": "Comunidade Global", "desc": "Criamos um espaço onde católicos de todas as partes do mundo rezam juntos, compartilham intenções e crescem espiritualmente conectados." },
-      "p3": { "title": "Ensinamentos Acessíveis", "desc": "Sintetizamos documentos da Santa Sé, escritos de santos e teologia católica em conteúdo claro—sem cursos, apenas sabedoria da Igreja ao alcance." },
-      "p4": { "title": "Simplicidade Sagrada", "desc": "Transformamos a tecnologia em ferramenta de oração, mantendo o foco na essência: contato pessoal com Deus e Maria." },
-      "p5": { "title": "Segurança da Fé", "desc": "Todo conteúdo é fundamentado na Doutrina da Igreja Católica, validado e orientado por princípios pastorais sólidos." },
-      "p6": { "title": "Acessibilidade", "desc": "Gratuito, aberto a todos, sem anúncios intrusivos. A fé não deve ter barreiras econômicas ou digitais." }
+      "p1": {
+        "title": "Fé Autêntica",
+        "desc": "Conectamos as pessoas à tradição viva da Igreja Católica, radicada na oração do Rosário como caminho de transformação espiritual."
+      },
+      "p2": {
+        "title": "Comunidade Global",
+        "desc": "Criamos um espaço onde católicos de todas as partes do mundo rezam juntos, compartilham intenções e crescem espiritualmente conectados."
+      },
+      "p3": {
+        "title": "Ensinamentos Acessíveis",
+        "desc": "Sintetizamos documentos da Santa Sé, escritos de santos e teologia católica em conteúdo claro—sem cursos, apenas sabedoria da Igreja ao alcance."
+      },
+      "p4": {
+        "title": "Simplicidade Sagrada",
+        "desc": "Transformamos a tecnologia em ferramenta de oração, mantendo o foco na essência: contato pessoal com Deus e Maria."
+      },
+      "p5": {
+        "title": "Segurança da Fé",
+        "desc": "Todo conteúdo é fundamentado na Doutrina da Igreja Católica, validado e orientado por princípios pastorais sólidos."
+      },
+      "p6": {
+        "title": "Acessibilidade",
+        "desc": "Gratuito, aberto a todos, sem anúncios intrusivos. A fé não deve ter barreiras econômicas ou digitais."
+      }
     },
     "offer": {
       "title": "O Que Oferecemos",
-      "track": { "title": "Rastrear", "desc": "Registre seu terço diário, acompanhe suas sequências de fidelidade, veja seu crescimento espiritual refletido em números que importam." },
-      "explore": { "title": "Explorar", "desc": "Navegue por ensinamentos católicos sintetizados: teologia, história da Igreja, vidas de santos, sacramentos—tudo baseado em fontes oficiais da Santa Sé." },
-      "pray": { "title": "Rezar Bem", "desc": "Acesse guias de oração, explore diferentes métodos do Rosário, e descubra ferramentas que ajudam você a rezar com maior devoção e consciência." },
-      "connect": { "title": "Conectar", "desc": "Participe de uma comunidade global de católicos, compartilhe intenções de oração e saiba que você reza nunca sozinho, mas com uma família de fé." }
+      "track": {
+        "title": "Rastrear",
+        "desc": "Registre seu terço diário, acompanhe suas sequências de fidelidade, veja seu crescimento espiritual refletido em números que importam."
+      },
+      "explore": {
+        "title": "Explorar",
+        "desc": "Navegue por ensinamentos católicos sintetizados: teologia, história da Igreja, vidas de santos, sacramentos—tudo baseado em fontes oficiais da Santa Sé."
+      },
+      "pray": {
+        "title": "Rezar Bem",
+        "desc": "Acesse guias de oração, explore diferentes métodos do Rosário, e descubra ferramentas que ajudam você a rezar com maior devoção e consciência."
+      },
+      "connect": {
+        "title": "Conectar",
+        "desc": "Participe de uma comunidade global de católicos, compartilhe intenções de oração e saiba que você reza nunca sozinho, mas com uma família de fé."
+      }
     },
     "journey": {
       "title": "Nossa Jornada",
-      "j1": { "year": "2024", "title": "Nascimento de uma Visão", "desc": "Rosário Vivo começou como uma simples ideia: um rastreador de terços que conectasse pessoas à sua fé diária." },
-      "j2": { "year": "2025", "title": "Do Rastreador ao Hub", "desc": "Reconhecemos que os católicos queriam mais. Não apenas rastrear—aprender, crescer e comungar em fé." },
-      "j3": { "year": "2026", "title": "Síntese da Tradição", "desc": "Rosário Vivo torna-se um compêndio acessível da Igreja: sintetizamos documentos da Santa Sé, ensinamentos de santos e teologia em conteúdo prático." }
+      "j1": {
+        "year": "2024",
+        "title": "Nascimento de uma Visão",
+        "desc": "Rosário Vivo começou como uma simples ideia: um rastreador de terços que conectasse pessoas à sua fé diária."
+      },
+      "j2": {
+        "year": "2025",
+        "title": "Do Rastreador ao Hub",
+        "desc": "Reconhecemos que os católicos queriam mais. Não apenas rastrear—aprender, crescer e comungar em fé."
+      },
+      "j3": {
+        "year": "2026",
+        "title": "Síntese da Tradição",
+        "desc": "Rosário Vivo torna-se um compêndio acessível da Igreja: sintetizamos documentos da Santa Sé, ensinamentos de santos e teologia em conteúdo prático."
+      }
     },
     "different": {
       "title": "Por Que Somos Diferentes",
-      "d1": { "title": "Baseado em Fontes Oficiais", "desc": "Todo conteúdo provém de documentos da Santa Sé, Catecismo, escritos de santos reconhecidos e teologia aprovada pela Igreja. Não inventamos—sintetizamos o que a Igreja já ensina." },
-      "d2": { "title": "Navegação Livre", "desc": "Sem trilhas obrigatórias ou lições sequenciais. Explore os ensinamentos que você deseja, quando desejar—como folhear um compêndio digital da fé católica." },
-      "d3": { "title": "Sempre Gratuito e Aberto", "desc": "Rosário Vivo é um projeto de código aberto impulsionado por fé, não por lucro. Os ensinamentos da Igreja pertencem a todos—não cobramos para acessá-los." },
-      "d4": { "title": "Sem Anúncios, Sem Rastreamento Invasivo", "desc": "Sua oração é sagrada. Nós não a monetizamos com anúncios direcionados, vendemos seus dados ou criamos perfis de consumo." }
+      "d1": {
+        "title": "Baseado em Fontes Oficiais",
+        "desc": "Todo conteúdo provém de documentos da Santa Sé, Catecismo, escritos de santos reconhecidos e teologia aprovada pela Igreja. Não inventamos—sintetizamos o que a Igreja já ensina."
+      },
+      "d2": {
+        "title": "Navegação Livre",
+        "desc": "Sem trilhas obrigatórias ou lições sequenciais. Explore os ensinamentos que você deseja, quando desejar—como folhear um compêndio digital da fé católica."
+      },
+      "d3": {
+        "title": "Sempre Gratuito e Aberto",
+        "desc": "Rosário Vivo é um projeto de código aberto impulsionado por fé, não por lucro. Os ensinamentos da Igreja pertencem a todos—não cobramos para acessá-los."
+      },
+      "d4": {
+        "title": "Sem Anúncios, Sem Rastreamento Invasivo",
+        "desc": "Sua oração é sagrada. Nós não a monetizamos com anúncios direcionados, vendemos seus dados ou criamos perfis de consumo."
+      }
     },
     "faq": {
       "title": "Perguntas Frequentes",
       "subtitle": "Respostas rápidas sobre Rosário Vivo",
-      "q1": { "q": "Por que preciso criar uma conta se o serviço é gratuito?", "a": "Ótima pergunta! Pedimos uma conta simples (apenas email e senha) por duas razões: proteger a comunidade de spam e oferecer recursos personalizados. Com uma conta, você pode rastrear sua sequência de orações, salvar conteúdos favoritos e acessar recursos exclusivos para membros. Isso também nos ajuda a entender quais ensinamentos são mais úteis, melhorando o serviço para todos. Prometemos nunca vender seus dados ou enviar spam—sua conta é apenas sua porta de entrada para uma experiência mais rica." },
-      "q2": { "q": "O que posso acessar sem conta? O que precisa de cadastro?", "a": "Sem conta (público): Como Rezar, História do Rosário, Mistérios do Dia e Orações Tradicionais estão totalmente abertos.\n\nCom conta gratuita: Rastreamento de sequências, Ensinamentos completos (santos, teologia, sacramentos), Ferramentas de oração, Dashboard personalizado e acesso à comunidade. Criar conta é rápido e permanece gratuito para sempre." },
-      "q3": { "q": "O conteúdo é realmente da Igreja Católica?", "a": "Sim, absolutamente. Todo nosso conteúdo é baseado em fontes oficiais: Catecismo da Igreja Católica, documentos papais (encíclicas, exortações), escritos de santos doutores reconhecidos e teologia aprovada pela Santa Sé. Não criamos doutrinas—apenas sintetizamos o que a Igreja já ensina há séculos, tornando-o acessível em formato digital." },
-      "q4": { "q": "Meus dados estão seguros? Vocês vendem informações?", "a": "Nunca vendemos dados. Coletamos apenas o essencial: email para login, estatísticas de uso agregadas (anônimas) para melhorar o serviço, e suas preferências pessoais (sequências, favoritos) armazenadas com segurança. Não há anúncios direcionados, rastreamento de terceiros ou perfis de consumo. Sua vida de oração é privada e sagrada." },
-      "q5": { "q": "Posso usar offline ou preciso de internet?", "a": "Atualmente, Rosário Vivo requer conexão com internet para carregar conteúdos e sincronizar seu progresso. Estamos trabalhando em funcionalidades offline (cache de orações, conteúdos baixados) para versões futuras. Por enquanto, uma conexão estável garante a melhor experiência." },
-      "q6": { "q": "Por que é open source? Posso contribuir?", "a": "Rosário Vivo é open source porque acreditamos que ferramentas de fé devem ser transparentes e colaborativas. O código está disponível no GitHub para qualquer pessoa revisar, aprender ou contribuir. Se você é desenvolvedor, designer ou especialista em teologia católica, sua ajuda é bem-vinda! Aceitamos contribuições de código, sugestões de conteúdo e melhorias.", "github": "Ver no GitHub" },
-      "q7": { "q": "Está disponível em outros idiomas?", "a": "Atualmente, Rosário Vivo está em Português. Planejamos expandir para Espanhol, Inglês e outros idiomas no futuro. A infraestrutura está preparada para internacionalização—é apenas uma questão de traduzir os conteúdos mantendo fidelidade teológica." },
-      "q8": { "q": "Existe aplicativo para celular?", "a": "Por enquanto, Rosário Vivo funciona como um aplicativo web (PWA - Progressive Web App), acessível via navegador no celular. Você pode adicioná-lo à tela inicial do seu dispositivo para uma experiência similar a um app nativo. Apps nativos para iOS e Android estão em nosso roadmap de longo prazo." },
-      "q9": { "q": "Será sempre gratuito ou virará pago no futuro?", "a": "Rosário Vivo será sempre gratuito. Nosso compromisso é manter todos os recursos essenciais acessíveis a todos, sem custo. No futuro, podemos introduzir recursos opcionais premium (como aulas ao vivo, consultorias espirituais, conteúdo exclusivo), mas o núcleo da plataforma—oração, ensinamentos e comunidade—permanecerá livre." }
+      "q1": {
+        "q": "Por que preciso criar uma conta se o serviço é gratuito?",
+        "a": "Ótima pergunta! Pedimos uma conta simples (apenas email e senha) por duas razões: proteger a comunidade de spam e oferecer recursos personalizados. Com uma conta, você pode rastrear sua sequência de orações, salvar conteúdos favoritos e acessar recursos exclusivos para membros. Isso também nos ajuda a entender quais ensinamentos são mais úteis, melhorando o serviço para todos. Prometemos nunca vender seus dados ou enviar spam—sua conta é apenas sua porta de entrada para uma experiência mais rica."
+      },
+      "q2": {
+        "q": "O que posso acessar sem conta? O que precisa de cadastro?",
+        "a": "Sem conta (público): Como Rezar, História do Rosário, Mistérios do Dia e Orações Tradicionais estão totalmente abertos.\n\nCom conta gratuita: Rastreamento de sequências, Ensinamentos completos (santos, teologia, sacramentos), Ferramentas de oração, Dashboard personalizado e acesso à comunidade. Criar conta é rápido e permanece gratuito para sempre."
+      },
+      "q3": {
+        "q": "O conteúdo é realmente da Igreja Católica?",
+        "a": "Sim, absolutamente. Todo nosso conteúdo é baseado em fontes oficiais: Catecismo da Igreja Católica, documentos papais (encíclicas, exortações), escritos de santos doutores reconhecidos e teologia aprovada pela Santa Sé. Não criamos doutrinas—apenas sintetizamos o que a Igreja já ensina há séculos, tornando-o acessível em formato digital."
+      },
+      "q4": {
+        "q": "Meus dados estão seguros? Vocês vendem informações?",
+        "a": "Nunca vendemos dados. Coletamos apenas o essencial: email para login, estatísticas de uso agregadas (anônimas) para melhorar o serviço, e suas preferências pessoais (sequências, favoritos) armazenadas com segurança. Não há anúncios direcionados, rastreamento de terceiros ou perfis de consumo. Sua vida de oração é privada e sagrada."
+      },
+      "q5": {
+        "q": "Posso usar offline ou preciso de internet?",
+        "a": "Atualmente, Rosário Vivo requer conexão com internet para carregar conteúdos e sincronizar seu progresso. Estamos trabalhando em funcionalidades offline (cache de orações, conteúdos baixados) para versões futuras. Por enquanto, uma conexão estável garante a melhor experiência."
+      },
+      "q6": {
+        "q": "Por que é open source? Posso contribuir?",
+        "a": "Rosário Vivo é open source porque acreditamos que ferramentas de fé devem ser transparentes e colaborativas. O código está disponível no GitHub para qualquer pessoa revisar, aprender ou contribuir. Se você é desenvolvedor, designer ou especialista em teologia católica, sua ajuda é bem-vinda! Aceitamos contribuições de código, sugestões de conteúdo e melhorias.",
+        "github": "Ver no GitHub"
+      },
+      "q7": {
+        "q": "Está disponível em outros idiomas?",
+        "a": "Atualmente, Rosário Vivo está em Português. Planejamos expandir para Espanhol, Inglês e outros idiomas no futuro. A infraestrutura está preparada para internacionalização—é apenas uma questão de traduzir os conteúdos mantendo fidelidade teológica."
+      },
+      "q8": {
+        "q": "Existe aplicativo para celular?",
+        "a": "Por enquanto, Rosário Vivo funciona como um aplicativo web (PWA - Progressive Web App), acessível via navegador no celular. Você pode adicioná-lo à tela inicial do seu dispositivo para uma experiência similar a um app nativo. Apps nativos para iOS e Android estão em nosso roadmap de longo prazo."
+      },
+      "q9": {
+        "q": "Será sempre gratuito ou virará pago no futuro?",
+        "a": "Rosário Vivo será sempre gratuito. Nosso compromisso é manter todos os recursos essenciais acessíveis a todos, sem custo. No futuro, podemos introduzir recursos opcionais premium (como aulas ao vivo, consultorias espirituais, conteúdo exclusivo), mas o núcleo da plataforma—oração, ensinamentos e comunidade—permanecerá livre."
+      }
     },
     "cta": {
       "title": "Pronto para Começar?",
@@ -549,15 +833,36 @@
       "desc": "Explore artigos, ensinamentos e reflexões sobre a doutrina católica, história da Igreja, vidas de santos e muito mais. Tudo pensado para aprofundar seu conhecimento e fé."
     },
     "topics": {
-      "santos": { "title": "Santos & Mestres", "desc": "Vidas inspiradoras de santos que devotos de Maria. Aprendam seus ensinamentos e métodos de oração." },
-      "teologia": { "title": "Teologia Católica", "desc": "Fundamentos da fé: Trindade, encarnação, salvação e doutrina da Igreja." },
-      "historia": { "title": "História da Igreja", "desc": "Dois mil anos de fé: dos apóstolos até hoje. Aparições, milagres e história da Igreja." },
-      "oracoes": { "title": "Métodos de Oração", "desc": "Métodos tradicionais de oração: rosário, novenas, meditação contemplativa e mais." },
-      "sacramentos": { "title": "Sacramentos", "desc": "Entenda os 7 sacramentos: Batismo, Eucaristia, Penitência, Unção dos Enfermos e mais." },
-      "maria": { "title": "Devoção Mariana", "desc": "O papel de Maria na salvação. Dogmas marianos e devoção à Mãe de Deus." },
-      "escritura": { "title": "Sagrada Escritura", "desc": "Descobrir a Bíblia através dos mistérios do Rosário. Conexões entre Testamentos e os mistérios." }
+      "santos": {
+        "title": "Santos & Mestres",
+        "desc": "Vidas inspiradoras de santos que devotos de Maria. Aprendam seus ensinamentos e métodos de oração."
+      },
+      "teologia": {
+        "title": "Teologia Católica",
+        "desc": "Fundamentos da fé: Trindade, encarnação, salvação e doutrina da Igreja."
+      },
+      "historia": {
+        "title": "História da Igreja",
+        "desc": "Dois mil anos de fé: dos apóstolos até hoje. Aparições, milagres e história da Igreja."
+      },
+      "oracoes": {
+        "title": "Métodos de Oração",
+        "desc": "Métodos tradicionais de oração: rosário, novenas, meditação contemplativa e mais."
+      },
+      "sacramentos": {
+        "title": "Sacramentos",
+        "desc": "Entenda os 7 sacramentos: Batismo, Eucaristia, Penitência, Unção dos Enfermos e mais."
+      },
+      "maria": {
+        "title": "Devoção Mariana",
+        "desc": "O papel de Maria na salvação. Dogmas marianos e devoção à Mãe de Deus."
+      },
+      "escritura": {
+        "title": "Sagrada Escritura",
+        "desc": "Descobrir a Bíblia através dos mistérios do Rosário. Conexões entre Testamentos e os mistérios."
+      }
     },
-      "article": "artigo",
+    "article": "artigo",
     "articles": "artigos",
     "available": "Artigos Disponíveis",
     "exploreMore": "Explore conteúdos profundos sobre {topic}. Artigos que ajudam a entender melhor os mistérios e ensinamentos da Igreja Católica de forma acessível.",
@@ -584,32 +889,72 @@
         "subtitle": "Fundamentos da fé e oração",
         "meta": "5 reflexões • ~80 minutos",
         "desc": "Este caminho foi criado para quem está começando ou deseja revisitar os fundamentos do Rosário. Ao final, você terá uma compreensão sólida e uma prática de oração mais profunda.",
-        "l1": { "title": "O que é o Rosário?", "desc": "Descubra a origem, estrutura e significado profundo desta oração milenar que une milhões de católicos." },
-        "l2": { "title": "O Papel de Maria na Salvação", "desc": "Entenda por que a Igreja honra Maria e como ela nos conduz a Jesus através do Rosário." },
-        "l3": { "title": "O Poder da Oração Repetitiva", "desc": "Aprenda como a repetição contemplativa transforma o coração e aproxima de Deus." },
-        "l4": { "title": "Construindo um Hábito Diário", "desc": "Estratégias práticas para incorporar o Rosário na sua rotina diária." },
-        "l5": { "title": "Vencendo as Distrações na Oração", "desc": "Técnicas dos santos para manter o foco e aprofundar na meditação." }
+        "l1": {
+          "title": "O que é o Rosário?",
+          "desc": "Descubra a origem, estrutura e significado profundo desta oração milenar que une milhões de católicos."
+        },
+        "l2": {
+          "title": "O Papel de Maria na Salvação",
+          "desc": "Entenda por que a Igreja honra Maria e como ela nos conduz a Jesus através do Rosário."
+        },
+        "l3": {
+          "title": "O Poder da Oração Repetitiva",
+          "desc": "Aprenda como a repetição contemplativa transforma o coração e aproxima de Deus."
+        },
+        "l4": {
+          "title": "Construindo um Hábito Diário",
+          "desc": "Estratégias práticas para incorporar o Rosário na sua rotina diária."
+        },
+        "l5": {
+          "title": "Vencendo as Distrações na Oração",
+          "desc": "Técnicas dos santos para manter o foco e aprofundar na meditação."
+        }
       },
       "aprofundando": {
         "title": "Aprofundando o Mistério",
         "subtitle": "Contemplação e vida sacramental",
         "meta": "5 reflexões • ~125 minutos",
         "desc": "Para quem já conhece o Rosário e deseja aprofundar sua prática contemplativa, conectando a oração com a Bíblia, a liturgia e a vida sacramental da Igreja.",
-        "l1": { "title": "Oração Contemplativa e o Rosário", "desc": "Aprenda a passar da oração vocal para a contemplação profunda dos mistérios." },
-        "l2": { "title": "Ano Litúrgico e o Rosário", "desc": "Conecte sua prática do Rosário com os tempos e festas da Igreja." },
-        "l3": { "title": "Raízes Bíblicas dos Mistérios", "desc": "Explore as passagens bíblicas de cada mistério em profundidade." },
-        "l4": { "title": "Rosário e os Sacramentos", "desc": "Descubra a relação entre o Rosário e a vida sacramental." },
-        "l5": { "title": "Maria nas Sagradas Escrituras", "desc": "Estudo bíblico completo sobre a presença de Maria na Bíblia." }
+        "l1": {
+          "title": "Oração Contemplativa e o Rosário",
+          "desc": "Aprenda a passar da oração vocal para a contemplação profunda dos mistérios."
+        },
+        "l2": {
+          "title": "Ano Litúrgico e o Rosário",
+          "desc": "Conecte sua prática do Rosário com os tempos e festas da Igreja."
+        },
+        "l3": {
+          "title": "Raízes Bíblicas dos Mistérios",
+          "desc": "Explore as passagens bíblicas de cada mistério em profundidade."
+        },
+        "l4": {
+          "title": "Rosário e os Sacramentos",
+          "desc": "Descubra a relação entre o Rosário e a vida sacramental."
+        },
+        "l5": {
+          "title": "Maria nas Sagradas Escrituras",
+          "desc": "Estudo bíblico completo sobre a presença de Maria na Bíblia."
+        }
       },
       "misterios-vivos": {
         "title": "Mistérios Vivos",
         "subtitle": "A profundidade mística de Maria",
         "meta": "5 reflexões • ~158 minutos",
-        "l1": { "title": "Teologia Mariana Essencial" },
-        "l2": { "title": "Consagração Total a Maria" },
-        "l3": { "title": "Aspectos Místicos do Rosário" },
-        "l4": { "title": "Rosário e Doutrina Social" },
-        "l5": { "title": "Vivendo o Rosário em Comunidade" }
+        "l1": {
+          "title": "Teologia Mariana Essencial"
+        },
+        "l2": {
+          "title": "Consagração Total a Maria"
+        },
+        "l3": {
+          "title": "Aspectos Místicos do Rosário"
+        },
+        "l4": {
+          "title": "Rosário e Doutrina Social"
+        },
+        "l5": {
+          "title": "Vivendo o Rosário em Comunidade"
+        }
       }
     },
     "tools": {
@@ -637,7 +982,42 @@
       "downloadMaterials": "Materiais para Baixar",
       "downloadSubtitle": "Leve a sua fé para o mundo físico",
       "downloadNow": "Baixar agora",
-      "usefulLinks": "Links Úteis"
+      "usefulLinks": "Links Úteis",
+      "documents": {
+        "0": {
+          "author": "Papa São João Paulo II",
+          "description": "Carta Apostólica sobre o Santo Rosário que introduziu os Mistérios Luminosos."
+        },
+        "1": {
+          "title": "Catecismo da Igreja Católica",
+          "author": "Santa Sé",
+          "description": "Exposição completa da doutrina da Igreja Católica."
+        },
+        "2": {
+          "author": "Papa São Paulo VI",
+          "description": "Exortação Apostólica para a reta ordenação e desenvolvimento do culto à Bem-aventurada Virgem Maria."
+        }
+      },
+      "downloads": {
+        "0": {
+          "title": "Guia de Orações (PDF)",
+          "description": "Compilado com as orações do Rosário e as meditações dos mistérios."
+        },
+        "1": {
+          "title": "Estampas para Impressão",
+          "description": "Imagens de alta qualidade de Nossa Senhora e Santos devotos do Rosário."
+        },
+        "2": {
+          "title": "Planilha de Exame de Consciência",
+          "description": "Guia prático para preparação para o Sacramento da Reconciliação."
+        }
+      },
+      "links": {
+        "0": "Vatican News",
+        "1": "CNBB",
+        "2": "Liturgia das Horas",
+        "3": "Apostolado da Oração"
+      }
     }
   },
   "Tools": {
@@ -651,10 +1031,22 @@
       "f2": "Comunidade de Fé"
     },
     "list": {
-      "guide": { "title": "Guia Interativo do Rosário", "desc": "Acompanhe cada conta do Rosário com textos, meditações e um rastreador visual em tempo real." },
-      "journal": { "title": "Diário Espiritual", "desc": "Registre suas reflexões, graças alcançadas e resoluções após cada mistério meditado." },
-      "timer": { "title": "Temporizador de Meditação", "desc": "Um timer dedicado para ajudar você a manter o foco e a profundidade em cada dezena." },
-      "wall": { "title": "Mural de Intenções", "desc": "Coloque suas intenções e ore pelas necessidades de outros membros da comunidade." }
+      "guide": {
+        "title": "Guia Interativo do Rosário",
+        "desc": "Acompanhe cada conta do Rosário com textos, meditações e um rastreador visual em tempo real."
+      },
+      "journal": {
+        "title": "Diário Espiritual",
+        "desc": "Registre suas reflexões, graças alcançadas e resoluções após cada mistério meditado."
+      },
+      "timer": {
+        "title": "Temporizador de Meditação",
+        "desc": "Um timer dedicado para ajudar você a manter o foco e a profundidade em cada dezena."
+      },
+      "wall": {
+        "title": "Mural de Intenções",
+        "desc": "Coloque suas intenções e ore pelas necessidades de outros membros da comunidade."
+      }
     },
     "badge": "Destaque",
     "btn": "Acessar ferramenta",
@@ -687,10 +1079,22 @@
       "generic": "Algo deu errado"
     },
     "mysteries": {
-      "joyful": { "label": "Gozosos", "days": "Seg & Sáb" },
-      "sorrowful": { "label": "Dolorosos", "days": "Ter & Sex" },
-      "glorious": { "label": "Gloriosos", "days": "Dom & Qua" },
-      "luminous": { "label": "Luminosos", "days": "Quinta-feira" }
+      "joyful": {
+        "label": "Gozosos",
+        "days": "Seg & Sáb"
+      },
+      "sorrowful": {
+        "label": "Dolorosos",
+        "days": "Ter & Sex"
+      },
+      "glorious": {
+        "label": "Gloriosos",
+        "days": "Dom & Qua"
+      },
+      "luminous": {
+        "label": "Luminosos",
+        "days": "Quinta-feira"
+      }
     },
     "intentionTags": {
       "family": "Família",
@@ -838,10 +1242,22 @@
       },
       "explore": "Explore Agora (Sem Login)",
       "cards": {
-        "howToPray": { "title": "Como Rezar", "desc": "Guia passo a passo" },
-        "mysteries": { "title": "Mistérios", "desc": "Meditações diárias" },
-        "history": { "title": "História", "desc": "Origem e tradição" },
-        "prayers": { "title": "Orações", "desc": "Textos completos" }
+        "howToPray": {
+          "title": "Como Rezar",
+          "desc": "Guia passo a passo"
+        },
+        "mysteries": {
+          "title": "Mistérios",
+          "desc": "Meditações diárias"
+        },
+        "history": {
+          "title": "História",
+          "desc": "Origem e tradição"
+        },
+        "prayers": {
+          "title": "Orações",
+          "desc": "Textos completos"
+        }
       }
     },
     "start": {
@@ -869,10 +1285,22 @@
       "title": "Por que Rosário Vivo?",
       "subtitle": "Mais que um app, somos sua companhia na jornada espiritual",
       "items": [
-        { "title": "Rastreie seu progresso", "desc": "Acompanhe sequências, total de rosários rezados e celebre conquistas" },
-        { "title": "Aprenda sobre a fé", "desc": "Acesse ensinamentos, vidas de santos, teologia e história da Igreja" },
-        { "title": "Una-se à comunidade", "desc": "Compartilhe intenções e ore junto a milhares de católicos no mundo" },
-        { "title": "100% Grátis & Open-Source", "desc": "Sem pagamentos, sem anúncios, sem monetização. Apenas fé e comunidade" }
+        {
+          "title": "Rastreie seu progresso",
+          "desc": "Acompanhe sequências, total de rosários rezados e celebre conquistas"
+        },
+        {
+          "title": "Aprenda sobre a fé",
+          "desc": "Acesse ensinamentos, vidas de santos, teologia e história da Igreja"
+        },
+        {
+          "title": "Una-se à comunidade",
+          "desc": "Compartilhe intenções e ore junto a milhares de católicos no mundo"
+        },
+        {
+          "title": "100% Grátis & Open-Source",
+          "desc": "Sem pagamentos, sem anúncios, sem monetização. Apenas fé e comunidade"
+        }
       ]
     },
     "cta": {
@@ -900,5 +1328,14 @@
       "credits": "Feito com fé e amor • {year} • Rosário Vivo",
       "quote": "\"Reze o Rosário todos os dias para obter a paz no mundo\" - Nossa Senhora de Fátima"
     }
+  },
+  "CommunityFeed": {
+    "title": "Orações da Comunidade",
+    "subtitle": "Reze junto com fiéis ao redor do mundo 🌍",
+    "error": "Falha ao carregar o feed da comunidade",
+    "empty": "Nenhuma oração ainda. Seja o primeiro a compartilhar!",
+    "prayedThe": "Rezou os",
+    "amen": "Amém",
+    "commentPlaceholder": "Adicione uma palavra de encorajamento..."
   }
-}
+}\n
