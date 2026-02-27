@@ -96,7 +96,11 @@
       "mysteries": "Mistérios",
       "teachings": "Ensinamentos",
       "resources": "Recursos",
-      "history": "Histórico"
+      "history": "Histórico",
+      "interactiveGuide": "Guia Interativo",
+      "journal": "Diário Espiritual",
+      "timer": "Temporizador",
+      "intentionsWall": "Mural de Intenções"
     },
     "quote": {
       "text": "“Reze o Rosário todos os dias para obter a paz no mundo e o fim da guerra.”",
@@ -117,7 +121,9 @@
       "startPath": "Iniciar Caminho",
       "suggestedForYou": "Sugerido para Você",
       "dailyVerse": "Versículo do Dia",
-      "explore": "Explore o Rosário Vivo"
+      "explore": "Explore o Rosário Vivo",
+      "tools": "Ferramentas de Oração",
+      "content": "Conteúdo & Aprendizado"
     },
     "suggested": {
       "pathTitle": "Primeiros Passos",
@@ -128,7 +134,140 @@
       "oracoesDesc": "Aprenda as orações da tradição católica.",
       "ensinamentosTitle": "Ensinamentos",
       "ensinamentosDesc": "Aprofunde seu conhecimento da doutrina da fé."
-    }
+    },
+    "activity": {
+      "title": "Atividade Recente",
+      "subtitle": "Suas últimas orações",
+      "empty": "Nenhuma atividade ainda. Reze o terço para começar!",
+      "prayedThe": "Rezou os",
+      "reflection": "Reflexão",
+      "noReflection": "Sem reflexão",
+      "timeAgo": "{time} atrás"
+    },
+    "progress": {
+      "title": "Progresso Semanal",
+      "subtitle": "Meta: rezar todos os dias",
+      "complete": "Parabéns! Semana completa! 🎉",
+      "daysCompleted": "{count} de 7 dias"
+    },
+    "continueSession": {
+      "title": "Continue sua Oração",
+      "desc": "Você tem uma sessão do Rosário em andamento. Retome de onde parou.",
+      "btn": "Continuar Rezando",
+      "progress": "{percent}% concluído"
+    },
+    "community": {
+      "title": "Orações da Comunidade",
+      "subtitle": "Reze junto com outros fiéis",
+      "seeAll": "Ver Todas",
+      "empty": "Nenhuma oração ainda na comunidade.",
+      "prayedThe": "Rezou os",
+      "amen": "Amém"
+    },
+    "favoriteMystery": {
+      "label": "Mistério Favorito",
+      "none": "Reze mais para descobrir!"
+    },
+    "comingSoon": "Em Breve",
+    "saintQuotes": [
+      {
+        "text": "O Rosário é a arma mais poderosa para tocar o Coração de Jesus, Nosso Redentor, que tanto ama Sua Mãe.",
+        "author": "São Luís Maria Grignion de Montfort"
+      },
+      {
+        "text": "Dai-me um exército que reze o Rosário e eu conquistarei o mundo.",
+        "author": "Beato Papa Pio IX"
+      },
+      {
+        "text": "O Rosário é a oração mais bela e a mais rica em graças; é a oração que mais toca o Coração da Mãe de Deus.",
+        "author": "São Pio X"
+      },
+      {
+        "text": "Nunca deixarei de recomendar o Rosário. É uma coroa de rosas que nunca murcham.",
+        "author": "São Padre Pio"
+      },
+      {
+        "text": "O Rosário é a corrente que nos liga a Deus.",
+        "author": "Beato Bartolo Longo"
+      },
+      {
+        "text": "Maria é o caminho mais seguro, mais fácil, mais curto e mais perfeito para chegar a Jesus.",
+        "author": "São Luís Maria Grignion de Montfort"
+      },
+      {
+        "text": "Quem reza o Rosário todos os dias nunca se perderá.",
+        "author": "São Francisco de Sales"
+      },
+      {
+        "text": "Recitai o Rosário todos os dias para alcançar a paz no mundo.",
+        "author": "Nossa Senhora de Fátima"
+      },
+      {
+        "text": "O Rosário é minha oração predileta. Oração maravilhosa! Maravilhosa na sua simplicidade e na sua profundidade.",
+        "author": "São João Paulo II"
+      },
+      {
+        "text": "Se quiserdes que reine a paz em vossos lares, rezai em família o Santo Rosário.",
+        "author": "São Pio X"
+      },
+      {
+        "text": "A Ave Maria é a saudação mais agradável que podemos dirigir a Maria.",
+        "author": "São Tomás de Aquino"
+      },
+      {
+        "text": "Todas as Ave Marias que rezamos são como rosas que oferecemos à Santíssima Virgem.",
+        "author": "Santa Teresinha do Menino Jesus"
+      },
+      {
+        "text": "Nada se obtém de Deus sem oração, e nenhuma oração é mais poderosa que o Rosário.",
+        "author": "Santo Afonso Maria de Ligório"
+      },
+      {
+        "text": "O Rosário é uma escola de contemplação e silêncio. Quem o reza, aprende a ouvir Deus.",
+        "author": "Bento XVI"
+      },
+      {
+        "text": "Com o Rosário, o povo cristão senta-se na escola de Maria, para ser introduzido na contemplação da beleza do rosto de Cristo.",
+        "author": "São João Paulo II"
+      },
+      {
+        "text": "Quando a Ave Maria é bem rezada, isto é, com atenção, devoção e modéstia, é o inimigo mais terrível do diabo.",
+        "author": "São Luís Maria Grignion de Montfort"
+      },
+      {
+        "text": "O Rosário é a oração do pobre e do rico, do sábio e do ignorante, do grande e do pequeno.",
+        "author": "São Luís Maria Grignion de Montfort"
+      },
+      {
+        "text": "A Virgem Maria nos deu o Rosário como remédio universal contra todos os males.",
+        "author": "São Domingos de Gusmão"
+      },
+      {
+        "text": "Não há problema, por maior que seja, temporal ou sobretudo espiritual, que não se possa resolver pelo Rosário.",
+        "author": "Irmã Lúcia de Fátima"
+      },
+      {
+        "text": "Quem propaga o Santo Rosário é salvo.",
+        "author": "São Domingos de Gusmão"
+      },
+      {
+        "text": "O Rosário é a arma dada por Deus àqueles que lutam pela salvação do mundo.",
+        "author": "Papa Pio XII"
+      },
+      {
+        "text": "A oração do Rosário é compêndio de todo o Evangelho.",
+        "author": "São João Paulo II"
+      },
+      {
+        "text": "Amai o Rosário! Rezai-o todos os dias, com devoção e recolhimento.",
+        "author": "Santa Jacinta Marto"
+      },
+      {
+        "text": "O Santo Rosário é depois da Santa Missa e do Ofício Divino, de todas as devoções a mais agradável a Deus e a mais útil às almas.",
+        "author": "São Luís Maria Grignion de Montfort"
+      }
+    ],
+    "saintQuoteLabel": "Palavra dos Santos"
   },
   "HowToPray": {
     "title": "Como Rezar o Terço",
@@ -1337,5 +1476,277 @@
     "prayedThe": "Rezou os",
     "amen": "Amém",
     "commentPlaceholder": "Adicione uma palavra de encorajamento..."
+  },
+  "RosaryGuide": {
+    "title": "Guia Interativo do Rosário",
+    "subtitle": "Reze conta por conta com meditações guiadas",
+    "breadcrumb": "Guia Interativo",
+    "todaysMystery": "Mistérios de Hoje",
+    "step": "Passo {current} de {total}",
+    "start": "Início",
+    "completed": "concluído",
+    "meditate": "Medite no mistério antes de avançar",
+    "next": "Próxima",
+    "prev": "Voltar",
+    "finish": "Concluir",
+    "reset": "Reiniciar",
+    "resume": {
+      "title": "Sessão Anterior Encontrada",
+      "desc": "Você tem uma sessão de oração salva. Deseja continuar de onde parou?",
+      "continue": "Continuar",
+      "restart": "Começar do Início"
+    },
+    "completion": {
+      "title": "Santo Rosário Concluído!",
+      "desc": "Parabéns por dedicar este tempo à oração e meditação dos mistérios de Cristo.",
+      "prayAgain": "Rezar Novamente",
+      "goToDashboard": "Ir para Dashboard",
+      "checkedIn": "Oração registrada automaticamente ✓"
+    },
+    "wakelock": {
+      "active": "Tela mantida ligada",
+      "inactive": "Modo de tela normal"
+    },
+    "haptic": {
+      "enabled": "Vibração ativada",
+      "disabled": "Vibração desativada"
+    },
+    "beads": {
+      "signOfCross": "Sinal da Cruz",
+      "creed": "Credo",
+      "ourFather": "Pai Nosso",
+      "hailMary": "Ave Maria",
+      "glory": "Glória ao Pai",
+      "fatimaPrayer": "Oração de Fátima",
+      "salveRegina": "Salve Rainha",
+      "mystery": "{n}º Mistério",
+      "hailMaryN": "{n}ª Ave Maria",
+      "hailMaryFaith": "1ª Ave Maria (Fé)",
+      "hailMaryHope": "2ª Ave Maria (Esperança)",
+      "hailMaryCharity": "3ª Ave Maria (Caridade)",
+      "montfortIntro": "Oração Preparatória de São Luís de Montfort",
+      "decadeOffering": "{n}ª Dezena — Oferecimento",
+      "montfortSalutation": "Saudação Mariana",
+      "montfortClosing": "Oração Final de São Luís de Montfort",
+      "subTuum": "Sub Tuum Praesidium"
+    },
+    "prayers": {
+      "signOfCross": "Em nome do Pai, do Filho e do Espírito Santo. Amém.",
+      "creed": "Creio em Deus Pai Todo-Poderoso, Criador do céu e da terra; e em Jesus Cristo, seu único Filho, nosso Senhor; que foi concebido pelo poder do Espírito Santo; nasceu da Virgem Maria; padeceu sob Pôncio Pilatos, foi crucificado, morto e sepultado; desceu à mansão dos mortos; ressuscitou ao terceiro dia; subiu aos céus; está sentado à direita de Deus Pai Todo-Poderoso, de onde há de vir a julgar os vivos e os mortos. Creio no Espírito Santo; na Santa Igreja Católica; na comunhão dos santos; na remissão dos pecados; na ressurreição da carne; na vida eterna. Amém.",
+      "ourFather": "Pai nosso, que estais no céu, santificado seja o vosso nome; venha a nós o vosso Reino; seja feita a vossa vontade assim na terra como no céu. O pão nosso de cada dia nos dai hoje; perdoai-nos as nossas ofensas assim como nós perdoamos a quem nos tem ofendido; e não nos deixeis cair em tentação, mas livrai-nos do mal. Amém.",
+      "hailMary": "Ave Maria, cheia de graça, o Senhor é convosco. Bendita sois vós entre as mulheres e bendito é o fruto do vosso ventre, Jesus. Santa Maria, Mãe de Deus, rogai por nós pecadores, agora e na hora da nossa morte. Amém.",
+      "glory": "Glória ao Pai, e ao Filho, e ao Espírito Santo. Como era no princípio, agora e sempre, por todos os séculos dos séculos. Amém.",
+      "fatimaPrayer": "Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno, levai as almas todas para o céu, principalmente as que mais precisarem da vossa misericórdia.",
+      "salveRegina": "Salve, Rainha, Mãe de misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos, os degredados filhos de Eva. A vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei. E depois deste desterro, mostrai-nos Jesus, bendito fruto do vosso ventre. Ó clemente, ó piedosa, ó doce sempre Virgem Maria. Rogai por nós, Santa Mãe de Deus, para que sejamos dignos das promessas de Cristo. Amém.",
+      "montfortIntro": "Dignarei-vos juntar-vos a mim, ó meu Jesus, para que eu possa unir-me a Vós. Que todos os poderes da minha alma Vos bendigam e louvem. Dignai-Vos, meu Jesus, unir-me a todas as intenções que tivestes ao instituir esta devoção do Santo Rosário e que eu tenha parte em todas as orações que foram e hão de ser rezadas em todo o mundo. Ofereço-Vos, ó meu Deus, estas dezenas em honra dos Mistérios da vida, morte e glória de Jesus e de Maria, em união com a Santa Igreja e segundo as intenções do Santo Padre. Peço-Vos pela intercessão de Maria, uma fé viva, uma firme esperança e uma ardente caridade. Amém.",
+      "montfortSalutation": "Eu vos saúdo, Maria, Filha bem-amada do Pai Eterno, Mãe admirável do Filho, Esposa fidelíssima do Espírito Santo, Templo augusto da Santíssima Trindade. Eu vos saúdo, Soberana Princesa, a quem tudo está sujeito no Céu e na Terra. Eu vos saúdo, Refúgio seguro dos pecadores, Nossa Senhora de Misericórdia, que nunca rejeitastes ninguém. Pecador como sou, prostro-me a vossos pés e vos peço que me alcanceis de vosso amado Jesus a contrição e o perdão de todos os meus pecados, assim como a sabedoria divina. Consagro-me inteiramente a vós, com tudo o que tenho. Tomai-me, ó doce Virgem, como vossa posse e propriedade. Amém.",
+      "montfortClosing": "Nós vos saudamos, ó Maria, Filha do Pai Eterno. Nós vos saudamos, ó Maria, Mãe do Filho Divino. Nós vos saudamos, ó Maria, Esposa do Espírito Santo. Nós vos saudamos, ó Maria, Templo de toda a Santíssima Trindade. Recebei, ó Virgem Imaculada, este Santo Rosário que vos oferecemos em testemunho da nossa terna devoção. Fazei que ele nos sirva para obter a remissão de todos os nossos pecados, para nos unir a vós e ao vosso Filho Jesus, e para alcançar a vida eterna. Amém.",
+      "subTuum": "Sob a vossa proteção nos refugiamos, Santa Mãe de Deus. Não desprezeis as nossas súplicas em nossas necessidades, mas livrai-nos sempre de todos os perigos, ó Virgem gloriosa e bendita. Amém."
+    },
+    "mysteries": {
+      "joyful": {
+        "label": "Gozosos",
+        "m1": "1º Mistério: A Anunciação do Anjo a Nossa Senhora",
+        "m2": "2º Mistério: A Visitação de Nossa Senhora a Santa Isabel",
+        "m3": "3º Mistério: O Nascimento de Jesus em Belém",
+        "m4": "4º Mistério: A Apresentação de Jesus no Templo",
+        "m5": "5º Mistério: A Perda e o Encontro de Jesus no Templo"
+      },
+      "sorrowful": {
+        "label": "Dolorosos",
+        "m1": "1º Mistério: A Agonia de Jesus no Horto das Oliveiras",
+        "m2": "2º Mistério: A Flagelação de Jesus",
+        "m3": "3º Mistério: A Coroação de Espinhos",
+        "m4": "4º Mistério: Jesus Carrega a Cruz",
+        "m5": "5º Mistério: A Crucificação e Morte de Jesus"
+      },
+      "glorious": {
+        "label": "Gloriosos",
+        "m1": "1º Mistério: A Ressurreição de Jesus",
+        "m2": "2º Mistério: A Ascensão de Jesus ao Céu",
+        "m3": "3º Mistério: A Vinda do Espírito Santo",
+        "m4": "4º Mistério: A Assunção de Nossa Senhora",
+        "m5": "5º Mistério: A Coroação de Nossa Senhora"
+      },
+      "luminous": {
+        "label": "Luminosos",
+        "m1": "1º Mistério: O Batismo de Jesus no Jordão",
+        "m2": "2º Mistério: A Auto-revelação de Jesus nas Bodas de Caná",
+        "m3": "3º Mistério: O Anúncio do Reino de Deus",
+        "m4": "4º Mistério: A Transfiguração de Jesus",
+        "m5": "5º Mistério: A Instituição da Eucaristia"
+      }
+    },
+    "meditations": {
+      "joyful": {
+        "m1": {
+          "bible": "O Anjo Gabriel foi enviado por Deus a uma virgem chamada Maria. Entrando onde ela estava, disse: «Ave, cheia de graça, o Senhor é contigo!» (Lc 1,26-28)",
+          "bibleRef": "Lucas 1,26-38",
+          "montfort": "Contemplemos neste mistério a profunda humildade de Maria, que se declarou serva do Senhor diante do Arcanjo Gabriel. Peçamos, pela intercessão desta Mãe humilde, uma profunda humildade de coração que nos afaste de todo orgulho e vaidade mundana."
+        },
+        "m2": {
+          "bible": "Maria pôs-se a caminho e foi apressadamente à região montanhosa. Entrou em casa de Zacarias e saudou Isabel. Logo que Isabel ouviu a saudação de Maria, o menino saltou de alegria no seu seio. (Lc 1,39-44)",
+          "bibleRef": "Lucas 1,39-56",
+          "montfort": "Meditemos sobre a caridade ardente de Maria, que a fez levantar-se e ir às pressas servir sua prima. Peçamos a graça de amar o próximo com o mesmo zelo e prontidão, levando Cristo àqueles que precisam."
+        },
+        "m3": {
+          "bible": "Deu à luz o seu filho primogénito, envolveu-o em panos e recostou-o numa manjedoura, porque não havia lugar para eles na hospedaria. (Lc 2,6-7)",
+          "bibleRef": "Lucas 2,1-20",
+          "montfort": "Contemplemos a pobreza divina do Menino Jesus nascido num estábulo. Peçamos o desprendimento dos bens terrenos e um coração que saiba encontrar Deus nas coisas mais simples e humildes."
+        },
+        "m4": {
+          "bible": "Quando se completaram os dias para a purificação, levaram-no a Jerusalém para o apresentar ao Senhor. Simeão tomou-o nos braços e louvou a Deus. (Lc 2,22-28)",
+          "bibleRef": "Lucas 2,22-40",
+          "montfort": "Meditemos sobre a obediência de Maria e José à Lei do Senhor. Peçamos a graça de uma obediência pronta e generosa à vontade divina, oferecendo-nos inteiramente a Deus como Maria ofereceu Jesus no Templo."
+        },
+        "m5": {
+          "bible": "Passados três dias, encontraram-no no Templo, sentado entre os doutores, a ouvi-los e a fazer-lhes perguntas. Disse-lhes Jesus: «Não sabíeis que devia estar nas coisas de meu Pai?» (Lc 2,46-49)",
+          "bibleRef": "Lucas 2,41-52",
+          "montfort": "Contemplemos a dor de Maria ao perder Jesus e sua alegria ao encontrá-lo no Templo. Peçamos a graça de buscar Jesus com fervor quando O perdemos pelo pecado, e a alegria de reencontrá-lo na confissão e na oração."
+        }
+      },
+      "sorrowful": {
+        "m1": {
+          "bible": "Adiantou-se um pouco mais e prostrou-se com a face por terra, orando: «Meu Pai, se é possível, afaste-se de mim este cálice! Todavia, não se faça a minha vontade, mas a tua.» (Mt 26,39)",
+          "bibleRef": "Mateus 26,36-46",
+          "montfort": "Meditemos sobre a agonia de Jesus, cujo suor se tornou como gotas de sangue que caíam por terra. Peçamos a graça de uma verdadeira contrição pelos nossos pecados e a fortaleza para aceitar os sofrimentos que Deus permite em nossas vidas."
+        },
+        "m2": {
+          "bible": "Pilatos, querendo satisfazer a multidão, mandou açoitar Jesus. (Mc 15,15)",
+          "bibleRef": "Marcos 15,15; João 19,1",
+          "montfort": "Contemplemos o corpo sagrado de Jesus dilacerado pelos açoites. Ele sofreu tudo isto para expiar os pecados da carne. Peçamos a graça da mortificação dos sentidos e a pureza de corpo e alma."
+        },
+        "m3": {
+          "bible": "Os soldados teceram uma coroa de espinhos e puseram-lha na cabeça. Aproximavam-se dele e diziam: «Salve, Rei dos Judeus!» E davam-lhe bofetadas. (Jo 19,2-3)",
+          "bibleRef": "João 19,1-5; Mateus 27,27-31",
+          "montfort": "Meditemos sobre a coroa de espinhos que perfurou a cabeça sagrada de Jesus, Rei do Universo. Peçamos a graça de suportar com paciência todas as humilhações e a coragem para professar nossa fé diante do mundo."
+        },
+        "m4": {
+          "bible": "Tomaram então Jesus. Ele próprio levava a sua cruz e saiu para o lugar chamado Calvário, em hebraico Gólgota. (Jo 19,16-17)",
+          "bibleRef": "João 19,16-17; Lucas 23,26-32",
+          "montfort": "Contemplemos Jesus carregando a pesada cruz pelo caminho do Calvário. Peçamos a graça de aceitar nossa cruz quotidiana com amor e paciência, seguindo os passos de Nosso Senhor até ao fim."
+        },
+        "m5": {
+          "bible": "Jesus deu um grande grito e expirou. Nessa hora, o véu do Templo rasgou-se em dois, de alto a baixo. O centurião disse: «Verdadeiramente, este homem era Filho de Deus!» (Mc 15,37-39)",
+          "bibleRef": "Marcos 15,33-39; João 19,28-37",
+          "montfort": "Meditemos sobre a morte de Jesus na Cruz, sacrifício supremo de amor pela humanidade. Peçamos a graça de uma devoção ardente à Paixão de Cristo, e a coragem de morrer para o pecado e viver só para Deus."
+        }
+      },
+      "glorious": {
+        "m1": {
+          "bible": "Não está aqui: ressuscitou, como tinha dito. Vinde ver o lugar onde jazia. (Mt 28,6)",
+          "bibleRef": "Mateus 28,1-10; João 20,1-18",
+          "montfort": "Contemplemos a vitória de Cristo sobre a morte. A Ressurreição é o fundamento da nossa fé. Peçamos uma fé viva e inabalável, e a graça de ressuscitar espiritualmente, deixando para trás a vida de pecado."
+        },
+        "m2": {
+          "bible": "Dito isto, foi elevado à vista deles, e uma nuvem o ocultou a seus olhos. (At 1,9)",
+          "bibleRef": "Atos 1,6-12; Marcos 16,19-20",
+          "montfort": "Meditemos sobre Jesus subindo gloriosamente ao Céu. Peçamos a graça de um ardente desejo do Céu, a nossa verdadeira pátria, e que nossos corações estejam onde está o nosso tesouro."
+        },
+        "m3": {
+          "bible": "Ficaram todos cheios do Espírito Santo e começaram a falar em outras línguas, conforme o Espírito lhes concedia que se exprimissem. (At 2,4)",
+          "bibleRef": "Atos 2,1-13",
+          "montfort": "Contemplemos a descida do Espírito Santo sobre Maria e os Apóstolos. Peçamos os sete dons do Espírito Santo: sabedoria, entendimento, conselho, fortaleza, ciência, piedade e temor de Deus."
+        },
+        "m4": {
+          "bible": "Maria foi levada ao Céu; alegram-se os coros dos Anjos. (Antífona da Liturgia da Assunção; cf. Ap 12,1)",
+          "bibleRef": "Apocalipse 12,1; Sl 45,10-15",
+          "montfort": "Meditemos sobre a gloriosa Assunção de Maria ao Céu em corpo e alma. Peçamos a graça de uma verdadeira devoção a Nossa Senhora e a certeza de que ela intercede por nós junto ao trono de Deus."
+        },
+        "m5": {
+          "bible": "Apareceu no céu um grande sinal: uma Mulher vestida de sol, com a lua debaixo dos pés e uma coroa de doze estrelas sobre a cabeça. (Ap 12,1)",
+          "bibleRef": "Apocalipse 12,1-6",
+          "montfort": "Contemplemos a coroação de Maria como Rainha do Céu e da Terra. Peçamos a graça de uma perseverança final na fé e a confiança na intercessão poderosa de Nossa Senhora na hora da nossa morte."
+        }
+      },
+      "luminous": {
+        "m1": {
+          "bible": "Logo que saiu da água, viu os céus abertos e o Espírito descer sobre ele como uma pomba. E ouviu-se uma voz dos céus: «Tu és o meu Filho amado, em ti pus o meu agrado.» (Mc 1,10-11)",
+          "bibleRef": "Marcos 1,9-11; Mateus 3,13-17",
+          "montfort": "Meditemos sobre o Batismo de Jesus no Jordão, quando o Pai o revela como Filho amado. Peçamos a graça de viver fielmente as promessas do nosso próprio Batismo e de sermos verdadeiros filhos de Deus."
+        },
+        "m2": {
+          "bible": "A mãe de Jesus disse-lhe: «Não têm vinho.» Disse-lhes Jesus: «Enchei de água as talhas.» Depois: «Tirai agora.» O mestre-sala provou a água tornada vinho. (Jo 2,3-9)",
+          "bibleRef": "João 2,1-12",
+          "montfort": "Contemplemos o primeiro milagre de Jesus, obtido pela intercessão de Maria. Peçamos a graça de recorrer sempre a Maria em nossas necessidades, confiantes de que ela apresentará nossos pedidos a Jesus."
+        },
+        "m3": {
+          "bible": "Jesus percorria toda a Galileia, ensinando nas sinagogas, proclamando o Evangelho do Reino e curando toda espécie de doenças. (Mt 4,23)",
+          "bibleRef": "Mateus 4,23-25; Marcos 1,14-15",
+          "montfort": "Meditemos sobre Jesus proclamando o Reino de Deus e chamando todos à conversão. Peçamos a graça de uma conversão profunda e contínua, e a coragem de anunciar o Evangelho com nossa vida."
+        },
+        "m4": {
+          "bible": "Jesus foi transfigurado diante deles: o seu rosto brilhou como o sol e as suas vestes tornaram-se brancas como a luz. (Mt 17,2)",
+          "bibleRef": "Mateus 17,1-8; Lucas 9,28-36",
+          "montfort": "Contemplemos a glória divina de Cristo manifestada no Monte Tabor. Peçamos a graça de buscar sempre a face de Deus na oração e de nos deixar transformar pela luz de Cristo."
+        },
+        "m5": {
+          "bible": "Tomou o pão, deu graças, partiu-o e deu-lho, dizendo: «Isto é o meu corpo, que vai ser entregue por vós. Fazei isto em memória de mim.» (Lc 22,19)",
+          "bibleRef": "Lucas 22,14-20; João 6,48-58",
+          "montfort": "Meditemos sobre o dom supremo da Eucaristia, onde Jesus se dá inteiramente a nós. Peçamos um amor ardente pela Santa Missa e pela Comunhão, e a graça de receber Jesus com fé viva e coração puro."
+        }
+      }
+    },
+    "tabs": {
+      "gospel": "📖 Evangelho",
+      "meditation": "🙏 Meditação",
+      "prayer": "📿 Oração"
+    },
+    "montfortLabel": "Método de São Luís de Montfort",
+    "bibleLabel": "Passagem Bíblica",
+    "sourceLabel": "Fonte: O Segredo do Rosário — São Luís Maria Grignion de Montfort",
+    "offerings": {
+      "joyful": {
+        "d1": "Nós vos oferecemos, Senhor Jesus, esta primeira dezena em honra da vossa Encarnação, e vos pedimos, por este mistério e pela intercessão da vossa Santa Mãe, uma profunda humildade. Amém.",
+        "d2": "Nós vos oferecemos, Senhor Jesus, esta segunda dezena em honra da Visitação de vossa Santa Mãe a sua prima Santa Isabel, e vos pedimos, por este mistério e pela intercessão de Maria, a caridade para com o próximo. Amém.",
+        "d3": "Nós vos oferecemos, Senhor Jesus, esta terceira dezena em honra do vosso Nascimento no estábulo de Belém, e vos pedimos, por este mistério e pela intercessão de Maria, o desprendimento dos bens do mundo e o amor à pobreza. Amém.",
+        "d4": "Nós vos oferecemos, Senhor Jesus, esta quarta dezena em honra da vossa Apresentação no Templo e da Purificação de Maria, e vos pedimos, por este mistério e pela intercessão de vossa Santa Mãe, a pureza de corpo e de alma. Amém.",
+        "d5": "Nós vos oferecemos, Senhor Jesus, esta quinta dezena em honra do vosso Encontro no Templo, e vos pedimos, por este mistério e pela intercessão de Maria, a verdadeira sabedoria. Amém."
+      },
+      "sorrowful": {
+        "d1": "Nós vos oferecemos, Senhor Jesus, esta primeira dezena em honra da vossa Agonia no Horto das Oliveiras, e vos pedimos, por este mistério e pela intercessão de Maria, a contrição perfeita dos nossos pecados. Amém.",
+        "d2": "Nós vos oferecemos, Senhor Jesus, esta segunda dezena em honra da vossa cruel Flagelação, e vos pedimos, por este mistério e pela intercessão de Maria, a mortificação dos nossos sentidos. Amém.",
+        "d3": "Nós vos oferecemos, Senhor Jesus, esta terceira dezena em honra da vossa Coroação de Espinhos, e vos pedimos, por este mistério e pela intercessão de Maria, o desprezo do mundo. Amém.",
+        "d4": "Nós vos oferecemos, Senhor Jesus, esta quarta dezena em honra do vosso Caminho da Cruz, e vos pedimos, por este mistério e pela intercessão de Maria, a paciência para carregar as nossas cruzes. Amém.",
+        "d5": "Nós vos oferecemos, Senhor Jesus, esta quinta dezena em honra da vossa Crucificação e Morte na Cruz, e vos pedimos, por este mistério e pela intercessão de Maria, a conversão dos pecadores e a perseverança dos justos. Amém."
+      },
+      "glorious": {
+        "d1": "Nós vos oferecemos, Senhor Jesus, esta primeira dezena em honra da vossa gloriosa Ressurreição, e vos pedimos, por este mistério e pela intercessão de Maria, o amor a Deus e o fervor na oração. Amém.",
+        "d2": "Nós vos oferecemos, Senhor Jesus, esta segunda dezena em honra da vossa triunfante Ascensão, e vos pedimos, por este mistério e pela intercessão de Maria, um ardente desejo do Céu. Amém.",
+        "d3": "Nós vos oferecemos, Senhor Jesus, esta terceira dezena em honra da descida do Espírito Santo sobre os Apóstolos, e vos pedimos, por este mistério e pela intercessão de Maria, os dons do Espírito Santo. Amém.",
+        "d4": "Nós vos oferecemos, Senhor Jesus, esta quarta dezena em honra da Assunção de vossa Santa Mãe, e vos pedimos, por este mistério e pela intercessão de Maria, uma terna devoção a tão boa Mãe. Amém.",
+        "d5": "Nós vos oferecemos, Senhor Jesus, esta quinta dezena em honra da Coroação de Maria, e vos pedimos, por este mistério e pela intercessão de Maria, a perseverança na graça e a coroa de glória. Amém."
+      },
+      "luminous": {
+        "d1": "Nós vos oferecemos, Senhor Jesus, esta primeira dezena em honra do vosso Batismo no Jordão, e vos pedimos, por este mistério e pela intercessão de Maria, a fidelidade às promessas do nosso Batismo. Amém.",
+        "d2": "Nós vos oferecemos, Senhor Jesus, esta segunda dezena em honra da vossa revelação nas Bodas de Caná, e vos pedimos, por este mistério e pela intercessão de Maria, a confiança na intercessão da Virgem Santíssima. Amém.",
+        "d3": "Nós vos oferecemos, Senhor Jesus, esta terceira dezena em honra do vosso Anúncio do Reino de Deus, e vos pedimos, por este mistério e pela intercessão de Maria, a conversão do coração e a busca do Reino. Amém.",
+        "d4": "Nós vos oferecemos, Senhor Jesus, esta quarta dezena em honra da vossa Transfiguração, e vos pedimos, por este mistério e pela intercessão de Maria, o desejo da santidade e da contemplação. Amém.",
+        "d5": "Nós vos oferecemos, Senhor Jesus, esta quinta dezena em honra da Instituição da Eucaristia, e vos pedimos, por este mistério e pela intercessão de Maria, o amor ardente pela Santa Missa e pela Comunhão. Amém."
+      }
+    },
+    "latin": {
+      "signOfCross": "In nómine Patris, et Fílii, et Spíritus Sancti. Amen.",
+      "creed": "Credo in Deum Patrem omnipoténtem, Creatórem cæli et terræ, et in Iesum Christum, Fílium eius únicum, Dóminum nostrum, qui concéptus est de Spíritu Sancto, natus ex María Vírgine, passus sub Póntio Piláto, crucifíxus, mórtuus, et sepúltus, descéndit ad ínferos, tértia die resurréxit a mórtuis, ascéndit ad cælos, sedet ad déxteram Dei Patris omnipoténtis, inde ventúrus est iudicáre vivos et mórtuos. Credo in Spíritum Sanctum, sanctam Ecclésiam cathólicam, sanctórum communiónem, remissiónem peccatórum, carnis resurrectiónem, vitam ætérnam. Amen.",
+      "ourFather": "Pater noster, qui es in cælis, sanctificétur nomen tuum. Advéniat regnum tuum. Fiat volúntas tua, sicut in cælo et in terra. Panem nostrum quotidiánum da nobis hódie, et dimítte nobis débita nostra sicut et nos dimíttimus debitóribus nostris. Et ne nos indúcas in tentatiónem, sed líbera nos a malo. Amen.",
+      "hailMary": "Ave María, grátia plena, Dóminus tecum. Benedícta tu in muliéribus, et benedíctus fructus ventris tui, Iesus. Sancta María, Mater Dei, ora pro nobis peccatóribus, nunc, et in hora mortis nostræ. Amen.",
+      "glory": "Glória Patri, et Fílio, et Spirítui Sancto. Sicut erat in princípio, et nunc, et semper, et in sǽcula sæculórum. Amen.",
+      "fatimaPrayer": "O mi Iesu, dimítte nobis débita nostra, salva nos ab igne inférni, perduc in cælum omnes ánimas, præsértim eas, quæ misericórdiæ tuæ máxime indígent.",
+      "salveRegina": "Salve, Regína, Mater misericórdiæ, vita, dulcédo, et spes nostra, salve. Ad te clamámus, éxsules fílii Hevæ. Ad te suspirámus, geméntes et flentes in hac lacrimárum valle. Eia, ergo, advocáta nostra, illos tuos misericórdes óculos ad nos convérte. Et Iesum, benedíctum fructum ventris tui, nobis post hoc exsílium osténde. O clemens, O pia, O dulcis Virgo María. Ora pro nobis, sancta Dei Génetrix, ut digni efficiámur promissiónibus Christi. Amen.",
+      "subTuum": "Sub tuum præsídium confúgimus, Sancta Dei Génetrix. Nostras deprecatiónes ne despícias in necessitátibus, sed a perículis cunctis líbera nos semper, Virgo gloriósa et benedícta. Amen.",
+      "toggle": "Latim",
+      "showLatin": "Ver em Latim",
+      "showVernacular": "Ver na língua atual"
+    },
+    "modeSelect": {
+      "title": "Como deseja rezar?",
+      "subtitle": "Escolha a forma do Santo Rosário",
+      "daily": "Santo Terço",
+      "dailyDesc": "Os cinco mistérios correspondentes ao dia de hoje, conforme a tradição.",
+      "full": "Rosário Completo",
+      "fullDesc": "Todos os quatro conjuntos de mistérios (20 dezenas) — Gozosos, Dolorosos, Gloriosos e Luminosos.",
+      "start": "Iniciar Oração",
+      "todayMystery": "Hoje: Mistérios {name}"
+    }
   }
-}\n
+}

@@ -1,24 +1,27 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useRouter } from "@/i18n/routing";
 import {
   Flame, Trophy, Calendar, ArrowRight, Sparkles, Heart,
   BookOpen, Clock, CheckCircle2,
   Sun, Moon,
-  GraduationCap, Compass, Library, Star, Cross, Users
+  GraduationCap, Compass, Library, Star, Cross, Users,
+  PlayCircle, PenLine, Timer, MessageCircleHeart, Lock
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   UserStats, CheckIn, getTodaysMystery, getMysteryInfo, MysteryType
 } from "@/types";
-import { getUserStats } from "@/services/api";
-import { getStoredCheckIns } from "@/services/mockData";
 import { ComingSoonModal } from "@/components/coming-soon-modal";
 import { CheckInModal } from "@/components/check-in-modal";
 import { PageTransition } from "@/components/page-transition";
 import { useAuth } from "@/providers/auth-provider";
 import { useTranslations, useLocale } from "next-intl";
+import { usePrayerStore } from "@/stores/prayer-store";
+import { useIsMounted } from "@/hooks/use-hydrated";
+import { formatRelativeTime } from "@/lib/utils";
+import { mockCheckIns } from "@/services/mockData";
 
 const mysteryColors: Record<MysteryType, { bg: string; text: string; gradient: string; icon: string }> = {
   joyful: {
@@ -47,6 +50,41 @@ const mysteryColors: Record<MysteryType, { bg: string; text: string; gradient: s
   },
 };
 
+// SVG Progress Ring component
+function ProgressRing({ progress, size = 120, strokeWidth = 8 }: { progress: number; size?: number; strokeWidth?: number }) {
+  const radius = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (Math.min(progress, 100) / 100) * circumference;
+
+  return (
+    <svg width={size} height={size} className="transform -rotate-90">
+      <circle
+        cx={size / 2} cy={size / 2} r={radius}
+        fill="none" stroke="currentColor"
+        strokeWidth={strokeWidth}
+        className="text-muted/30"
+      />
+      <circle
+        cx={size / 2} cy={size / 2} r={radius}
+        fill="none"
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        className="text-gold-500"
+        stroke="url(#goldGradient)"
+        strokeDasharray={circumference}
+        strokeDashoffset={offset}
+        style={{ transition: "stroke-dashoffset 1s ease-out" }}
+      />
+      <defs>
+        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="var(--gold-500, #D4AF37)" />
+          <stop offset="100%" stopColor="var(--gold-600, #B8960C)" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
 export default function DashboardPage() {
   const t = useTranslations("Dashboard");
   const commonT = useTranslations("Common");
@@ -54,14 +92,26 @@ export default function DashboardPage() {
   const locale = useLocale();
   const router = useRouter();
   const { user } = useAuth();
-  const [stats, setStats] = useState<UserStats | null>(null);
-  const [userCheckIns, setUserCheckIns] = useState<CheckIn[]>([]);
-  const [loading, setLoading] = useState(true);
+  const isMounted = useIsMounted();
+
+  // Zustand store selectors
+  const currentStreak = usePrayerStore((s) => s.currentStreak);
+  const longestStreak = usePrayerStore((s) => s.longestStreak);
+  const totalCheckIns = usePrayerStore((s) => s.totalCheckIns);
+  const storeCheckIns = usePrayerStore((s) => s.checkIns);
+  const lastPrayedDate = usePrayerStore((s) => s.lastPrayedDate);
+  const getWeeklyProgress = usePrayerStore((s) => s.getWeeklyProgress);
+  const getRecentActivity = usePrayerStore((s) => s.getRecentActivity);
+  const storeHasCheckedInToday = usePrayerStore((s) => s.hasCheckedInToday);
+  const favoriteMysterys = usePrayerStore((s) => s.favoriteMysterys);
+
   const [currentTime, setCurrentTime] = useState(new Date());
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
+  const [comingSoonFeature, setComingSoonFeature] = useState("");
   const [storageBannerDismissed, setStorageBannerDismissed] = useState(false);
   const [mvpAdviceDismissed, setMvpAdviceDismissed] = useState(false);
   const [checkInModalOpen, setCheckInModalOpen] = useState(false);
+  const [savedSession, setSavedSession] = useState<{ step: number; total: number; percent: number } | null>(null);
 
   const todaysMystery = getTodaysMystery();
   const mysteryInfo = getMysteryInfo(todaysMystery);
@@ -69,34 +119,37 @@ export default function DashboardPage() {
   const currentMysteryName = checkInT(`mysteries.${todaysMystery}.label`);
 
   useEffect(() => {
-    async function loadData() {
-      try {
-        const statsData = await getUserStats();
-        setStats(statsData);
-        setUserCheckIns(getStoredCheckIns());
-      } catch (error) {
-        console.error("Error loading dashboard data:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadData();
-
     const dismissed = localStorage.getItem("rosario-banner-dismissed");
     if (dismissed) setStorageBannerDismissed(true);
 
     const mvpDismissed = localStorage.getItem("rosario-mvp-advice-dismissed");
     if (mvpDismissed) setMvpAdviceDismissed(true);
 
+    // Detect saved rosary guide session
+    try {
+      const saved = localStorage.getItem("rosary-guide-session");
+      if (saved) {
+        const session = JSON.parse(saved);
+        const age = Date.now() - session.savedAt;
+        if (age < 12 * 60 * 60 * 1000 && session.step > 0) {
+          // Full rosary = 7 intro + 5*(1 mystery + 1 OF + 10 HM + 1 glory + 1 fatima) + 2 closing = 79 steps
+          const totalSteps = 79;
+          setSavedSession({
+            step: session.step,
+            total: totalSteps,
+            percent: Math.round(((session.step + 1) / totalSteps) * 100),
+          });
+        }
+      }
+    } catch {}
+
     const interval = setInterval(() => setCurrentTime(new Date()), 60000);
     return () => clearInterval(interval);
   }, []);
 
-  const refreshData = async () => {
-    const statsData = await getUserStats();
-    setStats(statsData);
-    setUserCheckIns(getStoredCheckIns());
-  };
+  const refreshData = useCallback(() => {
+    // Zustand auto-updates; no manual refresh needed
+  }, []);
 
   const getGreeting = () => {
     const hour = currentTime.getHours();
@@ -105,13 +158,17 @@ export default function DashboardPage() {
     return t("goodNight");
   };
 
-  const hasCheckedInToday = stats?.lastCheckIn
-    ? new Date(stats.lastCheckIn).toDateString() === new Date().toDateString()
-    : false;
+  // Use store values (safe defaults for SSR)
+  const hasCheckedInToday = isMounted ? storeHasCheckedInToday() : false;
+  const weeklyProgress = isMounted ? getWeeklyProgress() : 0;
+  const recentActivity = isMounted ? getRecentActivity(5) : [];
+  const favMystery = isMounted && favoriteMysterys.length > 0 ? favoriteMysterys[0] : null;
+  const communityFeed = mockCheckIns.slice(0, 3);
 
-  const checkInDateSet = new Set(
-    userCheckIns.map((c) => new Date(c.createdAt).toDateString())
-  );
+  const checkInDateSet = useMemo(() => {
+    if (!isMounted) return new Set<string>();
+    return new Set(storeCheckIns.map((c) => new Date(c.createdAt).toDateString()));
+  }, [isMounted, storeCheckIns]);
 
   const getWeekDays = () => {
     const today = new Date();
@@ -132,17 +189,7 @@ export default function DashboardPage() {
     return days;
   };
 
-  const weeklyProgress = (() => {
-    const today = new Date();
-    const startOfWeek = new Date(today);
-    startOfWeek.setDate(today.getDate() - 6);
-    startOfWeek.setHours(0, 0, 0, 0);
-    return userCheckIns.filter((c) => new Date(c.createdAt) >= startOfWeek).length;
-  })();
-
-  const dtf = new Intl.DateTimeFormat(locale === 'pt' ? "pt-BR" : "en-US");
-
-  if (loading) {
+  if (!isMounted) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-6 animate-fade-in">
@@ -215,15 +262,65 @@ export default function DashboardPage() {
             <p className="mt-3 text-lg text-muted-foreground max-w-2xl leading-relaxed">
               {hasCheckedInToday ? t("hasCheckedIn") : t("notCheckedIn")}
             </p>
+
+            {/* Hourly Saint Quote — integrated with header */}
+            <div className="mt-6 p-5 sm:p-6 rounded-2xl bg-card/50 border border-border/50 relative overflow-hidden max-w-2xl">
+              <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-500/15 to-transparent" />
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-gold-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Star className="w-5 h-5 text-gold-500" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm sm:text-base text-foreground/90 italic leading-relaxed font-manrope">
+                    &ldquo;{t(`saintQuotes.${currentTime.getHours()}.text`)}&rdquo;
+                  </p>
+                  <p className="mt-2 text-xs text-gold-600 dark:text-gold-400 font-bold uppercase tracking-wider">
+                    — {t(`saintQuotes.${currentTime.getHours()}.author`)}
+                  </p>
+                </div>
+              </div>
+            </div>
           </header>
+
+          {/* ─── Continue Session Card ─── */}
+          {savedSession && (
+            <section className="animate-fade-up animate-delay-50">
+              <button
+                onClick={() => router.push("/ferramentas/guia-interativo" as any)}
+                className="w-full group relative rounded-2xl overflow-hidden bg-gradient-to-r from-amber-500/10 to-gold-500/10 border border-amber-500/20 hover:border-amber-500/40 p-6 sm:p-8 text-left transition-all duration-300 hover:-translate-y-0.5"
+                data-testid="continue-session"
+              >
+                <div className="flex items-center gap-5">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center shadow-lg flex-shrink-0 animate-pulse-gold">
+                    <PlayCircle className="w-7 h-7 text-sacred-blue" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-cinzel font-bold text-foreground text-lg mb-1 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">
+                      {t("continueSession.title")}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">{t("continueSession.desc")}</p>
+                  </div>
+                  <div className="hidden sm:flex flex-col items-end gap-2 flex-shrink-0">
+                    <span className="text-sm font-bold text-gold-600 dark:text-gold-400">
+                      {t("continueSession.progress", { percent: savedSession.percent })}
+                    </span>
+                    <div className="w-32 h-2 rounded-full bg-muted overflow-hidden">
+                      <div className="h-full rounded-full bg-gradient-to-r from-gold-500 to-gold-600 transition-all" style={{ width: `${savedSession.percent}%` }} />
+                    </div>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-gold-500 group-hover:translate-x-1 transition-transform flex-shrink-0" />
+                </div>
+              </button>
+            </section>
+          )}
 
           {/* ─── Stats Row ─── */}
           <section className="animate-fade-up animate-delay-100">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 lg:gap-6">
               {[
-                { icon: Flame, value: stats?.currentStreak ?? 0, label: t("stats.currentStreak"), gradient: "from-orange-500 to-red-500", badge: (stats?.currentStreak ?? 0) >= 7 ? t("fire") : null, badgeColor: "bg-orange-500/20 text-orange-600 dark:text-orange-400" },
-                { icon: Trophy, value: stats?.longestStreak ?? 0, label: t("stats.longestStreak"), gradient: "from-gold-500 to-gold-600" },
-                { icon: Heart, value: stats?.totalCheckIns ?? 0, label: t("stats.totalPrayers"), gradient: "from-sacred-blue to-slate-700 dark:from-slate-700 dark:to-slate-800", iconClass: "text-gold-400" },
+                { icon: Flame, value: currentStreak, label: t("stats.currentStreak"), gradient: "from-orange-500 to-red-500", badge: currentStreak >= 7 ? t("fire") : null, badgeColor: "bg-orange-500/20 text-orange-600 dark:text-orange-400" },
+                { icon: Trophy, value: longestStreak, label: t("stats.longestStreak"), gradient: "from-gold-500 to-gold-600" },
+                { icon: Heart, value: totalCheckIns, label: t("stats.totalPrayers"), gradient: "from-sacred-blue to-slate-700 dark:from-slate-700 dark:to-slate-800", iconClass: "text-gold-400" },
                 { icon: Star, value: `${weeklyProgress}/7`, label: t("stats.thisWeek"), gradient: "from-emerald-500 to-green-600" },
               ].map((stat) => (
                 <div key={stat.label} className="group p-6 lg:p-8 rounded-2xl bg-card border border-border hover:border-gold-500/30 hover:-translate-y-1 transition-all duration-300">
@@ -237,6 +334,18 @@ export default function DashboardPage() {
                   <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{stat.label}</p>
                 </div>
               ))}
+              {/* Favorite Mystery Card */}
+              <div className="group p-6 lg:p-8 rounded-2xl bg-card border border-border hover:border-gold-500/30 hover:-translate-y-1 transition-all duration-300 col-span-2 md:col-span-1" data-testid="favorite-mystery">
+                <div className="flex items-start justify-between mb-5">
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${favMystery ? mysteryColors[favMystery].gradient : "from-slate-400 to-slate-500"} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                    <span className="text-xl">{favMystery ? mysteryColors[favMystery].icon : "📿"}</span>
+                  </div>
+                </div>
+                <p className="text-2xl lg:text-3xl font-cinzel font-bold text-foreground mb-1">
+                  {favMystery ? checkInT(`mysteries.${favMystery}.label`) : "—"}
+                </p>
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{t("favoriteMystery.label")}</p>
+              </div>
             </div>
           </section>
 
@@ -313,26 +422,171 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* Quick Access */}
-            <div className="space-y-4">
-              <h3 className="font-cinzel font-bold text-foreground text-sm uppercase tracking-widest px-1">{t("sections.quickAccess")}</h3>
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { icon: BookOpen, label: t("actions.howToPray"), path: "/como-rezar", gradient: "from-sacred-blue to-slate-700" },
-                  { icon: Sparkles, label: t("actions.mysteries"), path: "/misterios-do-dia", gradient: "from-gold-500 to-gold-600" },
-                  { icon: GraduationCap, label: t("actions.teachings"), path: "/ensinamentos", gradient: "from-emerald-600 to-emerald-700" },
-                  { icon: Library, label: t("actions.resources"), path: "/recursos", gradient: "from-blue-600 to-blue-700" },
-                ].map((action) => (
-                  <button key={action.path} onClick={() => router.push(action.path as any)} className="group flex flex-col items-center justify-center p-5 rounded-2xl bg-card border border-border hover:border-gold-500/30 hover:-translate-y-1 transition-all duration-300 min-h-[120px]">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${action.gradient} flex items-center justify-center mb-3 shadow-md`}>
-                      <action.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <p className="font-cinzel font-bold text-foreground text-[10px] group-hover:text-gold-600 dark:group-hover:text-gold-400 text-center uppercase tracking-widest leading-tight transition-colors">{action.label}</p>
-                  </button>
-                ))}
+            {/* Quick Access Hub */}
+            <div className="space-y-6">
+              {/* Prayer Tools */}
+              <div>
+                <h3 className="font-cinzel font-bold text-foreground text-sm uppercase tracking-widest px-1 mb-3">{t("sections.tools")}</h3>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { icon: PlayCircle, label: t("actions.interactiveGuide"), path: "/ferramentas/guia-interativo", gradient: "from-gold-500 to-gold-600" },
+                    { icon: PenLine, label: t("actions.journal"), path: "/ferramentas/diario-espiritual", gradient: "from-purple-500 to-purple-600" },
+                    { icon: Timer, label: t("actions.timer"), path: null, gradient: "from-sky-500 to-blue-500", comingSoon: true },
+                    { icon: MessageCircleHeart, label: t("actions.intentionsWall"), path: null, gradient: "from-rose-500 to-rose-600", comingSoon: true },
+                  ].map((action, i) => (
+                    <button
+                      key={action.label}
+                      onClick={() => action.comingSoon ? (setComingSoonFeature(action.label), setComingSoonOpen(true)) : router.push(action.path as any)}
+                      className="group relative flex flex-col items-center justify-center p-4 rounded-2xl bg-card border border-border hover:border-gold-500/30 hover:-translate-y-1 transition-all duration-300 min-h-[100px]"
+                    >
+                      {action.comingSoon && (
+                        <span className="absolute top-2 right-2 text-[8px] px-1.5 py-0.5 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1">
+                          <Lock className="w-2.5 h-2.5" />{t("comingSoon")}
+                        </span>
+                      )}
+                      <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${action.gradient} flex items-center justify-center mb-2 shadow-md ${action.comingSoon ? "opacity-50" : ""}`}>
+                        <action.icon className="w-5 h-5 text-white" />
+                      </div>
+                      <p className={`font-cinzel font-bold text-[10px] group-hover:text-gold-600 dark:group-hover:text-gold-400 text-center uppercase tracking-widest leading-tight transition-colors ${action.comingSoon ? "text-muted-foreground" : "text-foreground"}`}>{action.label}</p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+              {/* Content & Learning */}
+              <div>
+                <h3 className="font-cinzel font-bold text-foreground text-sm uppercase tracking-widest px-1 mb-3">{t("sections.content")}</h3>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { icon: BookOpen, label: t("actions.howToPray"), path: "/como-rezar", gradient: "from-sacred-blue to-slate-700" },
+                    { icon: Sparkles, label: t("actions.mysteries"), path: "/misterios-do-dia", gradient: "from-amber-500 to-amber-600" },
+                    { icon: GraduationCap, label: t("actions.teachings"), path: "/ensinamentos", gradient: "from-emerald-600 to-emerald-700" },
+                    { icon: Library, label: t("actions.resources"), path: "/recursos", gradient: "from-blue-600 to-blue-700" },
+                  ].map((action) => (
+                    <button key={action.path} onClick={() => router.push(action.path as any)} className="group flex flex-col items-center justify-center p-4 rounded-2xl bg-card border border-border hover:border-gold-500/30 hover:-translate-y-1 transition-all duration-300 min-h-[100px]">
+                      <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${action.gradient} flex items-center justify-center mb-2 shadow-md`}>
+                        <action.icon className="w-5 h-5 text-white" />
+                      </div>
+                      <p className="font-cinzel font-bold text-foreground text-[10px] group-hover:text-gold-600 dark:group-hover:text-gold-400 text-center uppercase tracking-widest leading-tight transition-colors">{action.label}</p>
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
+
+          {/* ─── Progress Ring + Recent Activity ─── */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-up animate-delay-350">
+            {/* Weekly Progress Ring */}
+            <div className="p-7 sm:p-9 rounded-2xl bg-card border border-border flex flex-col items-center justify-center text-center" data-testid="progress-ring">
+              <h3 className="font-cinzel font-bold text-foreground text-lg mb-1">{t("progress.title")}</h3>
+              <p className="text-sm text-muted-foreground mb-6">{t("progress.subtitle")}</p>
+              <div className="relative">
+                <ProgressRing progress={(weeklyProgress / 7) * 100} size={140} strokeWidth={10} />
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <span className="text-3xl font-cinzel font-bold text-foreground">{weeklyProgress}</span>
+                  <span className="text-xs text-muted-foreground font-medium">/ 7 {t("days")}</span>
+                </div>
+              </div>
+              {weeklyProgress >= 7 && (
+                <p className="mt-4 text-sm font-bold text-emerald-600 dark:text-emerald-400">{t("progress.complete")}</p>
+              )}
+            </div>
+
+            {/* Recent Activity Feed */}
+            <div className="lg:col-span-2 p-7 sm:p-9 rounded-2xl bg-card border border-border" data-testid="activity-feed">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h3 className="font-cinzel font-bold text-foreground text-lg mb-1">{t("activity.title")}</h3>
+                  <p className="text-sm text-muted-foreground">{t("activity.subtitle")}</p>
+                </div>
+                <div className="w-11 h-11 rounded-xl bg-gold-500/10 flex items-center justify-center">
+                  <Clock className="w-5 h-5 text-gold-600 dark:text-gold-400" />
+                </div>
+              </div>
+              {recentActivity.length === 0 ? (
+                <div className="text-center py-10">
+                  <span className="text-4xl mb-3 block">🙏</span>
+                  <p className="text-muted-foreground text-sm">{t("activity.empty")}</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {recentActivity.map((checkIn) => {
+                    const mysteryStyle = mysteryColors[checkIn.mystery];
+                    const mysteryLabel = checkInT(`mysteries.${checkIn.mystery}.label`);
+                    return (
+                      <div key={checkIn.id} className="flex items-start gap-4 p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors">
+                        <div className={`w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center ${mysteryStyle.bg}`}>
+                          <span className="text-lg">{mysteryStyle.icon}</span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-sm font-bold text-foreground">
+                              {t("activity.prayedThe")} {mysteryLabel}
+                            </span>
+                            <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${mysteryStyle.bg} ${mysteryStyle.text}`}>
+                              {mysteryStyle.icon}
+                            </span>
+                          </div>
+                          {checkIn.reflection ? (
+                            <p className="text-sm text-muted-foreground line-clamp-2 italic">&ldquo;{checkIn.reflection}&rdquo;</p>
+                          ) : (
+                            <p className="text-xs text-muted-foreground">{t("activity.noReflection")}</p>
+                          )}
+                          <span className="text-[10px] text-muted-foreground mt-1 block">
+                            {formatRelativeTime(checkIn.createdAt)}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* ─── Community Feed Preview ─── */}
+          <section className="animate-fade-up animate-delay-350" data-testid="community-preview">
+            <div className="p-7 sm:p-9 rounded-2xl bg-card border border-border">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h3 className="font-cinzel font-bold text-foreground text-lg mb-1">{t("community.title")}</h3>
+                  <p className="text-sm text-muted-foreground">{t("community.subtitle")}</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Users className="w-5 h-5 text-gold-500" />
+                </div>
+              </div>
+              <div className="space-y-4">
+                {communityFeed.map((checkIn) => {
+                  const cStyle = mysteryColors[checkIn.mystery];
+                  return (
+                    <div key={checkIn.id} className="flex items-start gap-4 p-4 rounded-xl bg-muted/30">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-600 flex items-center justify-center flex-shrink-0">
+                        <span className="text-xs font-bold text-foreground">
+                          {checkIn.user.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                        </span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-sm font-bold text-foreground">{checkIn.user.name}</span>
+                          <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${cStyle.bg} ${cStyle.text}`}>
+                            {cStyle.icon} {checkInT(`mysteries.${checkIn.mystery}.label`)}
+                          </span>
+                        </div>
+                        {checkIn.reflection && (
+                          <p className="text-sm text-muted-foreground line-clamp-1 italic">&ldquo;{checkIn.reflection}&rdquo;</p>
+                        )}
+                        <div className="flex items-center gap-3 mt-2">
+                          <span className="text-xs text-muted-foreground">🙏 {checkIn.amens} {t("community.amen")}</span>
+                          <span className="text-[10px] text-muted-foreground">{formatRelativeTime(checkIn.createdAt)}</span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
 
           {/* ─── Suggested Content ─── */}
           <section className="animate-fade-up animate-delay-400">
@@ -362,7 +616,7 @@ export default function DashboardPage() {
             </div>
           </section>
 
-          {/* ─── Inspirational Quote ─── */}
+          {/* ─── Fixed Our Lady of Fatima Quote ─── */}
           <section className="animate-fade-up animate-delay-500">
             <div className="p-10 sm:p-14 rounded-2xl bg-sacred-blue dark:bg-slate-900 relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent" />
@@ -380,7 +634,7 @@ export default function DashboardPage() {
       </main>
 
       <CheckInModal open={checkInModalOpen} onOpenChange={setCheckInModalOpen} onSuccess={refreshData} />
-      <ComingSoonModal isOpen={comingSoonOpen} onClose={() => setComingSoonOpen(false)} featureName={t("actions.history")} />
+      <ComingSoonModal isOpen={comingSoonOpen} onClose={() => setComingSoonOpen(false)} featureName={comingSoonFeature} />
     </div>
     </PageTransition>
   );
