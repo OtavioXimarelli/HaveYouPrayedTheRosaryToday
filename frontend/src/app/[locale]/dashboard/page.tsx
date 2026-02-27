@@ -598,7 +598,25 @@ export default function DashboardPage() {
             </div>
           </section>
 
-          {/* ─── Inspirational Quote ─── */}
+          {/* ─── Hourly Saint Quote ─── */}
+          <section className="animate-fade-up animate-delay-500">
+            <div className="p-10 sm:p-14 rounded-2xl bg-card border border-border relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent" />
+              <div className="max-w-3xl mx-auto text-center">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/20 mb-6">
+                  <Star className="w-4 h-4 text-gold-500" />
+                  <span className="text-xs font-bold uppercase tracking-widest text-gold-600 dark:text-gold-400">{t("saintQuoteLabel")}</span>
+                </div>
+                <div className="w-16 h-0.5 bg-gold-500 mx-auto mb-8 rounded-full" />
+                <blockquote className="text-xl sm:text-2xl md:text-3xl font-cinzel leading-relaxed mb-6 italic text-foreground">
+                  &ldquo;{t(`saintQuotes.${currentTime.getHours()}.text`)}&rdquo;
+                </blockquote>
+                <cite className="text-gold-600 dark:text-gold-400 font-bold uppercase tracking-[0.2em] text-sm not-italic">— {t(`saintQuotes.${currentTime.getHours()}.author`)}</cite>
+              </div>
+            </div>
+          </section>
+
+          {/* ─── Fixed Our Lady of Fatima Quote ─── */}
           <section className="animate-fade-up animate-delay-500">
             <div className="p-10 sm:p-14 rounded-2xl bg-sacred-blue dark:bg-slate-900 relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent" />

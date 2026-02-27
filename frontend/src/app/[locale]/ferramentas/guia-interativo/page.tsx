@@ -6,7 +6,7 @@ import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ArrowLeft, RefreshCw, CheckCircle2, Smartphone, Monitor } from "lucide-react";
+import { ArrowRight, ArrowLeft, RefreshCw, CheckCircle2, Smartphone, Monitor, BookOpen, Heart, ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { getTodaysMystery, MysteryType } from "@/types";
@@ -19,7 +19,7 @@ type RosaryStep = {
     titleKey: string;
     prayerKey: string;
     type: BeadType;
-    mysteryIndex?: number; // 1-5 for mystery beads
+    mysteryIndex?: number;
 };
 
 function buildRosarySequence(mysteryType: MysteryType): RosaryStep[] {
@@ -33,7 +33,6 @@ function buildRosarySequence(mysteryType: MysteryType): RosaryStep[] {
         { titleKey: "beads.glory", prayerKey: "prayers.glory", type: "glory" },
     ];
 
-    // 5 decades
     for (let decade = 1; decade <= 5; decade++) {
         steps.push({
             titleKey: `mysteries.${mysteryType}.m${decade}`,
@@ -70,8 +69,19 @@ const BEAD_COLORS: Record<BeadType, string> = {
     closing: "bg-gold-500",
 };
 
+const BEAD_LABELS: Record<BeadType, string> = {
+    cross: "✝️",
+    intro: "",
+    mystery_start: "⭐",
+    our_father: "🔵",
+    hail_mary: "",
+    glory: "🟣",
+    fatima: "🌹",
+    closing: "✝️",
+};
+
 const SESSION_KEY = "rosary-guide-session";
-const SESSION_MAX_AGE_MS = 12 * 60 * 60 * 1000; // 12 hours
+const SESSION_MAX_AGE_MS = 12 * 60 * 60 * 1000;
 
 interface SavedSession {
     step: number;
@@ -79,11 +89,14 @@ interface SavedSession {
     savedAt: number;
 }
 
-// Bead Visualizer Map
-function BeadMap({ steps, currentStep, onBeadClick }: {
+type MeditationTab = "gospel" | "meditation" | "prayer";
+
+// Improved Bead Visualizer — grouped by decade with labels
+function BeadMap({ steps, currentStep, onBeadClick, mysteryType }: {
     steps: RosaryStep[];
     currentStep: number;
     onBeadClick: (index: number) => void;
+    mysteryType: MysteryType;
 }) {
     const containerRef = useRef<HTMLDivElement>(null);
     const activeRef = useRef<HTMLButtonElement>(null);
@@ -94,30 +107,62 @@ function BeadMap({ steps, currentStep, onBeadClick }: {
         }
     }, [currentStep]);
 
-    return (
-        <div ref={containerRef} className="flex flex-wrap gap-1 justify-center py-4 max-h-24 overflow-y-auto" data-testid="bead-map">
-            {steps.map((step, i) => {
-                const isActive = i === currentStep;
-                const isPast = i < currentStep;
-                const beadColor = BEAD_COLORS[step.type];
-                const size = step.type === "mystery_start" || step.type === "cross" || step.type === "closing"
-                    ? "w-4 h-4" : "w-2.5 h-2.5";
+    // Group beads into sections: intro (0-6), 5 decades (7+), closing
+    const introBeads = steps.slice(0, 7);
+    const decades: RosaryStep[][] = [];
+    let idx = 7;
+    for (let d = 0; d < 5; d++) {
+        decades.push(steps.slice(idx, idx + 14)); // mystery+OF+10HM+glory+fatima = 14
+        idx += 14;
+    }
+    const closingBeads = steps.slice(idx);
 
-                return (
-                    <button
-                        key={i}
-                        ref={isActive ? activeRef : undefined}
-                        onClick={() => onBeadClick(i)}
-                        className={`
-                            rounded-full transition-all duration-300 flex-shrink-0
-                            ${size}
-                            ${isPast ? `${beadColor} opacity-40` : isActive ? `${beadColor} scale-150 ring-2 ring-amber-400 ring-offset-1 ring-offset-background` : `${beadColor} opacity-20`}
-                        `}
-                        aria-label={`Bead ${i + 1}`}
-                        data-testid={`bead-${i}`}
-                    />
-                );
-            })}
+    const renderBead = (step: RosaryStep, globalIndex: number) => {
+        const isActive = globalIndex === currentStep;
+        const isPast = globalIndex < currentStep;
+        const beadColor = BEAD_COLORS[step.type];
+        const isLarge = step.type === "mystery_start" || step.type === "cross" || step.type === "closing" || step.type === "our_father";
+        const size = isLarge ? "w-5 h-5" : "w-3 h-3";
+
+        return (
+            <button
+                key={globalIndex}
+                ref={isActive ? activeRef : undefined}
+                onClick={() => onBeadClick(globalIndex)}
+                title={step.type === "mystery_start" ? `${step.mysteryIndex}º` : step.type.replace("_", " ")}
+                className={`
+                    rounded-full transition-all duration-300 flex-shrink-0 relative
+                    ${size}
+                    ${isPast ? `${beadColor} opacity-50` : isActive ? `${beadColor} scale-[1.8] ring-2 ring-amber-400 ring-offset-2 ring-offset-background shadow-lg shadow-amber-400/30` : `${beadColor} opacity-25 hover:opacity-50`}
+                `}
+                aria-label={`Bead ${globalIndex + 1}`}
+            />
+        );
+    };
+
+    let globalIdx = 0;
+
+    return (
+        <div ref={containerRef} className="py-3 px-2" data-testid="bead-map">
+            {/* Intro beads */}
+            <div className="flex items-center justify-center gap-1.5 mb-3">
+                {introBeads.map((step) => renderBead(step, globalIdx++))}
+            </div>
+            {/* Decades */}
+            <div className="space-y-2">
+                {decades.map((decade, dIdx) => (
+                    <div key={dIdx} className="flex items-center justify-center gap-1 relative">
+                        <span className="absolute -left-1 sm:left-0 text-[9px] font-bold text-muted-foreground/50 w-4">{dIdx + 1}</span>
+                        <div className="flex items-center gap-1 pl-5">
+                            {decade.map((step) => renderBead(step, globalIdx++))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+            {/* Closing */}
+            <div className="flex items-center justify-center gap-1.5 mt-3">
+                {closingBeads.map((step) => renderBead(step, globalIdx++))}
+            </div>
         </div>
     );
 }
@@ -138,6 +183,7 @@ export default function GuiaInterativoPage() {
     const [hapticEnabled, setHapticEnabled] = useState(true);
     const [wakeLockActive, setWakeLockActive] = useState(false);
     const [autoCheckedIn, setAutoCheckedIn] = useState(false);
+    const [activeTab, setActiveTab] = useState<MeditationTab>("gospel");
     const wakeLockRef = useRef<WakeLockSentinel | null>(null);
 
     // Session recovery
@@ -211,8 +257,11 @@ export default function GuiaInterativoPage() {
             const next = currentStep + 1;
             setCurrentStep(next);
             saveSession(next);
+            // Reset to gospel tab when entering a mystery step
+            if (rosarySteps[next].type === "mystery_start") {
+                setActiveTab("gospel");
+            }
         } else {
-            // Rosary completed — auto check-in
             setCompleted(true);
             localStorage.removeItem(SESSION_KEY);
             if (!autoCheckedIn) {
@@ -223,7 +272,7 @@ export default function GuiaInterativoPage() {
                 wakeLockRef.current.release().catch(() => {});
             }
         }
-    }, [currentStep, rosarySteps.length, triggerHaptic, saveSession, submitCheckIn, mysteryType, autoCheckedIn]);
+    }, [currentStep, rosarySteps.length, triggerHaptic, saveSession, submitCheckIn, mysteryType, autoCheckedIn, rosarySteps]);
 
     const handlePrev = useCallback(() => {
         triggerHaptic();
@@ -349,23 +398,23 @@ export default function GuiaInterativoPage() {
                     </div>
 
                     {!completed ? (
-                        <div className="flex-grow flex flex-col justify-center py-6">
+                        <div className="flex-grow flex flex-col justify-center py-4">
                             {/* Bead Visualizer Map */}
-                            <BeadMap steps={rosarySteps} currentStep={currentStep} onBeadClick={handleBeadClick} />
+                            <BeadMap steps={rosarySteps} currentStep={currentStep} onBeadClick={handleBeadClick} mysteryType={mysteryType} />
 
                             {/* Progress Bar */}
-                            <div className="mb-8 mt-4">
+                            <div className="mb-6 mt-2">
                                 <div className="flex justify-between text-xs text-muted-foreground mb-2 font-medium">
                                     <span>{t("start")}</span>
-                                    <span>{Math.round(progressPercent)}% {t("completed")}</span>
+                                    <span className="font-bold text-gold-600 dark:text-gold-400">{Math.round(progressPercent)}%</span>
                                 </div>
-                                <div className="w-full bg-muted/50 rounded-full h-3 border border-border/50 overflow-hidden">
+                                <div className="w-full bg-muted/50 rounded-full h-2.5 border border-border/50 overflow-hidden">
                                     <div
-                                        className="bg-gradient-to-r from-gold-400 to-gold-600 h-3 rounded-full transition-all duration-500 ease-out"
+                                        className="bg-gradient-to-r from-gold-400 to-gold-600 h-2.5 rounded-full transition-all duration-500 ease-out"
                                         style={{ width: `${progressPercent}%` }}
                                     />
                                 </div>
-                                <div className="text-center mt-3 text-sm text-muted-foreground">
+                                <div className="text-center mt-2 text-xs text-muted-foreground">
                                     {t("step", { current: currentStep + 1, total: rosarySteps.length })}
                                 </div>
                             </div>
@@ -374,50 +423,146 @@ export default function GuiaInterativoPage() {
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={currentStep}
-                                    initial={{ opacity: 0, x: 30 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: -30 }}
-                                    transition={{ duration: 0.25 }}
-                                    className="glass sacred-border p-8 sm:p-12 rounded-3xl text-center relative overflow-hidden shadow-xl min-h-[300px] flex flex-col justify-center"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="relative"
                                 >
-                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gold-500/5 rounded-full blur-3xl" />
+                                    {step.type === "mystery_start" && step.mysteryIndex ? (
+                                        /* ── Mystery Step: Tabbed View (Gospel → Meditation → Prayer) ── */
+                                        <div className="rounded-3xl overflow-hidden border border-border shadow-xl bg-card">
+                                            {/* Mystery header */}
+                                            <div className="bg-gradient-to-r from-amber-500/10 to-gold-500/10 border-b border-amber-500/20 px-6 py-5 text-center">
+                                                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/25 mb-3">
+                                                    <span className="text-xs font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400">
+                                                        {t("todaysMystery")} — {step.mysteryIndex}/5
+                                                    </span>
+                                                </div>
+                                                <h2 className="text-xl sm:text-2xl font-cinzel font-bold text-foreground leading-tight">
+                                                    {getStepTitle(step, currentStep)}
+                                                </h2>
+                                            </div>
 
-                                    {step.type === "mystery_start" && step.mysteryIndex && (
-                                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 mx-auto mb-4 relative z-10">
-                                            <span className="text-xs font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400">
-                                                {t("todaysMystery")}
-                                            </span>
+                                            {/* Tabs */}
+                                            <div className="flex border-b border-border">
+                                                {(["gospel", "meditation", "prayer"] as MeditationTab[]).map((tab) => (
+                                                    <button
+                                                        key={tab}
+                                                        onClick={() => setActiveTab(tab)}
+                                                        className={`flex-1 px-3 py-3.5 text-center text-sm font-bold transition-all duration-200 relative
+                                                            ${activeTab === tab
+                                                                ? "text-gold-600 dark:text-gold-400"
+                                                                : "text-muted-foreground hover:text-foreground"
+                                                            }`}
+                                                    >
+                                                        <span>{t(`tabs.${tab}`)}</span>
+                                                        {activeTab === tab && (
+                                                            <motion.div
+                                                                layoutId="activeTab"
+                                                                className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-gold-500 to-gold-600 rounded-full"
+                                                            />
+                                                        )}
+                                                    </button>
+                                                ))}
+                                            </div>
+
+                                            {/* Tab Content */}
+                                            <div className="p-6 sm:p-8 min-h-[280px] flex flex-col justify-between">
+                                                <AnimatePresence mode="wait">
+                                                    <motion.div
+                                                        key={activeTab}
+                                                        initial={{ opacity: 0, x: 10 }}
+                                                        animate={{ opacity: 1, x: 0 }}
+                                                        exit={{ opacity: 0, x: -10 }}
+                                                        transition={{ duration: 0.2 }}
+                                                        className="flex-1"
+                                                    >
+                                                        {activeTab === "gospel" && (
+                                                            <div className="space-y-5">
+                                                                <div className="flex items-center gap-2 text-sm font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest">
+                                                                    <BookOpen className="w-4 h-4" />
+                                                                    <span>{t("bibleLabel")}</span>
+                                                                </div>
+                                                                <blockquote className="text-lg sm:text-xl leading-relaxed text-foreground italic border-l-4 border-gold-500/40 pl-5 py-2">
+                                                                    {t(`meditations.${mysteryType}.m${step.mysteryIndex}.bible`)}
+                                                                </blockquote>
+                                                                <p className="text-xs text-muted-foreground font-bold uppercase tracking-wider">
+                                                                    📖 {t(`meditations.${mysteryType}.m${step.mysteryIndex}.bibleRef`)}
+                                                                </p>
+                                                                <button
+                                                                    onClick={() => setActiveTab("meditation")}
+                                                                    className="inline-flex items-center gap-2 text-sm font-bold text-gold-600 dark:text-gold-400 hover:text-gold-500 transition-colors mt-2"
+                                                                >
+                                                                    {t("tabs.meditation")} <ChevronRight className="w-4 h-4" />
+                                                                </button>
+                                                            </div>
+                                                        )}
+
+                                                        {activeTab === "meditation" && (
+                                                            <div className="space-y-5">
+                                                                <div className="flex items-center gap-2 text-sm font-bold text-purple-600 dark:text-purple-400 uppercase tracking-widest">
+                                                                    <Heart className="w-4 h-4" />
+                                                                    <span>{t("montfortLabel")}</span>
+                                                                </div>
+                                                                <p className="text-lg leading-relaxed text-foreground">
+                                                                    {t(`meditations.${mysteryType}.m${step.mysteryIndex}.montfort`)}
+                                                                </p>
+                                                                <p className="text-[10px] text-muted-foreground/70 italic mt-4">
+                                                                    {t("sourceLabel")}
+                                                                </p>
+                                                                <button
+                                                                    onClick={() => setActiveTab("prayer")}
+                                                                    className="inline-flex items-center gap-2 text-sm font-bold text-gold-600 dark:text-gold-400 hover:text-gold-500 transition-colors mt-2"
+                                                                >
+                                                                    {t("tabs.prayer")} <ChevronRight className="w-4 h-4" />
+                                                                </button>
+                                                            </div>
+                                                        )}
+
+                                                        {activeTab === "prayer" && (
+                                                            <div className="space-y-5 text-center">
+                                                                <p className="text-sm text-muted-foreground uppercase tracking-widest font-bold">
+                                                                    {t("meditate")}
+                                                                </p>
+                                                                <p className="text-lg sm:text-xl leading-relaxed text-foreground italic">
+                                                                    &ldquo;{t(step.prayerKey)}&rdquo;
+                                                                </p>
+                                                            </div>
+                                                        )}
+                                                    </motion.div>
+                                                </AnimatePresence>
+                                            </div>
                                         </div>
-                                    )}
+                                    ) : (
+                                        /* ── Regular Prayer Step ── */
+                                        <div className="glass sacred-border p-8 sm:p-12 rounded-3xl text-center relative overflow-hidden shadow-xl min-h-[250px] flex flex-col justify-center">
+                                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gold-500/5 rounded-full blur-3xl" />
 
-                                    <h2 className="text-2xl sm:text-3xl font-cinzel font-bold text-gold-600 dark:text-gold-400 mb-6 relative z-10">
-                                        {getStepTitle(step, currentStep)}
-                                    </h2>
+                                            <h2 className="text-2xl sm:text-3xl font-cinzel font-bold text-gold-600 dark:text-gold-400 mb-6 relative z-10">
+                                                {getStepTitle(step, currentStep)}
+                                            </h2>
 
-                                    <p className="text-lg sm:text-xl leading-relaxed text-foreground italic relative z-10 font-manrope">
-                                        &ldquo;{t(step.prayerKey)}&rdquo;
-                                    </p>
-
-                                    {step.type === "mystery_start" && (
-                                        <p className="mt-4 text-sm text-muted-foreground uppercase tracking-widest relative z-10">
-                                            {t("meditate")}
-                                        </p>
+                                            <p className="text-lg sm:text-xl leading-relaxed text-foreground italic relative z-10 font-manrope">
+                                                &ldquo;{t(step.prayerKey)}&rdquo;
+                                            </p>
+                                        </div>
                                     )}
                                 </motion.div>
                             </AnimatePresence>
 
                             {/* Controls */}
-                            <div className="flex items-center justify-between mt-10 gap-4 flex-wrap">
+                            <div className="flex items-center justify-between mt-8 gap-3">
                                 <Button
                                     variant="outline"
                                     size="lg"
                                     onClick={handlePrev}
                                     disabled={currentStep === 0}
-                                    className="rounded-full px-6 py-6 sacred-border hover:bg-muted/30"
+                                    className="rounded-full px-5 py-6 sacred-border hover:bg-muted/30"
                                     data-testid="prev-btn"
                                 >
-                                    <ArrowLeft className="w-5 h-5 mr-2" />
-                                    {t("prev")}
+                                    <ArrowLeft className="w-5 h-5 mr-1.5" />
+                                    <span className="hidden sm:inline">{t("prev")}</span>
                                 </Button>
 
                                 <Button
@@ -425,21 +570,22 @@ export default function GuiaInterativoPage() {
                                     size="icon"
                                     onClick={handleReset}
                                     disabled={currentStep === 0}
-                                    className="rounded-full w-14 h-14 sacred-border hover:bg-muted/30 text-muted-foreground"
+                                    className="rounded-full w-12 h-12 sacred-border hover:bg-muted/30 text-muted-foreground"
                                     title={t("reset")}
                                     data-testid="reset-btn"
                                 >
-                                    <RefreshCw className="w-5 h-5" />
+                                    <RefreshCw className="w-4 h-4" />
                                 </Button>
 
                                 <Button
                                     size="lg"
                                     onClick={handleNext}
-                                    className="rounded-full px-8 py-6 text-base font-cinzel font-bold bg-gradient-to-r from-gold-500 to-gold-600 text-white hover:shadow-gold-glow transition-all"
+                                    className="rounded-full px-6 py-6 text-base font-cinzel font-bold bg-gradient-to-r from-gold-500 to-gold-600 text-white hover:shadow-gold-glow transition-all"
                                     data-testid="next-btn"
                                 >
-                                    {currentStep === rosarySteps.length - 1 ? t("finish") : t("next")}
-                                    <ArrowRight className="w-5 h-5 ml-2" />
+                                    <span className="hidden sm:inline">{currentStep === rosarySteps.length - 1 ? t("finish") : t("next")}</span>
+                                    <span className="sm:hidden">{currentStep === rosarySteps.length - 1 ? t("finish") : t("next")}</span>
+                                    <ArrowRight className="w-5 h-5 ml-1.5" />
                                 </Button>
                             </div>
                         </div>

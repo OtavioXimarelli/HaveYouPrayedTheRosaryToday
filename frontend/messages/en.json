@@ -168,7 +168,106 @@
       "label": "Favorite Mystery",
       "none": "Pray more to find out!"
     },
-    "comingSoon": "Coming Soon"
+    "comingSoon": "Coming Soon",
+    "saintQuotes": [
+      {
+        "text": "The Rosary is the most powerful weapon to touch the Heart of Jesus, our Redeemer, who so loves His Mother.",
+        "author": "St. Louis-Marie de Montfort"
+      },
+      {
+        "text": "Give me an army saying the Rosary and I will conquer the world.",
+        "author": "Bl. Pope Pius IX"
+      },
+      {
+        "text": "The Rosary is the most beautiful prayer and the richest in graces; it is the prayer that touches most the Heart of the Mother of God.",
+        "author": "St. Pius X"
+      },
+      {
+        "text": "I will never stop recommending the Rosary. It is a crown of roses that never wither.",
+        "author": "St. Padre Pio"
+      },
+      {
+        "text": "The Rosary is the chain that binds us to God.",
+        "author": "Bl. Bartolo Longo"
+      },
+      {
+        "text": "Mary is the safest, easiest, shortest, and most perfect way to reach Jesus.",
+        "author": "St. Louis-Marie de Montfort"
+      },
+      {
+        "text": "Whoever prays the Rosary every day will never go astray.",
+        "author": "St. Francis de Sales"
+      },
+      {
+        "text": "Pray the Rosary every day to obtain peace for the world.",
+        "author": "Our Lady of Fatima"
+      },
+      {
+        "text": "The Rosary is my favorite prayer. A marvelous prayer! Marvelous in its simplicity and its depth.",
+        "author": "St. John Paul II"
+      },
+      {
+        "text": "If you wish peace to reign in your homes, pray the family Rosary.",
+        "author": "St. Pius X"
+      },
+      {
+        "text": "The Hail Mary is the most pleasing greeting we can offer to Mary.",
+        "author": "St. Thomas Aquinas"
+      },
+      {
+        "text": "All the Hail Marys we pray are like roses we offer to the Blessed Virgin.",
+        "author": "St. Thérèse of Lisieux"
+      },
+      {
+        "text": "Nothing is obtained from God without prayer, and no prayer is more powerful than the Rosary.",
+        "author": "St. Alphonsus Liguori"
+      },
+      {
+        "text": "The Rosary is a school of contemplation and silence. Whoever prays it learns to listen to God.",
+        "author": "Benedict XVI"
+      },
+      {
+        "text": "With the Rosary, the Christian people sit at the school of Mary, to be led to contemplate the beauty of the face of Christ.",
+        "author": "St. John Paul II"
+      },
+      {
+        "text": "When the Hail Mary is well said—with attention, devotion, and modesty—it is the most terrible enemy of the devil.",
+        "author": "St. Louis-Marie de Montfort"
+      },
+      {
+        "text": "The Rosary is the prayer of the poor and the rich, of the wise and the ignorant, of the great and the small.",
+        "author": "St. Louis-Marie de Montfort"
+      },
+      {
+        "text": "The Virgin Mary gave us the Rosary as a universal remedy against every evil.",
+        "author": "St. Dominic"
+      },
+      {
+        "text": "There is no problem, no matter how great, temporal or above all spiritual, that cannot be solved by the Rosary.",
+        "author": "Sr. Lúcia of Fatima"
+      },
+      {
+        "text": "Whoever promotes the Holy Rosary is saved.",
+        "author": "St. Dominic"
+      },
+      {
+        "text": "The Rosary is the weapon given by God to those who fight for the salvation of the world.",
+        "author": "Pope Pius XII"
+      },
+      {
+        "text": "The Rosary prayer is a compendium of the entire Gospel.",
+        "author": "St. John Paul II"
+      },
+      {
+        "text": "Love the Rosary! Pray it every day with devotion and recollection.",
+        "author": "St. Jacinta Marto"
+      },
+      {
+        "text": "The Holy Rosary is, after the Holy Mass and the Divine Office, the most pleasing devotion to God and the most useful to souls.",
+        "author": "St. Louis-Marie de Montfort"
+      }
+    ],
+    "saintQuoteLabel": "Word of the Saints"
   },
   "HowToPray": {
     "title": "How to Pray the Rosary",
@@ -1432,6 +1531,124 @@
         "m4": "4th Mystery: The Transfiguration",
         "m5": "5th Mystery: The Institution of the Eucharist"
       }
-    }
+    },
+    "meditations": {
+      "joyful": {
+        "m1": {
+          "bible": "The Angel Gabriel was sent by God to a virgin named Mary. Coming to her, he said: 'Hail, full of grace, the Lord is with you!' (Lk 1:26-28)",
+          "bibleRef": "Luke 1:26-38",
+          "montfort": "Let us contemplate in this mystery the profound humility of Mary, who declared herself the handmaid of the Lord before the Archangel Gabriel. Let us ask, through the intercession of this humble Mother, for a deep humility of heart that removes all pride and worldly vanity."
+        },
+        "m2": {
+          "bible": "Mary set out and went with haste to a town in the hill country. She entered the house of Zechariah and greeted Elizabeth. When Elizabeth heard Mary's greeting, the child leaped in her womb. (Lk 1:39-44)",
+          "bibleRef": "Luke 1:39-56",
+          "montfort": "Let us meditate on the ardent charity of Mary, which made her rise and go in haste to serve her cousin. Let us ask for the grace to love our neighbor with the same zeal and promptness, bringing Christ to those in need."
+        },
+        "m3": {
+          "bible": "She gave birth to her firstborn son, wrapped him in swaddling clothes, and laid him in a manger, because there was no room for them in the inn. (Lk 2:6-7)",
+          "bibleRef": "Luke 2:1-20",
+          "montfort": "Let us contemplate the divine poverty of the Child Jesus born in a stable. Let us ask for detachment from earthly goods and a heart that knows how to find God in the simplest and humblest things."
+        },
+        "m4": {
+          "bible": "When the days of purification were completed, they brought him to Jerusalem to present him to the Lord. Simeon took him in his arms and praised God. (Lk 2:22-28)",
+          "bibleRef": "Luke 2:22-40",
+          "montfort": "Let us meditate on the obedience of Mary and Joseph to the Law of the Lord. Let us ask for the grace of a prompt and generous obedience to the divine will, offering ourselves entirely to God as Mary offered Jesus in the Temple."
+        },
+        "m5": {
+          "bible": "After three days they found him in the Temple, sitting among the teachers, listening to them and asking questions. Jesus said: 'Did you not know that I must be about my Father's business?' (Lk 2:46-49)",
+          "bibleRef": "Luke 2:41-52",
+          "montfort": "Let us contemplate the sorrow of Mary when she lost Jesus and her joy when she found him in the Temple. Let us ask for the grace to seek Jesus fervently when we lose him through sin, and the joy of finding him again in confession and prayer."
+        }
+      },
+      "sorrowful": {
+        "m1": {
+          "bible": "He went a little farther and fell on his face, praying: 'My Father, if it be possible, let this cup pass from me; nevertheless, not my will, but yours be done.' (Mt 26:39)",
+          "bibleRef": "Matthew 26:36-46",
+          "montfort": "Let us meditate on the agony of Jesus, whose sweat became like drops of blood falling to the ground. Let us ask for the grace of true contrition for our sins and the strength to accept the sufferings God permits in our lives."
+        },
+        "m2": {
+          "bible": "Pilate, wishing to satisfy the crowd, had Jesus scourged. (Mk 15:15)",
+          "bibleRef": "Mark 15:15; John 19:1",
+          "montfort": "Let us contemplate the sacred body of Jesus torn by the scourges. He suffered all this to atone for the sins of the flesh. Let us ask for the grace of mortification of the senses and purity of body and soul."
+        },
+        "m3": {
+          "bible": "The soldiers wove a crown of thorns and placed it on his head. They came up to him saying: 'Hail, King of the Jews!' And they struck him. (Jn 19:2-3)",
+          "bibleRef": "John 19:1-5; Matthew 27:27-31",
+          "montfort": "Let us meditate on the crown of thorns that pierced the sacred head of Jesus, King of the Universe. Let us ask for the grace to bear all humiliations with patience and the courage to profess our faith before the world."
+        },
+        "m4": {
+          "bible": "They took Jesus. Carrying his own cross, he went out to what is called the Place of the Skull, in Hebrew, Golgotha. (Jn 19:16-17)",
+          "bibleRef": "John 19:16-17; Luke 23:26-32",
+          "montfort": "Let us contemplate Jesus carrying the heavy cross on the road to Calvary. Let us ask for the grace to accept our daily cross with love and patience, following in the footsteps of Our Lord to the end."
+        },
+        "m5": {
+          "bible": "Jesus cried out with a loud voice and breathed his last. At that moment the veil of the Temple was torn in two, from top to bottom. The centurion said: 'Truly this man was the Son of God!' (Mk 15:37-39)",
+          "bibleRef": "Mark 15:33-39; John 19:28-37",
+          "montfort": "Let us meditate on the death of Jesus on the Cross, the supreme sacrifice of love for humanity. Let us ask for the grace of an ardent devotion to the Passion of Christ, and the courage to die to sin and live only for God."
+        }
+      },
+      "glorious": {
+        "m1": {
+          "bible": "He is not here: he has risen, as he said. Come, see the place where he lay. (Mt 28:6)",
+          "bibleRef": "Matthew 28:1-10; John 20:1-18",
+          "montfort": "Let us contemplate the victory of Christ over death. The Resurrection is the foundation of our faith. Let us ask for a living and unshakable faith, and the grace to rise spiritually, leaving behind the life of sin."
+        },
+        "m2": {
+          "bible": "After saying this, he was taken up before their very eyes, and a cloud hid him from their sight. (Acts 1:9)",
+          "bibleRef": "Acts 1:6-12; Mark 16:19-20",
+          "montfort": "Let us meditate on Jesus ascending gloriously into Heaven. Let us ask for the grace of an ardent desire for Heaven, our true homeland, and that our hearts may be where our treasure is."
+        },
+        "m3": {
+          "bible": "They were all filled with the Holy Spirit and began to speak in other tongues, as the Spirit enabled them. (Acts 2:4)",
+          "bibleRef": "Acts 2:1-13",
+          "montfort": "Let us contemplate the descent of the Holy Spirit upon Mary and the Apostles. Let us ask for the seven gifts of the Holy Spirit: wisdom, understanding, counsel, fortitude, knowledge, piety, and fear of the Lord."
+        },
+        "m4": {
+          "bible": "Mary was taken up into Heaven; the choirs of Angels rejoice. (Antiphon from the Liturgy of the Assumption; cf. Rev 12:1)",
+          "bibleRef": "Revelation 12:1; Ps 45:10-15",
+          "montfort": "Let us meditate on the glorious Assumption of Mary into Heaven in body and soul. Let us ask for the grace of a true devotion to Our Lady and the certainty that she intercedes for us before the throne of God."
+        },
+        "m5": {
+          "bible": "A great sign appeared in heaven: a Woman clothed with the sun, with the moon under her feet, and on her head a crown of twelve stars. (Rev 12:1)",
+          "bibleRef": "Revelation 12:1-6",
+          "montfort": "Let us contemplate the coronation of Mary as Queen of Heaven and Earth. Let us ask for the grace of final perseverance in the faith and confidence in the powerful intercession of Our Lady at the hour of our death."
+        }
+      },
+      "luminous": {
+        "m1": {
+          "bible": "As soon as he came up out of the water, he saw the heavens opened and the Spirit descending upon him like a dove. And a voice came from heaven: 'You are my beloved Son; with you I am well pleased.' (Mk 1:10-11)",
+          "bibleRef": "Mark 1:9-11; Matthew 3:13-17",
+          "montfort": "Let us meditate on the Baptism of Jesus in the Jordan, when the Father reveals him as his beloved Son. Let us ask for the grace to live faithfully the promises of our own Baptism and to be true children of God."
+        },
+        "m2": {
+          "bible": "The mother of Jesus said to him: 'They have no wine.' Jesus said: 'Fill the jars with water.' Then: 'Draw some out now.' The steward tasted the water that had become wine. (Jn 2:3-9)",
+          "bibleRef": "John 2:1-12",
+          "montfort": "Let us contemplate the first miracle of Jesus, obtained through Mary's intercession. Let us ask for the grace to always turn to Mary in our needs, trusting that she will present our petitions to Jesus."
+        },
+        "m3": {
+          "bible": "Jesus went throughout all Galilee, teaching in their synagogues, proclaiming the Gospel of the Kingdom, and healing every disease. (Mt 4:23)",
+          "bibleRef": "Matthew 4:23-25; Mark 1:14-15",
+          "montfort": "Let us meditate on Jesus proclaiming the Kingdom of God and calling everyone to conversion. Let us ask for the grace of a deep and continuous conversion, and the courage to proclaim the Gospel with our lives."
+        },
+        "m4": {
+          "bible": "Jesus was transfigured before them: his face shone like the sun and his garments became white as light. (Mt 17:2)",
+          "bibleRef": "Matthew 17:1-8; Luke 9:28-36",
+          "montfort": "Let us contemplate the divine glory of Christ revealed on Mount Tabor. Let us ask for the grace to always seek the face of God in prayer and to let ourselves be transformed by the light of Christ."
+        },
+        "m5": {
+          "bible": "He took bread, gave thanks, broke it, and gave it to them, saying: 'This is my body, which is given for you. Do this in remembrance of me.' (Lk 22:19)",
+          "bibleRef": "Luke 22:14-20; John 6:48-58",
+          "montfort": "Let us meditate on the supreme gift of the Eucharist, where Jesus gives himself entirely to us. Let us ask for an ardent love for the Holy Mass and Communion, and the grace to receive Jesus with living faith and a pure heart."
+        }
+      }
+    },
+    "tabs": {
+      "gospel": "📖 Gospel",
+      "meditation": "🙏 Meditation",
+      "prayer": "📿 Prayer"
+    },
+    "montfortLabel": "Method of St. Louis de Montfort",
+    "bibleLabel": "Bible Passage",
+    "sourceLabel": "Source: The Secret of the Rosary — St. Louis-Marie de Montfort"
   }
 }
