@@ -128,6 +128,21 @@
       "oracoesDesc": "Aprenda as orações da tradição católica.",
       "ensinamentosTitle": "Ensinamentos",
       "ensinamentosDesc": "Aprofunde seu conhecimento da doutrina da fé."
+    },
+    "activity": {
+      "title": "Atividade Recente",
+      "subtitle": "Suas últimas orações",
+      "empty": "Nenhuma atividade ainda. Reze o terço para começar!",
+      "prayedThe": "Rezou os",
+      "reflection": "Reflexão",
+      "noReflection": "Sem reflexão",
+      "timeAgo": "{time} atrás"
+    },
+    "progress": {
+      "title": "Progresso Semanal",
+      "subtitle": "Meta: rezar todos os dias",
+      "complete": "Parabéns! Semana completa! 🎉",
+      "daysCompleted": "{count} de 7 dias"
     }
   },
   "HowToPray": {
@@ -1337,5 +1352,97 @@
     "prayedThe": "Rezou os",
     "amen": "Amém",
     "commentPlaceholder": "Adicione uma palavra de encorajamento..."
+  },
+  "RosaryGuide": {
+    "title": "Guia Interativo do Rosário",
+    "subtitle": "Reze conta por conta com meditações guiadas",
+    "breadcrumb": "Guia Interativo",
+    "todaysMystery": "Mistérios de Hoje",
+    "step": "Passo {current} de {total}",
+    "start": "Início",
+    "completed": "concluído",
+    "meditate": "Medite no mistério antes de avançar",
+    "next": "Próxima",
+    "prev": "Voltar",
+    "finish": "Concluir",
+    "reset": "Reiniciar",
+    "resume": {
+      "title": "Sessão Anterior Encontrada",
+      "desc": "Você tem uma sessão de oração salva. Deseja continuar de onde parou?",
+      "continue": "Continuar",
+      "restart": "Começar do Início"
+    },
+    "completion": {
+      "title": "Santo Rosário Concluído!",
+      "desc": "Parabéns por dedicar este tempo à oração e meditação dos mistérios de Cristo.",
+      "prayAgain": "Rezar Novamente",
+      "goToDashboard": "Ir para Dashboard",
+      "checkedIn": "Oração registrada automaticamente ✓"
+    },
+    "wakelock": {
+      "active": "Tela mantida ligada",
+      "inactive": "Modo de tela normal"
+    },
+    "haptic": {
+      "enabled": "Vibração ativada",
+      "disabled": "Vibração desativada"
+    },
+    "beads": {
+      "signOfCross": "Sinal da Cruz",
+      "creed": "Credo",
+      "ourFather": "Pai Nosso",
+      "hailMary": "Ave Maria",
+      "glory": "Glória ao Pai",
+      "fatimaPrayer": "Oração de Fátima",
+      "salveRegina": "Salve Rainha",
+      "mystery": "{n}º Mistério",
+      "hailMaryN": "{n}ª Ave Maria",
+      "hailMaryFaith": "1ª Ave Maria (Fé)",
+      "hailMaryHope": "2ª Ave Maria (Esperança)",
+      "hailMaryCharity": "3ª Ave Maria (Caridade)"
+    },
+    "prayers": {
+      "signOfCross": "Em nome do Pai, do Filho e do Espírito Santo. Amém.",
+      "creed": "Creio em Deus Pai Todo-Poderoso, Criador do céu e da terra; e em Jesus Cristo, seu único Filho, nosso Senhor; que foi concebido pelo poder do Espírito Santo; nasceu da Virgem Maria; padeceu sob Pôncio Pilatos, foi crucificado, morto e sepultado; desceu à mansão dos mortos; ressuscitou ao terceiro dia; subiu aos céus; está sentado à direita de Deus Pai Todo-Poderoso, de onde há de vir a julgar os vivos e os mortos. Creio no Espírito Santo; na Santa Igreja Católica; na comunhão dos santos; na remissão dos pecados; na ressurreição da carne; na vida eterna. Amém.",
+      "ourFather": "Pai nosso, que estais no céu, santificado seja o vosso nome; venha a nós o vosso Reino; seja feita a vossa vontade assim na terra como no céu. O pão nosso de cada dia nos dai hoje; perdoai-nos as nossas ofensas assim como nós perdoamos a quem nos tem ofendido; e não nos deixeis cair em tentação, mas livrai-nos do mal. Amém.",
+      "hailMary": "Ave Maria, cheia de graça, o Senhor é convosco. Bendita sois vós entre as mulheres e bendito é o fruto do vosso ventre, Jesus. Santa Maria, Mãe de Deus, rogai por nós pecadores, agora e na hora da nossa morte. Amém.",
+      "glory": "Glória ao Pai, e ao Filho, e ao Espírito Santo. Como era no princípio, agora e sempre, por todos os séculos dos séculos. Amém.",
+      "fatimaPrayer": "Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno, levai as almas todas para o céu, principalmente as que mais precisarem da vossa misericórdia.",
+      "salveRegina": "Salve, Rainha, Mãe de misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos, os degredados filhos de Eva. A vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei. E depois deste desterro, mostrai-nos Jesus, bendito fruto do vosso ventre. Ó clemente, ó piedosa, ó doce sempre Virgem Maria. Rogai por nós, Santa Mãe de Deus, para que sejamos dignos das promessas de Cristo. Amém."
+    },
+    "mysteries": {
+      "joyful": {
+        "label": "Gozosos",
+        "m1": "1º Mistério: A Anunciação do Anjo a Nossa Senhora",
+        "m2": "2º Mistério: A Visitação de Nossa Senhora a Santa Isabel",
+        "m3": "3º Mistério: O Nascimento de Jesus em Belém",
+        "m4": "4º Mistério: A Apresentação de Jesus no Templo",
+        "m5": "5º Mistério: A Perda e o Encontro de Jesus no Templo"
+      },
+      "sorrowful": {
+        "label": "Dolorosos",
+        "m1": "1º Mistério: A Agonia de Jesus no Horto das Oliveiras",
+        "m2": "2º Mistério: A Flagelação de Jesus",
+        "m3": "3º Mistério: A Coroação de Espinhos",
+        "m4": "4º Mistério: Jesus Carrega a Cruz",
+        "m5": "5º Mistério: A Crucificação e Morte de Jesus"
+      },
+      "glorious": {
+        "label": "Gloriosos",
+        "m1": "1º Mistério: A Ressurreição de Jesus",
+        "m2": "2º Mistério: A Ascensão de Jesus ao Céu",
+        "m3": "3º Mistério: A Vinda do Espírito Santo",
+        "m4": "4º Mistério: A Assunção de Nossa Senhora",
+        "m5": "5º Mistério: A Coroação de Nossa Senhora"
+      },
+      "luminous": {
+        "label": "Luminosos",
+        "m1": "1º Mistério: O Batismo de Jesus no Jordão",
+        "m2": "2º Mistério: A Auto-revelação de Jesus nas Bodas de Caná",
+        "m3": "3º Mistério: O Anúncio do Reino de Deus",
+        "m4": "4º Mistério: A Transfiguração de Jesus",
+        "m5": "5º Mistério: A Instituição da Eucaristia"
+      }
+    }
   }
-}\n
+}

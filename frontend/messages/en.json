@@ -128,6 +128,21 @@
       "oracoesDesc": "Learn the prayers of Catholic tradition.",
       "ensinamentosTitle": "Teachings",
       "ensinamentosDesc": "Deepen your knowledge of the doctrine of the faith."
+    },
+    "activity": {
+      "title": "Recent Activity",
+      "subtitle": "Your latest prayers",
+      "empty": "No activity yet. Pray the rosary to get started!",
+      "prayedThe": "Prayed the",
+      "reflection": "Reflection",
+      "noReflection": "No reflection",
+      "timeAgo": "{time} ago"
+    },
+    "progress": {
+      "title": "Weekly Progress",
+      "subtitle": "Goal: pray every day",
+      "complete": "Congratulations! Perfect week! 🎉",
+      "daysCompleted": "{count} of 7 days"
     }
   },
   "HowToPray": {
@@ -1301,5 +1316,97 @@
     "prayedThe": "Prayed the",
     "amen": "Amen",
     "commentPlaceholder": "Add a word of encouragement..."
+  },
+  "RosaryGuide": {
+    "title": "Interactive Rosary Guide",
+    "subtitle": "Pray bead by bead with guided meditations",
+    "breadcrumb": "Interactive Guide",
+    "todaysMystery": "Today's Mysteries",
+    "step": "Step {current} of {total}",
+    "start": "Start",
+    "completed": "completed",
+    "meditate": "Meditate on the mystery before continuing",
+    "next": "Next",
+    "prev": "Back",
+    "finish": "Finish",
+    "reset": "Reset",
+    "resume": {
+      "title": "Previous Session Found",
+      "desc": "You have a saved prayer session. Would you like to continue where you left off?",
+      "continue": "Continue",
+      "restart": "Start Over"
+    },
+    "completion": {
+      "title": "Holy Rosary Completed!",
+      "desc": "Congratulations on dedicating this time to prayer and meditation on the mysteries of Christ.",
+      "prayAgain": "Pray Again",
+      "goToDashboard": "Go to Dashboard",
+      "checkedIn": "Prayer automatically registered ✓"
+    },
+    "wakelock": {
+      "active": "Screen kept awake",
+      "inactive": "Normal screen mode"
+    },
+    "haptic": {
+      "enabled": "Vibration enabled",
+      "disabled": "Vibration disabled"
+    },
+    "beads": {
+      "signOfCross": "Sign of the Cross",
+      "creed": "Apostles' Creed",
+      "ourFather": "Our Father",
+      "hailMary": "Hail Mary",
+      "glory": "Glory Be",
+      "fatimaPrayer": "Fatima Prayer",
+      "salveRegina": "Hail Holy Queen",
+      "mystery": "Mystery {n}",
+      "hailMaryN": "Hail Mary {n}",
+      "hailMaryFaith": "1st Hail Mary (Faith)",
+      "hailMaryHope": "2nd Hail Mary (Hope)",
+      "hailMaryCharity": "3rd Hail Mary (Charity)"
+    },
+    "prayers": {
+      "signOfCross": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen.",
+      "creed": "I believe in God, the Father Almighty, Creator of heaven and earth; and in Jesus Christ, His only Son, our Lord; who was conceived by the Holy Spirit; born of the Virgin Mary; suffered under Pontius Pilate, was crucified, died, and was buried; He descended into hell; on the third day He rose again from the dead; He ascended into heaven, and is seated at the right hand of God the Father Almighty; from there He will come to judge the living and the dead. I believe in the Holy Spirit, the Holy Catholic Church, the communion of Saints, the forgiveness of sins, the resurrection of the body, and life everlasting. Amen.",
+      "ourFather": "Our Father, who art in heaven, hallowed be Thy name; Thy kingdom come; Thy will be done on earth as it is in heaven. Give us this day our daily bread; and forgive us our trespasses as we forgive those who trespass against us; and lead us not into temptation, but deliver us from evil. Amen.",
+      "hailMary": "Hail Mary, full of grace, the Lord is with thee. Blessed art thou among women, and blessed is the fruit of thy womb, Jesus. Holy Mary, Mother of God, pray for us sinners, now and at the hour of our death. Amen.",
+      "glory": "Glory be to the Father, and to the Son, and to the Holy Spirit. As it was in the beginning, is now, and ever shall be, world without end. Amen.",
+      "fatimaPrayer": "O my Jesus, forgive us our sins, save us from the fires of hell, and lead all souls to Heaven, especially those in most need of Thy mercy.",
+      "salveRegina": "Hail, Holy Queen, Mother of Mercy, our life, our sweetness and our hope! To thee do we cry, poor banished children of Eve. To thee do we send up our sighs, mourning and weeping in this valley of tears. Turn, then, most gracious advocate, thine eyes of mercy toward us, and after this, our exile, show unto us the blessed fruit of thy womb, Jesus. O clement, O loving, O sweet Virgin Mary. Pray for us, O holy Mother of God, that we may be made worthy of the promises of Christ. Amen."
+    },
+    "mysteries": {
+      "joyful": {
+        "label": "Joyful",
+        "m1": "1st Mystery: The Annunciation",
+        "m2": "2nd Mystery: The Visitation",
+        "m3": "3rd Mystery: The Nativity",
+        "m4": "4th Mystery: The Presentation",
+        "m5": "5th Mystery: The Finding of Jesus in the Temple"
+      },
+      "sorrowful": {
+        "label": "Sorrowful",
+        "m1": "1st Mystery: The Agony in the Garden",
+        "m2": "2nd Mystery: The Scourging at the Pillar",
+        "m3": "3rd Mystery: The Crowning with Thorns",
+        "m4": "4th Mystery: The Carrying of the Cross",
+        "m5": "5th Mystery: The Crucifixion"
+      },
+      "glorious": {
+        "label": "Glorious",
+        "m1": "1st Mystery: The Resurrection",
+        "m2": "2nd Mystery: The Ascension",
+        "m3": "3rd Mystery: The Descent of the Holy Spirit",
+        "m4": "4th Mystery: The Assumption of Mary",
+        "m5": "5th Mystery: The Coronation of Mary"
+      },
+      "luminous": {
+        "label": "Luminous",
+        "m1": "1st Mystery: The Baptism of Jesus",
+        "m2": "2nd Mystery: The Wedding Feast at Cana",
+        "m3": "3rd Mystery: The Proclamation of the Kingdom",
+        "m4": "4th Mystery: The Transfiguration",
+        "m5": "5th Mystery: The Institution of the Eucharist"
+      }
+    }
   }
-}\n
+}

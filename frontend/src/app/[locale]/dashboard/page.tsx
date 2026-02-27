@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useRouter } from "@/i18n/routing";
 import {
   Flame, Trophy, Calendar, ArrowRight, Sparkles, Heart,
@@ -12,13 +12,14 @@ import { Button } from "@/components/ui/button";
 import {
   UserStats, CheckIn, getTodaysMystery, getMysteryInfo, MysteryType
 } from "@/types";
-import { getUserStats } from "@/services/api";
-import { getStoredCheckIns } from "@/services/mockData";
 import { ComingSoonModal } from "@/components/coming-soon-modal";
 import { CheckInModal } from "@/components/check-in-modal";
 import { PageTransition } from "@/components/page-transition";
 import { useAuth } from "@/providers/auth-provider";
 import { useTranslations, useLocale } from "next-intl";
+import { usePrayerStore } from "@/stores/prayer-store";
+import { useIsMounted } from "@/hooks/use-hydrated";
+import { formatRelativeTime } from "@/lib/utils";
 
 const mysteryColors: Record<MysteryType, { bg: string; text: string; gradient: string; icon: string }> = {
   joyful: {
@@ -47,6 +48,41 @@ const mysteryColors: Record<MysteryType, { bg: string; text: string; gradient: s
   },
 };
 
+// SVG Progress Ring component
+function ProgressRing({ progress, size = 120, strokeWidth = 8 }: { progress: number; size?: number; strokeWidth?: number }) {
+  const radius = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (Math.min(progress, 100) / 100) * circumference;
+
+  return (
+    <svg width={size} height={size} className="transform -rotate-90">
+      <circle
+        cx={size / 2} cy={size / 2} r={radius}
+        fill="none" stroke="currentColor"
+        strokeWidth={strokeWidth}
+        className="text-muted/30"
+      />
+      <circle
+        cx={size / 2} cy={size / 2} r={radius}
+        fill="none"
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        className="text-gold-500"
+        stroke="url(#goldGradient)"
+        strokeDasharray={circumference}
+        strokeDashoffset={offset}
+        style={{ transition: "stroke-dashoffset 1s ease-out" }}
+      />
+      <defs>
+        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="var(--gold-500, #D4AF37)" />
+          <stop offset="100%" stopColor="var(--gold-600, #B8960C)" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
 export default function DashboardPage() {
   const t = useTranslations("Dashboard");
   const commonT = useTranslations("Common");
@@ -54,9 +90,18 @@ export default function DashboardPage() {
   const locale = useLocale();
   const router = useRouter();
   const { user } = useAuth();
-  const [stats, setStats] = useState<UserStats | null>(null);
-  const [userCheckIns, setUserCheckIns] = useState<CheckIn[]>([]);
-  const [loading, setLoading] = useState(true);
+  const isMounted = useIsMounted();
+
+  // Zustand store selectors
+  const currentStreak = usePrayerStore((s) => s.currentStreak);
+  const longestStreak = usePrayerStore((s) => s.longestStreak);
+  const totalCheckIns = usePrayerStore((s) => s.totalCheckIns);
+  const storeCheckIns = usePrayerStore((s) => s.checkIns);
+  const lastPrayedDate = usePrayerStore((s) => s.lastPrayedDate);
+  const getWeeklyProgress = usePrayerStore((s) => s.getWeeklyProgress);
+  const getRecentActivity = usePrayerStore((s) => s.getRecentActivity);
+  const storeHasCheckedInToday = usePrayerStore((s) => s.hasCheckedInToday);
+
   const [currentTime, setCurrentTime] = useState(new Date());
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
   const [storageBannerDismissed, setStorageBannerDismissed] = useState(false);
@@ -69,19 +114,6 @@ export default function DashboardPage() {
   const currentMysteryName = checkInT(`mysteries.${todaysMystery}.label`);
 
   useEffect(() => {
-    async function loadData() {
-      try {
-        const statsData = await getUserStats();
-        setStats(statsData);
-        setUserCheckIns(getStoredCheckIns());
-      } catch (error) {
-        console.error("Error loading dashboard data:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadData();
-
     const dismissed = localStorage.getItem("rosario-banner-dismissed");
     if (dismissed) setStorageBannerDismissed(true);
 
@@ -92,11 +124,9 @@ export default function DashboardPage() {
     return () => clearInterval(interval);
   }, []);
 
-  const refreshData = async () => {
-    const statsData = await getUserStats();
-    setStats(statsData);
-    setUserCheckIns(getStoredCheckIns());
-  };
+  const refreshData = useCallback(() => {
+    // Zustand auto-updates; no manual refresh needed
+  }, []);
 
   const getGreeting = () => {
     const hour = currentTime.getHours();
@@ -105,13 +135,15 @@ export default function DashboardPage() {
     return t("goodNight");
   };
 
-  const hasCheckedInToday = stats?.lastCheckIn
-    ? new Date(stats.lastCheckIn).toDateString() === new Date().toDateString()
-    : false;
+  // Use store values (safe defaults for SSR)
+  const hasCheckedInToday = isMounted ? storeHasCheckedInToday() : false;
+  const weeklyProgress = isMounted ? getWeeklyProgress() : 0;
+  const recentActivity = isMounted ? getRecentActivity(5) : [];
 
-  const checkInDateSet = new Set(
-    userCheckIns.map((c) => new Date(c.createdAt).toDateString())
-  );
+  const checkInDateSet = useMemo(() => {
+    if (!isMounted) return new Set<string>();
+    return new Set(storeCheckIns.map((c) => new Date(c.createdAt).toDateString()));
+  }, [isMounted, storeCheckIns]);
 
   const getWeekDays = () => {
     const today = new Date();
@@ -132,17 +164,7 @@ export default function DashboardPage() {
     return days;
   };
 
-  const weeklyProgress = (() => {
-    const today = new Date();
-    const startOfWeek = new Date(today);
-    startOfWeek.setDate(today.getDate() - 6);
-    startOfWeek.setHours(0, 0, 0, 0);
-    return userCheckIns.filter((c) => new Date(c.createdAt) >= startOfWeek).length;
-  })();
-
-  const dtf = new Intl.DateTimeFormat(locale === 'pt' ? "pt-BR" : "en-US");
-
-  if (loading) {
+  if (!isMounted) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-6 animate-fade-in">
@@ -221,9 +243,9 @@ export default function DashboardPage() {
           <section className="animate-fade-up animate-delay-100">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
               {[
-                { icon: Flame, value: stats?.currentStreak ?? 0, label: t("stats.currentStreak"), gradient: "from-orange-500 to-red-500", badge: (stats?.currentStreak ?? 0) >= 7 ? t("fire") : null, badgeColor: "bg-orange-500/20 text-orange-600 dark:text-orange-400" },
-                { icon: Trophy, value: stats?.longestStreak ?? 0, label: t("stats.longestStreak"), gradient: "from-gold-500 to-gold-600" },
-                { icon: Heart, value: stats?.totalCheckIns ?? 0, label: t("stats.totalPrayers"), gradient: "from-sacred-blue to-slate-700 dark:from-slate-700 dark:to-slate-800", iconClass: "text-gold-400" },
+                { icon: Flame, value: currentStreak, label: t("stats.currentStreak"), gradient: "from-orange-500 to-red-500", badge: currentStreak >= 7 ? t("fire") : null, badgeColor: "bg-orange-500/20 text-orange-600 dark:text-orange-400" },
+                { icon: Trophy, value: longestStreak, label: t("stats.longestStreak"), gradient: "from-gold-500 to-gold-600" },
+                { icon: Heart, value: totalCheckIns, label: t("stats.totalPrayers"), gradient: "from-sacred-blue to-slate-700 dark:from-slate-700 dark:to-slate-800", iconClass: "text-gold-400" },
                 { icon: Star, value: `${weeklyProgress}/7`, label: t("stats.thisWeek"), gradient: "from-emerald-500 to-green-600" },
               ].map((stat) => (
                 <div key={stat.label} className="group p-6 lg:p-8 rounded-2xl bg-card border border-border hover:border-gold-500/30 hover:-translate-y-1 transition-all duration-300">
@@ -331,6 +353,76 @@ export default function DashboardPage() {
                   </button>
                 ))}
               </div>
+            </div>
+          </div>
+
+          {/* ─── Progress Ring + Recent Activity ─── */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-up animate-delay-350">
+            {/* Weekly Progress Ring */}
+            <div className="p-7 sm:p-9 rounded-2xl bg-card border border-border flex flex-col items-center justify-center text-center" data-testid="progress-ring">
+              <h3 className="font-cinzel font-bold text-foreground text-lg mb-1">{t("progress.title")}</h3>
+              <p className="text-sm text-muted-foreground mb-6">{t("progress.subtitle")}</p>
+              <div className="relative">
+                <ProgressRing progress={(weeklyProgress / 7) * 100} size={140} strokeWidth={10} />
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <span className="text-3xl font-cinzel font-bold text-foreground">{weeklyProgress}</span>
+                  <span className="text-xs text-muted-foreground font-medium">/ 7 {t("days")}</span>
+                </div>
+              </div>
+              {weeklyProgress >= 7 && (
+                <p className="mt-4 text-sm font-bold text-emerald-600 dark:text-emerald-400">{t("progress.complete")}</p>
+              )}
+            </div>
+
+            {/* Recent Activity Feed */}
+            <div className="lg:col-span-2 p-7 sm:p-9 rounded-2xl bg-card border border-border" data-testid="activity-feed">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h3 className="font-cinzel font-bold text-foreground text-lg mb-1">{t("activity.title")}</h3>
+                  <p className="text-sm text-muted-foreground">{t("activity.subtitle")}</p>
+                </div>
+                <div className="w-11 h-11 rounded-xl bg-gold-500/10 flex items-center justify-center">
+                  <Clock className="w-5 h-5 text-gold-600 dark:text-gold-400" />
+                </div>
+              </div>
+              {recentActivity.length === 0 ? (
+                <div className="text-center py-10">
+                  <span className="text-4xl mb-3 block">🙏</span>
+                  <p className="text-muted-foreground text-sm">{t("activity.empty")}</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {recentActivity.map((checkIn) => {
+                    const mysteryStyle = mysteryColors[checkIn.mystery];
+                    const mysteryLabel = checkInT(`mysteries.${checkIn.mystery}.label`);
+                    return (
+                      <div key={checkIn.id} className="flex items-start gap-4 p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors">
+                        <div className={`w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center ${mysteryStyle.bg}`}>
+                          <span className="text-lg">{mysteryStyle.icon}</span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-sm font-bold text-foreground">
+                              {t("activity.prayedThe")} {mysteryLabel}
+                            </span>
+                            <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${mysteryStyle.bg} ${mysteryStyle.text}`}>
+                              {mysteryStyle.icon}
+                            </span>
+                          </div>
+                          {checkIn.reflection ? (
+                            <p className="text-sm text-muted-foreground line-clamp-2 italic">&ldquo;{checkIn.reflection}&rdquo;</p>
+                          ) : (
+                            <p className="text-xs text-muted-foreground">{t("activity.noReflection")}</p>
+                          )}
+                          <span className="text-[10px] text-muted-foreground mt-1 block">
+                            {formatRelativeTime(checkIn.createdAt)}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
 
