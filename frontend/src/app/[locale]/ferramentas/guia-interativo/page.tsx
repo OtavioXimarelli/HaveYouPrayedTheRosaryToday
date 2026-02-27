@@ -8,7 +8,7 @@ import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
 import { Button } from "@/components/ui/button";
 import {
     ArrowRight, ArrowLeft, RefreshCw, CheckCircle2, Smartphone, Monitor,
-    BookOpen, Heart, ChevronRight, Globe, PlayCircle, Sparkles
+    BookOpen, Heart, ChevronRight, PlayCircle, Sparkles
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
@@ -71,12 +71,6 @@ function buildRosarySequence(mysteryTypes: MysteryType[]): RosaryStep[] {
                 mysteryIndex: decade,
                 mysteryType: mType,
             });
-            // Montfortian Salutation
-            steps.push({
-                titleKey: "beads.montfortSalutation",
-                prayerKey: "prayers.montfortSalutation",
-                type: "montfort_salutation",
-            });
             // Our Father
             steps.push({ titleKey: "beads.ourFather", prayerKey: "prayers.ourFather", latinKey: "latin.ourFather", type: "our_father" });
             // 10 Hail Marys
@@ -97,6 +91,7 @@ function buildRosarySequence(mysteryTypes: MysteryType[]): RosaryStep[] {
 
     // Closing
     steps.push({ titleKey: "beads.salveRegina", prayerKey: "prayers.salveRegina", latinKey: "latin.salveRegina", type: "closing" });
+    steps.push({ titleKey: "beads.montfortSalutation", prayerKey: "prayers.montfortSalutation", type: "montfort_salutation" });
     steps.push({ titleKey: "beads.montfortClosing", prayerKey: "prayers.montfortClosing", type: "montfort_closing" });
     steps.push({ titleKey: "beads.subTuum", prayerKey: "prayers.subTuum", latinKey: "latin.subTuum", type: "sub_tuum" });
     steps.push({ titleKey: "beads.signOfCross", prayerKey: "prayers.signOfCross", latinKey: "latin.signOfCross", type: "cross" });
@@ -304,7 +299,6 @@ export default function GuiaInterativoPage() {
     const [wakeLockActive, setWakeLockActive] = useState(false);
     const [autoCheckedIn, setAutoCheckedIn] = useState(false);
     const [activeTab, setActiveTab] = useState<MeditationTab>("gospel");
-    const [showLatin, setShowLatin] = useState(false);
     const wakeLockRef = useRef<WakeLockSentinel | null>(null);
 
     const mysteryTypes = useMemo(() => {
@@ -495,12 +489,6 @@ export default function GuiaInterativoPage() {
         return t(s.titleKey);
     };
 
-    // Get the prayer text, with optional Latin
-    const getPrayerText = (s: RosaryStep): string => {
-        if (showLatin && s.latinKey) return t(s.latinKey);
-        return t(s.prayerKey);
-    };
-
     // Determine current mystery type for this step (for meditations lookup)
     const getCurrentMysteryType = (): MysteryType | null => {
         for (let i = currentStep; i >= 0; i--) {
@@ -548,13 +536,6 @@ export default function GuiaInterativoPage() {
                         >
                             <Smartphone className={`w-3.5 h-3.5 ${hapticEnabled ? "text-emerald-500" : ""}`} />
                             <span>{hapticEnabled ? t("haptic.enabled") : t("haptic.disabled")}</span>
-                        </button>
-                        <button
-                            onClick={() => setShowLatin(!showLatin)}
-                            className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                            <Globe className={`w-3.5 h-3.5 ${showLatin ? "text-amber-500" : ""}`} />
-                            <span>{showLatin ? t("latin.toggle") : t("latin.showLatin")}</span>
                         </button>
                     </div>
 
@@ -707,26 +688,31 @@ export default function GuiaInterativoPage() {
                                                 {getStepTitle(step, currentStep)}
                                             </h2>
 
-                                            <p className={`leading-relaxed text-foreground italic relative z-10 font-manrope ${isLongPrayer ? "text-sm sm:text-base" : "text-lg sm:text-xl"}`}>
-                                                &ldquo;{getPrayerText(step)}&rdquo;
-                                            </p>
-
-                                            {/* Show Latin toggle hint for prayers that have Latin */}
-                                            {step.latinKey && !showLatin && (
-                                                <button
-                                                    onClick={() => setShowLatin(true)}
-                                                    className="mt-3 text-[10px] text-muted-foreground/60 hover:text-muted-foreground transition-colors relative z-10 uppercase tracking-widest"
-                                                >
-                                                    {t("latin.showLatin")}
-                                                </button>
-                                            )}
-                                            {step.latinKey && showLatin && (
-                                                <button
-                                                    onClick={() => setShowLatin(false)}
-                                                    className="mt-3 text-[10px] text-amber-500/70 hover:text-amber-500 transition-colors relative z-10 uppercase tracking-widest"
-                                                >
-                                                    {t("latin.showVernacular")}
-                                                </button>
+                                            {step.latinKey ? (
+                                                /* Side-by-side: vernacular + Latin */
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 relative z-10 text-left">
+                                                    <div>
+                                                        <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-2">
+                                                            {t("latin.showVernacular")}
+                                                        </p>
+                                                        <p className={`leading-relaxed text-foreground italic font-manrope ${isLongPrayer ? "text-xs sm:text-sm" : "text-sm sm:text-base"}`}>
+                                                            {t(step.prayerKey)}
+                                                        </p>
+                                                    </div>
+                                                    <div className="border-t sm:border-t-0 sm:border-l border-border/50 pt-3 sm:pt-0 sm:pl-5">
+                                                        <p className="text-[10px] font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400 mb-2">
+                                                            {t("latin.toggle")}
+                                                        </p>
+                                                        <p className={`leading-relaxed text-foreground/70 italic font-manrope ${isLongPrayer ? "text-xs sm:text-sm" : "text-sm sm:text-base"}`}>
+                                                            {t(step.latinKey)}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                /* No Latin version — single column */
+                                                <p className={`leading-relaxed text-foreground italic relative z-10 font-manrope ${isLongPrayer ? "text-sm sm:text-base" : "text-lg sm:text-xl"}`}>
+                                                    &ldquo;{t(step.prayerKey)}&rdquo;
+                                                </p>
                                             )}
                                         </div>
                                     )}
