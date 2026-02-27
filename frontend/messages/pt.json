@@ -1523,7 +1523,12 @@
       "hailMaryN": "{n}ª Ave Maria",
       "hailMaryFaith": "1ª Ave Maria (Fé)",
       "hailMaryHope": "2ª Ave Maria (Esperança)",
-      "hailMaryCharity": "3ª Ave Maria (Caridade)"
+      "hailMaryCharity": "3ª Ave Maria (Caridade)",
+      "montfortIntro": "Oração Preparatória de São Luís de Montfort",
+      "decadeOffering": "{n}ª Dezena — Oferecimento",
+      "montfortSalutation": "Saudação Mariana",
+      "montfortClosing": "Oração Final de São Luís de Montfort",
+      "subTuum": "Sub Tuum Praesidium"
     },
     "prayers": {
       "signOfCross": "Em nome do Pai, do Filho e do Espírito Santo. Amém.",
@@ -1532,7 +1537,11 @@
       "hailMary": "Ave Maria, cheia de graça, o Senhor é convosco. Bendita sois vós entre as mulheres e bendito é o fruto do vosso ventre, Jesus. Santa Maria, Mãe de Deus, rogai por nós pecadores, agora e na hora da nossa morte. Amém.",
       "glory": "Glória ao Pai, e ao Filho, e ao Espírito Santo. Como era no princípio, agora e sempre, por todos os séculos dos séculos. Amém.",
       "fatimaPrayer": "Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno, levai as almas todas para o céu, principalmente as que mais precisarem da vossa misericórdia.",
-      "salveRegina": "Salve, Rainha, Mãe de misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos, os degredados filhos de Eva. A vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei. E depois deste desterro, mostrai-nos Jesus, bendito fruto do vosso ventre. Ó clemente, ó piedosa, ó doce sempre Virgem Maria. Rogai por nós, Santa Mãe de Deus, para que sejamos dignos das promessas de Cristo. Amém."
+      "salveRegina": "Salve, Rainha, Mãe de misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos, os degredados filhos de Eva. A vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei. E depois deste desterro, mostrai-nos Jesus, bendito fruto do vosso ventre. Ó clemente, ó piedosa, ó doce sempre Virgem Maria. Rogai por nós, Santa Mãe de Deus, para que sejamos dignos das promessas de Cristo. Amém.",
+      "montfortIntro": "Dignarei-vos juntar-vos a mim, ó meu Jesus, para que eu possa unir-me a Vós. Que todos os poderes da minha alma Vos bendigam e louvem. Dignai-Vos, meu Jesus, unir-me a todas as intenções que tivestes ao instituir esta devoção do Santo Rosário e que eu tenha parte em todas as orações que foram e hão de ser rezadas em todo o mundo. Ofereço-Vos, ó meu Deus, estas dezenas em honra dos Mistérios da vida, morte e glória de Jesus e de Maria, em união com a Santa Igreja e segundo as intenções do Santo Padre. Peço-Vos pela intercessão de Maria, uma fé viva, uma firme esperança e uma ardente caridade. Amém.",
+      "montfortSalutation": "Eu vos saúdo, Maria, Filha bem-amada do Pai Eterno, Mãe admirável do Filho, Esposa fidelíssima do Espírito Santo, Templo augusto da Santíssima Trindade. Eu vos saúdo, Soberana Princesa, a quem tudo está sujeito no Céu e na Terra. Eu vos saúdo, Refúgio seguro dos pecadores, Nossa Senhora de Misericórdia, que nunca rejeitastes ninguém. Pecador como sou, prostro-me a vossos pés e vos peço que me alcanceis de vosso amado Jesus a contrição e o perdão de todos os meus pecados, assim como a sabedoria divina. Consagro-me inteiramente a vós, com tudo o que tenho. Tomai-me, ó doce Virgem, como vossa posse e propriedade. Amém.",
+      "montfortClosing": "Nós vos saudamos, ó Maria, Filha do Pai Eterno. Nós vos saudamos, ó Maria, Mãe do Filho Divino. Nós vos saudamos, ó Maria, Esposa do Espírito Santo. Nós vos saudamos, ó Maria, Templo de toda a Santíssima Trindade. Recebei, ó Virgem Imaculada, este Santo Rosário que vos oferecemos em testemunho da nossa terna devoção. Fazei que ele nos sirva para obter a remissão de todos os nossos pecados, para nos unir a vós e ao vosso Filho Jesus, e para alcançar a vida eterna. Amém.",
+      "subTuum": "Sob a vossa proteção nos refugiamos, Santa Mãe de Deus. Não desprezeis as nossas súplicas em nossas necessidades, mas livrai-nos sempre de todos os perigos, ó Virgem gloriosa e bendita. Amém."
     },
     "mysteries": {
       "joyful": {
@@ -1685,6 +1694,59 @@
     },
     "montfortLabel": "Método de São Luís de Montfort",
     "bibleLabel": "Passagem Bíblica",
-    "sourceLabel": "Fonte: O Segredo do Rosário — São Luís Maria Grignion de Montfort"
+    "sourceLabel": "Fonte: O Segredo do Rosário — São Luís Maria Grignion de Montfort",
+    "offerings": {
+      "joyful": {
+        "d1": "Nós vos oferecemos, Senhor Jesus, esta primeira dezena em honra da vossa Encarnação, e vos pedimos, por este mistério e pela intercessão da vossa Santa Mãe, uma profunda humildade. Amém.",
+        "d2": "Nós vos oferecemos, Senhor Jesus, esta segunda dezena em honra da Visitação de vossa Santa Mãe a sua prima Santa Isabel, e vos pedimos, por este mistério e pela intercessão de Maria, a caridade para com o próximo. Amém.",
+        "d3": "Nós vos oferecemos, Senhor Jesus, esta terceira dezena em honra do vosso Nascimento no estábulo de Belém, e vos pedimos, por este mistério e pela intercessão de Maria, o desprendimento dos bens do mundo e o amor à pobreza. Amém.",
+        "d4": "Nós vos oferecemos, Senhor Jesus, esta quarta dezena em honra da vossa Apresentação no Templo e da Purificação de Maria, e vos pedimos, por este mistério e pela intercessão de vossa Santa Mãe, a pureza de corpo e de alma. Amém.",
+        "d5": "Nós vos oferecemos, Senhor Jesus, esta quinta dezena em honra do vosso Encontro no Templo, e vos pedimos, por este mistério e pela intercessão de Maria, a verdadeira sabedoria. Amém."
+      },
+      "sorrowful": {
+        "d1": "Nós vos oferecemos, Senhor Jesus, esta primeira dezena em honra da vossa Agonia no Horto das Oliveiras, e vos pedimos, por este mistério e pela intercessão de Maria, a contrição perfeita dos nossos pecados. Amém.",
+        "d2": "Nós vos oferecemos, Senhor Jesus, esta segunda dezena em honra da vossa cruel Flagelação, e vos pedimos, por este mistério e pela intercessão de Maria, a mortificação dos nossos sentidos. Amém.",
+        "d3": "Nós vos oferecemos, Senhor Jesus, esta terceira dezena em honra da vossa Coroação de Espinhos, e vos pedimos, por este mistério e pela intercessão de Maria, o desprezo do mundo. Amém.",
+        "d4": "Nós vos oferecemos, Senhor Jesus, esta quarta dezena em honra do vosso Caminho da Cruz, e vos pedimos, por este mistério e pela intercessão de Maria, a paciência para carregar as nossas cruzes. Amém.",
+        "d5": "Nós vos oferecemos, Senhor Jesus, esta quinta dezena em honra da vossa Crucificação e Morte na Cruz, e vos pedimos, por este mistério e pela intercessão de Maria, a conversão dos pecadores e a perseverança dos justos. Amém."
+      },
+      "glorious": {
+        "d1": "Nós vos oferecemos, Senhor Jesus, esta primeira dezena em honra da vossa gloriosa Ressurreição, e vos pedimos, por este mistério e pela intercessão de Maria, o amor a Deus e o fervor na oração. Amém.",
+        "d2": "Nós vos oferecemos, Senhor Jesus, esta segunda dezena em honra da vossa triunfante Ascensão, e vos pedimos, por este mistério e pela intercessão de Maria, um ardente desejo do Céu. Amém.",
+        "d3": "Nós vos oferecemos, Senhor Jesus, esta terceira dezena em honra da descida do Espírito Santo sobre os Apóstolos, e vos pedimos, por este mistério e pela intercessão de Maria, os dons do Espírito Santo. Amém.",
+        "d4": "Nós vos oferecemos, Senhor Jesus, esta quarta dezena em honra da Assunção de vossa Santa Mãe, e vos pedimos, por este mistério e pela intercessão de Maria, uma terna devoção a tão boa Mãe. Amém.",
+        "d5": "Nós vos oferecemos, Senhor Jesus, esta quinta dezena em honra da Coroação de Maria, e vos pedimos, por este mistério e pela intercessão de Maria, a perseverança na graça e a coroa de glória. Amém."
+      },
+      "luminous": {
+        "d1": "Nós vos oferecemos, Senhor Jesus, esta primeira dezena em honra do vosso Batismo no Jordão, e vos pedimos, por este mistério e pela intercessão de Maria, a fidelidade às promessas do nosso Batismo. Amém.",
+        "d2": "Nós vos oferecemos, Senhor Jesus, esta segunda dezena em honra da vossa revelação nas Bodas de Caná, e vos pedimos, por este mistério e pela intercessão de Maria, a confiança na intercessão da Virgem Santíssima. Amém.",
+        "d3": "Nós vos oferecemos, Senhor Jesus, esta terceira dezena em honra do vosso Anúncio do Reino de Deus, e vos pedimos, por este mistério e pela intercessão de Maria, a conversão do coração e a busca do Reino. Amém.",
+        "d4": "Nós vos oferecemos, Senhor Jesus, esta quarta dezena em honra da vossa Transfiguração, e vos pedimos, por este mistério e pela intercessão de Maria, o desejo da santidade e da contemplação. Amém.",
+        "d5": "Nós vos oferecemos, Senhor Jesus, esta quinta dezena em honra da Instituição da Eucaristia, e vos pedimos, por este mistério e pela intercessão de Maria, o amor ardente pela Santa Missa e pela Comunhão. Amém."
+      }
+    },
+    "latin": {
+      "signOfCross": "In nómine Patris, et Fílii, et Spíritus Sancti. Amen.",
+      "creed": "Credo in Deum Patrem omnipoténtem, Creatórem cæli et terræ, et in Iesum Christum, Fílium eius únicum, Dóminum nostrum, qui concéptus est de Spíritu Sancto, natus ex María Vírgine, passus sub Póntio Piláto, crucifíxus, mórtuus, et sepúltus, descéndit ad ínferos, tértia die resurréxit a mórtuis, ascéndit ad cælos, sedet ad déxteram Dei Patris omnipoténtis, inde ventúrus est iudicáre vivos et mórtuos. Credo in Spíritum Sanctum, sanctam Ecclésiam cathólicam, sanctórum communiónem, remissiónem peccatórum, carnis resurrectiónem, vitam ætérnam. Amen.",
+      "ourFather": "Pater noster, qui es in cælis, sanctificétur nomen tuum. Advéniat regnum tuum. Fiat volúntas tua, sicut in cælo et in terra. Panem nostrum quotidiánum da nobis hódie, et dimítte nobis débita nostra sicut et nos dimíttimus debitóribus nostris. Et ne nos indúcas in tentatiónem, sed líbera nos a malo. Amen.",
+      "hailMary": "Ave María, grátia plena, Dóminus tecum. Benedícta tu in muliéribus, et benedíctus fructus ventris tui, Iesus. Sancta María, Mater Dei, ora pro nobis peccatóribus, nunc, et in hora mortis nostræ. Amen.",
+      "glory": "Glória Patri, et Fílio, et Spirítui Sancto. Sicut erat in princípio, et nunc, et semper, et in sǽcula sæculórum. Amen.",
+      "fatimaPrayer": "O mi Iesu, dimítte nobis débita nostra, salva nos ab igne inférni, perduc in cælum omnes ánimas, præsértim eas, quæ misericórdiæ tuæ máxime indígent.",
+      "salveRegina": "Salve, Regína, Mater misericórdiæ, vita, dulcédo, et spes nostra, salve. Ad te clamámus, éxsules fílii Hevæ. Ad te suspirámus, geméntes et flentes in hac lacrimárum valle. Eia, ergo, advocáta nostra, illos tuos misericórdes óculos ad nos convérte. Et Iesum, benedíctum fructum ventris tui, nobis post hoc exsílium osténde. O clemens, O pia, O dulcis Virgo María. Ora pro nobis, sancta Dei Génetrix, ut digni efficiámur promissiónibus Christi. Amen.",
+      "subTuum": "Sub tuum præsídium confúgimus, Sancta Dei Génetrix. Nostras deprecatiónes ne despícias in necessitátibus, sed a perículis cunctis líbera nos semper, Virgo gloriósa et benedícta. Amen.",
+      "toggle": "Latim",
+      "showLatin": "Ver em Latim",
+      "showVernacular": "Ver na língua atual"
+    },
+    "modeSelect": {
+      "title": "Como deseja rezar?",
+      "subtitle": "Escolha a forma do Santo Rosário",
+      "daily": "5 Mistérios do Dia",
+      "dailyDesc": "Os cinco mistérios correspondentes ao dia de hoje, conforme a tradição.",
+      "full": "Rosário Completo",
+      "fullDesc": "Todos os quatro conjuntos de mistérios (20 dezenas) — Gozosos, Dolorosos, Gloriosos e Luminosos.",
+      "start": "Iniciar Oração",
+      "todayMystery": "Hoje: Mistérios {name}"
+    }
   }
 }

@@ -1487,7 +1487,12 @@
       "hailMaryN": "Hail Mary {n}",
       "hailMaryFaith": "1st Hail Mary (Faith)",
       "hailMaryHope": "2nd Hail Mary (Hope)",
-      "hailMaryCharity": "3rd Hail Mary (Charity)"
+      "hailMaryCharity": "3rd Hail Mary (Charity)",
+      "montfortIntro": "Preparatory Prayer of St. Louis de Montfort",
+      "decadeOffering": "Decade {n} — Offering",
+      "montfortSalutation": "Marian Salutation",
+      "montfortClosing": "Closing Prayer of St. Louis de Montfort",
+      "subTuum": "Sub Tuum Praesidium"
     },
     "prayers": {
       "signOfCross": "In the name of the Father, and of the Son, and of the Holy Spirit. Amen.",
@@ -1496,7 +1501,11 @@
       "hailMary": "Hail Mary, full of grace, the Lord is with thee. Blessed art thou among women, and blessed is the fruit of thy womb, Jesus. Holy Mary, Mother of God, pray for us sinners, now and at the hour of our death. Amen.",
       "glory": "Glory be to the Father, and to the Son, and to the Holy Spirit. As it was in the beginning, is now, and ever shall be, world without end. Amen.",
       "fatimaPrayer": "O my Jesus, forgive us our sins, save us from the fires of hell, and lead all souls to Heaven, especially those in most need of Thy mercy.",
-      "salveRegina": "Hail, Holy Queen, Mother of Mercy, our life, our sweetness and our hope! To thee do we cry, poor banished children of Eve. To thee do we send up our sighs, mourning and weeping in this valley of tears. Turn, then, most gracious advocate, thine eyes of mercy toward us, and after this, our exile, show unto us the blessed fruit of thy womb, Jesus. O clement, O loving, O sweet Virgin Mary. Pray for us, O holy Mother of God, that we may be made worthy of the promises of Christ. Amen."
+      "salveRegina": "Hail, Holy Queen, Mother of Mercy, our life, our sweetness and our hope! To thee do we cry, poor banished children of Eve. To thee do we send up our sighs, mourning and weeping in this valley of tears. Turn, then, most gracious advocate, thine eyes of mercy toward us, and after this, our exile, show unto us the blessed fruit of thy womb, Jesus. O clement, O loving, O sweet Virgin Mary. Pray for us, O holy Mother of God, that we may be made worthy of the promises of Christ. Amen.",
+      "montfortIntro": "Deign to join me, O my Jesus, so that I may unite myself to You. May all the powers of my soul bless and praise You. Deign, my Jesus, to unite me with all the intentions You had in instituting this devotion of the Holy Rosary and that I may share in all the prayers that have been and shall be said throughout the world. I offer You, O my God, these decades in honor of the Mysteries of the life, death, and glory of Jesus and Mary, in union with Holy Church and according to the intentions of the Holy Father. I ask You, through the intercession of Mary, for a living faith, a firm hope, and an ardent charity. Amen.",
+      "montfortSalutation": "I greet you, Mary, beloved Daughter of the Eternal Father, admirable Mother of the Son, most faithful Spouse of the Holy Spirit, august Temple of the Most Holy Trinity. I greet you, Sovereign Princess, to whom all is subject in Heaven and on Earth. I greet you, safe Refuge of sinners, Our Lady of Mercy, who never rejected anyone. Sinner as I am, I cast myself at your feet and beg you to obtain from your beloved Jesus contrition and pardon for all my sins, as well as divine wisdom. I consecrate myself entirely to you, with all that I have. Take me, O sweet Virgin, as your possession and property. Amen.",
+      "montfortClosing": "We greet you, O Mary, Daughter of the Eternal Father. We greet you, O Mary, Mother of the Divine Son. We greet you, O Mary, Spouse of the Holy Spirit. We greet you, O Mary, Temple of the entire Most Holy Trinity. Receive, O Immaculate Virgin, this Holy Rosary which we offer you as a testimony of our tender devotion. May it serve to obtain the remission of all our sins, to unite us to you and your Son Jesus, and to obtain eternal life. Amen.",
+      "subTuum": "We fly to your protection, O Holy Mother of God. Do not despise our petitions in our necessities, but deliver us always from all dangers, O glorious and blessed Virgin. Amen."
     },
     "mysteries": {
       "joyful": {
@@ -1649,6 +1658,59 @@
     },
     "montfortLabel": "Method of St. Louis de Montfort",
     "bibleLabel": "Bible Passage",
-    "sourceLabel": "Source: The Secret of the Rosary — St. Louis-Marie de Montfort"
+    "sourceLabel": "Source: The Secret of the Rosary — St. Louis-Marie de Montfort",
+    "offerings": {
+      "joyful": {
+        "d1": "We offer You, Lord Jesus, this first decade in honor of Your Incarnation, and we ask You, through this mystery and through the intercession of Your Holy Mother, for a deep humility. Amen.",
+        "d2": "We offer You, Lord Jesus, this second decade in honor of the Visitation of Your Holy Mother to her cousin Saint Elizabeth, and we ask You, through this mystery and through the intercession of Mary, for charity toward our neighbor. Amen.",
+        "d3": "We offer You, Lord Jesus, this third decade in honor of Your Birth in the stable of Bethlehem, and we ask You, through this mystery and through the intercession of Mary, for detachment from worldly goods and love of poverty. Amen.",
+        "d4": "We offer You, Lord Jesus, this fourth decade in honor of Your Presentation in the Temple and the Purification of Mary, and we ask You, through this mystery and through the intercession of Your Holy Mother, for purity of body and soul. Amen.",
+        "d5": "We offer You, Lord Jesus, this fifth decade in honor of Your Finding in the Temple, and we ask You, through this mystery and through the intercession of Mary, for true wisdom. Amen."
+      },
+      "sorrowful": {
+        "d1": "We offer You, Lord Jesus, this first decade in honor of Your Agony in the Garden, and we ask You, through this mystery and through the intercession of Mary, for perfect contrition for our sins. Amen.",
+        "d2": "We offer You, Lord Jesus, this second decade in honor of Your cruel Scourging, and we ask You, through this mystery and through the intercession of Mary, for the mortification of our senses. Amen.",
+        "d3": "We offer You, Lord Jesus, this third decade in honor of Your Crowning with Thorns, and we ask You, through this mystery and through the intercession of Mary, for contempt of the world. Amen.",
+        "d4": "We offer You, Lord Jesus, this fourth decade in honor of Your Carrying of the Cross, and we ask You, through this mystery and through the intercession of Mary, for patience in carrying our crosses. Amen.",
+        "d5": "We offer You, Lord Jesus, this fifth decade in honor of Your Crucifixion and Death on the Cross, and we ask You, through this mystery and through the intercession of Mary, for the conversion of sinners and the perseverance of the just. Amen."
+      },
+      "glorious": {
+        "d1": "We offer You, Lord Jesus, this first decade in honor of Your glorious Resurrection, and we ask You, through this mystery and through the intercession of Mary, for the love of God and fervor in prayer. Amen.",
+        "d2": "We offer You, Lord Jesus, this second decade in honor of Your triumphant Ascension, and we ask You, through this mystery and through the intercession of Mary, for an ardent desire for Heaven. Amen.",
+        "d3": "We offer You, Lord Jesus, this third decade in honor of the descent of the Holy Spirit upon the Apostles, and we ask You, through this mystery and through the intercession of Mary, for the gifts of the Holy Spirit. Amen.",
+        "d4": "We offer You, Lord Jesus, this fourth decade in honor of the Assumption of Your Holy Mother, and we ask You, through this mystery and through the intercession of Mary, for a tender devotion to so good a Mother. Amen.",
+        "d5": "We offer You, Lord Jesus, this fifth decade in honor of the Coronation of Mary, and we ask You, through this mystery and through the intercession of Mary, for perseverance in grace and the crown of glory. Amen."
+      },
+      "luminous": {
+        "d1": "We offer You, Lord Jesus, this first decade in honor of Your Baptism in the Jordan, and we ask You, through this mystery and through the intercession of Mary, for faithfulness to the promises of our Baptism. Amen.",
+        "d2": "We offer You, Lord Jesus, this second decade in honor of Your revelation at the Wedding Feast of Cana, and we ask You, through this mystery and through the intercession of Mary, for confidence in the intercession of the Blessed Virgin. Amen.",
+        "d3": "We offer You, Lord Jesus, this third decade in honor of Your Proclamation of the Kingdom of God, and we ask You, through this mystery and through the intercession of Mary, for conversion of heart and the seeking of the Kingdom. Amen.",
+        "d4": "We offer You, Lord Jesus, this fourth decade in honor of Your Transfiguration, and we ask You, through this mystery and through the intercession of Mary, for the desire of holiness and contemplation. Amen.",
+        "d5": "We offer You, Lord Jesus, this fifth decade in honor of the Institution of the Eucharist, and we ask You, through this mystery and through the intercession of Mary, for an ardent love of the Holy Mass and Communion. Amen."
+      }
+    },
+    "latin": {
+      "signOfCross": "In nómine Patris, et Fílii, et Spíritus Sancti. Amen.",
+      "creed": "Credo in Deum Patrem omnipoténtem, Creatórem cæli et terræ, et in Iesum Christum, Fílium eius únicum, Dóminum nostrum, qui concéptus est de Spíritu Sancto, natus ex María Vírgine, passus sub Póntio Piláto, crucifíxus, mórtuus, et sepúltus, descéndit ad ínferos, tértia die resurréxit a mórtuis, ascéndit ad cælos, sedet ad déxteram Dei Patris omnipoténtis, inde ventúrus est iudicáre vivos et mórtuos. Credo in Spíritum Sanctum, sanctam Ecclésiam cathólicam, sanctórum communiónem, remissiónem peccatórum, carnis resurrectiónem, vitam ætérnam. Amen.",
+      "ourFather": "Pater noster, qui es in cælis, sanctificétur nomen tuum. Advéniat regnum tuum. Fiat volúntas tua, sicut in cælo et in terra. Panem nostrum quotidiánum da nobis hódie, et dimítte nobis débita nostra sicut et nos dimíttimus debitóribus nostris. Et ne nos indúcas in tentatiónem, sed líbera nos a malo. Amen.",
+      "hailMary": "Ave María, grátia plena, Dóminus tecum. Benedícta tu in muliéribus, et benedíctus fructus ventris tui, Iesus. Sancta María, Mater Dei, ora pro nobis peccatóribus, nunc, et in hora mortis nostræ. Amen.",
+      "glory": "Glória Patri, et Fílio, et Spirítui Sancto. Sicut erat in princípio, et nunc, et semper, et in sǽcula sæculórum. Amen.",
+      "fatimaPrayer": "O mi Iesu, dimítte nobis débita nostra, salva nos ab igne inférni, perduc in cælum omnes ánimas, præsértim eas, quæ misericórdiæ tuæ máxime indígent.",
+      "salveRegina": "Salve, Regína, Mater misericórdiæ, vita, dulcédo, et spes nostra, salve. Ad te clamámus, éxsules fílii Hevæ. Ad te suspirámus, geméntes et flentes in hac lacrimárum valle. Eia, ergo, advocáta nostra, illos tuos misericórdes óculos ad nos convérte. Et Iesum, benedíctum fructum ventris tui, nobis post hoc exsílium osténde. O clemens, O pia, O dulcis Virgo María. Ora pro nobis, sancta Dei Génetrix, ut digni efficiámur promissiónibus Christi. Amen.",
+      "subTuum": "Sub tuum præsídium confúgimus, Sancta Dei Génetrix. Nostras deprecatiónes ne despícias in necessitátibus, sed a perículis cunctis líbera nos semper, Virgo gloriósa et benedícta. Amen.",
+      "toggle": "Latin",
+      "showLatin": "Show in Latin",
+      "showVernacular": "Show in current language"
+    },
+    "modeSelect": {
+      "title": "How would you like to pray?",
+      "subtitle": "Choose the form of the Holy Rosary",
+      "daily": "5 Daily Mysteries",
+      "dailyDesc": "The five mysteries corresponding to today, according to tradition.",
+      "full": "Complete Rosary",
+      "fullDesc": "All four sets of mysteries (20 decades) — Joyful, Sorrowful, Glorious, and Luminous.",
+      "start": "Begin Prayer",
+      "todayMystery": "Today: {name} Mysteries"
+    }
   }
 }
