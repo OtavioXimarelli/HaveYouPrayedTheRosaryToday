@@ -158,7 +158,7 @@ function BeadMap({ steps, currentStep, onBeadClick }: {
         const isPast = globalIndex < currentStep;
         const beadColor = BEAD_COLORS[step.type];
         const isLarge = ["mystery_start", "cross", "closing", "our_father", "montfort_intro", "montfort_closing", "sub_tuum", "decade_offering", "montfort_salutation"].includes(step.type);
-        const size = isLarge ? "w-4 h-4" : "w-2.5 h-2.5";
+        const size = isLarge ? "w-5 h-5" : "w-3.5 h-3.5";
 
         return (
             <button
@@ -176,17 +176,17 @@ function BeadMap({ steps, currentStep, onBeadClick }: {
     };
 
     return (
-        <div ref={containerRef} className="py-2 px-2 max-h-32 overflow-y-auto" data-testid="bead-map">
+        <div ref={containerRef} className="py-3 px-3" data-testid="bead-map">
             {/* Intro beads */}
-            <div className="flex items-center justify-center gap-1 mb-2 flex-wrap">
+            <div className="flex items-center justify-center gap-1.5 mb-3 flex-wrap">
                 {steps.slice(0, introEnd || 8).map((step, i) => renderBead(step, i))}
             </div>
             {/* Decades */}
-            <div className="space-y-1.5">
+            <div className="space-y-2">
                 {decadeGroups.map((group, dIdx) => (
-                    <div key={dIdx} className="flex items-center justify-center gap-0.5 relative">
-                        <span className="text-[8px] font-bold text-muted-foreground/40 w-3 flex-shrink-0">{group.label}</span>
-                        <div className="flex items-center gap-0.5 flex-wrap justify-center">
+                    <div key={dIdx} className="flex items-center justify-center gap-1 relative">
+                        <span className="text-[9px] font-bold text-muted-foreground/50 w-4 flex-shrink-0">{group.label}</span>
+                        <div className="flex items-center gap-1 flex-wrap justify-center">
                             {steps.slice(group.startIdx, group.endIdx).map((step, i) => renderBead(step, group.startIdx + i))}
                         </div>
                     </div>
@@ -194,7 +194,7 @@ function BeadMap({ steps, currentStep, onBeadClick }: {
             </div>
             {/* Closing beads */}
             {decadeGroups.length > 0 && (
-                <div className="flex items-center justify-center gap-1 mt-2 flex-wrap">
+                <div className="flex items-center justify-center gap-1.5 mt-3 flex-wrap">
                     {steps.slice(decadeGroups[decadeGroups.length - 1].endIdx).map((step, i) => renderBead(step, decadeGroups[decadeGroups.length - 1].endIdx + i))}
                 </div>
             )}
