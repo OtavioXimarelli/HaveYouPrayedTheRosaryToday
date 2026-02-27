@@ -96,7 +96,11 @@
       "mysteries": "Mistérios",
       "teachings": "Ensinamentos",
       "resources": "Recursos",
-      "history": "Histórico"
+      "history": "Histórico",
+      "interactiveGuide": "Guia Interativo",
+      "journal": "Diário Espiritual",
+      "timer": "Temporizador",
+      "intentionsWall": "Mural de Intenções"
     },
     "quote": {
       "text": "“Reze o Rosário todos os dias para obter a paz no mundo e o fim da guerra.”",
@@ -117,7 +121,9 @@
       "startPath": "Iniciar Caminho",
       "suggestedForYou": "Sugerido para Você",
       "dailyVerse": "Versículo do Dia",
-      "explore": "Explore o Rosário Vivo"
+      "explore": "Explore o Rosário Vivo",
+      "tools": "Ferramentas de Oração",
+      "content": "Conteúdo & Aprendizado"
     },
     "suggested": {
       "pathTitle": "Primeiros Passos",
@@ -143,7 +149,26 @@
       "subtitle": "Meta: rezar todos os dias",
       "complete": "Parabéns! Semana completa! 🎉",
       "daysCompleted": "{count} de 7 dias"
-    }
+    },
+    "continueSession": {
+      "title": "Continue sua Oração",
+      "desc": "Você tem uma sessão do Rosário em andamento. Retome de onde parou.",
+      "btn": "Continuar Rezando",
+      "progress": "{percent}% concluído"
+    },
+    "community": {
+      "title": "Orações da Comunidade",
+      "subtitle": "Reze junto com outros fiéis",
+      "seeAll": "Ver Todas",
+      "empty": "Nenhuma oração ainda na comunidade.",
+      "prayedThe": "Rezou os",
+      "amen": "Amém"
+    },
+    "favoriteMystery": {
+      "label": "Mistério Favorito",
+      "none": "Reze mais para descobrir!"
+    },
+    "comingSoon": "Em Breve"
   },
   "HowToPray": {
     "title": "Como Rezar o Terço",

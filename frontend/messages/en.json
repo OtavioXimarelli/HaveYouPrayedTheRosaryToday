@@ -96,7 +96,11 @@
       "mysteries": "Mysteries",
       "teachings": "Teachings",
       "resources": "Resources",
-      "history": "History"
+      "history": "History",
+      "interactiveGuide": "Interactive Guide",
+      "journal": "Spiritual Journal",
+      "timer": "Timer",
+      "intentionsWall": "Intentions Wall"
     },
     "quote": {
       "text": "“Pray the Rosary every day to obtain peace for the world and the end of the war.”",
@@ -117,7 +121,9 @@
       "startPath": "Start Path",
       "suggestedForYou": "Suggested for You",
       "dailyVerse": "Verse of the Day",
-      "explore": "Explore Rosário Vivo"
+      "explore": "Explore Rosário Vivo",
+      "tools": "Prayer Tools",
+      "content": "Content & Learning"
     },
     "suggested": {
       "pathTitle": "First Steps",
@@ -143,7 +149,26 @@
       "subtitle": "Goal: pray every day",
       "complete": "Congratulations! Perfect week! 🎉",
       "daysCompleted": "{count} of 7 days"
-    }
+    },
+    "continueSession": {
+      "title": "Continue Your Prayer",
+      "desc": "You have a Rosary session in progress. Pick up where you left off.",
+      "btn": "Continue Praying",
+      "progress": "{percent}% completed"
+    },
+    "community": {
+      "title": "Community Prayers",
+      "subtitle": "Pray alongside fellow faithful",
+      "seeAll": "See All",
+      "empty": "No community prayers yet.",
+      "prayedThe": "Prayed the",
+      "amen": "Amen"
+    },
+    "favoriteMystery": {
+      "label": "Favorite Mystery",
+      "none": "Pray more to find out!"
+    },
+    "comingSoon": "Coming Soon"
   },
   "HowToPray": {
     "title": "How to Pray the Rosary",
