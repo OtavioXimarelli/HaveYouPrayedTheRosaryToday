@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Cinzel, Manrope } from "next/font/google";
 import "./globals.css";
 import { QueryProvider } from "@/providers/query-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
@@ -9,6 +10,18 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+
+const cinzel = Cinzel({
+  subsets: ["latin"],
+  variable: "--font-cinzel",
+  display: "swap",
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+  display: "swap",
+});
 
 export const viewport: Viewport = {
   themeColor: "#0F172A",
@@ -75,7 +88,7 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning className={`${cinzel.variable} ${manrope.variable}`}>
       <body className="font-manrope antialiased">
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider defaultTheme="system" storageKey="rosario-theme">
