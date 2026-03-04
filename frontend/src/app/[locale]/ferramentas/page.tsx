@@ -3,11 +3,11 @@
 import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
-import { 
-  Compass, 
-  Clock, 
-  BookOpen, 
-  Heart, 
+import {
+  Compass,
+  Clock,
+  BookOpen,
+  Heart,
   ArrowRight,
   Sparkles,
   Zap
@@ -16,7 +16,10 @@ import { useState } from "react";
 import { ComingSoonModal } from "@/components/coming-soon-modal";
 import { useTranslations } from "next-intl";
 
+import { useRouter } from "@/i18n/routing";
+
 export default function FerramentasPage() {
+  const router = useRouter();
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
   const [selectedFeature, setSelectedFeature] = useState("");
   const t = useTranslations("Teachings.tools");
@@ -29,6 +32,7 @@ export default function FerramentasPage() {
       icon: Compass,
       gradient: "from-gold-500 to-gold-600",
       isNew: true,
+      ready: true
     },
     {
       id: "diario-espiritual",
@@ -37,6 +41,7 @@ export default function FerramentasPage() {
       icon: Heart,
       gradient: "from-rose-500 to-rose-600",
       isNew: false,
+      ready: true
     },
     {
       id: "temporizador",
@@ -45,6 +50,7 @@ export default function FerramentasPage() {
       icon: Clock,
       gradient: "from-blue-500 to-blue-600",
       isNew: false,
+      ready: false
     },
     {
       id: "mural-intencoes",
@@ -53,12 +59,17 @@ export default function FerramentasPage() {
       icon: Sparkles,
       gradient: "from-purple-500 to-purple-600",
       isNew: false,
+      ready: false
     }
   ];
 
-  const handleToolClick = (title: string) => {
-    setSelectedFeature(title);
-    setComingSoonOpen(true);
+  const handleToolClick = (tool: typeof tools[0] | { ready: boolean, title: string }) => {
+    if (tool.ready && 'id' in tool) {
+      router.push(`/ferramentas/${tool.id}`);
+    } else {
+      setSelectedFeature(tool.title);
+      setComingSoonOpen(true);
+    }
   };
 
   return (
@@ -77,7 +88,7 @@ export default function FerramentasPage() {
           <section className="mb-16">
             <div className="p-8 sm:p-12 rounded-[2.5rem] bg-gradient-to-br from-gold-500/10 via-gold-500/5 to-transparent border border-gold-500/20 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-gold-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-              
+
               <div className="relative z-10 max-w-3xl">
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center shadow-xl mb-6">
                   <Zap className="w-8 h-8 text-white" />
@@ -106,12 +117,12 @@ export default function FerramentasPage() {
               {tools.map((tool) => (
                 <div
                   key={tool.id}
-                  onClick={() => handleToolClick(tool.title)}
+                  onClick={() => handleToolClick(tool)}
                   className="group relative p-8 rounded-[2rem] glass sacred-border hover:-translate-y-2 transition-all duration-500 cursor-pointer overflow-hidden"
                 >
                   {/* Hover background effect */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${tool.gradient} opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500`} />
-                  
+
                   <div className="relative z-10">
                     <div className="flex items-start justify-between mb-6">
                       <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${tool.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500`}>
@@ -127,7 +138,7 @@ export default function FerramentasPage() {
                     <h3 className="text-2xl font-cinzel font-bold text-foreground mb-3 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">
                       {tool.title}
                     </h3>
-                    
+
                     <p className="text-muted-foreground leading-relaxed mb-6">
                       {tool.description}
                     </p>
@@ -149,8 +160,8 @@ export default function FerramentasPage() {
             <p className="text-muted-foreground max-w-md mx-auto mb-6">
               {t("suggest.desc")}
             </p>
-            <button 
-              onClick={() => handleToolClick(t("suggest.btn"))}
+            <button
+              onClick={() => handleToolClick({ ready: false, title: t("suggest.btn") })}
               className="text-gold-600 dark:text-gold-400 font-bold uppercase tracking-widest hover:underline"
             >
               {t("suggest.btn")}
@@ -158,7 +169,7 @@ export default function FerramentasPage() {
           </section>
         </div>
 
-        <ComingSoonModal 
+        <ComingSoonModal
           isOpen={comingSoonOpen}
           onClose={() => setComingSoonOpen(false)}
           featureName={selectedFeature}
