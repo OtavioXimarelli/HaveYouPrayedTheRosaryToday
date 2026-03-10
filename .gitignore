@@ -81,3 +81,10 @@ next-env.d.ts
 # Emergent and build folders
 .emergent
 .next
+# AI Generated Prompts and Specs
+memory/AI_PROMPT_FLUTTER_PROTOTYPE.md
+memory/AI_PROMPT_FLUTTER_PROTOTYPE_SHORT.md
+memory/AI_PROMPT_FLUTTER_PROTOTYPE_STANDALONE.md
+memory/FLUTTER_TECH_SPECS.md
+memory/MOBILE_PRD.md
+memory/REACT_NATIVE_VS_FLUTTER.md

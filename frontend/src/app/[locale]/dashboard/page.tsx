@@ -18,7 +18,7 @@ import { CheckInModal } from "@/components/check-in-modal";
 import { PageTransition } from "@/components/page-transition";
 import { useAuth } from "@/providers/auth-provider";
 import { useTranslations, useLocale } from "next-intl";
-import { usePrayerStore } from "@/stores/prayer-store";
+import { usePrayerStore } from "@/store/use-prayer-store";
 import { useIsMounted } from "@/hooks/use-hydrated";
 import { formatRelativeTime } from "@/lib/utils";
 import { mockCheckIns } from "@/services/mockData";
@@ -167,7 +167,7 @@ export default function DashboardPage() {
 
   const checkInDateSet = useMemo(() => {
     if (!isMounted) return new Set<string>();
-    return new Set(storeCheckIns.map((c) => new Date(c.createdAt).toDateString()));
+    return new Set(storeCheckIns.map((c) => new Date(c.date || (c as any).createdAt).toDateString()));
   }, [isMounted, storeCheckIns]);
 
   const getWeekDays = () => {
@@ -533,7 +533,7 @@ export default function DashboardPage() {
                             <p className="text-xs text-muted-foreground">{t("activity.noReflection")}</p>
                           )}
                           <span className="text-[10px] text-muted-foreground mt-1 block">
-                            {formatRelativeTime(checkIn.createdAt)}
+                            {formatRelativeTime(checkIn.date || (checkIn as any).createdAt || new Date().toISOString())}
                           </span>
                         </div>
                       </div>
