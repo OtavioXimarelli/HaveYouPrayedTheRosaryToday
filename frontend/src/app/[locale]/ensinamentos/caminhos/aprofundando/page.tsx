@@ -11,13 +11,13 @@ import { AUTH_DISABLED } from "@/providers/auth-provider";
 import { getCaminhoLessons } from "@/lib/content";
 
 interface Props {
-  params: Promise<{
+  params: {
     locale: string;
-  }>;
+  };
 }
 
 export default async function AprofundandoPage({ params }: Props) {
-  const { locale } = await params;
+  const { locale } = params;
   const t = await getTranslations({ locale, namespace: "Teachings" });
   const LOCKED = AUTH_DISABLED ? false : true;
 

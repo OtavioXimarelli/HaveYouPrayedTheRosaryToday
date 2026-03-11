@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { IntentionsState } from '../types/store';
+import { IntentionsState, IntentionSchema } from '../types/store';
 
 export const useIntentionsStore = create<IntentionsState>()(
   persist(
@@ -53,6 +53,22 @@ export const useIntentionsStore = create<IntentionsState>()(
     {
       name: 'rosario-vivo-intentions-storage',
       storage: createJSONStorage(() => localStorage),
+      merge: (persistedState: any, currentState) => {
+        if (!persistedState) return currentState;
+
+        let validatedIntentions = currentState.intentions;
+        if (Array.isArray(persistedState.intentions)) {
+           validatedIntentions = persistedState.intentions.filter((i: any) =>
+             IntentionSchema.safeParse(i).success
+           );
+        }
+
+        return {
+          ...currentState,
+          ...persistedState,
+          intentions: validatedIntentions,
+        };
+      }
     }
   )
 );

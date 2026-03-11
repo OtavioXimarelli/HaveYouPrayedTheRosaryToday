@@ -32,7 +32,7 @@ export function LightRays({
   distortion = 0,
 }: LightRaysProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const mousePosRef = useRef({ x: 0, y: 0 });
   const animationRef = useRef<number | null>(null);
   const timeRef = useRef<number>(0);
 
@@ -43,10 +43,10 @@ export function LightRays({
     const handleMouseMove = (e: MouseEvent) => {
       if (canvasRef.current) {
         const rect = canvasRef.current.getBoundingClientRect();
-        setMousePos({
+        mousePosRef.current = {
           x: (e.clientX - rect.left) / rect.width,
           y: (e.clientY - rect.top) / rect.height,
-        });
+        };
       }
     };
 
@@ -95,8 +95,8 @@ export function LightRays({
 
       // Apply mouse influence
       if (followMouse) {
-        originX += (mousePos.x * width - originX) * mouseInfluence;
-        originY += (mousePos.y * height - originY) * mouseInfluence;
+        originX += (mousePosRef.current.x * width - originX) * mouseInfluence;
+        originY += (mousePosRef.current.y * height - originY) * mouseInfluence;
       }
 
       // Draw rays - optimize count for small screens
@@ -162,7 +162,7 @@ export function LightRays({
       window.removeEventListener("resize", updateSize);
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [raysColor, raysSpeed, lightSpread, rayLength, pulsating, mouseInfluence, followMouse, raysOrigin, mousePos]);
+  }, [raysColor, raysSpeed, lightSpread, rayLength, pulsating, mouseInfluence, followMouse, raysOrigin]);
 
   return (
     <canvas

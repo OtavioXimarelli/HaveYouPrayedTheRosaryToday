@@ -143,7 +143,7 @@ function BeadMap({ steps, currentStep, onBeadClick }: {
     }, [currentStep]);
 
     // Grouping logic based on exact sequence
-    let introEnd = 0;
+    let introEnd = -1;
     for (let i = 0; i < steps.length; i++) {
         if (steps[i].type === "mystery_start") {
             introEnd = i;
@@ -151,7 +151,7 @@ function BeadMap({ steps, currentStep, onBeadClick }: {
         }
     }
     // If no mysteries found, fallback
-    if (introEnd === 0) introEnd = 8;
+    if (introEnd === -1) introEnd = 8;
 
     const introBeads = steps.slice(0, introEnd);
     

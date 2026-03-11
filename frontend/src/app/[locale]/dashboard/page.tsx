@@ -167,7 +167,7 @@ export default function DashboardPage() {
 
   const checkInDateSet = useMemo(() => {
     if (!isMounted) return new Set<string>();
-    return new Set(storeCheckIns.map((c) => new Date(c.date || (c as any).createdAt).toDateString()));
+    return new Set(storeCheckIns.map((c) => new Date(c.date).toDateString()));
   }, [isMounted, storeCheckIns]);
 
   const getWeekDays = () => {
@@ -533,7 +533,7 @@ export default function DashboardPage() {
                             <p className="text-xs text-muted-foreground">{t("activity.noReflection")}</p>
                           )}
                           <span className="text-[10px] text-muted-foreground mt-1 block">
-                            {formatRelativeTime(checkIn.date || (checkIn as any).createdAt || new Date().toISOString())}
+                            {formatRelativeTime(new Date(checkIn.date))}
                           </span>
                         </div>
                       </div>

@@ -11,18 +11,18 @@ import { AUTH_DISABLED } from "@/providers/auth-provider";
 import { getCaminhoLessons } from "@/lib/content";
 
 interface Props {
-  params: Promise<{
+  params: {
     locale: string;
-  }>;
+  };
 }
 
 export default async function PrimeirosPassosPage({ params }: Props) {
-  const { locale } = await params;
+  const { locale } = params;
   const t = await getTranslations({ locale, namespace: "Teachings" });
   const LOCKED = AUTH_DISABLED ? false : true;
 
   // Real data from MDX
-  const lessonsData = getCaminhoLessons("iniciante", locale);
+  const lessonsData = getCaminhoLessons("primeiros-passos", locale);
 
   // Map to the format needed by the UI
   const lessons = lessonsData.map((lesson) => ({
@@ -96,7 +96,7 @@ export default async function PrimeirosPassosPage({ params }: Props) {
                     title={lesson.title}
                     description={lesson.description}
                     duration={lesson.duration}
-                    path={`/ensinamentos/caminhos/iniciante/${lesson.id}`}
+                    path={`/ensinamentos/caminhos/primeiros-passos/${lesson.id}`}
                     lessonNumber={lesson.number}
                     isCompleted={completedLessons.includes(lesson.id)}
                     isLocked={lesson.isLocked}

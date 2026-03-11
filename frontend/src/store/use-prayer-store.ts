@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { startOfDay, differenceInDays } from 'date-fns';
-import { PrayerState, PrayerCheckIn } from '../types/store';
+import { PrayerState, PrayerCheckIn, PrayerCheckInSchema } from '../types/store';
 
 export const usePrayerStore = create<PrayerState>()(
   persist(
@@ -14,11 +14,12 @@ export const usePrayerStore = create<PrayerState>()(
       favoriteMysterys: [],
 
       addCheckIn: (date, mystery, intentions = [], reflection?: string) => {
+        get().resetStreakIfNeeded();
         set((state) => {
           const newCheckin: PrayerCheckIn = { id: crypto.randomUUID(), date, mystery, intentions, reflection };
-          const dateOnly = date.split('T')[0];
+          const localDateStr = new Date(date).toDateString();
           
-          if (state.checkIns.some(c => c.date.startsWith(dateOnly))) {
+          if (state.checkIns.some(c => new Date(c.date).toDateString() === localDateStr)) {
              return state; // Already prayed today
           }
 
@@ -71,7 +72,7 @@ export const usePrayerStore = create<PrayerState>()(
         weekAgo.setHours(0, 0, 0, 0);
 
         const recent = checkIns.filter(c => new Date(c.date) >= weekAgo);
-        const uniqueDays = new Set(recent.map(c => c.date.split('T')[0]));
+        const uniqueDays = new Set(recent.map(c => new Date(c.date).toDateString()));
         return uniqueDays.size;
       },
 
@@ -91,6 +92,22 @@ export const usePrayerStore = create<PrayerState>()(
     {
       name: 'rosario-vivo-prayer-storage',
       storage: createJSONStorage(() => localStorage),
+      merge: (persistedState: any, currentState) => {
+        if (!persistedState) return currentState;
+
+        let validatedCheckIns = currentState.checkIns;
+        if (Array.isArray(persistedState.checkIns)) {
+          validatedCheckIns = persistedState.checkIns.filter((c: any) => 
+            PrayerCheckInSchema.safeParse(c).success
+          );
+        }
+
+        return {
+          ...currentState,
+          ...persistedState,
+          checkIns: validatedCheckIns,
+        };
+      }
     }
   )
 );

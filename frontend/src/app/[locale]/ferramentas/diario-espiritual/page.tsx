@@ -6,65 +6,73 @@ import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
 import { Button } from "@/components/ui/button";
 import { Save, Calendar as CalendarIcon, Download, Trash2 } from "lucide-react";
-
-type JournalEntry = {
-    id: string;
-    date: string; // YYYY-MM-DD
-    content: string;
-    intentions: string;
-    mystery: string;
-};
+import { useJournalStore } from "@/store/use-journal-store";
+import { useToast } from "@/hooks/use-toast";
+import { useIsMounted } from "@/hooks/use-hydrated";
 
 export default function DiarioEspiritualPage() {
-    const [entries, setEntries] = useState<JournalEntry[]>([]);
     const [currentContent, setCurrentContent] = useState("");
     const [currentIntentions, setCurrentIntentions] = useState("");
     const [currentMystery, setCurrentMystery] = useState("Mistérios Gozosos");
 
+    const entries = useJournalStore((s) => s.entries);
+    const addEntry = useJournalStore((s) => s.addEntry);
+    const updateEntry = useJournalStore((s) => s.updateEntry);
+    const deleteEntry = useJournalStore((s) => s.deleteEntry);
+    
+    const { toast } = useToast();
+    const isMounted = useIsMounted();
+
     const today = new Date().toISOString().split("T")[0];
 
     useEffect(() => {
-        const saved = localStorage.getItem("rosary-journal-entries");
-        if (saved) {
-            try {
-                const parsed = JSON.parse(saved);
-                setEntries(parsed);
-                const todayEntry = parsed.find((e: JournalEntry) => e.date === today);
-                if (todayEntry) {
-                    setCurrentContent(todayEntry.content);
-                    setCurrentIntentions(todayEntry.intentions);
-                    setCurrentMystery(todayEntry.mystery);
-                }
-            } catch (e) {
-                console.error("Failed to parse journal entries", e);
-            }
+        if (!isMounted) return;
+        const todayEntry = entries.find((e) => e.date.startsWith(today));
+        if (todayEntry) {
+            setCurrentContent(todayEntry.content || "");
+            setCurrentIntentions(todayEntry.intentions || "");
+            setCurrentMystery(todayEntry.mystery || "Mistérios Gozosos");
         }
-    }, [today]);
+    }, [today, entries, isMounted]);
 
     const handleSave = () => {
-        const newEntry: JournalEntry = {
-            id: today,
-            date: today,
-            content: currentContent,
-            intentions: currentIntentions,
-            mystery: currentMystery,
-        };
+        const todayEntry = entries.find((e) => e.date.startsWith(today));
+        if (todayEntry) {
+             updateEntry(todayEntry.id, {
+                 content: currentContent,
+                 intentions: currentIntentions,
+                 mystery: currentMystery,
+             });
+        } else {
+             addEntry({
+                 date: new Date().toISOString(),
+                 content: currentContent,
+                 intentions: currentIntentions,
+                 mystery: currentMystery,
+                 tags: [],
+             });
+        }
 
-        const updatedEntries = [...entries.filter((e) => e.date !== today), newEntry];
-        setEntries(updatedEntries);
-        localStorage.setItem("rosary-journal-entries", JSON.stringify(updatedEntries));
-        alert("Diário salvo com sucesso!");
+        toast({
+            title: "Diário salvo",
+            description: "Suas reflexões foram salvas com sucesso!",
+            variant: "success",
+        });
     };
 
     const handleClear = () => {
-        if (confirm("Tem certeza que deseja apagar a reflexão de hoje?")) {
-            setCurrentContent("");
-            setCurrentIntentions("");
-
-            const updatedEntries = entries.filter((e) => e.date !== today);
-            setEntries(updatedEntries);
-            localStorage.setItem("rosary-journal-entries", JSON.stringify(updatedEntries));
+        const todayEntry = entries.find((e) => e.date.startsWith(today));
+        if (todayEntry) {
+            deleteEntry(todayEntry.id);
         }
+        
+        setCurrentContent("");
+        setCurrentIntentions("");
+        
+        toast({
+            title: "Reflexão Apagada",
+            description: "Sua reflexão de hoje foi removida.",
+        });
     };
 
     const handleExport = () => {
@@ -76,6 +84,8 @@ export default function DiarioEspiritualPage() {
         downloadAnchorNode.click();
         downloadAnchorNode.remove();
     };
+
+    if (!isMounted) return null;
 
     return (
         <PageTransition>

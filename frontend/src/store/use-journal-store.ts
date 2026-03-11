@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { JournalState } from '../types/store';
+import { JournalState, JournalEntrySchema } from '../types/store';
 
 export const useJournalStore = create<JournalState>()(
   persist(
@@ -35,6 +35,22 @@ export const useJournalStore = create<JournalState>()(
     {
       name: 'rosario-vivo-journal-storage',
       storage: createJSONStorage(() => localStorage),
+      merge: (persistedState: any, currentState) => {
+        if (!persistedState) return currentState;
+
+        let validatedEntries = currentState.entries;
+        if (Array.isArray(persistedState.entries)) {
+          validatedEntries = persistedState.entries.filter((e: any) => 
+            JournalEntrySchema.safeParse(e).success
+          );
+        }
+
+        return {
+          ...currentState,
+          ...persistedState,
+          entries: validatedEntries,
+        };
+      }
     }
   )
 );

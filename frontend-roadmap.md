@@ -117,7 +117,7 @@ A clean layout to offer official external Catholic documentation.
 
 To execute this page-by-page roadmap efficiently, we will build out the application in this exact order:
 
-1. **Global Base**: Set up the `usePrayerStore` and `useJournalStore` Zustand logics so that we have a real "database" API ready to use everywhere.
+1. **Global Base**: Set up the `usePrayerStore` and `useJournalStore` Zustand logic so that we have a real "database" API ready to use everywhere.
 2. **Dashboard Overview**: Overhaul `/dashboard` to read from the newly instantiated Zustand stores. Implement the Streak algorithm logic.
 3. **Mural de Intenções**: Build the schema, UI masonry board, and interactions.
 4. **Temporizador**: Build the highly accurate timer hook with WakeLock and Chime features.

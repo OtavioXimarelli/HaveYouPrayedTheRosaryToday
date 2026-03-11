@@ -23,13 +23,13 @@ export default function TemporizadorPage() {
   const [selectedMinutes, setSelectedMinutes] = useState(15);
   const { remainingMs, isRunning, start, pause, reset, duration } = useTimer(selectedMinutes * 60 * 1000);
   const [wakeLockActive, setWakeLockActive] = useState(false);
-  const wakeLockRef = useRef<WakeLockSentinel | null>(null);
+  const wakeLockRef = useRef<any>(null);
 
   // Screen WakeLock logic
   const requestWakeLock = useCallback(async () => {
     try {
-      if ("wakeLock" in navigator && isRunning) {
-        wakeLockRef.current = await navigator.wakeLock.request("screen");
+      if (typeof navigator !== "undefined" && "wakeLock" in navigator && isRunning) {
+        wakeLockRef.current = await (navigator as any).wakeLock.request("screen");
         setWakeLockActive(true);
       }
     } catch {
@@ -60,13 +60,17 @@ export default function TemporizadorPage() {
     // If it was running, and now is not running, and remaining time is 0 => finished
     if (prevRunningRef.current && !isRunning && remainingMs === 0) {
       try {
-        const audio = new window.Audio("/sounds/chime.mp3");
-        audio.play().catch(() => {
-          // If browser blocks audio or file is missing, fallback to vibration if available
-          if ("vibrate" in navigator) {
-            navigator.vibrate([200, 100, 200, 100, 500]);
-          }
-        });
+        if (typeof window !== "undefined" && window.Audio) {
+          const audio = new window.Audio("/sounds/chime.mp3");
+          audio.play().catch(() => {
+            // If browser blocks audio or file is missing, fallback to vibration if available
+            if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+              navigator.vibrate([200, 100, 200, 100, 500]);
+            }
+          });
+        } else if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+          navigator.vibrate([200, 100, 200, 100, 500]);
+        }
       } catch (err) {}
     }
     prevRunningRef.current = isRunning;
