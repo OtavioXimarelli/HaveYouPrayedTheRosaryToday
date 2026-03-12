@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { useSubmitCheckIn } from "@/hooks/use-rosary";
+import { usePrayerStore } from "@/store/use-prayer-store";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslations } from "next-intl";
 import {
@@ -74,7 +74,8 @@ export function CheckInModal({ open, onOpenChange, onSuccess }: CheckInModalProp
   const [selectedIntentions, setSelectedIntentions] = useState<IntentionTag[]>([]);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const submitMutation = useSubmitCheckIn();
+  const addCheckIn = usePrayerStore((state) => state.addCheckIn);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const toggleIntention = (tag: IntentionTag) => {
@@ -85,16 +86,21 @@ export function CheckInModal({ open, onOpenChange, onSuccess }: CheckInModalProp
 
   const handleSubmit = async () => {
     try {
-      await submitMutation.mutateAsync({
+      setIsSubmitting(true);
+      
+      // Zustand is synchronous but we simulate a tiny delay or just rely on the UI state success transition
+      addCheckIn(
+        new Date().toISOString(),
         mystery,
-        reflection: reflection.trim() || undefined,
-        intentions: selectedIntentions,
-      });
+        selectedIntentions,
+        reflection.trim() || undefined
+      );
 
       setShowSuccess(true);
       onSuccess?.();
 
       setTimeout(() => {
+        setIsSubmitting(false);
         setShowSuccess(false);
         onOpenChange(false);
         setMystery(todaysMystery);
@@ -108,6 +114,7 @@ export function CheckInModal({ open, onOpenChange, onSuccess }: CheckInModalProp
         variant: "success",
       });
     } catch (error) {
+      setIsSubmitting(false);
       toast({
         title: t("error.title"),
         description: error instanceof Error ? error.message : t("error.generic"),
@@ -273,10 +280,10 @@ export function CheckInModal({ open, onOpenChange, onSuccess }: CheckInModalProp
           </button>
           <Button
             onClick={handleSubmit}
-            disabled={submitMutation.isPending}
+            disabled={isSubmitting}
             className="flex-1 bg-gradient-to-r from-yellow-600 to-yellow-500 text-slate-900 font-cinzel font-bold rounded-xl py-5 hover:shadow-lg hover:shadow-yellow-500/25 transition-all duration-200 text-base"
           >
-            {submitMutation.isPending ? (
+            {isSubmitting ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin mr-2" />
                 {t("submitting")}

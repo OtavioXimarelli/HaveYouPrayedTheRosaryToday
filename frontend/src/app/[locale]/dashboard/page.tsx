@@ -18,7 +18,7 @@ import { CheckInModal } from "@/components/check-in-modal";
 import { PageTransition } from "@/components/page-transition";
 import { useAuth } from "@/providers/auth-provider";
 import { useTranslations, useLocale } from "next-intl";
-import { usePrayerStore } from "@/stores/prayer-store";
+import { usePrayerStore } from "@/store/use-prayer-store";
 import { useIsMounted } from "@/hooks/use-hydrated";
 import { formatRelativeTime } from "@/lib/utils";
 import { mockCheckIns } from "@/services/mockData";
@@ -103,7 +103,7 @@ export default function DashboardPage() {
   const getWeeklyProgress = usePrayerStore((s) => s.getWeeklyProgress);
   const getRecentActivity = usePrayerStore((s) => s.getRecentActivity);
   const storeHasCheckedInToday = usePrayerStore((s) => s.hasCheckedInToday);
-  const favoriteMysterys = usePrayerStore((s) => s.favoriteMysterys);
+  const favoriteMysteries = usePrayerStore((s) => s.favoriteMysteries);
 
   const [currentTime, setCurrentTime] = useState(new Date());
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
@@ -162,12 +162,12 @@ export default function DashboardPage() {
   const hasCheckedInToday = isMounted ? storeHasCheckedInToday() : false;
   const weeklyProgress = isMounted ? getWeeklyProgress() : 0;
   const recentActivity = isMounted ? getRecentActivity(5) : [];
-  const favMystery = isMounted && favoriteMysterys.length > 0 ? favoriteMysterys[0] : null;
+  const favMystery = isMounted && favoriteMysteries.length > 0 ? favoriteMysteries[0] : null;
   const communityFeed = mockCheckIns.slice(0, 3);
 
   const checkInDateSet = useMemo(() => {
     if (!isMounted) return new Set<string>();
-    return new Set(storeCheckIns.map((c) => new Date(c.createdAt).toDateString()));
+    return new Set(storeCheckIns.map((c) => new Date(c.date).toDateString()));
   }, [isMounted, storeCheckIns]);
 
   const getWeekDays = () => {
@@ -533,7 +533,7 @@ export default function DashboardPage() {
                             <p className="text-xs text-muted-foreground">{t("activity.noReflection")}</p>
                           )}
                           <span className="text-[10px] text-muted-foreground mt-1 block">
-                            {formatRelativeTime(checkIn.createdAt)}
+                            {formatRelativeTime(new Date(checkIn.date))}
                           </span>
                         </div>
                       </div>

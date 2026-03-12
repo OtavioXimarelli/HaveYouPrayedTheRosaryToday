@@ -83,7 +83,7 @@ export async function submitCheckIn(
     longestStreak: Math.max(stats.longestStreak, newStreak),
     totalCheckIns: stats.totalCheckIns + 1,
     lastCheckIn: new Date(),
-    favoriteMysterys: updateFavorites(stats.favoriteMysterys, request.mystery),
+    favoriteMysteries: updateFavorites(stats.favoriteMysteries, request.mystery),
   };
 
   // Persist to localStorage

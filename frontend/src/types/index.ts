@@ -2,7 +2,8 @@
 // Domain Types
 // ===========================
 
-export type MysteryType = "joyful" | "sorrowful" | "glorious" | "luminous";
+export const MYSTERY_TYPES = ["joyful", "sorrowful", "glorious", "luminous"] as const;
+export type MysteryType = typeof MYSTERY_TYPES[number];
 
 export type IntentionTag =
   | "family"
@@ -48,7 +49,7 @@ export interface UserStats {
   longestStreak: number;
   totalCheckIns: number;
   lastCheckIn?: Date;
-  favoriteMysterys: MysteryType[];
+  favoriteMysteries: MysteryType[];
 }
 
 // ===========================

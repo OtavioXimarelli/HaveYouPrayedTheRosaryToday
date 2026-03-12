@@ -1,26 +1,31 @@
-"use client";
-
-import { useRouter } from "@/i18n/routing";
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
 import { Crown } from "lucide-react";
 import { AUTH_DISABLED } from "@/providers/auth-provider";
+import { getCaminhoLessons } from "@/lib/content";
 
-import { useTranslations } from "next-intl";
+interface Props {
+  params: {
+    locale: string;
+  };
+}
 
-export default function MisteriosVivosPage() {
-  const router = useRouter();
-  const t = useTranslations("Teachings");
+export default async function MisteriosVivosPage({ params }: Props) {
+  const { locale } = params;
+  const t = await getTranslations({ locale, namespace: "Teachings" });
   const LOCKED = AUTH_DISABLED ? false : true;
 
-  const lessons = [
-    { id: "teologia-mariana", number: 1, title: t("pathPages.misterios-vivos.l1.title"), duration: "35 min" },
-    { id: "consagracao-total", number: 2, title: t("pathPages.misterios-vivos.l2.title"), duration: "40 min" },
-    { id: "aspectos-misticos", number: 3, title: t("pathPages.misterios-vivos.l3.title"), duration: "30 min" },
-    { id: "doutrina-social", number: 4, title: t("pathPages.misterios-vivos.l4.title"), duration: "25 min" },
-    { id: "lideranca-oracao", number: 5, title: t("pathPages.misterios-vivos.l5.title"), duration: "28 min" }
-  ];
+  const lessonsData = getCaminhoLessons("misterios-vivos", locale);
+
+  const lessons = lessonsData.map((lesson) => ({
+    id: lesson.slug,
+    number: lesson.order ?? 99,
+    title: lesson.title,
+    duration: lesson.readingTime,
+    isLocked: LOCKED
+  }));
 
   return (
     <PageTransition>
@@ -32,11 +37,11 @@ export default function MisteriosVivosPage() {
         />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-          <BreadcrumbNav 
+          <BreadcrumbNav
             items={[
               { label: t("breadcrumb"), path: "/ensinamentos?tab=caminhos" },
               { label: t("pathLabels.misterios-vivos") }
-            ]} 
+            ]}
           />
 
           {/* Preview */}
@@ -52,15 +57,19 @@ export default function MisteriosVivosPage() {
                 </div>
               </div>
               <ul className="space-y-2">
-                {lessons.map((lesson) => (
-                  <li key={lesson.id} className="flex items-center gap-2 text-muted-foreground">
-                    <span className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center text-xs font-bold text-purple-600 dark:text-purple-400">
-                      {lesson.number}
-                    </span>
-                    <span className="text-sm">{lesson.title}</span>
-                    <span className="text-xs text-muted-foreground/60 ml-auto">{lesson.duration}</span>
-                  </li>
-                ))}
+                {lessons.length > 0 ? (
+                  lessons.map((lesson) => (
+                    <li key={lesson.id} className="flex items-center gap-2 text-muted-foreground">
+                      <span className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center text-xs font-bold text-purple-600 dark:text-purple-400">
+                        {lesson.number}
+                      </span>
+                      <span className="text-sm">{lesson.title}</span>
+                      <span className="text-xs text-muted-foreground/60 ml-auto">{lesson.duration}</span>
+                    </li>
+                  ))
+                ) : (
+                  <p className="text-muted-foreground text-sm">Novas lições em breve.</p>
+                )}
               </ul>
             </div>
           </section>

@@ -13,7 +13,7 @@ import {
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { getTodaysMystery, MysteryType } from "@/types";
-import { usePrayerStore } from "@/stores/prayer-store";
+import { usePrayerStore } from "@/store/use-prayer-store";
 import { useIsMounted } from "@/hooks/use-hydrated";
 
 // ── Types ──
@@ -142,23 +142,70 @@ function BeadMap({ steps, currentStep, onBeadClick }: {
         }
     }, [currentStep]);
 
-    // Find decade boundaries
-    const decadeGroups: { label: string; startIdx: number; endIdx: number }[] = [];
-    let introEnd = 0;
+    // Single linear pass grouping logic
+    const introBeads: RosaryStep[] = [];
+    const decades: { label: string; startIndex: number; beads: RosaryStep[] }[] = [];
+    const closingBeads: RosaryStep[] = [];
+    
+    let currentDecadeBeads: RosaryStep[] = [];
+    let currentDecadeStartIndex = 0;
+    let phase: "intro" | "decades" | "closing" = "intro";
+
     for (let i = 0; i < steps.length; i++) {
-        if (steps[i].type === "mystery_start") {
-            if (introEnd === 0) introEnd = i;
-            const endIdx = Math.min(i + 16, steps.length); // mystery+offering+salut+OF+10HM+glory+fatima = 16
-            decadeGroups.push({ label: `${steps[i].mysteryIndex}`, startIdx: i, endIdx });
+        const step = steps[i];
+        
+        if (phase === "intro") {
+            if (step.type === "mystery_start") {
+                phase = "decades";
+                currentDecadeStartIndex = i;
+                currentDecadeBeads = [step];
+            } else {
+                introBeads.push(step);
+            }
+        } else if (phase === "decades") {
+            if (step.type === "mystery_start") {
+                decades.push({ 
+                    label: `${steps[currentDecadeStartIndex].mysteryIndex || 1}`, 
+                    startIndex: currentDecadeStartIndex, 
+                    beads: currentDecadeBeads 
+                });
+                currentDecadeStartIndex = i;
+                currentDecadeBeads = [step];
+            } else if (step.type === "closing") {
+                decades.push({ 
+                    label: `${steps[currentDecadeStartIndex].mysteryIndex || 1}`, 
+                    startIndex: currentDecadeStartIndex, 
+                    beads: currentDecadeBeads 
+                });
+                phase = "closing";
+                closingBeads.push(step);
+            } else {
+                currentDecadeBeads.push(step);
+            }
+        } else if (phase === "closing") {
+            closingBeads.push(step);
         }
     }
+
+    if (phase === "decades" && currentDecadeBeads.length > 0) {
+        decades.push({ 
+            label: `${steps[currentDecadeStartIndex].mysteryIndex || 1}`, 
+            startIndex: currentDecadeStartIndex, 
+            beads: currentDecadeBeads 
+        });
+    }
+
+    const closingStartIndex = steps.length - closingBeads.length;
 
     const renderBead = (step: RosaryStep, globalIndex: number) => {
         const isActive = globalIndex === currentStep;
         const isPast = globalIndex < currentStep;
         const beadColor = BEAD_COLORS[step.type];
-        const isLarge = ["mystery_start", "cross", "closing", "our_father", "montfort_intro", "montfort_closing", "sub_tuum", "decade_offering", "montfort_salutation"].includes(step.type);
-        const size = isLarge ? "w-5 h-5" : "w-3.5 h-3.5";
+        
+        // Size logic: Most are small, active is huge. 
+        // In the mockup, there are no "large" inactive beads within the decade, only the active one gets massive.
+        // Let's keep a consistent size for inactive, and use a thick ring for active.
+        const sizeClass = isActive ? "w-8 h-8 md:w-10 md:h-10 border-2 border-[#1a1c22]" : "w-3.5 h-3.5 sm:w-4 sm:h-4";
 
         return (
             <button
@@ -166,9 +213,9 @@ function BeadMap({ steps, currentStep, onBeadClick }: {
                 ref={isActive ? activeRef : undefined}
                 onClick={() => onBeadClick(globalIndex)}
                 className={`
-                    rounded-full transition-all duration-300 flex-shrink-0
-                    ${size}
-                    ${isPast ? `${beadColor} opacity-50` : isActive ? `${beadColor} scale-[1.8] ring-2 ring-amber-400 ring-offset-2 ring-offset-background shadow-lg shadow-amber-400/30` : `${beadColor} opacity-25 hover:opacity-50`}
+                    rounded-full transition-all duration-300 flex-shrink-0 relative
+                    ${sizeClass}
+                    ${isPast ? `${beadColor} opacity-50` : isActive ? `${beadColor} ring-4 ring-gold-500 shadow-xl shadow-gold-500/20 z-10` : `${beadColor} opacity-30 hover:opacity-60`}
                 `}
                 aria-label={`Bead ${globalIndex + 1}`}
             />
@@ -176,26 +223,28 @@ function BeadMap({ steps, currentStep, onBeadClick }: {
     };
 
     return (
-        <div ref={containerRef} className="py-3 px-3" data-testid="bead-map">
-            {/* Intro beads */}
-            <div className="flex items-center justify-center gap-1.5 mb-3 flex-wrap">
-                {steps.slice(0, introEnd || 8).map((step, i) => renderBead(step, i))}
+        <div ref={containerRef} className="py-4 px-2 sm:px-4 w-full max-w-sm mx-auto flex flex-col items-center gap-4 sm:gap-5" data-testid="bead-map">
+            {/* Intro row */}
+            <div className="flex items-center justify-center gap-1.5 sm:gap-2 sm:pl-6 w-full min-h-[48px]">
+                {introBeads.map((step, i) => renderBead(step, i))}
             </div>
-            {/* Decades */}
-            <div className="space-y-2">
-                {decadeGroups.map((group, dIdx) => (
-                    <div key={dIdx} className="flex items-center justify-center gap-1 relative">
-                        <span className="text-[9px] font-bold text-muted-foreground/50 w-4 flex-shrink-0">{group.label}</span>
-                        <div className="flex items-center gap-1 flex-wrap justify-center">
-                            {steps.slice(group.startIdx, group.endIdx).map((step, i) => renderBead(step, group.startIdx + i))}
+
+            {/* Decades 1-5 */}
+            <div className="flex flex-col gap-2 sm:gap-3 w-full">
+                {decades.map((decade, i) => (
+                    <div key={i} className="flex items-center justify-start gap-3 sm:gap-4 w-full min-h-[48px]">
+                        <span className="text-[10px] sm:text-xs font-bold text-muted-foreground/60 w-3 text-right">{decade.label}</span>
+                        <div className="flex items-center gap-1 sm:gap-1.5 flex-1 flex-wrap">
+                            {decade.beads.map((step, j) => renderBead(step, decade.startIndex + j))}
                         </div>
                     </div>
                 ))}
             </div>
-            {/* Closing beads */}
-            {decadeGroups.length > 0 && (
-                <div className="flex items-center justify-center gap-1.5 mt-3 flex-wrap">
-                    {steps.slice(decadeGroups[decadeGroups.length - 1].endIdx).map((step, i) => renderBead(step, decadeGroups[decadeGroups.length - 1].endIdx + i))}
+
+            {/* Closing row */}
+            {closingBeads.length > 0 && (
+                <div className="flex items-center justify-center gap-1.5 sm:gap-2 sm:pl-6 w-full min-h-[48px] mt-2">
+                    {closingBeads.map((step, i) => renderBead(step, closingStartIndex + i))}
                 </div>
             )}
         </div>
@@ -287,7 +336,7 @@ export default function GuiaInterativoPage() {
     const t = useTranslations("RosaryGuide");
     const checkInT = useTranslations("CheckIn");
     const isMounted = useIsMounted();
-    const submitCheckIn = usePrayerStore((s) => s.submitCheckIn);
+    const addCheckIn = usePrayerStore((s) => s.addCheckIn);
 
     const todaysMystery = getTodaysMystery();
 
@@ -375,12 +424,12 @@ export default function GuiaInterativoPage() {
             setCompleted(true);
             localStorage.removeItem(SESSION_KEY);
             if (!autoCheckedIn) {
-                submitCheckIn(todaysMystery, undefined, []);
+                addCheckIn(new Date().toISOString(), todaysMystery, [], undefined);
                 setAutoCheckedIn(true);
             }
             if (wakeLockRef.current) wakeLockRef.current.release().catch(() => {});
         }
-    }, [currentStep, rosarySteps, triggerHaptic, saveSession, submitCheckIn, todaysMystery, autoCheckedIn]);
+    }, [currentStep, rosarySteps, triggerHaptic, saveSession, addCheckIn, todaysMystery, autoCheckedIn]);
 
     const handlePrev = useCallback(() => {
         triggerHaptic();
@@ -545,18 +594,18 @@ export default function GuiaInterativoPage() {
                             <BeadMap steps={rosarySteps} currentStep={currentStep} onBeadClick={handleBeadClick} />
 
                             {/* Progress */}
-                            <div className="mb-5 mt-1">
-                                <div className="flex justify-between text-xs text-muted-foreground mb-1.5 font-medium">
+                            <div className="mb-4 mt-1 px-2 sm:px-6">
+                                <div className="flex justify-between items-end text-xs text-muted-foreground mb-1.5 font-bold uppercase tracking-widest">
                                     <span>{t("start")}</span>
-                                    <span className="font-bold text-gold-600 dark:text-gold-400">{Math.round(progressPercent)}%</span>
+                                    <span className="text-gold-500">{Math.round(progressPercent)}%</span>
                                 </div>
-                                <div className="w-full bg-muted/50 rounded-full h-2 border border-border/50 overflow-hidden">
+                                <div className="w-full bg-muted/30 rounded-full h-1.5 border border-border/20 overflow-hidden">
                                     <div
-                                        className="bg-gradient-to-r from-gold-400 to-gold-600 h-2 rounded-full transition-all duration-500 ease-out"
+                                        className="bg-gold-500 h-1.5 rounded-full transition-all duration-500 ease-out"
                                         style={{ width: `${progressPercent}%` }}
                                     />
                                 </div>
-                                <div className="text-center mt-1.5 text-[11px] text-muted-foreground">
+                                <div className="text-center mt-2 text-[10px] text-muted-foreground/80 font-medium">
                                     {t("step", { current: currentStep + 1, total: rosarySteps.length })}
                                 </div>
                             </div>
@@ -672,8 +721,9 @@ export default function GuiaInterativoPage() {
                                         </div>
                                     ) : (
                                         /* ── Regular Prayer Step ── */
-                                        <div className="glass sacred-border p-6 sm:p-10 rounded-3xl text-center relative overflow-hidden shadow-xl min-h-[220px] flex flex-col justify-center">
-                                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gold-500/5 rounded-full blur-3xl" />
+                                        <div className="bg-[#13151A] border border-white/5 rounded-[2rem] p-6 sm:p-10 text-center relative overflow-hidden shadow-2xl min-h-[220px] flex flex-col justify-center">
+                                            {/* Decorative glow inside card */}
+                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-32 bg-gold-500/10 rounded-[100%] blur-2xl" />
 
                                             {/* Step type badge */}
                                             {(step.type === "montfort_intro" || step.type === "montfort_salutation" || step.type === "montfort_closing" || step.type === "decade_offering") && (
@@ -684,35 +734,41 @@ export default function GuiaInterativoPage() {
                                                 </div>
                                             )}
 
-                                            <h2 className={`font-cinzel font-bold text-gold-600 dark:text-gold-400 mb-4 relative z-10 ${isLongPrayer ? "text-xl sm:text-2xl" : "text-2xl sm:text-3xl"}`}>
+                                            <h2 className={`font-cinzel font-bold text-gold-500 uppercase tracking-wide mb-6 relative z-10 ${isLongPrayer ? "text-xl sm:text-2xl" : "text-2xl sm:text-3xl"}`}>
                                                 {getStepTitle(step, currentStep)}
                                             </h2>
 
                                             {step.latinKey ? (
-                                                /* Side-by-side: vernacular + Latin */
-                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 relative z-10 text-left">
+                                                /* ── Latin / Vernacular split ── */
+                                                <div className="flex flex-col gap-6 relative z-10 text-left">
                                                     <div>
-                                                        <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-2">
+                                                        <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground mb-3">
                                                             {t("latin.showVernacular")}
                                                         </p>
-                                                        <p className={`leading-relaxed text-foreground italic font-manrope ${isLongPrayer ? "text-xs sm:text-sm" : "text-sm sm:text-base"}`}>
+                                                        <p className={`leading-relaxed text-slate-200 italic font-manrope ${isLongPrayer ? "text-sm sm:text-base" : "text-base sm:text-lg"}`}>
                                                             {t(step.prayerKey)}
                                                         </p>
                                                     </div>
-                                                    <div className="border-t sm:border-t-0 sm:border-l border-border/50 pt-3 sm:pt-0 sm:pl-5">
-                                                        <p className="text-[10px] font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400 mb-2">
+                                                    <div className="w-full h-px bg-white/5" />
+                                                    <div>
+                                                        <p className="text-[9px] font-bold uppercase tracking-widest text-gold-500 mb-3">
                                                             {t("latin.toggle")}
                                                         </p>
-                                                        <p className={`leading-relaxed text-foreground/70 italic font-manrope ${isLongPrayer ? "text-xs sm:text-sm" : "text-sm sm:text-base"}`}>
+                                                        <p className={`leading-relaxed text-slate-400 italic font-manrope ${isLongPrayer ? "text-sm sm:text-base" : "text-base sm:text-lg"}`}>
                                                             {t(step.latinKey)}
                                                         </p>
                                                     </div>
                                                 </div>
                                             ) : (
                                                 /* No Latin version — single column */
-                                                <p className={`leading-relaxed text-foreground italic relative z-10 font-manrope ${isLongPrayer ? "text-sm sm:text-base" : "text-lg sm:text-xl"}`}>
-                                                    &ldquo;{t(step.prayerKey)}&rdquo;
-                                                </p>
+                                                <div className="relative z-10 text-left">
+                                                    <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground mb-3text-center">
+                                                        {t("meditate")}
+                                                    </p>
+                                                    <p className={`leading-relaxed text-slate-200 italic text-center font-manrope ${isLongPrayer ? "text-sm sm:text-base" : "text-lg sm:text-xl"}`}>
+                                                        {t(step.prayerKey)}
+                                                    </p>
+                                                </div>
                                             )}
                                         </div>
                                     )}
@@ -720,16 +776,16 @@ export default function GuiaInterativoPage() {
                             </AnimatePresence>
 
                             {/* Controls */}
-                            <div className="flex items-center justify-between mt-6 gap-3">
+                            <div className="flex items-center mt-6 gap-3 sm:gap-4 px-2 sm:px-0">
                                 <Button
                                     variant="outline"
-                                    size="lg"
+                                    size="icon"
                                     onClick={handlePrev}
                                     disabled={currentStep === 0}
-                                    className="rounded-full px-5 py-6 sacred-border hover:bg-muted/30"
+                                    className="rounded-full min-w-[3.5rem] w-14 h-14 bg-transparent border-white/10 hover:bg-white/5 text-white/70 hover:text-white transition-colors"
+                                    title={t("prev")}
                                 >
-                                    <ArrowLeft className="w-5 h-5 mr-1.5" />
-                                    <span className="hidden sm:inline">{t("prev")}</span>
+                                    <ArrowLeft className="w-6 h-6" />
                                 </Button>
 
                                 <Button
@@ -737,16 +793,16 @@ export default function GuiaInterativoPage() {
                                     size="icon"
                                     onClick={handleReset}
                                     disabled={currentStep === 0}
-                                    className="rounded-full w-12 h-12 sacred-border hover:bg-muted/30 text-muted-foreground"
+                                    className="rounded-full min-w-[3.5rem] w-14 h-14 bg-transparent border-white/10 hover:bg-white/5 text-white/50 hover:text-white transition-colors"
                                     title={t("reset")}
                                 >
-                                    <RefreshCw className="w-4 h-4" />
+                                    <RefreshCw className="w-5 h-5" />
                                 </Button>
 
                                 <Button
                                     size="lg"
                                     onClick={handleNext}
-                                    className="rounded-full px-6 py-6 text-base font-cinzel font-bold bg-gradient-to-r from-gold-500 to-gold-600 text-white hover:shadow-gold-glow transition-all"
+                                    className="flex-1 rounded-full h-14 text-base font-cinzel font-bold bg-gold-500 hover:bg-gold-600 text-[#1a1c22] transition-colors border-none"
                                 >
                                     {currentStep === rosarySteps.length - 1 ? t("finish") : t("next")}
                                     <ArrowRight className="w-5 h-5 ml-1.5" />

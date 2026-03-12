@@ -17,10 +17,10 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        cinzel: ['Cinzel', 'serif'],
-        manrope: ['Manrope', 'sans-serif'],
-        sans: ['Manrope', 'sans-serif'],
-        serif: ['Cinzel', 'serif'],
+        cinzel: ['var(--font-cinzel)', 'serif'],
+        manrope: ['var(--font-manrope)', 'sans-serif'],
+        sans: ['var(--font-manrope)', 'sans-serif'],
+        serif: ['var(--font-cinzel)', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",

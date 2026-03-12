@@ -85,13 +85,13 @@ export function MobileNav() {
             </button>
 
             <button
-              onClick={() => setCheckInOpen(true)}
+              onClick={() => navigateTo("/ferramentas/guia-interativo")}
               className="flex flex-col items-center justify-center -mt-3 group"
             >
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center shadow-gold-glow active:scale-90 transition-transform">
-                <Play className="w-5 h-5 text-sacred-blue ml-0.5" />
+                <Play className="w-5 h-5 text-sacred-blue ml-0.5 fill-current" />
               </div>
-              <span className="text-[10px] text-gold-400 mt-0.5 leading-tight font-bold">{commonT("praying")}</span>
+              <span className="text-[10px] text-gold-400 mt-1 leading-tight font-bold">{commonT("praying")}</span>
             </button>
 
             <button

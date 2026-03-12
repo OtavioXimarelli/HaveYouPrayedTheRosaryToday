@@ -32,7 +32,7 @@ export function LightRays({
   distortion = 0,
 }: LightRaysProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const mousePosRef = useRef({ x: 0, y: 0 });
   const animationRef = useRef<number | null>(null);
   const timeRef = useRef<number>(0);
 
@@ -43,10 +43,10 @@ export function LightRays({
     const handleMouseMove = (e: MouseEvent) => {
       if (canvasRef.current) {
         const rect = canvasRef.current.getBoundingClientRect();
-        setMousePos({
+        mousePosRef.current = {
           x: (e.clientX - rect.left) / rect.width,
           y: (e.clientY - rect.top) / rect.height,
-        });
+        };
       }
     };
 
@@ -63,20 +63,24 @@ export function LightRays({
 
     // Set canvas size
     const updateSize = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      // Performance optimization: Cap devicePixelRatio at 1.5 for performance on high-DPI low-end phones
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      canvas.width = canvas.offsetWidth * dpr;
+      canvas.height = canvas.offsetHeight * dpr;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
     };
     updateSize();
 
     const animate = () => {
       timeRef.current += raysSpeed * 0.01;
 
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       // Clear canvas
-      ctx.clearRect(0, 0, canvas.width / window.devicePixelRatio, canvas.height / window.devicePixelRatio);
+      ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
 
-      const width = canvas.width / window.devicePixelRatio;
-      const height = canvas.height / window.devicePixelRatio;
+      const width = canvas.width / dpr;
+      const height = canvas.height / dpr;
 
       // Determine origin point
       let originX = width / 2;
@@ -92,12 +96,14 @@ export function LightRays({
 
       // Apply mouse influence
       if (followMouse) {
-        originX += (mousePos.x * width - originX) * mouseInfluence;
-        originY += (mousePos.y * height - originY) * mouseInfluence;
+        originX += (mousePosRef.current.x * width - originX) * mouseInfluence;
+        originY += (mousePosRef.current.y * height - originY) * mouseInfluence;
       }
 
-      // Draw rays
-      const rayCount = 12;
+      // Draw rays - optimize count for small screens
+      const isMobile = width < 768;
+      const rayCount = isMobile ? 8 : 12;
+      
       for (let i = 0; i < rayCount; i++) {
         const angle = (i / rayCount) * Math.PI * 2 + timeRef.current * 0.5;
         const speed = Math.sin(timeRef.current + i) * 0.1;
@@ -138,7 +144,8 @@ export function LightRays({
         ctx.restore();
       }
 
-      // Pulsating effect
+      // Pulsating effect - disable on mobile if too heavy? 
+      // For now just keep it as it's a simple fillRect
       if (pulsating) {
         const pulse = Math.sin(timeRef.current * 0.5) * 0.3 + 0.7;
         ctx.globalAlpha = pulse;
@@ -156,12 +163,12 @@ export function LightRays({
       window.removeEventListener("resize", updateSize);
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [raysColor, raysSpeed, lightSpread, rayLength, pulsating, mouseInfluence, followMouse]);
+  }, [raysColor, raysSpeed, lightSpread, rayLength, pulsating, mouseInfluence, followMouse, raysOrigin]);
 
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
+      className="absolute inset-0 w-full h-full pointer-events-none will-change-transform"
     />
   );
 }

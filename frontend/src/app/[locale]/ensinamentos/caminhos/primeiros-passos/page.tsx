@@ -1,6 +1,5 @@
-"use client";
-
-import { useRouter } from "@/i18n/routing";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/routing";
 import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { LessonCard } from "@/components/learning/lesson-card";
@@ -9,60 +8,34 @@ import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { AUTH_DISABLED } from "@/providers/auth-provider";
+import { getCaminhoLessons } from "@/lib/content";
 
-import { useTranslations } from "next-intl";
+interface Props {
+  params: {
+    locale: string;
+  };
+}
 
-export default function PrimeirosPassosPage() {
-  const router = useRouter();
-  const t = useTranslations("Teachings");
+export default async function PrimeirosPassosPage({ params }: Props) {
+  const { locale } = params;
+  const t = await getTranslations({ locale, namespace: "Teachings" });
   const LOCKED = AUTH_DISABLED ? false : true;
 
-  // Mock data
-  const completedLessons: string[] = []; // Would come from localStorage
+  // Real data from MDX
+  const lessonsData = getCaminhoLessons("primeiros-passos", locale);
 
-  const lessons = [
-    {
-      id: "o-que-e-rosario",
-      number: 1,
-      title: t("pathPages.primeiros-passos.l1.title"),
-      description: t("pathPages.primeiros-passos.l1.desc"),
-      duration: "15 min",
-      isLocked: false
-    },
-    {
-      id: "papel-de-maria",
-      number: 2,
-      title: t("pathPages.primeiros-passos.l2.title"),
-      description: t("pathPages.primeiros-passos.l2.desc"),
-      duration: "20 min",
-      isLocked: false
-    },
-    {
-      id: "poder-oracao-repetitiva",
-      number: 3,
-      title: t("pathPages.primeiros-passos.l3.title"),
-      description: t("pathPages.primeiros-passos.l3.desc"),
-      duration: "15 min",
-      isLocked: LOCKED
-    },
-    {
-      id: "habito-diario",
-      number: 4,
-      title: t("pathPages.primeiros-passos.l4.title"),
-      description: t("pathPages.primeiros-passos.l4.desc"),
-      duration: "12 min",
-      isLocked: LOCKED
-    },
-    {
-      id: "vencendo-distracoes",
-      number: 5,
-      title: t("pathPages.primeiros-passos.l5.title"),
-      description: t("pathPages.primeiros-passos.l5.desc"),
-      duration: "18 min",
-      isLocked: LOCKED
-    }
-  ];
+  // Map to the format needed by the UI
+  const lessons = lessonsData.map((lesson) => ({
+    id: lesson.slug,
+    number: lesson.order ?? 99,
+    title: lesson.title,
+    description: lesson.excerpt,
+    duration: lesson.readingTime,
+    isLocked: LOCKED && (lesson.order ?? 99) > 2 // Arbitrary lock rule based on order if locked
+  }));
 
+  // Mock checking progress
+  const completedLessons: string[] = [];
   const completedCount = lessons.filter(l => completedLessons.includes(l.id)).length;
 
   return (
@@ -75,11 +48,11 @@ export default function PrimeirosPassosPage() {
         />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-          <BreadcrumbNav 
+          <BreadcrumbNav
             items={[
               { label: t("breadcrumb"), path: "/ensinamentos?tab=caminhos" },
               { label: t("pathLabels.primeiros-passos") }
-            ]} 
+            ]}
           />
 
           {/* Intro */}
@@ -105,7 +78,7 @@ export default function PrimeirosPassosPage() {
             <div className="p-5 rounded-2xl glass sacred-border">
               <ProgressBar
                 current={completedCount}
-                total={lessons.length}
+                total={lessons.length > 0 ? lessons.length : 1}
                 label={t("pathPages.progress")}
               />
             </div>
@@ -114,20 +87,27 @@ export default function PrimeirosPassosPage() {
           {/* Lessons */}
           <section className="mb-12">
             <h2 className="text-xl font-cinzel font-bold text-foreground mb-6">{t("pathPages.lessons")}</h2>
-            <div className="space-y-4">
-              {lessons.map((lesson) => (
-                <LessonCard
-                  key={lesson.id}
-                  title={lesson.title}
-                  description={lesson.description}
-                  duration={lesson.duration}
-                  path={`/ensinamentos/caminhos/primeiros-passos/${lesson.id}`}
-                  lessonNumber={lesson.number}
-                  isCompleted={completedLessons.includes(lesson.id)}
-                  isLocked={lesson.isLocked}
-                />
-              ))}
-            </div>
+
+            {lessons.length > 0 ? (
+              <div className="space-y-4">
+                {lessons.map((lesson) => (
+                  <LessonCard
+                    key={lesson.id}
+                    title={lesson.title}
+                    description={lesson.description}
+                    duration={lesson.duration}
+                    path={`/ensinamentos/caminhos/primeiros-passos/${lesson.id}`}
+                    lessonNumber={lesson.number}
+                    isCompleted={completedLessons.includes(lesson.id)}
+                    isLocked={lesson.isLocked}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-10 glass rounded-3xl sacred-border">
+                <p className="text-muted-foreground">Novas lições em breve.</p>
+              </div>
+            )}
           </section>
 
           {/* Next Path CTA */}
@@ -140,13 +120,15 @@ export default function PrimeirosPassosPage() {
                 {t("pathPages.nextStepDesc")}
               </p>
               <Button
+                asChild
                 size="lg"
-                onClick={() => router.push("/ensinamentos/caminhos/aprofundando")}
                 className="rounded-full px-8 py-6 text-base font-cinzel font-bold bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:shadow-lg transition-all"
                 data-testid="next-path-btn"
               >
-                {t("pathPages.nextStepBtn")}
-                <ArrowRight className="w-5 h-5 ml-2" />
+                <Link href="/ensinamentos/caminhos/aprofundando">
+                  {t("pathPages.nextStepBtn")}
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Link>
               </Button>
             </div>
           </section>
