@@ -7,6 +7,9 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { CheckInsModule } from './modules/checkins/checkins.module';
 import { PrayersModule } from './modules/prayers/prayers.module';
+import { JournalModule } from './modules/journal/journal.module';
+import { TeachingsModule } from './modules/teachings/teachings.module';
+import { MeditationModule } from './modules/meditation/meditation.module';
 import { HealthController } from './health.controller';
 
 @Module({
@@ -41,6 +44,9 @@ import { HealthController } from './health.controller';
     UsersModule,
     CheckInsModule,
     PrayersModule,
+    JournalModule,
+    TeachingsModule,
+    MeditationModule,
   ],
   controllers: [HealthController],
 })
