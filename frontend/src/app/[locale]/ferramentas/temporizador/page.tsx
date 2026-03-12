@@ -20,6 +20,7 @@ const formatTime = (ms: number) => {
 };
 
 export default function TemporizadorPage() {
+  const t = useTranslations("Temporizador");
   const [selectedMinutes, setSelectedMinutes] = useState(15);
   const { remainingMs, isRunning, start, pause, reset, duration } = useTimer(selectedMinutes * 60 * 1000);
   const [wakeLockActive, setWakeLockActive] = useState(false);
@@ -87,7 +88,7 @@ export default function TemporizadorPage() {
   return (
     <PageTransition>
       <div className="min-h-screen bg-background pb-24">
-        <PageHeader title="Temporizador" subtitle="Silêncio e meditação contemplativa." icon="⏳" />
+        <PageHeader title={t("title")} subtitle={t("subtitle")} icon="⏳" />
 
         <main className="max-w-3xl mx-auto px-4 sm:px-6 mt-8 flex flex-col items-center justify-center min-h-[60vh]">
           
@@ -95,7 +96,7 @@ export default function TemporizadorPage() {
           <div className="flex items-center justify-center gap-3 mb-8 w-full">
             <div className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border transition-colors ${wakeLockActive ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30" : "bg-muted text-muted-foreground border-transparent"}`}>
                <Monitor className="w-3.5 h-3.5" />
-               <span>{wakeLockActive ? "Tela Ativa" : "Tela Normal"}</span>
+               <span>{wakeLockActive ? t("screenActive") : t("screenNormal")}</span>
             </div>
           </div>
 
@@ -132,7 +133,7 @@ export default function TemporizadorPage() {
                  {formatTime(remainingMs)}
                </span>
                <span className="text-xs uppercase tracking-widest text-muted-foreground font-bold flex items-center gap-1.5">
-                  <TimerIcon className="w-3.5 h-3.5" /> Meditação
+                  <TimerIcon className="w-3.5 h-3.5" /> {t("meditation")}
                </span>
             </div>
           </div>
@@ -142,7 +143,7 @@ export default function TemporizadorPage() {
              <button 
                onClick={() => reset()} 
                className="w-14 h-14 rounded-full flex items-center justify-center border border-border bg-card text-muted-foreground hover:text-foreground hover:border-gold-500/30 transition-all hover:-translate-y-1"
-               title="Reiniciar"
+               title={t("restart")}
              >
                 <RotateCcw className="w-5 h-5" />
              </button>
@@ -160,7 +161,7 @@ export default function TemporizadorPage() {
                   generateQuickPillAnimation();
                }}
                className="w-14 h-14 rounded-full flex items-center justify-center border border-border bg-card text-muted-foreground hover:text-foreground hover:border-gold-500/30 transition-all hover:-translate-y-1"
-               title="Opções"
+               title={t("options")}
              >
                 <Settings2 className="w-5 h-5" />
              </button>
@@ -168,7 +169,7 @@ export default function TemporizadorPage() {
 
           {/* Quick Select */}
           <div className="w-full max-w-sm animate-fade-up">
-            <h3 className="text-center text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Escolher a Duração</h3>
+            <h3 className="text-center text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">{t("chooseDuration")}</h3>
             <div className="flex flex-wrap justify-center gap-3">
                {QUICK_MINUTES.map(mins => (
                  <button
@@ -176,7 +177,7 @@ export default function TemporizadorPage() {
                    onClick={() => handleSelectMinutes(mins)}
                    className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all ${selectedMinutes === mins ? "bg-gold-500/20 text-gold-600 dark:text-gold-400 border border-gold-500/50 shadow-sm" : "bg-card border border-border text-foreground hover:border-gold-500/30"}`}
                  >
-                   {mins} min
+                   {mins} {t("min")}
                  </button>
                ))}
             </div>

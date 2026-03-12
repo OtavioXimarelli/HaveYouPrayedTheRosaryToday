@@ -34,7 +34,16 @@ export const useJournalStore = create<JournalState>()(
     }),
     {
       name: 'rosario-vivo-journal-storage',
-      storage: createJSONStorage(() => typeof window !== 'undefined' ? window.localStorage : undefined as any),
+      storage: createJSONStorage(() => {
+        if (typeof window === 'undefined') {
+          return {
+            getItem: () => null,
+            setItem: () => {},
+            removeItem: () => {},
+          } as unknown as Storage;
+        }
+        return window.localStorage;
+      }),
       merge: (persistedState: any, currentState) => {
         if (!persistedState) return currentState;
 

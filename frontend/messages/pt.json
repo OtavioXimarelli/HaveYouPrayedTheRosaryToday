@@ -1791,5 +1791,16 @@
     "yesEmpty": "Sim, Excluir",
     "nothingToSave": "Nada para salvar",
     "nothingToSaveDesc": "Escreva ao menos uma reflexão ou uma intenção antes de salvar."
+  },
+  "Temporizador": {
+    "title": "Temporizador",
+    "subtitle": "Silêncio e meditação contemplativa.",
+    "screenActive": "Tela Ativa",
+    "screenNormal": "Tela Normal",
+    "meditation": "Meditação",
+    "restart": "Reiniciar",
+    "options": "Opções",
+    "chooseDuration": "Escolher a Duração",
+    "min": "min"
   }
 }

@@ -119,7 +119,7 @@ export default function IntentionsWallPage() {
                         onClick={() => setNewCategory(c.id as IntentionCategory)}
                         className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider border transition-all ${newCategory === c.id ? c.color : "bg-muted text-muted-foreground border-transparent hover:bg-muted/80"}`}
                       >
-                         {c.id}
+                         {t(c.labelKey)}
                       </button>
                     ))}
                   </div>
@@ -141,7 +141,7 @@ export default function IntentionsWallPage() {
                   onClick={() => setActiveFilter(c.id as any)}
                   className={`px-4 py-2 flex-shrink-0 rounded-full text-xs font-bold uppercase tracking-wider border transition-all ${activeFilter === c.id ? c.color : "bg-muted text-muted-foreground border-transparent hover:bg-muted/80"}`}
                 >
-                  {c.id}
+                  {t(c.labelKey)}
                 </button>
               ))}
             </div>
@@ -173,7 +173,7 @@ export default function IntentionsWallPage() {
                   <div key={intention.id} className={`break-inside-avoid mb-6 relative p-6 rounded-2xl border transition-all duration-300 hover:shadow-lg ${isAnswered ? "bg-gradient-to-br from-gold-500/10 to-amber-500/5 border-gold-500/30" : "bg-card border-border hover:border-gold-500/30"}`}>
                     <div className="flex items-start justify-between mb-3">
                       <span className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full border ${catInfo?.color}`}>
-                        {intention.category}
+                        {catInfo ? t(catInfo.labelKey) : intention.category}
                       </span>
                       {isAnswered && (
                         <span className="flex items-center gap-1 text-xs font-bold text-gold-600 dark:text-gold-400">

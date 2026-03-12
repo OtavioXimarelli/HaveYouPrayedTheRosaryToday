@@ -1755,5 +1755,16 @@
     "yesEmpty": "Yes, Delete",
     "nothingToSave": "Nothing to save",
     "nothingToSaveDesc": "Write at least a reflection or an intention before saving."
+  },
+  "Temporizador": {
+    "title": "Timer",
+    "subtitle": "Silence and contemplative meditation.",
+    "screenActive": "Screen Awake",
+    "screenNormal": "Screen Normal",
+    "meditation": "Meditation",
+    "restart": "Restart",
+    "options": "Options",
+    "chooseDuration": "Choose Duration",
+    "min": "min"
   }
 }
