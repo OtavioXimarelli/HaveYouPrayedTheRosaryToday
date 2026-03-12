@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
@@ -11,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useIsMounted } from "@/hooks/use-hydrated";
 
 export default function DiarioEspiritualPage() {
+    const t = useTranslations("Diario");
     const [currentContent, setCurrentContent] = useState("");
     const [currentIntentions, setCurrentIntentions] = useState("");
     const [currentMystery, setCurrentMystery] = useState("Mistérios Gozosos");
@@ -35,19 +37,35 @@ export default function DiarioEspiritualPage() {
         }
     }, [today, entries, isMounted]);
 
+    const canSave = currentContent.trim().length > 0 || currentIntentions.trim().length > 0;
+
     const handleSave = () => {
+        const trimmedContent = currentContent.trim();
+        const trimmedIntentions = currentIntentions.trim();
+
+        if (!canSave) {
+            toast({
+                variant: "destructive",
+                title: t("nothingToSave"),
+                description: t("nothingToSaveDesc"),
+            });
+            return;
+        }
+
+        const contentToSave = trimmedContent || trimmedIntentions;
         const todayEntry = entries.find((e) => e.date.startsWith(today));
+
         if (todayEntry) {
              updateEntry(todayEntry.id, {
-                 content: currentContent,
-                 intentions: currentIntentions,
+                 content: contentToSave,
+                 intentions: trimmedIntentions,
                  mystery: currentMystery,
              });
         } else {
              addEntry({
                  date: new Date().toISOString(),
-                 content: currentContent,
-                 intentions: currentIntentions,
+                 content: contentToSave,
+                 intentions: trimmedIntentions,
                  mystery: currentMystery,
                  tags: [],
              });
@@ -91,8 +109,8 @@ export default function DiarioEspiritualPage() {
         <PageTransition>
             <main className="min-h-screen bg-background">
                 <PageHeader
-                    title="Diário Espiritual"
-                    subtitle="Um espaço sagrado para suas reflexões diárias, intenções e anotações após a oração."
+                    title={t('title')}
+                    subtitle={t('subtitle')}
                     icon="❤️"
                 />
 
@@ -111,7 +129,7 @@ export default function DiarioEspiritualPage() {
                                 <div className="flex items-center justify-between mb-6">
                                     <h3 className="text-xl font-cinzel font-bold text-foreground flex items-center gap-2">
                                         <CalendarIcon className="w-5 h-5 text-rose-500" />
-                                        Reflexão de Hoje
+                                        {t('todaysMystery')}
                                     </h3>
                                     <span className="text-sm font-medium text-muted-foreground bg-muted/50 px-3 py-1 rounded-full">
                                         {new Date().toLocaleDateString("pt-BR", { weekday: "long", day: "numeric", month: "long" })}
@@ -121,7 +139,7 @@ export default function DiarioEspiritualPage() {
                                 <div className="space-y-5">
                                     <div>
                                         <label className="block text-sm font-medium text-muted-foreground mb-2">
-                                            Mistério Contemplado
+                                            {t('chooseMystery')}
                                         </label>
                                         <select
                                             value={currentMystery}
@@ -137,24 +155,24 @@ export default function DiarioEspiritualPage() {
 
                                     <div>
                                         <label className="block text-sm font-medium text-muted-foreground mb-2">
-                                            Intenções Pessoais
+                                            {t('intentionsLabel')}
                                         </label>
                                         <textarea
                                             value={currentIntentions}
                                             onChange={(e) => setCurrentIntentions(e.target.value)}
-                                            placeholder="Por quem você ofereceu o Rosário hoje?"
+                                            placeholder={t('intentionsPlaceholder')}
                                             className="w-full bg-background border border-border/50 rounded-xl px-4 py-3 text-foreground focus:ring-2 focus:ring-rose-500/50 outline-none transition-all min-h-[100px] resize-y"
                                         />
                                     </div>
 
                                     <div>
                                         <label className="block text-sm font-medium text-muted-foreground mb-2">
-                                            Reflexão / Inspiração
+                                            {t('reflectionLabel')}
                                         </label>
                                         <textarea
                                             value={currentContent}
                                             onChange={(e) => setCurrentContent(e.target.value)}
-                                            placeholder="O que Deus falou ao seu coração durante a meditação?"
+                                            placeholder={t('reflectionPlaceholder')}
                                             className="w-full bg-background border border-border/50 rounded-xl px-4 py-3 text-foreground focus:ring-2 focus:ring-rose-500/50 outline-none transition-all min-h-[200px] resize-y leading-relaxed"
                                         />
                                     </div>
@@ -163,10 +181,11 @@ export default function DiarioEspiritualPage() {
                                 <div className="mt-8 flex flex-wrap gap-3">
                                     <Button
                                         onClick={handleSave}
+                                        disabled={!canSave}
                                         className="rounded-full bg-gradient-to-r from-rose-500 to-rose-600 text-white font-bold hover:shadow-lg hover:shadow-rose-500/20 px-8"
                                     >
                                         <Save className="w-4 h-4 mr-2" />
-                                        Salvar
+                                        {t('save')}
                                     </Button>
 
                                     <Button
@@ -175,7 +194,7 @@ export default function DiarioEspiritualPage() {
                                         className="rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10 border-border/50"
                                     >
                                         <Trash2 className="w-4 h-4 mr-2" />
-                                        Limpar
+                                        {t('clear')}
                                     </Button>
                                 </div>
                             </div>
@@ -184,7 +203,7 @@ export default function DiarioEspiritualPage() {
                         {/* Sidebar Data */}
                         <div className="space-y-6">
                             <div className="glass sacred-border p-6 rounded-3xl">
-                                <h3 className="font-cinzel font-bold text-foreground mb-4">Suas Anotações</h3>
+                                <h3 className="font-cinzel font-bold text-foreground mb-4">{t('previousEntries')}</h3>
                                 <p className="text-sm text-muted-foreground mb-6">
                                     Seu diário fica salvo apenas no seu dispositivo de forma privada garantindo a confidencialidade das suas orações.
                                 </p>
@@ -201,7 +220,7 @@ export default function DiarioEspiritualPage() {
                                     className="w-full rounded-xl sacred-border"
                                 >
                                     <Download className="w-4 h-4 mr-2" />
-                                    Exportar Backup (JSON)
+                                    {t('export')}
                                 </Button>
                             </div>
 

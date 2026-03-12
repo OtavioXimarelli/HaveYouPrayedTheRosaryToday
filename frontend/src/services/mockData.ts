@@ -191,7 +191,7 @@ export function getDefaultStats(): UserStats {
     longestStreak: 0,
     totalCheckIns: 0,
     lastCheckIn: undefined,
-    favoriteMysterys: [],
+    favoriteMysteries: [],
   };
 }
 

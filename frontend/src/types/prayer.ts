@@ -1,11 +1,11 @@
 import { z } from 'zod';
 import { ISODateSchema } from './shared';
-import { MysteryType } from './index';
+import { MysteryType, MYSTERY_TYPES } from './index';
 
 export const PrayerCheckInSchema = z.object({
   id: z.string().uuid(),
   date: ISODateSchema,
-  mystery: z.enum(['joyful', 'luminous', 'sorrowful', 'glorious']),
+  mystery: z.enum(MYSTERY_TYPES),
   intentions: z.array(z.string()).default([]),
   reflection: z.string().optional(),
 });
@@ -18,7 +18,7 @@ export interface PrayerState {
   currentStreak: number;
   longestStreak: number;
   totalCheckIns: number;
-  favoriteMysterys: MysteryType[];
+  favoriteMysteries: MysteryType[];
   addCheckIn: (date: string, mystery: MysteryType, intentions?: string[], reflection?: string) => void;
   resetStreakIfNeeded: () => void;
   getWeeklyProgress: () => number;

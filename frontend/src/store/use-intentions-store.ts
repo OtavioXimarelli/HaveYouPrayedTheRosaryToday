@@ -52,7 +52,7 @@ export const useIntentionsStore = create<IntentionsState>()(
     }),
     {
       name: 'rosario-vivo-intentions-storage',
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => typeof window !== 'undefined' ? window.localStorage : undefined as any),
       merge: (persistedState: any, currentState) => {
         if (!persistedState) return currentState;
 

@@ -21,9 +21,7 @@ const CATEGORIES: { id: IntentionCategory | "all"; labelKey: string; color: stri
 ];
 
 export default function IntentionsWallPage() {
-  // Using CheckIn translations for now, or Common, or a new namespace if requested.
-  // The user didn't specify a translation file, so we'll fallback to hardcoded Pt-Br for MVP mapping,
-  // or use basic generic t() if it exists. We'll mix hardcoded Portuguese matching the PRD.
+  const t = useTranslations("Mural");
   const intentions = useIntentionsStore((s) => s.intentions);
   const addIntention = useIntentionsStore((s) => s.addIntention);
   const incrementPrayedCount = useIntentionsStore((s) => s.incrementPrayedCount);
@@ -74,7 +72,7 @@ export default function IntentionsWallPage() {
   return (
     <PageTransition>
       <div className="min-h-screen bg-background pb-24">
-        <PageHeader title="Mural de Intenções" subtitle="Deposite suas intenções e reze pelas necessidades dos irmãos." icon="📌" />
+        <PageHeader title={t('title')} subtitle={t('subtitle')} icon="📌" />
 
         <main className="max-w-6xl mx-auto px-4 sm:px-6 mt-8 space-y-8">
           
@@ -82,18 +80,18 @@ export default function IntentionsWallPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="p-6 rounded-2xl bg-card border border-border flex flex-col justify-center items-center text-center">
               <span className="text-3xl font-cinzel font-bold text-foreground">{activeCount}</span>
-              <span className="text-xs uppercase tracking-wider text-muted-foreground font-bold mt-1">Intenções Ativas</span>
+              <span className="text-xs uppercase tracking-wider text-muted-foreground font-bold mt-1">{t('activeIntentions')}</span>
             </div>
             <div className="p-6 rounded-2xl bg-card border border-border flex flex-col justify-center items-center text-center">
               <span className="text-3xl font-cinzel font-bold text-gold-600 dark:text-gold-400">{answeredCount}</span>
-              <span className="text-xs uppercase tracking-wider text-muted-foreground font-bold mt-1">Graças Alcançadas</span>
+              <span className="text-xs uppercase tracking-wider text-muted-foreground font-bold mt-1">{t('answeredGraces')}</span>
             </div>
             <button 
               onClick={() => setIsCreating(true)}
               className="p-6 rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 flex flex-col justify-center items-center text-white hover:shadow-gold-glow-lg transition-all duration-300 hover:-translate-y-1"
             >
               <Plus className="w-8 h-8 mb-2" />
-              <span className="font-cinzel font-bold tracking-widest text-sm uppercase">Nova Intenção</span>
+              <span className="font-cinzel font-bold tracking-widest text-sm uppercase">{t('newIntention')}</span>
             </button>
           </div>
 
@@ -102,17 +100,17 @@ export default function IntentionsWallPage() {
             <div className="p-6 rounded-2xl bg-card border border-gold-500/50 shadow-xl shadow-gold-500/10 animate-fade-in">
               <form onSubmit={handleCreate} className="space-y-4">
                 <div className="flex flex-col mb-4">
-                  <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">Sua Intenção</label>
+                  <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">{t('yourIntention')}</label>
                   <input 
                     autoFocus
                     value={newTitle}
                     onChange={(e) => setNewTitle(e.target.value)}
-                    placeholder="Ex: Pela saúde da minha mãe..."
+                    placeholder={t('placeholder')}
                     className="w-full bg-background border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-gold-500 transition-colors"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2 block">Categoria</label>
+                  <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2 block">{t('category')}</label>
                   <div className="flex flex-wrap gap-2">
                     {CATEGORIES.filter(c => c.id !== "all").map(c => (
                       <button
@@ -127,8 +125,8 @@ export default function IntentionsWallPage() {
                   </div>
                 </div>
                 <div className="flex justify-end gap-3 pt-4 border-t border-border">
-                  <Button type="button" variant="ghost" onClick={() => setIsCreating(false)}>Cancelar</Button>
-                  <Button type="submit" disabled={!newTitle.trim()} className="bg-gold-600 hover:bg-gold-700 text-white rounded-full px-6">Publicar</Button>
+                  <Button type="button" variant="ghost" onClick={() => setIsCreating(false)}>{t('cancel')}</Button>
+                  <Button type="submit" disabled={!newTitle.trim()} className="bg-gold-600 hover:bg-gold-700 text-white rounded-full px-6">{t('publish')}</Button>
                 </div>
               </form>
             </div>
@@ -150,7 +148,7 @@ export default function IntentionsWallPage() {
             <div className="relative w-full sm:w-64">
               <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <input 
-                placeholder="Buscar intenções..." 
+                placeholder={t('search')} 
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full bg-card border border-border rounded-full pl-9 pr-4 py-2 text-sm focus:outline-none focus:border-gold-500 transition-colors"
@@ -162,8 +160,8 @@ export default function IntentionsWallPage() {
           {filteredIntentions.length === 0 ? (
             <div className="text-center py-20 px-4">
               <span className="text-5xl block mb-4">🕊️</span>
-              <h3 className="text-xl font-cinzel font-bold text-foreground mb-2">Nenhuma intenção encontrada</h3>
-              <p className="text-muted-foreground">Seja o primeiro a depositar uma intenção neste espaço sagrado.</p>
+              <h3 className="text-xl font-cinzel font-bold text-foreground mb-2">{t('emptyTitle')}</h3>
+              <p className="text-muted-foreground">{t('emptyDesc')}</p>
             </div>
           ) : (
             <div className="columns-1 md:columns-2 lg:columns-3 gap-6">
@@ -179,7 +177,7 @@ export default function IntentionsWallPage() {
                       </span>
                       {isAnswered && (
                         <span className="flex items-center gap-1 text-xs font-bold text-gold-600 dark:text-gold-400">
-                          <CheckCircle2 className="w-4 h-4" /> Graça Alcançada
+                          <CheckCircle2 className="w-4 h-4" /> {t('answered')}
                         </span>
                       )}
                     </div>
@@ -192,7 +190,7 @@ export default function IntentionsWallPage() {
                       <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                         <Heart className={`w-4 h-4 ${intention.prayedCount > 0 ? "text-rose-500 fill-rose-500/20" : ""}`} />
                         <span className={intention.prayedCount > 0 ? "font-bold text-foreground" : ""}>
-                          {intention.prayedCount} {intention.prayedCount === 1 ? 'Terço' : 'Terços'}
+                          {t('prayedCount', { count: intention.prayedCount })}
                         </span>
                       </div>
                       
@@ -203,13 +201,13 @@ export default function IntentionsWallPage() {
                             className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground hover:text-gold-500 transition-colors px-2"
                             title="Marcar como graça alcançada"
                           >
-                            Alcançada?
+                            {t('markAnswered')}
                           </button>
                           <button 
                             onClick={(e) => handleIncrement(intention.id, e)}
                             className="bg-gold-100 hover:bg-gold-200 dark:bg-gold-500/20 dark:hover:bg-gold-500/30 text-gold-700 dark:text-gold-400 text-xs font-bold px-3 py-1.5 rounded-full transition-colors flex items-center gap-1"
                           >
-                            +1 Terço
+                            {t('addPrayer')}
                           </button>
                         </div>
                       ) : (

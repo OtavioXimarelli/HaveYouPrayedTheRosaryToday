@@ -11,7 +11,7 @@ export const usePrayerStore = create<PrayerState>()(
       currentStreak: 0,
       longestStreak: 0,
       totalCheckIns: 0,
-      favoriteMysterys: [],
+      favoriteMysteries: [],
 
       addCheckIn: (date, mystery, intentions = [], reflection?: string) => {
         get().resetStreakIfNeeded();
@@ -41,7 +41,7 @@ export const usePrayerStore = create<PrayerState>()(
             currentStreak: state.currentStreak + 1,
             longestStreak: isNewStreakRecord ? state.currentStreak + 1 : state.longestStreak,
             totalCheckIns: state.totalCheckIns + 1,
-            favoriteMysterys: sortedFavs.slice(0, 3)
+            favoriteMysteries: sortedFavs.slice(0, 3)
           };
         });
       },
@@ -91,7 +91,7 @@ export const usePrayerStore = create<PrayerState>()(
     }),
     {
       name: 'rosario-vivo-prayer-storage',
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => typeof window !== 'undefined' ? window.localStorage : undefined as any),
       merge: (persistedState: any, currentState) => {
         if (!persistedState) return currentState;
 

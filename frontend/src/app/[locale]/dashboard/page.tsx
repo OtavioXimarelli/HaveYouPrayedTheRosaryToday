@@ -103,7 +103,7 @@ export default function DashboardPage() {
   const getWeeklyProgress = usePrayerStore((s) => s.getWeeklyProgress);
   const getRecentActivity = usePrayerStore((s) => s.getRecentActivity);
   const storeHasCheckedInToday = usePrayerStore((s) => s.hasCheckedInToday);
-  const favoriteMysterys = usePrayerStore((s) => s.favoriteMysterys);
+  const favoriteMysteries = usePrayerStore((s) => s.favoriteMysteries);
 
   const [currentTime, setCurrentTime] = useState(new Date());
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
@@ -162,7 +162,7 @@ export default function DashboardPage() {
   const hasCheckedInToday = isMounted ? storeHasCheckedInToday() : false;
   const weeklyProgress = isMounted ? getWeeklyProgress() : 0;
   const recentActivity = isMounted ? getRecentActivity(5) : [];
-  const favMystery = isMounted && favoriteMysterys.length > 0 ? favoriteMysterys[0] : null;
+  const favMystery = isMounted && favoriteMysteries.length > 0 ? favoriteMysteries[0] : null;
   const communityFeed = mockCheckIns.slice(0, 3);
 
   const checkInDateSet = useMemo(() => {

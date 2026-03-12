@@ -142,55 +142,60 @@ function BeadMap({ steps, currentStep, onBeadClick }: {
         }
     }, [currentStep]);
 
-    // Grouping logic based on exact sequence
-    let introEnd = -1;
-    for (let i = 0; i < steps.length; i++) {
-        if (steps[i].type === "mystery_start") {
-            introEnd = i;
-            break;
-        }
-    }
-    // If no mysteries found, fallback
-    if (introEnd === -1) introEnd = 8;
-
-    const introBeads = steps.slice(0, introEnd);
-    
+    // Single linear pass grouping logic
+    const introBeads: RosaryStep[] = [];
     const decades: { label: string; startIndex: number; beads: RosaryStep[] }[] = [];
-    let closingStartIndex = steps.length;
+    const closingBeads: RosaryStep[] = [];
+    
+    let currentDecadeBeads: RosaryStep[] = [];
+    let currentDecadeStartIndex = 0;
+    let phase: "intro" | "decades" | "closing" = "intro";
 
-    let currentIndex = introEnd;
-    for (let d = 1; d <= 5; d++) {
-        // Find the next mystery_start or end of array
-        let nextMysteryIdx = steps.length;
-        for (let i = currentIndex + 1; i < steps.length; i++) {
-            if (steps[i].type === "mystery_start") {
-                nextMysteryIdx = i;
-                break;
-            }
-        }
+    for (let i = 0; i < steps.length; i++) {
+        const step = steps[i];
         
-        // If this is the 5th decade, the next "mystery_start" doesn't exist, we must find the start of closing beads.
-        if (d === 5) {
-            // Closing beads start after the last fatima or glory. 
-            // Our sequence closing starts with "closing" (salveRegina)
-            for (let i = currentIndex; i < steps.length; i++) {
-                if (steps[i].type === "closing") {
-                    nextMysteryIdx = i;
-                    closingStartIndex = i;
-                    break;
-                }
+        if (phase === "intro") {
+            if (step.type === "mystery_start") {
+                phase = "decades";
+                currentDecadeStartIndex = i;
+                currentDecadeBeads = [step];
+            } else {
+                introBeads.push(step);
             }
+        } else if (phase === "decades") {
+            if (step.type === "mystery_start") {
+                decades.push({ 
+                    label: `${steps[currentDecadeStartIndex].mysteryIndex || 1}`, 
+                    startIndex: currentDecadeStartIndex, 
+                    beads: currentDecadeBeads 
+                });
+                currentDecadeStartIndex = i;
+                currentDecadeBeads = [step];
+            } else if (step.type === "closing") {
+                decades.push({ 
+                    label: `${steps[currentDecadeStartIndex].mysteryIndex || 1}`, 
+                    startIndex: currentDecadeStartIndex, 
+                    beads: currentDecadeBeads 
+                });
+                phase = "closing";
+                closingBeads.push(step);
+            } else {
+                currentDecadeBeads.push(step);
+            }
+        } else if (phase === "closing") {
+            closingBeads.push(step);
         }
-
-        decades.push({
-            label: `${d}`,
-            startIndex: currentIndex,
-            beads: steps.slice(currentIndex, nextMysteryIdx)
-        });
-        currentIndex = nextMysteryIdx;
     }
 
-    const closingBeads = steps.slice(closingStartIndex);
+    if (phase === "decades" && currentDecadeBeads.length > 0) {
+        decades.push({ 
+            label: `${steps[currentDecadeStartIndex].mysteryIndex || 1}`, 
+            startIndex: currentDecadeStartIndex, 
+            beads: currentDecadeBeads 
+        });
+    }
+
+    const closingStartIndex = steps.length - closingBeads.length;
 
     const renderBead = (step: RosaryStep, globalIndex: number) => {
         const isActive = globalIndex === currentStep;

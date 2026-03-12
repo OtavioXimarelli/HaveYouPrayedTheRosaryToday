@@ -1748,5 +1748,48 @@
       "start": "Iniciar Oração",
       "todayMystery": "Hoje: Mistérios {name}"
     }
+  },
+  "Mural": {
+    "title": "Mural de Intenções",
+    "subtitle": "Deposite suas intenções e reze pelas necessidades dos irmãos.",
+    "activeIntentions": "Intenções Ativas",
+    "answeredGraces": "Graças Alcançadas",
+    "newIntention": "Nova Intenção",
+    "yourIntention": "Sua Intenção",
+    "placeholder": "Ex: Pela saúde da minha mãe...",
+    "category": "Categoria",
+    "cancel": "Cancelar",
+    "publish": "Publicar",
+    "search": "Buscar intenções...",
+    "emptyTitle": "Nenhuma intenção encontrada",
+    "emptyDesc": "Seja o primeiro a depositar uma intenção neste espaço sagrado.",
+    "answered": "Graça Alcançada",
+    "prayedCount": "{count} {count, plural, =1 {Terço} other {Terços}}",
+    "markAnswered": "Alcançada?",
+    "addPrayer": "+1 Terço"
+  },
+  "Diario": {
+    "title": "Diário Espiritual",
+    "subtitle": "Registre suas reflexões diárias e as intenções confiadas à Virgem Maria.",
+    "emptyStateTitle": "Nenhum Resumo Encontrado",
+    "emptyStateDesc": "Salve seu primeiro resumo espiritual diário para iniciar a jornada.",
+    "chooseMystery": "Escolha o Mistério do Terço",
+    "todaysMystery": "Mistério de Hoje",
+    "reflectionLabel": "Sua Reflexão",
+    "reflectionPlaceholder": "O que Deus falou ao seu coração hoje? Quais virtudes a meditação inspirou?",
+    "intentionsLabel": "Intenções Oferecidas",
+    "intentionsPlaceholder": "Por quem ou pelo que você rezou?",
+    "clear": "Limpar",
+    "save": "Salvar",
+    "export": "Exportar Diário (JSON)",
+    "previousEntries": "Registros Anteriores",
+    "noReflection": "Sem reflexão.",
+    "noIntentions": "Sem intenções registradas.",
+    "mysteryLabel": "Mistério:",
+    "deleteTitle": "Excluir Registro",
+    "deleteConfirm": "Tem certeza que deseja excluir as reflexões do dia {date}? Esta ação não pode ser desfeita.",
+    "yesEmpty": "Sim, Excluir",
+    "nothingToSave": "Nada para salvar",
+    "nothingToSaveDesc": "Escreva ao menos uma reflexão ou uma intenção antes de salvar."
   }
 }
