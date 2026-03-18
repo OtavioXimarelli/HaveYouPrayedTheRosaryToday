@@ -37,9 +37,8 @@ export function HeroSection() {
         delay: 0.5
       });
 
-      tl.fromTo(".animate-gsap-up", 
-        { y: 40, opacity: 0 }, 
-        { y: 0, opacity: 1, duration: 1.2, stagger: 0.15 },
+      tl.from(".animate-gsap-up", 
+        { y: 40, opacity: 0, duration: 1.2, stagger: 0.15 },
         "-=1.5"
       );
 
@@ -122,12 +121,12 @@ export function HeroSection() {
       {/* Content */}
       <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {status?.stats && status.stats.totalCheckIns > 0 && (
-          <div className="mb-8 animate-gsap-up opacity-0">
+          <div className="mb-8 animate-gsap-up">
             <StreakCounter stats={status.stats} />
           </div>
         )}
 
-        <div className="mb-8 sm:mb-10 relative inline-block animate-gsap-up opacity-0">
+        <div className="mb-8 sm:mb-10 relative inline-block animate-gsap-up">
           <div 
             className={`w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full flex items-center justify-center shadow-2xl border-2 border-gold-500/30 dark:border-gold-400/40 transition-all duration-500 ${
               hasPrayed 
@@ -144,7 +143,7 @@ export function HeroSection() {
           {hasPrayed && <Sparkles className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 w-8 h-8 sm:w-10 sm:h-10 text-gold-500 animate-pulse" />}
         </div>
 
-        <h1 className="animate-gsap-up opacity-0">
+        <h1 className="animate-gsap-up">
           <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-cinzel font-bold bg-gradient-to-r from-gold-500 via-gold-400 to-gold-600 bg-clip-text text-transparent mb-4">
             {t("title")}
           </span>
@@ -153,11 +152,11 @@ export function HeroSection() {
           </span>
         </h1>
 
-        <p className="mt-6 sm:mt-8 text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-manrope animate-gsap-up opacity-0">
+        <p className="mt-6 sm:mt-8 text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-manrope animate-gsap-up">
           {hasPrayed ? t("hasPrayed") : t("notPrayed")}
         </p>
 
-        <div className="mt-12 sm:mt-14 animate-gsap-up opacity-0">
+        <div className="mt-12 sm:mt-14 animate-gsap-up">
           {hasPrayed ? (
             <div className="space-y-4 mb-12">
               <div className="inline-flex items-center gap-3 px-8 py-4 glass rounded-full border border-green-500/30 dark:border-green-400/30">

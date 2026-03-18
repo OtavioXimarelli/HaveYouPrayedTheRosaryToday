@@ -112,16 +112,21 @@
 
   /* Glass effects */
   .glass-light {
-    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-lg;
+    @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-xl;
   }
 
   .glass-dark {
-    @apply bg-slate-900/60 backdrop-blur-xl border border-yellow-500/10 shadow-xl;
+    @apply bg-slate-900/70 backdrop-blur-2xl border border-gold-500/20 shadow-2xl;
   }
 
   .glass {
-    @apply bg-white/70 dark:bg-slate-900/60 backdrop-blur-md dark:backdrop-blur-xl border border-white/20 dark:border-yellow-500/10 shadow-lg dark:shadow-xl;
+    @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl dark:backdrop-blur-2xl border border-white/40 dark:border-gold-500/20 shadow-xl dark:shadow-2xl;
   }
+
+  .glass-card {
+    @apply bg-white/50 dark:bg-slate-900/50 backdrop-blur-md dark:backdrop-blur-lg border border-white/30 dark:border-gold-500/10 shadow-lg dark:shadow-xl rounded-2xl;
+  }
+
 
   /* Gold glow effect */
   .gold-glow {

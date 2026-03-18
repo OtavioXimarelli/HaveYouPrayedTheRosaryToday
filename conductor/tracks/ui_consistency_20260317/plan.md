@@ -1,14 +1,14 @@
 # Implementation Plan: UI/UX Refinement and Consistency
 
 ## Phase 1: Global Consistency and Theming Audit
-- [ ] Task: Standardize spacing and typography variables
-    - [ ] Create/Update design tokens for padding, margins, and font sizes.
-    - [ ] Write unit tests for utility functions that compute styles (if applicable).
-    - [ ] Apply tokens globally in `tailwind.config.ts` or base CSS.
-- [ ] Task: Refine Theme Colors and Glassmorphism
-    - [ ] Tweak "Cathedral Night" and "Sacred Cream" palettes.
-    - [ ] Standardize glassmorphism classes/components for consistent blur and opacity.
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Global Consistency and Theming Audit' (Protocol in workflow.md)
+- [x] Task: Standardize spacing and typography variables
+    - [x] Create/Update design tokens for padding, margins, and font sizes.
+    - [x] Write unit tests for utility functions that compute styles (if applicable).
+    - [x] Apply tokens globally in `tailwind.config.ts` or base CSS.
+- [x] Task: Refine Theme Colors and Glassmorphism
+    - [x] Tweak "Cathedral Night" and "Sacred Cream" palettes.
+    - [x] Standardize glassmorphism classes/components for consistent blur and opacity.
+- [~] Task: Conductor - User Manual Verification 'Phase 1: Global Consistency and Theming Audit' (Protocol in workflow.md)
 
 ## Phase 2: Refine Global Components and Navigation
 - [ ] Task: Update Mobile and Desktop Navbars
