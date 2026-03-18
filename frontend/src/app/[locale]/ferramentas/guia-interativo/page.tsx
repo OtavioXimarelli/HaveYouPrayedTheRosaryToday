@@ -584,29 +584,34 @@ export default function GuiaInterativoPage() {
                     </div>
 
                     {!completed ? (
-                        <div className="flex-grow flex flex-col justify-center py-3">
-                            {/* Bead Map */}
-                            <BeadMap steps={rosarySteps} currentStep={currentStep} onBeadClick={handleBeadClick} />
+                        <div className="flex-grow flex flex-col lg:flex-row lg:items-start lg:gap-12 py-3 w-full">
+                            {/* Sidebar / Top area */}
+                            <div className="w-full lg:w-1/3 flex flex-col lg:sticky lg:top-28">
+                                {/* Bead Map */}
+                                <BeadMap steps={rosarySteps} currentStep={currentStep} onBeadClick={handleBeadClick} />
 
-                            {/* Progress */}
-                            <div className="mb-4 mt-1 px-2 sm:px-6">
-                                <div className="flex justify-between items-end text-xs text-muted-foreground mb-1.5 font-bold uppercase tracking-widest">
-                                    <span>{t("start")}</span>
-                                    <span className="text-gold-500">{Math.round(progressPercent)}%</span>
-                                </div>
-                                <div className="w-full bg-muted/30 rounded-full h-1.5 border border-border/20 overflow-hidden">
-                                    <div
-                                        className="bg-gold-500 h-1.5 rounded-full transition-all duration-500 ease-out"
-                                        style={{ width: `${progressPercent}%` }}
-                                    />
-                                </div>
-                                <div className="text-center mt-2 text-[10px] text-muted-foreground/80 font-medium">
-                                    {t("step", { current: currentStep + 1, total: rosarySteps.length })}
+                                {/* Progress */}
+                                <div className="mb-4 mt-1 px-2 sm:px-6">
+                                    <div className="flex justify-between items-end text-xs text-muted-foreground mb-1.5 font-bold uppercase tracking-widest">
+                                        <span>{t("start")}</span>
+                                        <span className="text-gold-500">{Math.round(progressPercent)}%</span>
+                                    </div>
+                                    <div className="w-full bg-muted/30 rounded-full h-1.5 border border-border/20 overflow-hidden">
+                                        <div
+                                            className="bg-gold-500 h-1.5 rounded-full transition-all duration-500 ease-out shadow-[0_0_10px_rgba(212,175,55,0.8)]"
+                                            style={{ width: `${progressPercent}%` }}
+                                        />
+                                    </div>
+                                    <div className="text-center mt-2 text-[10px] text-muted-foreground/80 font-medium">
+                                        {t("step", { current: currentStep + 1, total: rosarySteps.length })}
+                                    </div>
                                 </div>
                             </div>
 
-                            {/* Prayer Card */}
-                            <AnimatePresence mode="wait">
+                            {/* Main Content Area */}
+                            <div className="w-full lg:w-2/3 flex flex-col min-w-0">
+                                {/* Prayer Card */}
+                                <AnimatePresence mode="wait">
                                 <motion.div
                                     key={currentStep}
                                     initial={{ opacity: 0, y: 20 }}
@@ -659,56 +664,77 @@ export default function GuiaInterativoPage() {
                                                         className="flex-1"
                                                     >
                                                         {activeTab === "gospel" && (
-                                                            <div className="space-y-4">
-                                                                <div className="flex items-center gap-2 text-sm font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest">
-                                                                    <BookOpen className="w-4 h-4" />
-                                                                    <span>{t("bibleLabel")}</span>
+                                                            <motion.div 
+                                                              initial={{ opacity: 0, y: 10 }}
+                                                              animate={{ opacity: 1, y: 0 }}
+                                                              transition={{ duration: 0.4, delay: 0.1 }}
+                                                              className="space-y-6"
+                                                            >
+                                                                <div className="flex items-center justify-between border-b border-border/50 pb-2">
+                                                                    <div className="flex items-center gap-2 text-sm font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest">
+                                                                        <BookOpen className="w-4 h-4" />
+                                                                        <span>{t("bibleLabel")}</span>
+                                                                    </div>
+                                                                    <p className="text-xs text-muted-foreground font-bold uppercase tracking-wider">
+                                                                        {t(`meditations.${step.mysteryType}.m${step.mysteryIndex}.bibleRef`)}
+                                                                    </p>
                                                                 </div>
-                                                                <blockquote className="text-base sm:text-lg leading-relaxed text-foreground italic border-l-4 border-gold-500/40 pl-4 py-1">
-                                                                    {t(`meditations.${step.mysteryType}.m${step.mysteryIndex}.bible`)}
+                                                                <blockquote className="text-lg sm:text-xl md:text-2xl leading-relaxed text-foreground italic font-manrope font-medium px-2">
+                                                                    "{t(`meditations.${step.mysteryType}.m${step.mysteryIndex}.bible`)}"
                                                                 </blockquote>
-                                                                <p className="text-xs text-muted-foreground font-bold uppercase tracking-wider">
-                                                                    📖 {t(`meditations.${step.mysteryType}.m${step.mysteryIndex}.bibleRef`)}
-                                                                </p>
-                                                                <button
-                                                                    onClick={() => setActiveTab("meditation")}
-                                                                    className="inline-flex items-center gap-2 text-sm font-bold text-gold-600 dark:text-gold-400 hover:text-gold-500 transition-colors mt-1"
-                                                                >
-                                                                    {t("tabs.meditation")} <ChevronRight className="w-4 h-4" />
-                                                                </button>
-                                                            </div>
+                                                                <div className="flex justify-end pt-4">
+                                                                    <button
+                                                                        onClick={() => setActiveTab("meditation")}
+                                                                        className="inline-flex items-center gap-2 text-sm font-bold text-gold-600 dark:text-gold-400 hover:text-gold-500 transition-colors group"
+                                                                    >
+                                                                        {t("tabs.meditation")} <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                                                    </button>
+                                                                </div>
+                                                            </motion.div>
                                                         )}
 
                                                         {activeTab === "meditation" && (
-                                                            <div className="space-y-4">
-                                                                <div className="flex items-center gap-2 text-sm font-bold text-purple-600 dark:text-purple-400 uppercase tracking-widest">
-                                                                    <Heart className="w-4 h-4" />
-                                                                    <span>{t("montfortLabel")}</span>
+                                                            <motion.div 
+                                                              initial={{ opacity: 0, y: 10 }}
+                                                              animate={{ opacity: 1, y: 0 }}
+                                                              transition={{ duration: 0.4, delay: 0.1 }}
+                                                              className="space-y-6"
+                                                            >
+                                                                <div className="flex items-center justify-between border-b border-border/50 pb-2">
+                                                                    <div className="flex items-center gap-2 text-sm font-bold text-purple-600 dark:text-purple-400 uppercase tracking-widest">
+                                                                        <Heart className="w-4 h-4" />
+                                                                        <span>{t("montfortLabel")}</span>
+                                                                    </div>
+                                                                    <p className="text-[10px] text-muted-foreground/70 italic uppercase tracking-wider">
+                                                                        {t("sourceLabel")}
+                                                                    </p>
                                                                 </div>
-                                                                <p className="text-base leading-relaxed text-foreground">
+                                                                <p className="text-base sm:text-lg leading-relaxed text-foreground font-manrope">
                                                                     {t(`meditations.${step.mysteryType}.m${step.mysteryIndex}.montfort`)}
                                                                 </p>
-                                                                <p className="text-[10px] text-muted-foreground/70 italic">
-                                                                    {t("sourceLabel")}
-                                                                </p>
-                                                                <button
-                                                                    onClick={() => setActiveTab("prayer")}
-                                                                    className="inline-flex items-center gap-2 text-sm font-bold text-gold-600 dark:text-gold-400 hover:text-gold-500 transition-colors mt-1"
-                                                                >
-                                                                    {t("tabs.prayer")} <ChevronRight className="w-4 h-4" />
-                                                                </button>
-                                                            </div>
+                                                                <div className="flex justify-end pt-4">
+                                                                    <button
+                                                                        onClick={() => setActiveTab("prayer")}
+                                                                        className="inline-flex items-center gap-2 text-sm font-bold text-gold-600 dark:text-gold-400 hover:text-gold-500 transition-colors group"
+                                                                    >
+                                                                        {t("tabs.prayer")} <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                                                    </button>
+                                                                </div>
+                                                            </motion.div>
                                                         )}
 
                                                         {activeTab === "prayer" && (
-                                                            <div className="space-y-4 text-center">
-                                                                <p className="text-sm text-muted-foreground uppercase tracking-widest font-bold">
-                                                                    {t("meditate")}
-                                                                </p>
-                                                                <p className="text-base sm:text-lg leading-relaxed text-foreground italic">
+                                                            <motion.div 
+                                                              initial={{ opacity: 0, scale: 0.95 }}
+                                                              animate={{ opacity: 1, scale: 1 }}
+                                                              transition={{ duration: 0.5, ease: "easeOut" }}
+                                                              className="space-y-6 text-center py-6"
+                                                            >
+                                                                <Sparkles className="w-8 h-8 text-gold-500 mx-auto animate-pulse-gold" />
+                                                                <p className="text-xl sm:text-2xl md:text-3xl leading-relaxed text-foreground italic font-cinzel">
                                                                     &ldquo;{t(step.prayerKey)}&rdquo;
                                                                 </p>
-                                                            </div>
+                                                            </motion.div>
                                                         )}
                                                     </motion.div>
                                                 </AnimatePresence>
@@ -803,6 +829,7 @@ export default function GuiaInterativoPage() {
                                     <ArrowRight className="w-5 h-5 ml-1.5" />
                                 </Button>
                             </div>
+                        </div>
                         </div>
                     ) : (
                         /* ── Completion Screen ── */
