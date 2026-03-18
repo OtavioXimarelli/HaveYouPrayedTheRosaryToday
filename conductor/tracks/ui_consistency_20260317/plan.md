@@ -20,9 +20,9 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Refine Global Components and Navigation' (Protocol in workflow.md)
 
 ## Phase 3: Enhance Prayer Tracking and Guide
-- [~] Task: Refine Dashboard and Check-in Flow
-    - [ ] Write tests to verify dashboard structural changes.
-    - [ ] Apply consistent spacing and typography to dashboard widgets and check-in steps.
+- [x] Task: Refine Dashboard and Check-in Flow f856759
+    - [x] Write tests to verify dashboard structural changes.
+    - [x] Apply consistent spacing and typography to dashboard widgets and check-in steps.
 - [ ] Task: Polish Prayer Guide Interface
     - [ ] Write tests for prayer guide component rendering.
     - [ ] Optimize reading experience (font size, line height, contrast) for the step-by-step guide.
