@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { useRouter } from "@/i18n/routing";
 import {
   Flame, Trophy, Calendar, ArrowRight, Sparkles, Heart,
@@ -22,6 +22,7 @@ import { usePrayerStore } from "@/store/use-prayer-store";
 import { useIsMounted } from "@/hooks/use-hydrated";
 import { formatRelativeTime } from "@/lib/utils";
 import { mockCheckIns } from "@/services/mockData";
+import { gsap } from "gsap";
 
 const mysteryColors: Record<MysteryType, { bg: string; text: string; gradient: string; icon: string }> = {
   joyful: {
@@ -112,11 +113,46 @@ export default function DashboardPage() {
   const [mvpAdviceDismissed, setMvpAdviceDismissed] = useState(false);
   const [checkInModalOpen, setCheckInModalOpen] = useState(false);
   const [savedSession, setSavedSession] = useState<{ step: number; total: number; percent: number } | null>(null);
+  
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const todaysMystery = getTodaysMystery();
   const mysteryInfo = getMysteryInfo(todaysMystery);
   const mysteryStyle = mysteryColors[todaysMystery];
   const currentMysteryName = checkInT(`mysteries.${todaysMystery}.label`);
+
+  useEffect(() => {
+    if (!isMounted || !containerRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Card hover animations
+      const cards = containerRef.current?.querySelectorAll(".gsap-hover-card");
+      cards?.forEach((card) => {
+        card.addEventListener("mouseenter", () => {
+          gsap.to(card, {
+            y: -4,
+            scale: 1.01,
+            backgroundColor: "rgba(255, 255, 255, 0.08)",
+            borderColor: "rgba(212, 175, 55, 0.4)",
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+        card.addEventListener("mouseleave", () => {
+          gsap.to(card, {
+            y: 0,
+            scale: 1,
+            backgroundColor: "",
+            borderColor: "",
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [isMounted]);
 
   useEffect(() => {
     const dismissed = localStorage.getItem("rosario-banner-dismissed");
@@ -209,7 +245,7 @@ export default function DashboardPage() {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-background" data-testid="dashboard-page">
+      <div ref={containerRef} className="min-h-screen bg-background" data-testid="dashboard-page">
 
       <main className="pt-8 pb-24 md:pt-16 md:pb-32 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto w-full max-w-6xl space-y-10 md:space-y-14">
@@ -323,7 +359,7 @@ export default function DashboardPage() {
                 { icon: Heart, value: totalCheckIns, label: t("stats.totalPrayers"), gradient: "from-sacred-blue to-slate-700 dark:from-slate-700 dark:to-slate-800", iconClass: "text-gold-400" },
                 { icon: Star, value: `${weeklyProgress}/7`, label: t("stats.thisWeek"), gradient: "from-emerald-500 to-green-600" },
               ].map((stat) => (
-                <div key={stat.label} className="group p-6 lg:p-8 rounded-2xl glass-card hover:border-gold-500/30 hover:-translate-y-1 transition-all duration-300">
+                <div key={stat.label} className="group p-6 lg:p-8 gsap-hover-card rounded-2xl glass-card transition-all duration-300">
                   <div className="flex items-start justify-between mb-5">
                     <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${stat.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                       <stat.icon className={`w-6 h-6 ${stat.iconClass ?? "text-white"}`} />
@@ -335,7 +371,7 @@ export default function DashboardPage() {
                 </div>
               ))}
               {/* Favorite Mystery Card */}
-              <div className="group p-6 lg:p-8 rounded-2xl glass-card hover:border-gold-500/30 hover:-translate-y-1 transition-all duration-300 col-span-2 md:col-span-1" data-testid="favorite-mystery">
+              <div className="group p-6 lg:p-8 gsap-hover-card rounded-2xl glass-card transition-all duration-300 col-span-2 md:col-span-1" data-testid="favorite-mystery">
                 <div className="flex items-start justify-between mb-5">
                   <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${favMystery ? mysteryColors[favMystery].gradient : "from-slate-400 to-slate-500"} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                     <span className="text-xl">{favMystery ? mysteryColors[favMystery].icon : "📿"}</span>
@@ -437,7 +473,7 @@ export default function DashboardPage() {
                     <button
                       key={action.label}
                       onClick={() => action.comingSoon ? (setComingSoonFeature(action.label), setComingSoonOpen(true)) : router.push(action.path as any)}
-                      className="group relative flex flex-col items-center justify-center p-4 rounded-2xl glass-card hover:border-gold-500/30 hover:-translate-y-1 transition-all duration-300 min-h-[100px]"
+                      className="group relative flex flex-col items-center justify-center p-4 gsap-hover-card rounded-2xl glass-card transition-all duration-300 min-h-[100px]"
                     >
                       {action.comingSoon && (
                         <span className="absolute top-2 right-2 text-[8px] px-1.5 py-0.5 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1">
@@ -462,7 +498,7 @@ export default function DashboardPage() {
                     { icon: GraduationCap, label: t("actions.teachings"), path: "/ensinamentos", gradient: "from-emerald-600 to-emerald-700" },
                     { icon: Library, label: t("actions.resources"), path: "/recursos", gradient: "from-blue-600 to-blue-700" },
                   ].map((action) => (
-                    <button key={action.path} onClick={() => router.push(action.path as any)} className="group flex flex-col items-center justify-center p-4 rounded-2xl glass-card hover:border-gold-500/30 hover:-translate-y-1 transition-all duration-300 min-h-[100px]">
+                    <button key={action.path} onClick={() => router.push(action.path as any)} className="group flex flex-col items-center justify-center p-4 gsap-hover-card rounded-2xl glass-card transition-all duration-300 min-h-[100px]">
                       <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${action.gradient} flex items-center justify-center mb-2 shadow-md`}>
                         <action.icon className="w-5 h-5 text-white" />
                       </div>
@@ -477,7 +513,7 @@ export default function DashboardPage() {
           {/* ─── Progress Ring + Recent Activity ─── */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-up animate-delay-350">
             {/* Weekly Progress Ring */}
-            <div className="p-7 sm:p-9 rounded-2xl glass-card flex flex-col items-center justify-center text-center" data-testid="progress-ring">
+            <div className="gsap-hover-card p-7 sm:p-9 rounded-2xl glass-card flex flex-col items-center justify-center text-center transition-all duration-300" data-testid="progress-ring">
               <h3 className="font-cinzel font-bold text-foreground text-lg mb-1">{t("progress.title")}</h3>
               <p className="text-sm text-muted-foreground mb-6">{t("progress.subtitle")}</p>
               <div className="relative">
@@ -493,7 +529,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Recent Activity Feed */}
-            <div className="lg:col-span-2 p-7 sm:p-9 rounded-2xl glass-card" data-testid="activity-feed">
+            <div className="gsap-hover-card lg:col-span-2 p-7 sm:p-9 rounded-2xl glass-card transition-all duration-300" data-testid="activity-feed">
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h3 className="font-cinzel font-bold text-foreground text-lg mb-1">{t("activity.title")}</h3>
@@ -546,7 +582,7 @@ export default function DashboardPage() {
 
           {/* ─── Community Feed Preview ─── */}
           <section className="animate-fade-up animate-delay-350" data-testid="community-preview">
-            <div className="p-7 sm:p-9 rounded-2xl glass-card">
+            <div className="gsap-hover-card p-7 sm:p-9 rounded-2xl glass-card transition-all duration-300">
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h3 className="font-cinzel font-bold text-foreground text-lg mb-1">{t("community.title")}</h3>
@@ -602,7 +638,7 @@ export default function DashboardPage() {
                 { title: t("suggested.santosTitle"), desc: t("suggested.santosDesc"), path: "/ensinamentos/santos", icon: Users, gradient: "from-purple-500 to-purple-600", cta: t("sections.viewAll") },
                 { title: t("suggested.oracoesTitle"), desc: t("suggested.oracoesDesc"), path: "/oracoes-tradicionais", icon: Cross, gradient: "from-emerald-500 to-emerald-600", cta: t("sections.viewAll") },
               ].map((card) => (
-                <button key={card.path} onClick={() => router.push(card.path as any)} className="group text-left p-6 rounded-2xl glass-card hover:border-gold-500/30 transition-all duration-300 hover:-translate-y-1">
+                <button key={card.path} onClick={() => router.push(card.path as any)} className="gsap-hover-card group text-left p-6 rounded-2xl glass-card transition-all duration-300">
                   <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${card.gradient} flex items-center justify-center mb-4 shadow-md group-hover:scale-105 transition-transform duration-300`}>
                     <card.icon className="w-6 h-6 text-white" />
                   </div>

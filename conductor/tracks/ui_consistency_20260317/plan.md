@@ -29,9 +29,9 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Enhance Prayer Tracking and Guide' (Protocol in workflow.md)
 
 ## Phase 4: Polish Formation Library and Animations
-- [ ] Task: Refine Formation Library Readability
-    - [ ] Update article layout, typography scale, and image spacing in teachings.
-- [ ] Task: Implement Global GSAP Animations
+- [x] Task: Refine Formation Library Readability
+    - [x] Update article layout, typography scale, and image spacing in teachings.
+- [~] Task: Implement Global GSAP Animations
     - [ ] Write tests for animation wrapper components (if possible, or mock GSAP).
     - [ ] Add standardized enter/exit and interactive hover animations using GSAP.
 - [ ] Task: Accessibility and Final Polish

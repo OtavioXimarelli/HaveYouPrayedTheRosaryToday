@@ -131,8 +131,8 @@ export function ArticleLayout({
             </header>
 
             {/* Introductory Card */}
-            <div className="mb-12 p-6 sm:p-8 rounded-2xl border border-gold-500/15 bg-gradient-to-br from-gold-500/[0.04] to-transparent">
-              <p className="text-muted-foreground text-[1.1rem] leading-[1.9] italic">
+            <div className="mb-12 p-sacred-6 sm:p-sacred-8 glass-card border-gold-500/15">
+              <p className="text-muted-foreground text-sacred-lg leading-[1.9] italic font-manrope">
                 {meta.excerpt}
               </p>
             </div>
@@ -142,34 +142,34 @@ export function ArticleLayout({
               prose prose-lg dark:prose-invert max-w-none
               
               prose-headings:font-cinzel prose-headings:text-foreground prose-headings:tracking-wide
-              prose-h2:text-2xl prose-h2:mt-14 prose-h2:mb-5 prose-h2:pb-3 prose-h2:border-b prose-h2:border-gold-500/20
-              prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4
-              prose-h4:text-lg prose-h4:mt-8 prose-h4:mb-3
+              prose-h2:text-sacred-2xl prose-h2:mt-14 prose-h2:mb-5 prose-h2:pb-3 prose-h2:border-b prose-h2:border-gold-500/20
+              prose-h3:text-sacred-xl prose-h3:mt-10 prose-h3:mb-4
+              prose-h4:text-sacred-lg prose-h4:mt-8 prose-h4:mb-3
 
-              prose-p:text-muted-foreground prose-p:leading-[1.85] prose-p:mb-6 prose-p:text-[1.05rem]
+              prose-p:text-muted-foreground prose-p:leading-[1.85] prose-p:mb-6 prose-p:text-sacred-base
               prose-a:text-gold-600 dark:prose-a:text-gold-400 prose-a:no-underline hover:prose-a:underline prose-a:font-medium
               prose-strong:text-foreground prose-strong:font-semibold
               prose-em:text-foreground/80
 
-              prose-blockquote:border-l-4 prose-blockquote:border-gold-500 prose-blockquote:bg-gold-500/5 prose-blockquote:rounded-r-xl prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:my-8 prose-blockquote:not-italic
-              prose-blockquote:text-foreground/80 prose-blockquote:text-[1rem] prose-blockquote:leading-relaxed
+              prose-blockquote:border-l-4 prose-blockquote:border-gold-500 prose-blockquote:bg-gold-500/5 prose-blockquote:rounded-r-xl prose-blockquote:py-sacred-4 prose-blockquote:px-sacred-6 prose-blockquote:my-8 prose-blockquote:not-italic
+              prose-blockquote:text-foreground/80 prose-blockquote:text-sacred-base prose-blockquote:leading-relaxed
               [&_blockquote_p]:before:content-none [&_blockquote_p]:after:content-none
 
-              prose-ul:text-muted-foreground prose-ul:my-6 prose-ul:space-y-2
-              prose-ol:text-muted-foreground prose-ol:my-6 prose-ol:space-y-2
-              prose-li:text-[1.05rem] prose-li:leading-relaxed
+              prose-ul:text-muted-foreground prose-ul:my-6 prose-ul:space-y-sacred-2
+              prose-ol:text-muted-foreground prose-ol:my-6 prose-ol:space-y-sacred-2
+              prose-li:text-sacred-base prose-li:leading-relaxed
               [&_ul_li]:marker:text-gold-500 [&_ol_li]:marker:text-gold-500 [&_ol_li]:marker:font-semibold
 
               prose-hr:border-border/30 prose-hr:my-12
 
               prose-table:border prose-table:border-border/50 prose-table:rounded-xl prose-table:overflow-hidden
-              prose-th:bg-muted/50 prose-th:font-cinzel prose-th:text-sm prose-th:uppercase prose-th:tracking-wider prose-th:text-foreground/70
+              prose-th:bg-muted/50 prose-th:font-cinzel prose-th:text-sacred-sm prose-th:uppercase prose-th:tracking-wider prose-th:text-foreground/70
               prose-td:text-muted-foreground prose-td:border-border/30
 
               prose-code:text-gold-700 dark:prose-code:text-gold-300 prose-code:font-normal prose-code:before:content-none prose-code:after:content-none
               prose-pre:bg-muted/50 prose-pre:border prose-pre:border-border/50 prose-pre:rounded-2xl
 
-              prose-img:rounded-2xl prose-img:shadow-lg prose-img:my-8
+              prose-img:rounded-2xl prose-img:shadow-lg prose-img:my-sacred-8
             ">
               {children}
             </div>
@@ -200,7 +200,7 @@ export function ArticleLayout({
                       onClick={() =>
                         router.push(`${resolvedRelatedBasePath}/${item.slug}`)
                       }
-                      className="group text-left glass sacred-border p-4 rounded-xl hover:shadow-gold-glow transition-all duration-300 hover:-translate-y-0.5"
+                      className="group text-left glass-card p-sacred-4 hover:shadow-gold-glow transition-all duration-300 hover:-translate-y-0.5"
                     >
                       <h4 className="font-cinzel text-sm font-semibold text-foreground group-hover:text-gold-600 dark:group-hover:text-gold-400 mb-1 transition-colors line-clamp-2">
                         {item.title}
