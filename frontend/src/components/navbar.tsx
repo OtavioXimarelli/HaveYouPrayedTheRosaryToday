@@ -76,9 +76,9 @@ export function Navbar() {
     <>
       {/* Desktop Floating Navbar */}
       <nav 
-        className={`fixed bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-50 hidden md:flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2 sm:py-2.5 rounded-full transition-all duration-500 max-w-[calc(100vw-1.5rem)] ${
+        className={`fixed bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-50 hidden md:flex items-center gap-sacred-2 px-sacred-3 py-sacred-2 rounded-full transition-all duration-500 max-w-[calc(100vw-1.5rem)] ${
           scrolled 
-            ? "bg-sacred-blue/95 dark:bg-slate-900/95 backdrop-blur-xl shadow-2xl border border-white/10" 
+            ? "glass-dark shadow-2xl" 
             : "bg-sacred-blue/90 dark:bg-slate-900/90 backdrop-blur-lg shadow-xl border border-white/5"
         }`}
         data-testid="navbar-desktop"
@@ -86,12 +86,12 @@ export function Navbar() {
         {/* Home */}
         <button
           onClick={() => navigateTo("/")}
-          className={`flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full transition-colors ${
+          className={`flex items-center gap-sacred-2 px-sacred-4 py-sacred-2 rounded-full transition-colors ${
             pathname === "/" ? "bg-white/10" : "hover:bg-white/10"
           }`}
         >
           <span className="text-lg">📿</span>
-          <span className="text-white font-medium text-xs sm:text-sm">{t("home")}</span>
+          <span className="text-white font-medium text-sacred-sm">{t("home")}</span>
         </button>
 
         <div className="w-px h-6 bg-white/10" />
@@ -100,25 +100,25 @@ export function Navbar() {
         <div className="relative" ref={explorarRef}>
           <button
             onClick={() => setExplorarOpen(!explorarOpen)}
-            className={`flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full transition-colors ${
+            className={`flex items-center gap-sacred-2 px-sacred-4 py-sacred-2 rounded-full transition-colors ${
               isOnContentPage || explorarOpen
                 ? "bg-gold-500/20 text-gold-400" 
                 : "text-white/80 hover:text-white hover:bg-white/10"
             }`}
           >
             <BookOpen className="w-4 h-4" />
-            <span className="text-xs sm:text-sm font-medium">{t("explore")}</span>
+            <span className="text-sacred-sm font-medium">{t("explore")}</span>
             <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${explorarOpen ? "rotate-180" : ""}`} />
           </button>
 
           {explorarOpen && (
-            <div className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-72 bg-sacred-blue dark:bg-slate-900 rounded-2xl border border-white/10 shadow-2xl overflow-hidden p-2">
+            <div className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-72 glass-dark rounded-2xl overflow-hidden p-sacred-2">
               <div className="max-h-[60vh] overflow-y-auto scrollbar-hide">
                 {explorarLinks.map((link) => (
                   <button
                     key={link.path}
                     onClick={() => navigateTo(link.path)}
-                    className={`flex items-start gap-3 w-full px-4 py-3 rounded-xl transition-colors text-left ${
+                    className={`flex items-start gap-sacred-3 w-full px-sacred-4 py-sacred-3 rounded-xl transition-colors text-left ${
                       pathname === link.path 
                         ? "bg-gold-500/20 text-gold-400" 
                         : "text-white hover:bg-white/10"
@@ -126,15 +126,15 @@ export function Navbar() {
                   >
                     <link.icon className="w-5 h-5 mt-0.5 flex-shrink-0" />
                     <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <span className="font-medium block text-sm">{link.label}</span>
+                      <div className="flex items-center gap-sacred-2">
+                        <span className="font-medium block text-sacred-sm">{link.label}</span>
                         {!link.isPublic && (
-                          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-gold-500/20 text-gold-300 font-semibold">
+                          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-gold-500/20 text-gold-300 font-semibold uppercase tracking-wider">
                             {commonT("members")}
                           </span>
                         )}
                       </div>
-                      <span className="text-[11px] text-white/50">{link.description}</span>
+                      <span className="text-[11px] text-white/50 block mt-1">{link.description}</span>
                     </div>
                   </button>
                 ))}
@@ -148,12 +148,12 @@ export function Navbar() {
         {/* Dashboard */}
         <button
           onClick={() => navigateTo("/dashboard")}
-          className={`flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full transition-colors ${
+          className={`flex items-center gap-sacred-2 px-sacred-4 py-sacred-2 rounded-full transition-colors ${
             pathname === "/dashboard" ? "bg-gold-500/20 text-gold-400" : "text-white/80 hover:text-white hover:bg-white/10"
           }`}
         >
           <LayoutDashboard className="w-4 h-4" />
-          <span className="text-xs sm:text-sm font-medium">{t("dashboard")}</span>
+          <span className="text-sacred-sm font-medium">{t("dashboard")}</span>
         </button>
 
         <div className="w-px h-6 bg-white/10" />
@@ -161,7 +161,7 @@ export function Navbar() {
         {/* Rezar CTA */}
         <button
           onClick={() => setCheckInOpen(true)}
-          className="relative flex items-center gap-2 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue font-cinzel font-bold text-xs sm:text-sm tracking-wide hover:shadow-[0_0_20px_-5px_rgba(212,175,55,0.5)] transition-all"
+          className="relative flex items-center gap-sacred-2 px-sacred-5 py-sacred-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue font-cinzel font-bold text-sacred-sm tracking-wide hover:shadow-gold-glow transition-all"
         >
           <Play className="w-4 h-4" />
           <span>{t("start")}</span>

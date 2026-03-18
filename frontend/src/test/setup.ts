@@ -6,7 +6,11 @@ expect.extend(axeMatchers);
 
 // Mock next/intl
 vi.mock("next-intl", () => ({
-  useTranslations: (namespace: string) => (key: string) => `${namespace}.${key}`,
+  useTranslations: (namespace: string) => {
+    const t = (key: string) => `${namespace}.${key}`;
+    t.rich = (key: string, values: any) => `${namespace}.${key}`;
+    return t;
+  },
   useLocale: () => "pt",
 }));
 

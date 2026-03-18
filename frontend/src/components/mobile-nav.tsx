@@ -75,8 +75,8 @@ export function MobileNav() {
     <>
       {/* Mobile Bottom Tab Bar */}
       <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden safe-area-bottom">
-        <div className="bg-sacred-blue/95 dark:bg-slate-900/95 backdrop-blur-xl border-t border-white/[0.06] shadow-[0_-4px_20px_-5px_rgba(0,0,0,0.3)]">
-          <div className="flex items-end justify-around px-2 pt-1.5 pb-1.5">
+        <div className="glass-dark border-t border-white/[0.06] shadow-[0_-4px_20px_-5px_rgba(0,0,0,0.3)]">
+          <div className="flex items-end justify-around px-sacred-2 pt-1.5 pb-1.5">
             <button
               onClick={() => navigateTo("/")}
               aria-label={t("home")}
@@ -146,7 +146,7 @@ export function MobileNav() {
         <div className="fixed inset-0 z-40 md:hidden" onClick={() => setMobileMenuOpen(false)}>
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
           <div 
-            className="absolute bottom-[72px] left-3 right-3 bg-sacred-blue/95 dark:bg-slate-900/95 backdrop-blur-2xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300 p-4" 
+            className="absolute bottom-[72px] left-3 right-3 glass-dark rounded-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300 p-sacred-4" 
             onClick={(e) => e.stopPropagation()}
           >
             <div className="w-10 h-1 rounded-full bg-white/20 mx-auto mb-6" />
@@ -196,11 +196,11 @@ export function MobileNav() {
         <div className="fixed inset-0 z-40 md:hidden" onClick={() => setLangOpen(false)}>
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
           <div 
-            className="absolute bottom-[72px] left-3 right-3 bg-sacred-blue/95 dark:bg-slate-900/95 backdrop-blur-2xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300 p-5" 
+            className="absolute bottom-[72px] left-3 right-3 glass-dark rounded-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300 p-sacred-4" 
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className="text-white font-cinzel font-bold mb-5 text-center text-lg">Idioma / Language</h3>
-            <div className="grid grid-cols-1 gap-3">
+            <h3 className="text-white font-cinzel font-bold mb-5 text-center text-sacred-lg">Idioma / Language</h3>
+            <div className="grid grid-cols-1 gap-sacred-3">
               <button
                 onClick={() => changeLanguage("pt")}
                 className={`flex items-center justify-between px-5 py-4 rounded-xl transition-all active:scale-[0.98] ${locale === 'pt' ? "bg-gold-500/20 text-gold-400 border border-gold-500/30" : "bg-white/5 text-white"}`}

@@ -11,7 +11,7 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Global Consistency and Theming Audit' (Protocol in workflow.md)
 
 ## Phase 2: Refine Global Components and Navigation
-- [ ] Task: Update Mobile and Desktop Navbars
+- [~] Task: Update Mobile and Desktop Navbars
     - [ ] Write tests for navigation rendering and layout changes.
     - [ ] Implement spacing, typography, and color refinements on `Navbar` and `MobileNav`.
 - [ ] Task: Refine Modals and Shared Layout Wrappers
