@@ -578,7 +578,7 @@ export default function GuiaInterativoPage() {
             <main className="min-h-screen bg-background flex flex-col" data-testid="rosary-guide">
                 <PageHeader title={t("title")} subtitle={t("subtitle")} icon="📿" />
 
-                <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-grow flex flex-col">
+                <div className="max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-grow flex flex-col">
                     <BreadcrumbNav
                         items={[
                             { label: "Ferramentas", path: "/ferramentas" },
