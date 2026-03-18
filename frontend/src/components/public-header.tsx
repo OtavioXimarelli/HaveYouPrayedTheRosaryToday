@@ -18,7 +18,7 @@ export function PublicHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
-  const { openAuthModal } = useAuth();
+  const { openAuthModal, isLoggedIn } = useAuth();
   const t = useTranslations("PublicHeader");
   const navT = useTranslations("Navbar");
   const langRef = useRef<HTMLDivElement>(null);
@@ -168,14 +168,14 @@ export function PublicHeader() {
                 <Moon className="absolute h-4 w-4 rotate-90 scale-0 text-gold-400 transition-transform duration-300 dark:rotate-0 dark:scale-100" />
               </button>
 
-              {AUTH_DISABLED ? (
+              {AUTH_DISABLED || isLoggedIn ? (
                 <Button
                   size="sm"
                   onClick={() => navigateTo("/dashboard")}
                   className="rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow font-cinzel font-semibold"
                   data-testid="header-dashboard"
                 >
-                  {t("accessNow")}
+                  {isLoggedIn ? navT("dashboard") : t("accessNow")}
                 </Button>
               ) : (
                 <>
