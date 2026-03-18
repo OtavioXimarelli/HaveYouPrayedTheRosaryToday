@@ -572,15 +572,18 @@ export default function GuiaInterativoPage() {
     return (
         <PageTransition>
             <main className="min-h-screen bg-background flex flex-col" data-testid="rosary-guide">
-                <PageHeader title={t("title")} subtitle={t("subtitle")} icon="📿" />
-
                 <div className="max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-grow flex flex-col">
-                    <BreadcrumbNav
-                        items={[
-                            { label: "Ferramentas", path: "/ferramentas" },
-                            { label: t("breadcrumb") },
-                        ]}
-                    />
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                        <BreadcrumbNav
+                            items={[
+                                { label: "Ferramentas", path: "/ferramentas" },
+                                { label: t("breadcrumb") },
+                            ]}
+                        />
+                        <div className="text-xs font-medium text-muted-foreground uppercase tracking-widest flex items-center gap-2">
+                            <span className="text-base">📿</span> {t("subtitle")}
+                        </div>
+                    </div>
 
                     {/* Status bar */}
                     <div className="flex items-center justify-center gap-3 mt-3 mb-1 flex-wrap">
