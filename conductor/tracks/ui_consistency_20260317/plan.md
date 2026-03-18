@@ -14,9 +14,9 @@
 - [x] Task: Update Mobile and Desktop Navbars 82c053e
     - [x] Write tests for navigation rendering and layout changes.
     - [x] Implement spacing, typography, and color refinements on `Navbar` and `MobileNav`.
-- [~] Task: Refine Modals and Shared Layout Wrappers
-    - [ ] Write tests for modal rendering and accessibility attributes.
-    - [ ] Standardize modal paddings, backgrounds, and close button placements.
+- [x] Task: Refine Modals and Shared Layout Wrappers b76375e
+    - [x] Write tests for modal rendering and accessibility attributes.
+    - [x] Standardize modal paddings, backgrounds, and close button placements.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Refine Global Components and Navigation' (Protocol in workflow.md)
 
 ## Phase 3: Enhance Prayer Tracking and Guide
