@@ -19,14 +19,14 @@
     - [x] Standardize modal paddings, backgrounds, and close button placements.
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Refine Global Components and Navigation' (Protocol in workflow.md)
 
-## Phase 3: Enhance Prayer Tracking and Guide
+## Phase 3: Enhance Prayer Tracking and Guide [checkpoint: 0adaff5]
 - [x] Task: Refine Dashboard and Check-in Flow f856759
     - [x] Write tests to verify dashboard structural changes.
     - [x] Apply consistent spacing and typography to dashboard widgets and check-in steps.
 - [x] Task: Polish Prayer Guide Interface 1302937
     - [x] Write tests for prayer guide component rendering.
     - [x] Optimize reading experience (font size, line height, contrast) for the step-by-step guide.
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Enhance Prayer Tracking and Guide' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Enhance Prayer Tracking and Guide' (Protocol in workflow.md)
 
 ## Phase 4: Polish Formation Library and Animations
 - [ ] Task: Refine Formation Library Readability
