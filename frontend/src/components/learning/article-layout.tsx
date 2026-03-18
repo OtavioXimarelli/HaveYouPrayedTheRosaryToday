@@ -4,6 +4,8 @@ import { Clock, Tag, ArrowLeft, BookOpen } from "lucide-react";
 import { useRouter } from "@/i18n/routing";
 import { BreadcrumbNav } from "./breadcrumb-nav";
 import { useTranslations, useLocale } from "next-intl";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 interface ArticleMeta {
   title: string;
@@ -47,6 +49,40 @@ export function ArticleLayout({
   const t = useTranslations("Article");
   const teachingsT = useTranslations("Teachings");
   const locale = useLocale();
+  
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const cards = containerRef.current?.querySelectorAll(".gsap-hover-card");
+      cards?.forEach((card) => {
+        card.addEventListener("mouseenter", () => {
+          gsap.to(card, {
+            y: -4,
+            scale: 1.01,
+            backgroundColor: resolvedTheme === 'dark' ? "rgba(255, 255, 255, 0.08)" : "rgba(255, 255, 255, 0.9)",
+            borderColor: "rgba(212, 175, 55, 0.4)",
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+        card.addEventListener("mouseleave", () => {
+          gsap.to(card, {
+            y: 0,
+            scale: 1,
+            backgroundColor: "",
+            borderColor: "",
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const LEVEL_LABELS: Record<string, { label: string; color: string }> = {
     "primeiros-passos": {
@@ -75,7 +111,7 @@ export function ArticleLayout({
     relatedBasePath ?? `/ensinamentos/${meta.tema}`;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div ref={containerRef} className="min-h-screen bg-background">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Breadcrumb */}
         <BreadcrumbNav items={breadcrumbItems} />
@@ -200,7 +236,7 @@ export function ArticleLayout({
                       onClick={() =>
                         router.push(`${resolvedRelatedBasePath}/${item.slug}`)
                       }
-                      className="group text-left glass-card p-sacred-4 hover:shadow-gold-glow transition-all duration-300 hover:-translate-y-0.5"
+                      className="gsap-hover-card group text-left glass-card p-sacred-4 transition-all duration-300"
                     >
                       <h4 className="font-cinzel text-sm font-semibold text-foreground group-hover:text-gold-600 dark:group-hover:text-gold-400 mb-1 transition-colors line-clamp-2">
                         {item.title}
