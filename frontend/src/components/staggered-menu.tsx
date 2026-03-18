@@ -181,7 +181,7 @@ export function StaggeredMenu({
           )}
 
           {/* Menu Items */}
-          <nav className="flex-1 flex flex-col justify-center">
+          <nav className="flex-1 flex flex-col justify-center" role="menu">
             <ul className="space-y-6">
               {items.map((item, index) => (
                 <li
@@ -193,9 +193,11 @@ export function StaggeredMenu({
                   style={{
                     transform: `translateX(${position === "right" ? "50px" : "-50px"}) scale(0.95)`,
                   }}
+                  role="none"
                 >
                   <a
                     href={item.href}
+                    role="menuitem"
                     onClick={(e) => {
                       if (item.onClick) {
                         e.preventDefault();
@@ -203,7 +205,7 @@ export function StaggeredMenu({
                         setIsOpen(false);
                       }
                     }}
-                    className="group flex items-center gap-4 text-3xl font-bold text-white transition-colors hover:opacity-80"
+                    className="group flex items-center gap-4 text-3xl font-bold text-white transition-colors hover:opacity-80 focus-visible:outline-none focus-visible:text-gold-400"
                     style={{
                       color: "white",
                     }}

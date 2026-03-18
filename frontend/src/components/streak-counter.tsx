@@ -15,7 +15,11 @@ export function StreakCounter({ stats, variant = "compact" }: StreakCounterProps
 
   if (variant === "compact") {
     return (
-      <div className="inline-flex items-center gap-3 px-5 py-2.5 glass rounded-full sacred-border shadow-sm" data-testid="streak-counter">
+      <div 
+        className="inline-flex items-center gap-3 px-5 py-2.5 glass rounded-full sacred-border shadow-sm" 
+        data-testid="streak-counter"
+        aria-label={`${t("current")}: ${currentStreak} ${t("days")}`}
+      >
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg shadow-orange-500/20">
             <Flame className="w-4 h-4 text-white" />
@@ -33,7 +37,11 @@ export function StreakCounter({ stats, variant = "compact" }: StreakCounterProps
   }
 
   return (
-    <div className="grid grid-cols-3 gap-6 p-6 glass rounded-2xl sacred-border shadow-xl" data-testid="streak-counter-full">
+    <div 
+      className="grid grid-cols-3 gap-6 p-6 glass rounded-2xl sacred-border shadow-xl" 
+      data-testid="streak-counter-full"
+      aria-label="Prayer Statistics"
+    >
       <StatItem
         icon={<Flame className="w-6 h-6 text-orange-500" />}
         value={currentStreak}

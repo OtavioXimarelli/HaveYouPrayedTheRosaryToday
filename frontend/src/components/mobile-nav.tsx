@@ -79,7 +79,8 @@ export function MobileNav() {
           <div className="flex items-end justify-around px-2 pt-1.5 pb-1.5">
             <button
               onClick={() => navigateTo("/")}
-              className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
+              aria-label={t("home")}
+              className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500/50 ${
                 pathname === "/" ? "text-gold-400" : "text-white/50"
               }`}
             >
@@ -92,7 +93,9 @@ export function MobileNav() {
                 setMobileMenuOpen(!mobileMenuOpen);
                 setLangOpen(false);
               }}
-              className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
+              aria-label={t("explore")}
+              aria-expanded={mobileMenuOpen}
+              className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500/50 ${
                 isOnContentPage || mobileMenuOpen ? "text-gold-400" : "text-white/50"
               }`}
             >
@@ -102,9 +105,10 @@ export function MobileNav() {
 
             <button
               onClick={() => navigateTo("/ferramentas/guia-interativo")}
-              className="flex flex-col items-center justify-center -mt-3 group"
+              aria-label={commonT("praying")}
+              className="flex flex-col items-center justify-center -mt-3 group focus-visible:outline-none"
             >
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center shadow-gold-glow active:scale-90 transition-transform">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center shadow-gold-glow active:scale-90 transition-transform group-focus-visible:ring-2 group-focus-visible:ring-gold-500 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-sacred-blue">
                 <Play className="w-5 h-5 text-sacred-blue ml-0.5 fill-current" />
               </div>
               <span className="text-[10px] text-gold-400 mt-1 leading-tight font-bold">{commonT("praying")}</span>
@@ -112,7 +116,8 @@ export function MobileNav() {
 
             <button
               onClick={() => navigateTo("/dashboard")}
-              className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
+              aria-label={commonT("dashboard")}
+              className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500/50 ${
                 pathname === "/dashboard" ? "text-gold-400" : "text-white/50"
               }`}
             >
@@ -125,7 +130,9 @@ export function MobileNav() {
                 setLangOpen(!langOpen);
                 setMobileMenuOpen(false);
               }}
-              className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${langOpen ? "text-gold-400" : "text-white/50"}`}
+              aria-label={locale === "pt" ? "Alterar idioma" : "Change language"}
+              aria-expanded={langOpen}
+              className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500/50 ${langOpen ? "text-gold-400" : "text-white/50"}`}
             >
               <Globe className={`w-[22px] h-[22px] ${langOpen ? "stroke-[2.5]" : "stroke-[1.5]"}`} />
               <span className="text-[10px] mt-0.5 leading-tight uppercase font-bold">{locale}</span>
