@@ -617,7 +617,7 @@ export default function GuiaInterativoPage() {
                                 >
                                     {step.type === "mystery_start" && step.mysteryIndex && step.mysteryType ? (
                                         /* ── Mystery Step: Tabbed View ── */
-                                        <div className="rounded-3xl overflow-hidden border border-border shadow-xl bg-card">
+                                        <div className="rounded-3xl overflow-hidden shadow-xl glass-card">
                                             {/* Header */}
                                             <div className="bg-gradient-to-r from-amber-500/10 to-gold-500/10 border-b border-amber-500/20 px-5 py-4 text-center">
                                                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/25 mb-2">
@@ -716,7 +716,7 @@ export default function GuiaInterativoPage() {
                                         </div>
                                     ) : (
                                         /* ── Regular Prayer Step ── */
-                                        <div className="bg-[#13151A] border border-white/5 rounded-[2rem] p-6 sm:p-10 text-center relative overflow-hidden shadow-2xl min-h-[220px] flex flex-col justify-center">
+                                        <div className="glass-dark rounded-3xl p-sacred-6 sm:p-sacred-8 text-center relative overflow-hidden shadow-2xl min-h-[220px] flex flex-col justify-center">
                                             {/* Decorative glow inside card */}
                                             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-32 bg-gold-500/10 rounded-[100%] blur-2xl" />
 
