@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Sparkles, Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTodayStatus } from "@/hooks/use-rosary";
@@ -9,14 +9,89 @@ import { StreakCounter } from "./streak-counter";
 import { useAuth } from "@/providers/auth-provider";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
+import { gsap } from "gsap";
 
 export function HeroSection() {
   const t = useTranslations("Hero");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: status } = useTodayStatus();
   const { openAuthModal } = useAuth();
+  
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollBtnRef = useRef<HTMLButtonElement>(null);
+  const crossLeftRef = useRef<HTMLDivElement>(null);
+  const crossRightRef = useRef<HTMLDivElement>(null);
 
   const hasPrayed = status?.hasPrayed ?? false;
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Entrance animation
+      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+      
+      tl.to([crossLeftRef.current, crossRightRef.current], {
+        opacity: 1,
+        duration: 2,
+        delay: 0.5
+      });
+
+      tl.fromTo(".animate-gsap-up", 
+        { y: 40, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 1.2, stagger: 0.15 },
+        "-=1.5"
+      );
+
+      // Floating crosses
+      gsap.to([crossLeftRef.current, crossRightRef.current], {
+        y: "+=20",
+        rotation: "+=5",
+        duration: 4,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+
+      // Floating scroll button
+      if (scrollBtnRef.current) {
+        gsap.to(scrollBtnRef.current, {
+          y: "+=10",
+          duration: 2,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut"
+        });
+      }
+
+      // Card hover animations
+      const cards = containerRef.current?.querySelectorAll(".gsap-hover-card");
+      cards?.forEach((card) => {
+        card.addEventListener("mouseenter", () => {
+          gsap.to(card, {
+            y: -8,
+            scale: 1.02,
+            backgroundColor: "rgba(255, 255, 255, 0.1)",
+            borderColor: "rgba(212, 175, 55, 0.6)",
+            duration: 0.4,
+            ease: "power2.out"
+          });
+        });
+        card.addEventListener("mouseleave", () => {
+          gsap.to(card, {
+            y: 0,
+            scale: 1,
+            backgroundColor: "rgba(255, 255, 255, 0.05)",
+            borderColor: "rgba(212, 175, 55, 0.3)",
+            duration: 0.4,
+            ease: "power2.out"
+          });
+        });
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [status]);
 
   return (
     <section className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden">
@@ -41,22 +116,22 @@ export function HeroSection() {
       </div>
 
       {/* Decorative cross pattern */}
-      <div className="absolute top-10 left-10 text-gold-500/10 dark:text-gold-400/5 text-[200px] font-serif select-none pointer-events-none">✝</div>
-      <div className="absolute bottom-10 right-10 text-gold-500/10 dark:text-gold-400/5 text-[150px] font-serif select-none pointer-events-none rotate-12">✝</div>
+      <div ref={crossLeftRef} className="absolute top-10 left-10 text-gold-500/10 dark:text-gold-400/5 text-[200px] font-serif select-none pointer-events-none opacity-0">✝</div>
+      <div ref={crossRightRef} className="absolute bottom-10 right-10 text-gold-500/10 dark:text-gold-400/5 text-[150px] font-serif select-none pointer-events-none rotate-12 opacity-0">✝</div>
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {status?.stats && status.stats.totalCheckIns > 0 && (
-          <div className="mb-8 animate-fade-up opacity-0" style={{ animationDelay: "100ms" }}>
+          <div className="mb-8 animate-gsap-up opacity-0">
             <StreakCounter stats={status.stats} />
           </div>
         )}
 
-        <div className="mb-8 sm:mb-10 relative inline-block animate-fade-up opacity-0" style={{ animationDelay: "200ms" }}>
+        <div className="mb-8 sm:mb-10 relative inline-block animate-gsap-up opacity-0">
           <div 
             className={`w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full flex items-center justify-center shadow-2xl border-2 border-gold-500/30 dark:border-gold-400/40 transition-all duration-500 ${
               hasPrayed 
-                ? "bg-gradient-to-br from-gold-500 to-gold-600 animate-pulse-gold" 
+                ? "bg-gradient-to-br from-gold-500 to-gold-600 shadow-gold-glow" 
                 : "bg-gradient-to-br from-sacred-blue to-slate-800 dark:from-slate-800 dark:to-slate-900"
             }`}
           >
@@ -69,7 +144,7 @@ export function HeroSection() {
           {hasPrayed && <Sparkles className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 w-8 h-8 sm:w-10 sm:h-10 text-gold-500 animate-pulse" />}
         </div>
 
-        <h1 className="animate-fade-up opacity-0" style={{ animationDelay: "300ms" }}>
+        <h1 className="animate-gsap-up opacity-0">
           <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-cinzel font-bold bg-gradient-to-r from-gold-500 via-gold-400 to-gold-600 bg-clip-text text-transparent mb-4">
             {t("title")}
           </span>
@@ -78,11 +153,11 @@ export function HeroSection() {
           </span>
         </h1>
 
-        <p className="mt-6 sm:mt-8 text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-manrope animate-fade-up opacity-0" style={{ animationDelay: "400ms" }}>
+        <p className="mt-6 sm:mt-8 text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-manrope animate-gsap-up opacity-0">
           {hasPrayed ? t("hasPrayed") : t("notPrayed")}
         </p>
 
-        <div className="mt-12 sm:mt-14 animate-fade-up opacity-0" style={{ animationDelay: "500ms" }}>
+        <div className="mt-12 sm:mt-14 animate-gsap-up opacity-0">
           {hasPrayed ? (
             <div className="space-y-4 mb-12">
               <div className="inline-flex items-center gap-3 px-8 py-4 glass rounded-full border border-green-500/30 dark:border-green-400/30">
@@ -103,7 +178,7 @@ export function HeroSection() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <Link
                   href="/como-rezar"
-                  className="group relative p-6 glass rounded-lg border border-gold-500/30 hover:border-gold-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/20 block text-left"
+                  className="gsap-hover-card group relative p-6 glass rounded-lg border border-gold-500/30 transition-all duration-300 block text-left bg-white/5"
                 >
                   <div className="text-3xl mb-3">📿</div>
                   <h3 className="font-cinzel font-bold text-lg text-white mb-2">{t("prayNow")}</h3>
@@ -112,7 +187,7 @@ export function HeroSection() {
 
                 <Link
                   href="/ensinamentos"
-                  className="group relative p-6 glass rounded-lg border border-gold-500/30 hover:border-gold-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/20 block text-left"
+                  className="gsap-hover-card group relative p-6 glass rounded-lg border border-gold-500/30 transition-all duration-300 block text-left bg-white/5"
                 >
                   <div className="text-3xl mb-3">📚</div>
                   <h3 className="font-cinzel font-bold text-lg text-white mb-2">{t("learn")}</h3>
@@ -121,7 +196,7 @@ export function HeroSection() {
 
                 <button
                   onClick={() => openAuthModal("signup")}
-                  className="group relative p-6 glass rounded-lg border border-gold-500/30 hover:border-gold-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/20 text-left w-full"
+                  className="gsap-hover-card group relative p-6 glass rounded-lg border border-gold-500/30 transition-all duration-300 text-left w-full bg-white/5"
                 >
                   <div className="text-3xl mb-3">⭐</div>
                   <h3 className="font-cinzel font-bold text-lg text-white mb-2">{t("track")}</h3>
@@ -132,8 +207,9 @@ export function HeroSection() {
           )}
         </div>
 
-        <div className="mt-16 sm:mt-20 animate-bounce">
+        <div className="mt-16 sm:mt-20">
           <button 
+            ref={scrollBtnRef}
             onClick={() => {
               const element = document.getElementById("community");
               if (element) element.scrollIntoView({ behavior: "smooth" });

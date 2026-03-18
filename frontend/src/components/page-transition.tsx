@@ -1,6 +1,7 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 interface PageTransitionProps {
   children: ReactNode;
@@ -8,9 +9,20 @@ interface PageTransitionProps {
   delay?: number;
 }
 
-export function PageTransition({ children, className = "" }: PageTransitionProps) {
+export function PageTransition({ children, className = "", delay = 0 }: PageTransitionProps) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    gsap.fromTo(ref.current, 
+      { opacity: 0, y: 15 }, 
+      { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", delay }
+    );
+  }, [delay]);
+
   return (
-    <div className={`animate-fade-in ${className}`}>
+    <div ref={ref} className={`opacity-0 ${className}`}>
       {children}
     </div>
   );
