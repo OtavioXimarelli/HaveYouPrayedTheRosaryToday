@@ -28,13 +28,13 @@
     - [x] Optimize reading experience (font size, line height, contrast) for the step-by-step guide.
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Enhance Prayer Tracking and Guide' (Protocol in workflow.md)
 
-## Phase 4: Polish Formation Library and Animations
+## Phase 4: Polish Formation Library and Animations [checkpoint: dbb2570]
 - [x] Task: Refine Formation Library Readability
     - [x] Update article layout, typography scale, and image spacing in teachings.
-- [~] Task: Implement Global GSAP Animations
-    - [ ] Write tests for animation wrapper components (if possible, or mock GSAP).
-    - [ ] Add standardized enter/exit and interactive hover animations using GSAP.
-- [ ] Task: Accessibility and Final Polish
-    - [ ] Run accessibility audit (axe-core or similar).
-    - [ ] Fix any contrast issues and ensure focus states are visible across all components.
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Polish Formation Library and Animations' (Protocol in workflow.md)
+- [x] Task: Implement Global GSAP Animations b312979
+    - [x] Write tests for animation wrapper components (if possible, or mock GSAP).
+    - [x] Add standardized enter/exit and interactive hover animations using GSAP.
+- [x] Task: Accessibility and Final Polish
+    - [x] Run accessibility audit (axe-core or similar).
+    - [x] Fix any contrast issues and ensure focus states are visible across all components.
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Polish Formation Library and Animations' (Protocol in workflow.md)
