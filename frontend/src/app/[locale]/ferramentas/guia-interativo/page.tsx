@@ -198,14 +198,14 @@ function BeadMap({ steps, currentStep, onBeadClick }: {
         const beadColor = BEAD_COLORS[step.type];
 
         return (
-            <div key={globalIndex} className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center flex-shrink-0">
+            <div key={globalIndex} className="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center flex-shrink-0">
                 <button
                     ref={isActive ? activeRef : undefined}
                     onClick={() => onBeadClick(globalIndex)}
                     className={`
                         rounded-full transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] relative
-                        w-3.5 h-3.5 sm:w-4 sm:h-4
-                        ${isPast ? `${beadColor} opacity-50` : isActive ? `${beadColor} scale-[2.2] sm:scale-[2.5] ring-2 ring-gold-500/50 shadow-xl shadow-gold-500/30 z-10` : `${beadColor} opacity-30 hover:opacity-60 hover:scale-110`}
+                        w-3 h-3 sm:w-3.5 sm:h-3.5
+                        ${isPast ? `${beadColor} opacity-50` : isActive ? `${beadColor} scale-[2.2] sm:scale-[2.4] ring-2 ring-gold-500/50 shadow-lg shadow-gold-500/30 z-10` : `${beadColor} opacity-30 hover:opacity-60 hover:scale-110`}
                     `}
                     aria-label={`Bead ${globalIndex + 1}`}
                 />
@@ -216,26 +216,26 @@ function BeadMap({ steps, currentStep, onBeadClick }: {
     return (
         <div ref={containerRef} className="py-4 px-2 sm:px-4 w-full max-w-sm mx-auto flex flex-col items-center gap-4 sm:gap-5" data-testid="bead-map">
             {/* Intro row */}
-            <div className="flex items-center justify-center gap-0 sm:pl-6 w-full min-h-[48px] flex-wrap">
+            <div className="flex items-center justify-center gap-0 sm:pl-6 w-full min-h-[40px] flex-wrap">
                 {introBeads.map((step, i) => (
-                    <div key={i} className={`${step.type === "our_father" ? "mx-2" : step.type === "glory" ? "ml-2" : ""}`}>
+                    <div key={i} className={`${step.type === "our_father" ? "mx-1.5" : step.type === "glory" ? "ml-1.5" : ""}`}>
                         {renderBead(step, i)}
                     </div>
                 ))}
             </div>
 
             {/* Decades 1-5 */}
-            <div className="flex flex-col gap-4 sm:gap-5 w-full">
+            <div className="flex flex-col gap-3 sm:gap-4 w-full">
                 {decades.map((decade, i) => (
-                    <div key={i} className="flex items-center justify-start gap-1 w-full min-h-[48px]">
+                    <div key={i} className="flex items-center justify-start gap-1 w-full min-h-[40px]">
                         <span className="text-[10px] sm:text-xs font-bold text-muted-foreground/60 w-3 text-right">{decade.label}</span>
                         <div className="flex items-center gap-0 flex-1 flex-wrap">
                             {decade.beads.map((step, j) => (
                                 <div 
                                     key={j} 
                                     className={`
-                                        ${step.type === "our_father" ? "mr-2" : ""} 
-                                        ${step.type === "glory" ? "ml-2" : ""}
+                                        ${step.type === "our_father" ? "mr-1.5" : ""} 
+                                        ${step.type === "glory" ? "ml-1.5" : ""}
                                     `}
                                 >
                                     {renderBead(step, decade.startIndex + j)}
@@ -248,9 +248,9 @@ function BeadMap({ steps, currentStep, onBeadClick }: {
 
             {/* Closing row */}
             {closingBeads.length > 0 && (
-                <div className="flex items-center justify-center gap-0 sm:pl-6 w-full min-h-[48px] mt-4 flex-wrap">
+                <div className="flex items-center justify-center gap-0 sm:pl-6 w-full min-h-[40px] mt-2 flex-wrap">
                     {closingBeads.map((step, i) => (
-                        <div key={i} className={`${step.type === "sub_tuum" ? "ml-2" : ""}`}>
+                        <div key={i} className={`${step.type === "sub_tuum" ? "ml-1.5" : ""}`}>
                             {renderBead(step, closingStartIndex + i)}
                         </div>
                     ))}
@@ -598,9 +598,9 @@ export default function GuiaInterativoPage() {
                     </div>
 
                     {!completed ? (
-                        <div className="flex-grow flex flex-col lg:flex-row lg:items-start lg:gap-20 xl:gap-24 py-3 w-full">
+                        <div className="flex-grow flex flex-col lg:flex-row lg:items-start lg:gap-16 xl:gap-20 py-3 w-full">
                             {/* Sidebar / Top area */}
-                            <div className="w-full lg:w-1/3 flex flex-col lg:sticky lg:top-28">
+                            <div className="w-full lg:w-[320px] xl:w-[360px] flex-shrink-0 flex flex-col lg:sticky lg:top-28">
                                 {/* Bead Map */}
                                 <BeadMap steps={rosarySteps} currentStep={currentStep} onBeadClick={handleBeadClick} />
 
@@ -623,7 +623,7 @@ export default function GuiaInterativoPage() {
                             </div>
 
                             {/* Main Content Area */}
-                            <div className="w-full lg:w-2/3 flex flex-col min-w-0">
+                            <div className="w-full flex-1 flex flex-col min-w-0">
                                 {/* Prayer Card */}
                                 <AnimatePresence mode="wait">
                                 <motion.div
