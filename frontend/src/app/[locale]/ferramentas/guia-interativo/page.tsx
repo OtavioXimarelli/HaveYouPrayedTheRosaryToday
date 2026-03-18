@@ -220,17 +220,31 @@ function BeadMap({ steps, currentStep, onBeadClick }: {
     return (
         <div ref={containerRef} className="py-4 px-2 sm:px-4 w-full max-w-sm mx-auto flex flex-col items-center gap-4 sm:gap-5" data-testid="bead-map">
             {/* Intro row */}
-            <div className="flex items-center justify-center gap-1.5 sm:gap-2 sm:pl-6 w-full min-h-[48px]">
-                {introBeads.map((step, i) => renderBead(step, i))}
+            <div className="flex items-center justify-center gap-1.5 sm:gap-2 sm:pl-6 w-full min-h-[48px] flex-wrap">
+                {introBeads.map((step, i) => (
+                    <div key={i} className={`${step.type === "our_father" ? "mx-3" : step.type === "glory" ? "ml-3" : ""}`}>
+                        {renderBead(step, i)}
+                    </div>
+                ))}
             </div>
 
             {/* Decades 1-5 */}
-            <div className="flex flex-col gap-2 sm:gap-3 w-full">
+            <div className="flex flex-col gap-4 sm:gap-5 w-full">
                 {decades.map((decade, i) => (
                     <div key={i} className="flex items-center justify-start gap-3 sm:gap-4 w-full min-h-[48px]">
                         <span className="text-[10px] sm:text-xs font-bold text-muted-foreground/60 w-3 text-right">{decade.label}</span>
                         <div className="flex items-center gap-1 sm:gap-1.5 flex-1 flex-wrap">
-                            {decade.beads.map((step, j) => renderBead(step, decade.startIndex + j))}
+                            {decade.beads.map((step, j) => (
+                                <div 
+                                    key={j} 
+                                    className={`
+                                        ${step.type === "our_father" ? "mr-3" : ""} 
+                                        ${step.type === "glory" ? "ml-3" : ""}
+                                    `}
+                                >
+                                    {renderBead(step, decade.startIndex + j)}
+                                </div>
+                            ))}
                         </div>
                     </div>
                 ))}
@@ -238,8 +252,12 @@ function BeadMap({ steps, currentStep, onBeadClick }: {
 
             {/* Closing row */}
             {closingBeads.length > 0 && (
-                <div className="flex items-center justify-center gap-1.5 sm:gap-2 sm:pl-6 w-full min-h-[48px] mt-2">
-                    {closingBeads.map((step, i) => renderBead(step, closingStartIndex + i))}
+                <div className="flex items-center justify-center gap-1.5 sm:gap-2 sm:pl-6 w-full min-h-[48px] mt-4 flex-wrap">
+                    {closingBeads.map((step, i) => (
+                        <div key={i} className={`${step.type === "sub_tuum" ? "ml-3" : ""}`}>
+                            {renderBead(step, closingStartIndex + i)}
+                        </div>
+                    ))}
                 </div>
             )}
         </div>
@@ -584,7 +602,7 @@ export default function GuiaInterativoPage() {
                     </div>
 
                     {!completed ? (
-                        <div className="flex-grow flex flex-col lg:flex-row lg:items-start lg:gap-12 py-3 w-full">
+                        <div className="flex-grow flex flex-col lg:flex-row lg:items-start lg:gap-20 xl:gap-24 py-3 w-full">
                             {/* Sidebar / Top area */}
                             <div className="w-full lg:w-1/3 flex flex-col lg:sticky lg:top-28">
                                 {/* Bead Map */}
