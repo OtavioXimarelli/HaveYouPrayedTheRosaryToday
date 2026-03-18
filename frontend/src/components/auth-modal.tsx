@@ -91,7 +91,7 @@ export function AuthModal({
           {t(`${m}.subtitle`)}
         </DialogDescription>
         {/* ── Card ── */}
-        <div className="relative rounded-2xl overflow-hidden bg-slate-900/95 backdrop-blur-2xl border border-yellow-500/20 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.8)]">
+        <div className="relative rounded-2xl overflow-hidden glass-dark border-gold-500/20 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.8)]">
 
           {/* Gold top accent bar */}
           <div className="h-1 w-full bg-gradient-to-r from-yellow-700 via-yellow-400 to-yellow-700" />

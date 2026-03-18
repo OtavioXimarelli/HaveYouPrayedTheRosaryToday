@@ -67,7 +67,7 @@ export function OnboardingModal() {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md p-0 overflow-hidden glass border-gold-500/20 rounded-[2rem]">
+      <DialogContent className="sm:max-w-md p-0 overflow-hidden glass-dark border-gold-500/20 rounded-2xl">
         <DialogTitle className="sr-only">{t("title")}</DialogTitle>
         <DialogDescription className="sr-only">{t("description")}</DialogDescription>
         

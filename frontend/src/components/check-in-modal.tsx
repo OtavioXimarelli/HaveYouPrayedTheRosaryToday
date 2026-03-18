@@ -127,7 +127,7 @@ export function CheckInModal({ open, onOpenChange, onSuccess }: CheckInModalProp
   if (showSuccess) {
     return (
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="sm:max-w-sm bg-slate-900/98 backdrop-blur-2xl border border-yellow-500/20 rounded-2xl">
+        <DialogContent className="sm:max-w-sm glass-dark border-gold-500/20 rounded-2xl">
           <DialogTitle className="sr-only">{t("success.title")}</DialogTitle>
           <DialogDescription className="sr-only">{t("success.desc")}</DialogDescription>
           <div className="flex flex-col items-center justify-center py-10 text-center gap-5">
@@ -156,7 +156,7 @@ export function CheckInModal({ open, onOpenChange, onSuccess }: CheckInModalProp
   /* ── Main form ── */
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-lg bg-slate-900/98 backdrop-blur-2xl border border-yellow-500/20 rounded-2xl p-0 overflow-hidden max-h-[92dvh] flex flex-col">
+      <DialogContent className="sm:max-w-lg glass-dark border-gold-500/20 rounded-2xl p-0 overflow-hidden max-h-[92dvh] flex flex-col">
         {/* Header */}
         <div className="px-6 pt-6 pb-4 border-b border-slate-800 flex-shrink-0">
           <div className="flex items-center gap-3">

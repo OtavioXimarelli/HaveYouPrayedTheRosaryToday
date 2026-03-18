@@ -43,3 +43,14 @@ vi.mock("@/providers/auth-provider", () => ({
     openAuthModal: vi.fn(),
   }),
 }));
+
+// Mock localStorage
+const localStorageMock = {
+  getItem: vi.fn(),
+  setItem: vi.fn(),
+  clear: vi.fn(),
+  removeItem: vi.fn(),
+};
+Object.defineProperty(window, 'localStorage', {
+  value: localStorageMock,
+});
