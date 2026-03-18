@@ -6,3 +6,8 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 - [x] **Track: Refine Frontend UX, Accessibility, and Animations**
   *Link: [./tracks/refine_ux_20260317/](./tracks/refine_ux_20260317/)*
+
+---
+
+- [ ] **Track: refine the UI and UX**
+  *Link: [./tracks/ui_consistency_20260317/](./tracks/ui_consistency_20260317/)*
