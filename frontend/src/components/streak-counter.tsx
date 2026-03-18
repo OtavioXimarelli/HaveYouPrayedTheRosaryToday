@@ -15,16 +15,16 @@ export function StreakCounter({ stats, variant = "compact" }: StreakCounterProps
 
   if (variant === "compact") {
     return (
-      <div className="inline-flex items-center gap-3 px-5 py-2.5 glass rounded-full sacred-border" data-testid="streak-counter">
+      <div className="inline-flex items-center gap-3 px-5 py-2.5 glass rounded-full sacred-border shadow-sm" data-testid="streak-counter">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg shadow-orange-500/20">
             <Flame className="w-4 h-4 text-white" />
           </div>
-          <span className="font-cinzel font-bold text-foreground text-lg">{currentStreak}</span>
-          <span className="text-muted-foreground text-sm">{t("days")}</span>
+          <span className="font-cinzel font-bold text-foreground text-xl tracking-tight">{currentStreak}</span>
+          <span className="text-slate-500 dark:text-slate-400 text-[11px] font-bold uppercase tracking-widest">{t("days")}</span>
         </div>
         {currentStreak >= 7 && (
-          <span className="text-xs bg-gold-500/20 text-gold-600 dark:text-gold-400 px-3 py-1 rounded-full font-semibold">
+          <span className="text-[10px] bg-gold-500/20 text-gold-600 dark:text-gold-400 px-3 py-1 rounded-full font-bold uppercase tracking-wider">
             {t("fire")}
           </span>
         )}
@@ -33,7 +33,7 @@ export function StreakCounter({ stats, variant = "compact" }: StreakCounterProps
   }
 
   return (
-    <div className="grid grid-cols-3 gap-4 p-6 glass rounded-2xl sacred-border" data-testid="streak-counter-full">
+    <div className="grid grid-cols-3 gap-6 p-6 glass rounded-2xl sacred-border shadow-xl" data-testid="streak-counter-full">
       <StatItem
         icon={<Flame className="w-6 h-6 text-orange-500" />}
         value={currentStreak}
@@ -66,16 +66,16 @@ function StatItem({
   highlight?: boolean;
 }) {
   return (
-    <div className="text-center">
-      <div className="flex justify-center mb-2">{icon}</div>
+    <div className="text-center group">
+      <div className="flex justify-center mb-3 transform transition-transform group-hover:scale-110 duration-300">{icon}</div>
       <div
-        className={`text-2xl font-cinzel font-bold ${
+        className={`text-3xl font-cinzel font-bold tracking-tight ${
           highlight ? "text-orange-500" : "text-foreground"
         }`}
       >
         {value}
       </div>
-      <div className="text-xs text-muted-foreground">{label}</div>
+      <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 mt-1">{label}</div>
     </div>
   );
 }

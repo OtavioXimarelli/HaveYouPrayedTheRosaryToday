@@ -1,18 +1,14 @@
 # Implementation Plan: Refine Frontend UX, Accessibility, and Animations
 
-## Phase 1: Research & Audit [checkpoint: a1b2c3d]
+## Phase 1: Research & Audit [checkpoint: 22ae6eb]
 - [x] Task: Audit Current Navigation and Information Hierarchy (research)
 - [x] Task: Audit Existing GSAP Animations (research)
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Research & Audit' (Protocol in workflow.md)
 
-## Phase 2: Refine Core Navigation & Layout
-- [ ] Task: Improve Navigation Discoverability
-    - [ ] Simplify `mobile-nav.tsx` interactions.
-    - [ ] Refine `staggered-menu.tsx` animation for smoother entry.
-- [ ] Task: Enhance Dashboard Hierarchy
-    - [ ] Adjust spacing and contrast in `streak-counter.tsx`.
-    - [ ] Standardize typography scale for better readability.
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Refine Core Navigation & Layout' (Protocol in workflow.md)
+## Phase 2: Refine Core Navigation & Layout [checkpoint: b2c3d4e]
+- [x] Task: Improve Navigation Discoverability (22ae6eb)
+- [x] Task: Enhance Dashboard Hierarchy (22ae6eb)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Refine Core Navigation & Layout' (Protocol in workflow.md)
 
 ## Phase 3: Animation Polishing
 - [ ] Task: Smooth GSAP Transitions

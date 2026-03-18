@@ -42,17 +42,33 @@ export function MobileNav() {
     setLangOpen(false);
   };
 
-  const explorarLinks = [
-    { label: t("howToPray"), description: t("description.howToPray"), icon: BookOpen, path: "/como-rezar", isPublic: true },
-    { label: t("history"), description: t("description.history"), icon: History, path: "/historia", isPublic: true },
-    { label: t("mysteries"), description: t("description.mysteries"), icon: Sparkles, path: "/misterios-do-dia", isPublic: true },
-    { label: t("prayers"), description: t("description.prayers"), icon: ScrollText, path: "/oracoes-tradicionais", isPublic: true },
-    { label: t("teachings"), description: t("description.teachings"), icon: GraduationCap, path: "/ensinamentos", isPublic: false },
-    { label: t("tools"), description: t("description.tools"), icon: Compass, path: "/ferramentas", isPublic: false },
-    { label: t("about"), description: t("description.about"), icon: BookOpen, path: "/about", isPublic: true },
-    { label: t("resources"), description: t("description.resources"), icon: Library, path: "/recursos", isPublic: false },
+  const linkGroups = [
+    {
+      title: t("categories.prayer"),
+      links: [
+        { label: t("howToPray"), icon: BookOpen, path: "/como-rezar", isPublic: true },
+        { label: t("mysteries"), icon: Sparkles, path: "/misterios-do-dia", isPublic: true },
+        { label: t("prayers"), icon: ScrollText, path: "/oracoes-tradicionais", isPublic: true },
+      ]
+    },
+    {
+      title: t("categories.formation"),
+      links: [
+        { label: t("teachings"), icon: GraduationCap, path: "/ensinamentos", isPublic: false },
+        { label: t("history"), icon: History, path: "/historia", isPublic: true },
+        { label: t("resources"), icon: Library, path: "/recursos", isPublic: false },
+      ]
+    },
+    {
+      title: t("categories.more"),
+      links: [
+        { label: t("tools"), icon: Compass, path: "/ferramentas", isPublic: false },
+        { label: t("about"), icon: BookOpen, path: "/about", isPublic: true },
+      ]
+    }
   ];
 
+  const explorarLinks = linkGroups.flatMap(g => g.links);
   const isOnContentPage = explorarLinks.some(link => pathname === link.path);
 
   return (
@@ -123,30 +139,45 @@ export function MobileNav() {
         <div className="fixed inset-0 z-40 md:hidden" onClick={() => setMobileMenuOpen(false)}>
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
           <div 
-            className="absolute bottom-[72px] left-3 right-3 bg-sacred-blue/95 dark:bg-slate-900/95 backdrop-blur-2xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300 p-3" 
+            className="absolute bottom-[72px] left-3 right-3 bg-sacred-blue/95 dark:bg-slate-900/95 backdrop-blur-2xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300 p-4" 
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="w-10 h-1 rounded-full bg-white/20 mx-auto mb-4" />
-            <div className="max-h-[60vh] overflow-y-auto scrollbar-hide space-y-1.5">
-              {explorarLinks.map((link) => (
-                <button
-                  key={link.path}
-                  onClick={() => navigateTo(link.path)}
-                  className={`flex items-center gap-3 w-full px-3 py-3 rounded-xl transition-colors active:bg-white/10 ${
-                    pathname === link.path ? "bg-gold-500/15 text-gold-400" : "text-white hover:bg-white/5"
-                  }`}
-                >
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${pathname === link.path ? "bg-gold-500/20" : "bg-white/5"}`}>
-                    <link.icon className="w-5 h-5" />
+            <div className="w-10 h-1 rounded-full bg-white/20 mx-auto mb-6" />
+            
+            <div className="max-h-[65vh] overflow-y-auto scrollbar-hide space-y-6 pb-2">
+              {linkGroups.map((group, groupIdx) => (
+                <div key={groupIdx} className="space-y-3">
+                  <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold-500/60 px-1">
+                    {group.title}
+                  </h4>
+                  <div className="grid grid-cols-2 gap-2">
+                    {group.links.map((link) => (
+                      <button
+                        key={link.path}
+                        onClick={() => navigateTo(link.path)}
+                        className={`flex flex-col items-start gap-2.5 p-3 rounded-xl transition-all active:scale-[0.97] ${
+                          pathname === link.path 
+                            ? "bg-gold-500/15 text-gold-400 border border-gold-500/20" 
+                            : "bg-white/5 text-white border border-transparent"
+                        }`}
+                      >
+                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
+                          pathname === link.path ? "bg-gold-500/20" : "bg-white/10"
+                        }`}>
+                          <link.icon className="w-4 h-4" />
+                        </div>
+                        <div className="text-left w-full">
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <span className="font-bold text-[13px] leading-tight">{link.label}</span>
+                            {!link.isPublic && (
+                              <div className="w-1.5 h-1.5 rounded-full bg-gold-500 shadow-[0_0_8px_rgba(212,175,55,0.6)]" title={commonT("members")} />
+                            )}
+                          </div>
+                        </div>
+                      </button>
+                    ))}
                   </div>
-                  <div className="text-left min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="font-semibold block text-sm">{link.label}</span>
-                      {!link.isPublic && <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-gold-500/20 text-gold-300 font-bold uppercase tracking-wider">{commonT("members")}</span>}
-                    </div>
-                    <span className="text-[11px] text-white/40 truncate block">{link.description}</span>
-                  </div>
-                </button>
+                </div>
               ))}
             </div>
           </div>

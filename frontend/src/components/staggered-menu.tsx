@@ -57,8 +57,8 @@ export function StaggeredMenu({
           overlay,
           {
             x: 0,
-            duration: 0.6,
-            ease: "power3.out",
+            duration: 0.8,
+            ease: "power4.out",
           },
           index * 0.1
         );
@@ -69,29 +69,34 @@ export function StaggeredMenu({
         {
           opacity: 1,
           x: 0,
-          duration: 0.4,
+          scale: 1,
+          duration: 0.6,
           stagger: 0.1,
-          ease: "power2.out",
+          ease: "power3.out",
         },
-        "-=0.2"
+        "-=0.4"
       );
 
       onMenuOpen?.();
     } else {
       // Close animation
-      gsap.to(itemsRef.current, {
+      const tl = gsap.timeline();
+
+      tl.to(itemsRef.current, {
         opacity: 0,
         x: position === "right" ? 50 : -50,
+        scale: 0.95,
         duration: 0.3,
         stagger: 0.05,
+        ease: "power2.in",
       });
 
-      gsap.to(overlaysRef.current, {
+      tl.to(overlaysRef.current, {
         x: position === "right" ? "100%" : "-100%",
-        duration: 0.5,
+        duration: 0.6,
         stagger: 0.08,
-        ease: "power3.in",
-      });
+        ease: "power4.in",
+      }, "-=0.2");
 
       onMenuClose?.();
     }
@@ -186,7 +191,7 @@ export function StaggeredMenu({
                   }}
                   className="opacity-0"
                   style={{
-                    transform: `translateX(${position === "right" ? "50px" : "-50px"})`,
+                    transform: `translateX(${position === "right" ? "50px" : "-50px"}) scale(0.95)`,
                   }}
                 >
                   <a
