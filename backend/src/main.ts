@@ -29,8 +29,8 @@ async function bootstrap() {
 
   // Swagger documentation
   const config = new DocumentBuilder()
-    .setTitle('Terço Hoje API')
-    .setDescription('API para o aplicativo Você Já Rezou o Terço Hoje?')
+    .setTitle('Living Rosary API')
+    .setDescription('Living Rosary API')
     .setVersion('1.0')
     .addBearerAuth()
     .addTag('auth', 'Autenticação')
