@@ -76,8 +76,10 @@ rosario-vivo/
 │   │   └── prayers/        # Prayer intentions
 │   └── Dockerfile
 │
-├── docker-compose.yml      # Local dev (full stack)
-├── docker-compose.prod.yml # Production
+├── compose.yaml            # Base services shared by all environments
+├── compose.dev.yaml        # Development overrides + mongo-express profile
+├── compose.prod.yaml       # Production overrides
+├── docker-compose.prod.yml # Legacy production compose (Coolify-compatible)
 └── pnpm-workspace.yaml     # Monorepo
 ```
 
@@ -106,7 +108,7 @@ Or separately:
 
 ```bash
 # Terminal 1 — Backend + MongoDB
-docker-compose up -d mongodb
+docker compose -f compose.yaml -f compose.dev.yaml up -d mongodb
 pnpm dev:backend
 
 # Terminal 2 — Frontend
@@ -133,6 +135,12 @@ pnpm docker:dev
 
 # Production
 pnpm docker:prod
+
+# Stop local dev stack
+pnpm docker:down
+
+# Stop production stack
+pnpm docker:down:prod
 ```
 
 ---
@@ -140,7 +148,7 @@ pnpm docker:prod
 ## ☁️ Coolify Deployment
 
 1. Create a **Docker Compose** resource in Coolify
-2. Point it to `docker-compose.prod.yml`
+2. Point it to `docker-compose.prod.yml` (legacy) or use `compose.yaml` + `compose.prod.yaml` if your Coolify setup supports multiple files
 3. Configure environment variables
 4. Map domains:
 
