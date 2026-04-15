@@ -35,7 +35,8 @@ export function LessonCard({
   };
 
   return (
-    <div
+    <button
+      type="button"
       onClick={handleClick}
       className={`group p-5 sm:p-6 rounded-2xl transition-all duration-300 ${
         isLocked
@@ -44,6 +45,7 @@ export function LessonCard({
           ? "bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 border border-emerald-500/20 cursor-pointer hover:-translate-y-1 hover:shadow-lg"
           : "glass sacred-border cursor-pointer hover:-translate-y-1 hover:shadow-gold-glow"
       }`}
+      aria-disabled={isLocked}
       data-testid={`lesson-card-${path.replace(/\//g, "-")}`}
     >
       <div className="flex items-start gap-4">
@@ -105,6 +107,6 @@ export function LessonCard({
           </div>
         </div>
       </div>
-    </div>
+    </button>
   );
 }

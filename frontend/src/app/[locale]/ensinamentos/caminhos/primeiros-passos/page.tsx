@@ -7,7 +7,6 @@ import { ProgressBar } from "@/components/learning/progress-bar";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { AUTH_DISABLED } from "@/providers/auth-provider";
 import { getCaminhoLessons } from "@/lib/content";
 
 interface Props {
@@ -19,7 +18,6 @@ interface Props {
 export default async function PrimeirosPassosPage({ params }: Props) {
   const { locale } = params;
   const t = await getTranslations({ locale, namespace: "Teachings" });
-  const LOCKED = AUTH_DISABLED ? false : true;
 
   // Real data from MDX
   const lessonsData = getCaminhoLessons("primeiros-passos", locale);
@@ -31,7 +29,7 @@ export default async function PrimeirosPassosPage({ params }: Props) {
     title: lesson.title,
     description: lesson.excerpt,
     duration: lesson.readingTime,
-    isLocked: LOCKED && (lesson.order ?? 99) > 2 // Arbitrary lock rule based on order if locked
+    isLocked: false
   }));
 
   // Mock checking progress
@@ -50,7 +48,7 @@ export default async function PrimeirosPassosPage({ params }: Props) {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
           <BreadcrumbNav
             items={[
-              { label: t("breadcrumb"), path: "/ensinamentos?tab=caminhos" },
+              { label: t("breadcrumb"), path: "/ensinamentos" },
               { label: t("pathLabels.primeiros-passos") }
             ]}
           />
@@ -105,7 +103,7 @@ export default async function PrimeirosPassosPage({ params }: Props) {
               </div>
             ) : (
               <div className="text-center py-10 glass rounded-3xl sacred-border">
-                <p className="text-muted-foreground">Novas lições em breve.</p>
+                <p className="text-muted-foreground">{t("pathPages.comingSoon")}</p>
               </div>
             )}
           </section>
