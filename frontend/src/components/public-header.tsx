@@ -1,14 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "@/i18n/routing";
-import { BookOpen, History, Sparkles, ScrollText, Menu, X, Globe, ChevronDown } from "lucide-react";
+import {
+  BookOpen,
+  Globe,
+  Home,
+  History,
+  Menu,
+  MessageCircleHeart,
+  Moon,
+  ScrollText,
+  Sparkles,
+  Sun,
+  X,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sun, Moon } from "lucide-react";
 import { useTheme } from "@/providers/theme-provider";
 import { useAuth, AUTH_DISABLED } from "@/providers/auth-provider";
-import { useTranslations, useLocale } from "next-intl";
-import { useRef } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 export function PublicHeader() {
   const pathname = usePathname();
@@ -23,14 +33,8 @@ export function PublicHeader() {
   const navT = useTranslations("Navbar");
   const langRef = useRef<HTMLDivElement>(null);
 
-  const toggleTheme = () => {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
-  };
-
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -45,19 +49,11 @@ export function PublicHeader() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const toggleTheme = () => setTheme(resolvedTheme === "dark" ? "light" : "dark");
+
   const changeLanguage = (newLocale: string) => {
     router.replace(pathname as any, { locale: newLocale as any });
     setLangOpen(false);
-  };
-
-  const openSignup = () => {
-    openAuthModal("signup");
-    setMobileMenuOpen(false);
-  };
-
-  const openLogin = () => {
-    openAuthModal("login");
-    setMobileMenuOpen(false);
   };
 
   const navigateTo = (path: string) => {
@@ -66,41 +62,44 @@ export function PublicHeader() {
   };
 
   const navLinks = [
+    { label: navT("home"), icon: Home, path: "/" },
     { label: navT("howToPray"), icon: BookOpen, path: "/como-rezar" },
-    { label: navT("history"), icon: History, path: "/historia" },
-    { label: navT("mysteries"), icon: Sparkles, path: "/misterios-do-dia" },
+    { label: navT("mysteries"), icon: Sparkles, path: "/misterios-do-dia", badge: t("badgeToday") },
     { label: navT("prayers"), icon: ScrollText, path: "/oracoes-tradicionais" },
+  ];
+
+  const secondaryLinks = [
+    { label: navT("history"), icon: History, path: "/historia" },
+    { label: navT("about"), icon: MessageCircleHeart, path: "/about" },
   ];
 
   return (
     <>
-      <header 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled 
-            ? "bg-sacred-cream/95 dark:bg-slate-950/95 backdrop-blur-xl shadow-lg border-b border-gold-500/10" 
-            : "bg-sacred-cream/80 dark:bg-slate-950/80 backdrop-blur-md"
+      <header
+        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "border-b border-gold-500/10 bg-sacred-cream/95 shadow-lg backdrop-blur-xl dark:bg-slate-950/95"
+            : "bg-sacred-cream/80 backdrop-blur-md dark:bg-slate-950/80"
         }`}
       >
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 sm:h-20">
-            {/* Logo */}
+        <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between sm:h-20">
             <button
               onClick={() => navigateTo("/")}
-              className="flex items-center gap-2 sm:gap-3 group"
+              className="group flex items-center gap-2 sm:gap-3"
               data-testid="header-logo"
             >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center shadow-lg group-hover:shadow-gold-glow transition-all">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-gold-500 to-gold-600 shadow-lg transition-all group-hover:shadow-gold-glow sm:h-12 sm:w-12">
                 <span className="text-xl sm:text-2xl">📿</span>
               </div>
               <div className="hidden sm:block">
-                <h1 className="font-cinzel font-bold text-lg sm:text-xl text-foreground group-hover:text-gold-500 transition-colors">
+                <h1 className="font-cinzel text-lg font-bold text-foreground transition-colors group-hover:text-gold-500 sm:text-xl">
                   Rosário Vivo
                 </h1>
               </div>
             </button>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden items-center gap-1 lg:flex">
               {navLinks.map((link) => {
                 const Icon = link.icon;
                 const isActive = pathname === link.path;
@@ -108,49 +107,51 @@ export function PublicHeader() {
                   <button
                     key={link.path}
                     onClick={() => navigateTo(link.path)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200 ${
+                    className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm transition-all duration-200 ${
                       isActive
-                        ? "bg-gold-500/10 text-gold-600 dark:text-gold-400 font-medium"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                        ? "bg-gold-500/10 font-medium text-gold-600 dark:text-gold-400"
+                        : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
                     }`}
-                    data-testid={`nav-${link.path.replace("/", "")}`}
+                    data-testid={`nav-${link.path.replace("/", "") || "home"}`}
                   >
-                    <Icon className="w-4 h-4" />
-                    <span className="text-sm">{link.label}</span>
+                    <Icon className="h-4 w-4" />
+                    <span>{link.label}</span>
+                    {link.badge && (
+                      <span className="rounded-full border border-gold-500/30 bg-gold-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-gold-600 dark:text-gold-300">
+                        {link.badge}
+                      </span>
+                    )}
                   </button>
                 );
               })}
             </div>
 
-            {/* Desktop Actions */}
-            <div className="hidden md:flex items-center gap-3">
-              {/* Language Switcher */}
+            <div className="hidden items-center gap-3 lg:flex">
               <div className="relative" ref={langRef}>
                 <button
                   onClick={() => setLangOpen(!langOpen)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border transition-all duration-300 ${
-                    langOpen 
-                      ? "bg-gold-500/10 border-gold-500/30 text-gold-600 dark:text-gold-400" 
-                      : "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  className={`flex items-center gap-1.5 rounded-full border px-3 py-1.5 transition-all duration-300 ${
+                    langOpen
+                      ? "border-gold-500/30 bg-gold-500/10 text-gold-600 dark:text-gold-400"
+                      : "border-transparent text-muted-foreground hover:bg-muted/50 hover:text-foreground"
                   }`}
                   aria-label="Change language"
                 >
-                  <Globe className="w-4 h-4" />
+                  <Globe className="h-4 w-4" />
                   <span className="text-xs font-bold uppercase">{locale}</span>
-                  <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${langOpen ? "rotate-180" : ""}`} />
                 </button>
 
                 {langOpen && (
-                  <div className="absolute top-full mt-2 right-0 w-40 bg-sacred-cream dark:bg-slate-900 rounded-xl border border-gold-500/10 shadow-xl overflow-hidden p-1 z-[60] animate-in fade-in slide-in-from-top-2">
+                  <div className="animate-in fade-in slide-in-from-top-2 absolute right-0 top-full z-[60] mt-2 w-40 overflow-hidden rounded-xl border border-gold-500/10 bg-sacred-cream p-1 shadow-xl dark:bg-slate-900">
                     <button
                       onClick={() => changeLanguage("pt")}
-                      className={`flex items-center gap-2 w-full px-3 py-2.5 rounded-lg text-xs font-medium transition-colors ${locale === 'pt' ? "bg-gold-500/10 text-gold-600 dark:text-gold-400" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"}`}
+                      className={`flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-xs font-medium transition-colors ${locale === "pt" ? "bg-gold-500/10 text-gold-600 dark:text-gold-400" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}
                     >
                       <span className="text-base">🇧🇷</span> Português
                     </button>
                     <button
                       onClick={() => changeLanguage("en")}
-                      className={`flex items-center gap-2 w-full px-3 py-2.5 rounded-lg text-xs font-medium transition-colors ${locale === 'en' ? "bg-gold-500/10 text-gold-600 dark:text-gold-400" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"}`}
+                      className={`flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-xs font-medium transition-colors ${locale === "en" ? "bg-gold-500/10 text-gold-600 dark:text-gold-400" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"}`}
                     >
                       <span className="text-base">🇺🇸</span> English
                     </button>
@@ -160,39 +161,38 @@ export function PublicHeader() {
 
               <button
                 onClick={toggleTheme}
-                className="w-9 h-9 rounded-full glass sacred-border flex items-center justify-center hover:shadow-gold-glow transition-all duration-300"
+                className="glass sacred-border relative flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:shadow-gold-glow"
                 aria-label={t("theme")}
                 data-testid="theme-toggle"
               >
-                <Sun className="h-4 w-4 rotate-0 scale-100 text-gold-600 transition-transform duration-300 dark:-rotate-90 dark:scale-0" />
-                <Moon className="absolute h-4 w-4 rotate-90 scale-0 text-gold-400 transition-transform duration-300 dark:rotate-0 dark:scale-100" />
+                <Sun className="h-4 w-4 scale-100 rotate-0 text-gold-600 transition-transform duration-300 dark:scale-0 dark:-rotate-90" />
+                <Moon className="absolute h-4 w-4 scale-0 rotate-90 text-gold-400 transition-transform duration-300 dark:scale-100 dark:rotate-0" />
               </button>
 
               {AUTH_DISABLED ? (
                 <Button
                   size="sm"
                   onClick={() => navigateTo("/dashboard")}
-                  className="rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow font-cinzel font-semibold"
+                  className="rounded-full bg-gradient-to-r from-gold-500 to-gold-600 font-cinzel font-semibold text-sacred-blue hover:shadow-gold-glow"
                   data-testid="header-dashboard"
                 >
-                  {t("accessNow")}
+                  {t("openDashboard")}
                 </Button>
               ) : (
                 <>
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={openLogin}
+                    onClick={() => openAuthModal("login")}
                     className="rounded-full border-gold-500/20 hover:border-gold-500/40 hover:bg-gold-500/5"
                     data-testid="header-login"
                   >
                     {t("login")}
                   </Button>
-
                   <Button
                     size="sm"
-                    onClick={openSignup}
-                    className="rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-sacred-blue hover:shadow-gold-glow font-cinzel font-semibold"
+                    onClick={() => openAuthModal("signup")}
+                    className="rounded-full bg-gradient-to-r from-gold-500 to-gold-600 font-cinzel font-semibold text-sacred-blue hover:shadow-gold-glow"
                     data-testid="header-signup"
                   >
                     {t("start")}
@@ -201,24 +201,82 @@ export function PublicHeader() {
               )}
             </div>
 
-            {/* Mobile Actions */}
-            <div className="flex md:hidden items-center gap-2">
+            <div className="flex items-center gap-2 lg:hidden">
               <button
                 onClick={toggleTheme}
-                className="w-9 h-9 rounded-full glass sacred-border flex items-center justify-center"
+                className="glass sacred-border relative flex h-9 w-9 items-center justify-center rounded-full"
                 aria-label={t("theme")}
               >
-                <Sun className="h-4 w-4 rotate-0 scale-100 text-gold-600 transition-transform duration-300 dark:-rotate-90 dark:scale-0" />
-                <Moon className="absolute h-4 w-4 rotate-90 scale-0 text-gold-400 transition-transform duration-300 dark:rotate-0 dark:scale-100" />
+                <Sun className="h-4 w-4 scale-100 rotate-0 text-gold-600 transition-transform duration-300 dark:scale-0 dark:-rotate-90" />
+                <Moon className="absolute h-4 w-4 scale-0 rotate-90 text-gold-400 transition-transform duration-300 dark:scale-100 dark:rotate-0" />
+              </button>
+              <button
+                onClick={() => setMobileMenuOpen((v) => !v)}
+                className="glass sacred-border flex h-9 w-9 items-center justify-center rounded-full"
+                aria-label={t("menu")}
+              >
+                {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
               </button>
             </div>
           </div>
         </nav>
       </header>
 
-      {/* Spacer to prevent content from going under fixed header */}
       <div className="h-16 sm:h-20" />
 
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-40 lg:hidden">
+          <button
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-label="Close menu overlay"
+          />
+          <div className="absolute left-4 right-4 top-20 rounded-2xl border border-gold-500/20 bg-background p-4 shadow-2xl">
+            <div className="space-y-2">
+              {navLinks.map((link) => {
+                const Icon = link.icon;
+                const isActive = pathname === link.path;
+                return (
+                  <button
+                    key={link.path}
+                    onClick={() => navigateTo(link.path)}
+                    className={`flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left transition-colors ${
+                      isActive ? "bg-gold-500/10 text-gold-600 dark:text-gold-400" : "hover:bg-muted/50"
+                    }`}
+                  >
+                    <Icon className="h-5 w-5" />
+                    <span className="font-semibold">{link.label}</span>
+                    {link.badge && (
+                      <span className="ml-auto rounded-full border border-gold-500/30 bg-gold-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-gold-600 dark:text-gold-300">
+                        {link.badge}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+
+              <div className="my-2 border-t border-border/60" />
+
+              {secondaryLinks.map((link) => {
+                const Icon = link.icon;
+                const isActive = pathname === link.path;
+                return (
+                  <button
+                    key={link.path}
+                    onClick={() => navigateTo(link.path)}
+                    className={`flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left transition-colors ${
+                      isActive ? "bg-gold-500/10 text-gold-600 dark:text-gold-400" : "hover:bg-muted/50"
+                    }`}
+                  >
+                    <Icon className="h-5 w-5" />
+                    <span className="font-medium">{link.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

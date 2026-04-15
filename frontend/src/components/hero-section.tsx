@@ -106,8 +106,8 @@ export function HeroSection() {
                   className="group relative p-6 glass rounded-lg border border-gold-500/30 hover:border-gold-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/20 block text-left"
                 >
                   <div className="text-3xl mb-3">📿</div>
-                  <h3 className="font-cinzel font-bold text-lg text-white mb-2">{t("prayNow")}</h3>
-                  <p className="text-sm text-slate-300">{t("prayNowDesc")}</p>
+                  <h3 className="font-cinzel font-bold text-lg text-foreground mb-2">{t("prayNow")}</h3>
+                  <p className="text-sm text-muted-foreground">{t("prayNowDesc")}</p>
                 </Link>
 
                 <Link
@@ -115,8 +115,8 @@ export function HeroSection() {
                   className="group relative p-6 glass rounded-lg border border-gold-500/30 hover:border-gold-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/20 block text-left"
                 >
                   <div className="text-3xl mb-3">📚</div>
-                  <h3 className="font-cinzel font-bold text-lg text-white mb-2">{t("learn")}</h3>
-                  <p className="text-sm text-slate-300">{t("learnDesc")}</p>
+                  <h3 className="font-cinzel font-bold text-lg text-foreground mb-2">{t("learn")}</h3>
+                  <p className="text-sm text-muted-foreground">{t("learnDesc")}</p>
                 </Link>
 
                 <button
@@ -124,8 +124,8 @@ export function HeroSection() {
                   className="group relative p-6 glass rounded-lg border border-gold-500/30 hover:border-gold-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/20 text-left w-full"
                 >
                   <div className="text-3xl mb-3">⭐</div>
-                  <h3 className="font-cinzel font-bold text-lg text-white mb-2">{t("track")}</h3>
-                  <p className="text-sm text-slate-300">{t("trackDesc")}</p>
+                  <h3 className="font-cinzel font-bold text-lg text-foreground mb-2">{t("track")}</h3>
+                  <p className="text-sm text-muted-foreground">{t("trackDesc")}</p>
                 </button>
               </div>
             </div>

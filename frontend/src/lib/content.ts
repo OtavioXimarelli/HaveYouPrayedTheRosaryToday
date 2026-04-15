@@ -31,6 +31,10 @@ export interface ArticleMeta extends ArticleFrontmatter {
   // no content — lightweight, used in listing pages
 }
 
+export interface ArticleListItem extends ArticleMeta {
+  categoria: string;
+}
+
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function readMdx(filePath: string): { data: ArticleFrontmatter; content: string } {
@@ -95,6 +99,30 @@ export function getAllArticleParams(): { locale: string; categoria: string; slug
       }))
     );
   });
+}
+
+/**
+ * Get all non-path teachings articles for a locale, flattened with category.
+ */
+export function getAllTeachingsArticles(locale: string = "pt"): ArticleListItem[] {
+  const root = getRootForLocale(locale);
+  if (!fs.existsSync(root)) return [];
+
+  const categorias = fs
+    .readdirSync(root, { withFileTypes: true })
+    .filter((d) => d.isDirectory() && d.name !== "caminhos")
+    .map((d) => d.name);
+
+  const items = categorias.flatMap((categoria) =>
+    getArticlesByTema(categoria, locale).map((article) => ({
+      ...article,
+      categoria,
+    }))
+  );
+
+  return items.sort(
+    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+  );
 }
 
 // ─── Caminhos (guided path lessons) ─────────────────────────────────────────

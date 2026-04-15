@@ -79,6 +79,16 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/blog',
+        destination: '/ensinamentos',
+        permanent: true,
+      },
+      {
+        source: '/:locale/blog',
+        destination: '/:locale/ensinamentos',
+        permanent: true,
+      },
+      {
         source: '/formacao',
         destination: '/ensinamentos?tab=caminhos',
         permanent: true,

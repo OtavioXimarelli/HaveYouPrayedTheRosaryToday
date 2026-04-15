@@ -33,6 +33,9 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 const STORAGE_KEY = "rosario-user";
+const ACCESS_TOKEN_KEY = "rosario-access-token";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ?? "http://localhost:3001/api";
+const USE_BACKEND_AUTH = process.env.NEXT_PUBLIC_USE_BACKEND === "true";
 export const AUTH_DISABLED = true;
 
 function generateUserId(): string {
@@ -57,6 +60,10 @@ async function sha256(text: string): Promise<string> {
     .join("");
 }
 
+function isEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
 // ─── Provider ─────────────────────────────────────────────────────────────────
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -69,6 +76,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (AUTH_DISABLED) {
       setUser(createGuestUser());
       return;
+    }
+    if (USE_BACKEND_AUTH) {
+      try {
+        const token = localStorage.getItem(ACCESS_TOKEN_KEY);
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (token && stored) {
+          const parsed = JSON.parse(stored) as Partial<AuthUser> | null;
+          if (
+            parsed &&
+            typeof parsed.id === "string" &&
+            typeof parsed.name === "string"
+          ) {
+            setUser({
+              id: parsed.id,
+              name: parsed.name,
+              passwordHash: "__backend__",
+            });
+            return;
+          }
+        }
+      } catch {
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(ACCESS_TOKEN_KEY);
+      }
     }
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
@@ -93,6 +124,40 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const login = useCallback(async (username: string, password: string) => {
     if (AUTH_DISABLED) {
       setUser(createGuestUser());
+      setModalOpen(false);
+      return;
+    }
+    if (USE_BACKEND_AUTH) {
+      if (!isEmail(username)) {
+        throw new Error("No modo backend, use seu e-mail para entrar.");
+      }
+
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: username, password }),
+      });
+
+      if (!response.ok) {
+        const data = (await response.json().catch(() => ({}))) as { message?: string | string[] };
+        const message = Array.isArray(data.message)
+          ? data.message.join(", ")
+          : data.message ?? "Falha no login.";
+        throw new Error(message);
+      }
+
+      const data = (await response.json()) as {
+        accessToken: string;
+        user: { id: string; name: string };
+      };
+      const backendUser: AuthUser = {
+        id: data.user.id,
+        name: data.user.name,
+        passwordHash: "__backend__",
+      };
+      localStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(backendUser));
+      setUser(backendUser);
       setModalOpen(false);
       return;
     }
@@ -122,6 +187,44 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signup = useCallback(async (username: string, password: string) => {
     if (AUTH_DISABLED) {
       setUser(createGuestUser());
+      setModalOpen(false);
+      return;
+    }
+    if (USE_BACKEND_AUTH) {
+      if (!isEmail(username)) {
+        throw new Error("No modo backend, use um e-mail válido para criar conta.");
+      }
+
+      const response = await fetch(`${API_BASE_URL}/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: username.split("@")[0],
+          email: username,
+          password,
+        }),
+      });
+
+      if (!response.ok) {
+        const data = (await response.json().catch(() => ({}))) as { message?: string | string[] };
+        const message = Array.isArray(data.message)
+          ? data.message.join(", ")
+          : data.message ?? "Falha ao criar conta.";
+        throw new Error(message);
+      }
+
+      const data = (await response.json()) as {
+        accessToken: string;
+        user: { id: string; name: string };
+      };
+      const backendUser: AuthUser = {
+        id: data.user.id,
+        name: data.user.name,
+        passwordHash: "__backend__",
+      };
+      localStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(backendUser));
+      setUser(backendUser);
       setModalOpen(false);
       return;
     }
@@ -155,6 +258,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return;
     }
     localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(ACCESS_TOKEN_KEY);
     setUser(null);
   }, []);
 
@@ -204,4 +308,3 @@ export function useAuth(): AuthContextValue {
   if (!ctx) throw new Error("useAuth must be used within an <AuthProvider>");
   return ctx;
 }
-

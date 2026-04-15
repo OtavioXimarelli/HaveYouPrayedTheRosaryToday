@@ -147,10 +147,12 @@ export default function RecursosPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {downloads.map((item, i) => (
-                  <div
+                  <button
+                    type="button"
                     key={i}
                     onClick={() => handleDownloadClick(item.title)}
-                    className="group p-6 rounded-2xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-blue-500/40 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                    aria-label={`${t("downloadNow")}: ${item.title}`}
+                    className="group p-6 rounded-2xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-blue-500/40 hover:-translate-y-1 transition-all duration-300 text-left"
                   >
                     <div className="flex items-start justify-between mb-4">
                       <FileText className="w-8 h-8 text-blue-500" />
@@ -166,7 +168,7 @@ export default function RecursosPage() {
                       {t("downloadNow")}
                       <Download className="w-3 h-3" />
                     </div>
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>

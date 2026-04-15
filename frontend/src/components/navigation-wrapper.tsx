@@ -10,14 +10,27 @@ import { useAuth } from "@/providers/auth-provider";
 export function NavigationWrapper() {
   const pathname = usePathname();
   const { isLoggedIn } = useAuth();
-  
-  // Public pages that should show the header-style navigation
-  const publicPages = ["/", "/como-rezar", "/historia", "/misterios-do-dia", "/oracoes-tradicionais", "/about"];
-  const isPublicPage = publicPages.includes(pathname as string);
+
+  const publicPrefixes = [
+    "/",
+    "/about",
+    "/como-rezar",
+    "/historia",
+    "/misterios-do-dia",
+    "/oracoes-tradicionais",
+    "/ensinamentos",
+    "/recursos",
+  ];
+
+  const isPublicPage = publicPrefixes.some((prefix) => {
+    if (prefix === "/") return pathname === "/";
+    return pathname === prefix || pathname.startsWith(`${prefix}/`);
+  });
   
   // Only show floating navbar on dashboard when authenticated
   const isDashboardPage = pathname === "/dashboard";
   const shouldShowFloatingNav = isDashboardPage && isLoggedIn;
+  const shouldShowMobileNav = !isPublicPage && pathname.startsWith("/ferramentas");
   
   const renderNav = () => {
     if (isPublicPage) {
@@ -33,9 +46,9 @@ export function NavigationWrapper() {
 
   return (
     <>
-      <OnboardingModal />
+      <OnboardingModal enabled={isDashboardPage && isLoggedIn} />
       {renderNav()}
-      <MobileNav />
+      {shouldShowMobileNav && <MobileNav />}
     </>
   );
 }

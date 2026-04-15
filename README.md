@@ -122,6 +122,8 @@ pnpm dev:frontend
 | Swagger  | http://localhost:3001/api/docs |
 
 > **MVP note**: `AUTH_DISABLED=true` is active in the frontend — all features are unlocked without requiring login. To enable the full auth flow, toggle the flag in `src/providers/auth-provider.tsx`.
+>
+> **Separated backend mode**: set `NEXT_PUBLIC_USE_BACKEND=true` in the frontend environment. The frontend service layer will call the NestJS API (`NEXT_PUBLIC_API_URL`) and use JWT from `localStorage` key `rosario-access-token`.
 
 ---
 
@@ -162,6 +164,7 @@ JWT_SECRET=<min-32-character-secret>
 # URLs
 FRONTEND_URL=https://yourdomain.com
 NEXT_PUBLIC_API_URL=https://api.yourdomain.com/api
+NEXT_PUBLIC_USE_BACKEND=true
 ```
 
 > ⚠️ Never commit `.env` files. Use strong passwords in production.

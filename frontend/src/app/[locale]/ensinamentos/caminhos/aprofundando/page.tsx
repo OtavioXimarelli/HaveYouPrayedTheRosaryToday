@@ -7,7 +7,6 @@ import { ProgressBar } from "@/components/learning/progress-bar";
 import { BreadcrumbNav } from "@/components/learning/breadcrumb-nav";
 import { BookOpen, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { AUTH_DISABLED } from "@/providers/auth-provider";
 import { getCaminhoLessons } from "@/lib/content";
 
 interface Props {
@@ -19,7 +18,6 @@ interface Props {
 export default async function AprofundandoPage({ params }: Props) {
   const { locale } = params;
   const t = await getTranslations({ locale, namespace: "Teachings" });
-  const LOCKED = AUTH_DISABLED ? false : true;
 
   const lessonsData = getCaminhoLessons("aprofundando", locale);
 
@@ -29,7 +27,7 @@ export default async function AprofundandoPage({ params }: Props) {
     title: lesson.title,
     description: lesson.excerpt,
     duration: lesson.readingTime,
-    isLocked: LOCKED
+    isLocked: false
   }));
 
   const completedLessons: string[] = []; // Would come from localStorage
@@ -47,7 +45,7 @@ export default async function AprofundandoPage({ params }: Props) {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
           <BreadcrumbNav
             items={[
-              { label: t("breadcrumb"), path: "/ensinamentos?tab=caminhos" },
+              { label: t("breadcrumb"), path: "/ensinamentos" },
               { label: t("pathLabels.aprofundando") }
             ]}
           />
@@ -102,7 +100,7 @@ export default async function AprofundandoPage({ params }: Props) {
               </div>
             ) : (
               <div className="text-center py-10 glass rounded-3xl sacred-border">
-                <p className="text-muted-foreground">Novas lições em breve.</p>
+                <p className="text-muted-foreground">{t("pathPages.comingSoon")}</p>
               </div>
             )}
           </section>
@@ -111,10 +109,10 @@ export default async function AprofundandoPage({ params }: Props) {
           <section className="text-center">
             <div className="p-6 sm:p-8 rounded-3xl glass sacred-border">
               <h3 className="text-xl font-cinzel font-bold text-foreground mb-3">
-                Continuar para Mistérios Vivos
+                {t("pathPages.continuePathTitle")}
               </h3>
               <p className="text-muted-foreground mb-6">
-                Avance para o último caminho e aprofunde ainda mais os ensinamentos.
+                {t("pathPages.continuePathDesc")}
               </p>
               <Button
                 asChild
