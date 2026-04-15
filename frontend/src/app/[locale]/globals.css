@@ -32,6 +32,8 @@
     --gold-glow: 43 74% 53%;
     --sacred-blue: 222 47% 11%;
     --cream: 45 50% 98%;
+    --font-cinzel: Georgia;
+    --font-manrope: system-ui;
   }
 
   .dark {
