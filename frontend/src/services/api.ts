@@ -1,66 +1,316 @@
 /**
  * API Service Layer
  *
- * This file implements the Service/Repository pattern for the frontend.
- * Currently uses mock data and localStorage, but is designed to be
- * seamlessly replaced with actual API calls to the NestJS backend.
- *
- * All functions simulate network latency with delays.
+ * Supports two data sources:
+ * 1. local mock/localStorage mode (default for MVP)
+ * 2. separated backend mode via NEXT_PUBLIC_USE_BACKEND=true
  */
 
 import {
+  AddAmenRequest,
+  AddCommentRequest,
   CheckIn,
+  Comment,
   CreateCheckInRequest,
   CreateCheckInResponse,
   GetFeedResponse,
-  UserStats,
-  AddCommentRequest,
-  AddAmenRequest,
-  Comment,
+  IntentionTag,
   MysteryType,
+  UserStats,
 } from "@/types";
 import {
-  mockCheckIns,
-  currentUser,
-  getStoredStats,
-  saveStats,
-  saveCheckIn,
-  generateId,
   calculateStreak,
-  hasCheckedInToday,
+  currentUser,
+  generateId,
   getStoredCheckIns,
+  getStoredStats,
+  hasCheckedInToday,
+  mockCheckIns,
+  saveCheckIn,
+  saveStats,
 } from "./mockData";
 
-// ===========================
-// Configuration
-// ===========================
+const SIMULATED_DELAY_MS = 500;
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ??
+  "http://localhost:3001/api";
+const USE_BACKEND = process.env.NEXT_PUBLIC_USE_BACKEND === "true";
+const ACCESS_TOKEN_KEY = "rosario-access-token";
 
-const SIMULATED_DELAY_MS = 500; // Simulates network latency
+type BackendMysteryLabel =
+  | "Mistérios Gozosos"
+  | "Mistérios Dolorosos"
+  | "Mistérios Gloriosos"
+  | "Mistérios Luminosos";
+
+type BackendIntentionLabel =
+  | "Família"
+  | "Paz"
+  | "Saúde"
+  | "Trabalho"
+  | "Estudos"
+  | "Vocação"
+  | "Conversão"
+  | "Igreja"
+  | "Fiéis Defuntos"
+  | "Pessoal";
+
+interface BackendComment {
+  userId: string;
+  userName: string;
+  userAvatar?: string;
+  text: string;
+  createdAt: string;
+}
+
+interface BackendCheckIn {
+  _id: string;
+  userId: string;
+  userName: string;
+  userAvatar?: string;
+  mystery: string;
+  reflection?: string;
+  intentions?: string[];
+  comments?: BackendComment[];
+  amenCount?: number;
+  hasUserAmen?: boolean;
+  createdAt: string;
+}
+
+interface BackendFeedResponse {
+  checkIns: BackendCheckIn[];
+  total: number;
+  page: number;
+  totalPages: number;
+}
+
+interface BackendTodayResponse {
+  hasCheckedIn: boolean;
+}
+
+interface BackendFavoriteMystery {
+  mystery: string;
+  count: number;
+}
+
+interface BackendStatsResponse {
+  currentStreak: number;
+  longestStreak: number;
+  totalCheckIns: number;
+  lastCheckIn?: string;
+  favoriteMysteries: BackendFavoriteMystery[] | string[];
+}
 
 function delay(ms: number = SIMULATED_DELAY_MS): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-// ===========================
-// Check-in Service
-// ===========================
+function getAccessToken(): string | null {
+  if (typeof window === "undefined") return null;
+  return localStorage.getItem(ACCESS_TOKEN_KEY);
+}
 
-/**
- * Submit a new rosary check-in
- */
+function isMysteryType(value: string): value is MysteryType {
+  return ["joyful", "sorrowful", "glorious", "luminous"].includes(value);
+}
+
+function isIntentionTag(value: string): value is IntentionTag {
+  return [
+    "family",
+    "peace",
+    "health",
+    "gratitude",
+    "work",
+    "faith",
+    "love",
+    "healing",
+  ].includes(value);
+}
+
+const frontendToBackendMystery: Record<MysteryType, BackendMysteryLabel> = {
+  joyful: "Mistérios Gozosos",
+  sorrowful: "Mistérios Dolorosos",
+  glorious: "Mistérios Gloriosos",
+  luminous: "Mistérios Luminosos",
+};
+
+const backendToFrontendMystery: Record<BackendMysteryLabel, MysteryType> = {
+  "Mistérios Gozosos": "joyful",
+  "Mistérios Dolorosos": "sorrowful",
+  "Mistérios Gloriosos": "glorious",
+  "Mistérios Luminosos": "luminous",
+};
+
+const frontendToBackendIntention: Record<IntentionTag, BackendIntentionLabel> = {
+  family: "Família",
+  peace: "Paz",
+  health: "Saúde",
+  gratitude: "Pessoal",
+  work: "Trabalho",
+  faith: "Igreja",
+  love: "Vocação",
+  healing: "Conversão",
+};
+
+const backendToFrontendIntention: Partial<Record<BackendIntentionLabel, IntentionTag>> = {
+  Família: "family",
+  Paz: "peace",
+  Saúde: "health",
+  Trabalho: "work",
+  Estudos: "faith",
+  Vocação: "faith",
+  Conversão: "healing",
+  Igreja: "faith",
+  "Fiéis Defuntos": "peace",
+  Pessoal: "gratitude",
+};
+
+function mapMysteryToFrontend(rawMystery: string): MysteryType {
+  if (isMysteryType(rawMystery)) return rawMystery;
+  const mapped = backendToFrontendMystery[rawMystery as BackendMysteryLabel];
+  return mapped ?? "joyful";
+}
+
+function mapIntentionsToFrontend(intentions?: string[]): IntentionTag[] {
+  if (!intentions?.length) return [];
+  return intentions
+    .map((label) => backendToFrontendIntention[label as BackendIntentionLabel] ?? "faith")
+    .filter(isIntentionTag);
+}
+
+function mapCheckInToFrontend(checkIn: BackendCheckIn): CheckIn {
+  return {
+    id: checkIn._id,
+    userId: checkIn.userId,
+    user: {
+      id: checkIn.userId,
+      name: checkIn.userName,
+      avatarUrl: checkIn.userAvatar,
+      createdAt: new Date(checkIn.createdAt),
+    },
+    mystery: mapMysteryToFrontend(checkIn.mystery),
+    reflection: checkIn.reflection,
+    intentions: mapIntentionsToFrontend(checkIn.intentions),
+    createdAt: new Date(checkIn.createdAt),
+    amens: checkIn.amenCount ?? 0,
+    hasUserAmened: checkIn.hasUserAmen ?? false,
+    comments: (checkIn.comments ?? []).map((comment, index) => ({
+      id: `${checkIn._id}-comment-${index}`,
+      userId: comment.userId,
+      user: {
+        id: comment.userId,
+        name: comment.userName,
+        avatarUrl: comment.userAvatar,
+        createdAt: new Date(comment.createdAt),
+      },
+      checkInId: checkIn._id,
+      content: comment.text,
+      createdAt: new Date(comment.createdAt),
+    })),
+  };
+}
+
+function mapStatsToFrontend(stats: BackendStatsResponse): UserStats {
+  const favoriteMysteries = (stats.favoriteMysteries ?? [])
+    .map((item) => {
+      if (typeof item === "string") return mapMysteryToFrontend(item);
+      return mapMysteryToFrontend(item.mystery);
+    })
+    .filter(isMysteryType)
+    .slice(0, 3);
+
+  return {
+    currentStreak: stats.currentStreak ?? 0,
+    longestStreak: stats.longestStreak ?? 0,
+    totalCheckIns: stats.totalCheckIns ?? 0,
+    lastCheckIn: stats.lastCheckIn ? new Date(stats.lastCheckIn) : undefined,
+    favoriteMysteries,
+  };
+}
+
+async function backendRequest<T>(
+  path: string,
+  init: RequestInit = {},
+  requireAuth: boolean = false
+): Promise<T | null> {
+  if (!USE_BACKEND) return null;
+
+  const token = getAccessToken();
+  if (requireAuth && !token) return null;
+
+  const headers = new Headers(init.headers);
+  if (!headers.has("Content-Type")) {
+    headers.set("Content-Type", "application/json");
+  }
+  if (token) {
+    headers.set("Authorization", `Bearer ${token}`);
+  }
+
+  const response = await fetch(`${API_BASE_URL}${path}`, {
+    ...init,
+    headers,
+  });
+
+  if (!response.ok) {
+    let message = `Backend request failed (${response.status})`;
+    try {
+      const data = (await response.json()) as { message?: string | string[] };
+      if (Array.isArray(data.message)) {
+        message = data.message.join(", ");
+      } else if (data.message) {
+        message = data.message;
+      }
+    } catch {
+      // Keep default message.
+    }
+    throw new Error(message);
+  }
+
+  return (await response.json()) as T;
+}
+
+function updateFavorites(current: MysteryType[], newMystery: MysteryType): MysteryType[] {
+  if (!current.includes(newMystery)) {
+    return [...current, newMystery].slice(-3);
+  }
+  return current;
+}
+
 export async function submitCheckIn(
   request: CreateCheckInRequest
 ): Promise<CreateCheckInResponse> {
-  await delay();
+  const backendCheckIn = await backendRequest<BackendCheckIn>(
+    "/checkins",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        mystery: frontendToBackendMystery[request.mystery],
+        reflection: request.reflection,
+        intentions: request.intentions.map((tag) => frontendToBackendIntention[tag]),
+        isPublic: true,
+      }),
+    },
+    true
+  );
 
+  if (backendCheckIn) {
+    const backendStats = await backendRequest<BackendStatsResponse>("/users/me/stats", {}, true);
+    if (!backendStats) {
+      throw new Error("Backend stats unavailable after check-in.");
+    }
+    return {
+      checkIn: mapCheckInToFrontend(backendCheckIn),
+      stats: mapStatsToFrontend(backendStats),
+    };
+  }
+
+  await delay();
   const stats = getStoredStats();
 
-  // Check if already checked in today
   if (hasCheckedInToday(stats.lastCheckIn)) {
     throw new Error("Você já rezou o Terço hoje. Volte amanhã!");
   }
 
-  // Create new check-in
   const newCheckIn: CheckIn = {
     id: generateId(),
     userId: currentUser.id,
@@ -74,10 +324,9 @@ export async function submitCheckIn(
     comments: [],
   };
 
-  // Update stats
-  const { current: streakBonus, isNewDay } = calculateStreak(stats.lastCheckIn);
-  
+  const { isNewDay } = calculateStreak(stats.lastCheckIn);
   const newStreak = isNewDay ? stats.currentStreak + 1 : stats.currentStreak;
+
   const updatedStats: UserStats = {
     currentStreak: newStreak,
     longestStreak: Math.max(stats.longestStreak, newStreak),
@@ -86,11 +335,8 @@ export async function submitCheckIn(
     favoriteMysteries: updateFavorites(stats.favoriteMysteries, request.mystery),
   };
 
-  // Persist to localStorage
   saveCheckIn(newCheckIn);
   saveStats(updatedStats);
-
-  // Add to mock feed
   mockCheckIns.unshift(newCheckIn);
 
   return {
@@ -99,101 +345,115 @@ export async function submitCheckIn(
   };
 }
 
-function updateFavorites(
-  current: MysteryType[],
-  newMystery: MysteryType
-): MysteryType[] {
-  // Simple implementation: add to favorites if not already there
-  if (!current.includes(newMystery)) {
-    return [...current, newMystery].slice(-3) as MysteryType[];
-  }
-  return current;
-}
-
-/**
- * Check if user has already prayed today
- */
 export async function checkTodayStatus(): Promise<{ hasPrayed: boolean; stats: UserStats }> {
+  const today = await backendRequest<BackendTodayResponse>("/checkins/today", {}, true);
+  const stats = await backendRequest<BackendStatsResponse>("/users/me/stats", {}, true);
+
+  if (today && stats) {
+    return {
+      hasPrayed: today.hasCheckedIn,
+      stats: mapStatsToFrontend(stats),
+    };
+  }
+
   await delay(300);
-
-  const stats = getStoredStats();
-  const hasPrayed = hasCheckedInToday(stats.lastCheckIn);
-
-  return { hasPrayed, stats };
+  const localStats = getStoredStats();
+  return { hasPrayed: hasCheckedInToday(localStats.lastCheckIn), stats: localStats };
 }
 
-// ===========================
-// Feed Service
-// ===========================
-
-/**
- * Get the community feed of check-ins
- */
 export async function getFeed(cursor?: string): Promise<GetFeedResponse> {
-  await delay(700);
+  const page = cursor ? Number.parseInt(cursor, 10) : 1;
+  const backendFeed = await backendRequest<BackendFeedResponse>(
+    `/checkins/feed?page=${Number.isNaN(page) ? 1 : page}&limit=10`
+  );
 
-  // Merge mock check-ins with user's stored check-ins
+  if (backendFeed) {
+    const safePage = backendFeed.page ?? 1;
+    const totalPages = backendFeed.totalPages ?? 1;
+    const hasMore = safePage < totalPages;
+
+    return {
+      checkIns: backendFeed.checkIns.map(mapCheckInToFrontend),
+      hasMore,
+      nextCursor: hasMore ? String(safePage + 1) : undefined,
+    };
+  }
+
+  await delay(700);
   const userCheckIns = getStoredCheckIns();
   const allCheckIns = [...userCheckIns, ...mockCheckIns].sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
 
-  // Simple pagination simulation
   const pageSize = 10;
-  const startIndex = cursor ? parseInt(cursor, 10) : 0;
-  const checkIns = allCheckIns.slice(startIndex, startIndex + pageSize);
-  const hasMore = startIndex + pageSize < allCheckIns.length;
+  const startIndex = cursor ? Number.parseInt(cursor, 10) : 0;
+  const safeStartIndex = Number.isNaN(startIndex) ? 0 : startIndex;
+  const checkIns = allCheckIns.slice(safeStartIndex, safeStartIndex + pageSize);
+  const hasMore = safeStartIndex + pageSize < allCheckIns.length;
 
   return {
     checkIns,
     hasMore,
-    nextCursor: hasMore ? String(startIndex + pageSize) : undefined,
+    nextCursor: hasMore ? String(safeStartIndex + pageSize) : undefined,
   };
 }
 
-// ===========================
-// User Stats Service
-// ===========================
-
-/**
- * Get user statistics
- */
 export async function getUserStats(): Promise<UserStats> {
+  const backendStats = await backendRequest<BackendStatsResponse>("/users/me/stats", {}, true);
+  if (backendStats) return mapStatsToFrontend(backendStats);
+
   await delay(300);
   return getStoredStats();
 }
 
-// ===========================
-// Interaction Services
-// ===========================
-
-/**
- * Add an "Amen" (like) to a check-in
- */
 export async function addAmen(request: AddAmenRequest): Promise<{ amens: number }> {
-  await delay(200);
+  const backendAmen = await backendRequest<{ amenCount: number }>(
+    `/checkins/${request.checkInId}/amen`,
+    { method: "POST" },
+    true
+  );
 
-  const checkIn = mockCheckIns.find((c) => c.id === request.checkInId);
-  if (checkIn) {
-    if (checkIn.hasUserAmened) {
-      checkIn.amens--;
-      checkIn.hasUserAmened = false;
-    } else {
-      checkIn.amens++;
-      checkIn.hasUserAmened = true;
-    }
-    return { amens: checkIn.amens };
+  if (backendAmen) {
+    return { amens: backendAmen.amenCount };
   }
 
-  throw new Error("Check-in not found");
+  await delay(200);
+  const checkIn = mockCheckIns.find((c) => c.id === request.checkInId);
+  if (!checkIn) {
+    throw new Error("Check-in not found");
+  }
+
+  if (checkIn.hasUserAmened) {
+    checkIn.amens--;
+    checkIn.hasUserAmened = false;
+  } else {
+    checkIn.amens++;
+    checkIn.hasUserAmened = true;
+  }
+
+  return { amens: checkIn.amens };
 }
 
-/**
- * Add a comment to a check-in
- */
 export async function addComment(request: AddCommentRequest): Promise<Comment> {
-  await delay(400);
+  const backendResponse = await backendRequest<BackendCheckIn>(
+    `/checkins/${request.checkInId}/comments`,
+    {
+      method: "POST",
+      body: JSON.stringify({ text: request.content }),
+    },
+    true
+  );
 
+  if (backendResponse) {
+    const mapped = mapCheckInToFrontend(backendResponse);
+    const latestComment = mapped.comments[mapped.comments.length - 1];
+    if (!latestComment) {
+      throw new Error("Comment was not returned by backend.");
+    }
+    return latestComment;
+  }
+
+  await delay(400);
   const checkIn = mockCheckIns.find((c) => c.id === request.checkInId);
   if (!checkIn) {
     throw new Error("Check-in not found");
@@ -212,10 +472,6 @@ export async function addComment(request: AddCommentRequest): Promise<Comment> {
   return newComment;
 }
 
-// ===========================
-// Type Exports for Repository Pattern
-// ===========================
-
 export interface CheckInRepository {
   submit: typeof submitCheckIn;
   getTodayStatus: typeof checkTodayStatus;
@@ -231,7 +487,6 @@ export interface StatsRepository {
   getUserStats: typeof getUserStats;
 }
 
-// Repository instances (for dependency injection pattern)
 export const checkInRepository: CheckInRepository = {
   submit: submitCheckIn,
   getTodayStatus: checkTodayStatus,

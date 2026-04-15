@@ -1,39 +1,30 @@
 "use client";
 
 import { useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/routing";
-import { 
-  Home, 
-  BookOpen, 
-  Sparkles, 
-  Play, 
-  LayoutDashboard, 
-  Globe,
-  History,
-  ScrollText,
-  GraduationCap,
+import {
+  BookOpen,
   Compass,
-  Library
+  Globe,
+  Home,
+  LayoutDashboard,
+  Play,
+  Sparkles,
 } from "lucide-react";
-import { useTranslations, useLocale } from "next-intl";
-import { useAuth } from "@/providers/auth-provider";
-import { CheckInModal } from "./check-in-modal";
 
 export function MobileNav() {
   const t = useTranslations("Navbar");
-  const commonT = useTranslations("Common");
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
-  const { isLoggedIn } = useAuth();
-  
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const [menuOpen, setMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
-  const [checkInOpen, setCheckInOpen] = useState(false);
 
   const navigateTo = (path: string) => {
     router.push(path as any);
-    setMobileMenuOpen(false);
+    setMenuOpen(false);
     setLangOpen(false);
   };
 
@@ -42,159 +33,128 @@ export function MobileNav() {
     setLangOpen(false);
   };
 
-  const explorarLinks = [
-    { label: t("howToPray"), description: t("description.howToPray"), icon: BookOpen, path: "/como-rezar", isPublic: true },
-    { label: t("history"), description: t("description.history"), icon: History, path: "/historia", isPublic: true },
-    { label: t("mysteries"), description: t("description.mysteries"), icon: Sparkles, path: "/misterios-do-dia", isPublic: true },
-    { label: t("prayers"), description: t("description.prayers"), icon: ScrollText, path: "/oracoes-tradicionais", isPublic: true },
-    { label: t("teachings"), description: t("description.teachings"), icon: GraduationCap, path: "/ensinamentos", isPublic: false },
-    { label: t("tools"), description: t("description.tools"), icon: Compass, path: "/ferramentas", isPublic: false },
-    { label: t("about"), description: t("description.about"), icon: BookOpen, path: "/about", isPublic: true },
-    { label: t("resources"), description: t("description.resources"), icon: Library, path: "/recursos", isPublic: false },
+  const moreLinks = [
+    { label: t("mysteries"), path: "/misterios-do-dia", icon: Sparkles },
+    { label: t("prayers"), path: "/oracoes-tradicionais", icon: BookOpen },
+    { label: t("resources"), path: "/recursos", icon: Compass },
+    { label: t("about"), path: "/about", icon: Home },
   ];
-
-  const isOnContentPage = explorarLinks.some(link => pathname === link.path);
 
   return (
     <>
-      {/* Mobile Bottom Tab Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden safe-area-bottom">
-        <div className="bg-sacred-blue/95 dark:bg-slate-900/95 backdrop-blur-xl border-t border-white/[0.06] shadow-[0_-4px_20px_-5px_rgba(0,0,0,0.3)]">
-          <div className="flex items-end justify-around px-2 pt-1.5 pb-1.5">
-            <button
-              onClick={() => navigateTo("/")}
-              className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
-                pathname === "/" ? "text-gold-400" : "text-white/50"
-              }`}
-            >
-              <Home className={`w-[22px] h-[22px] ${pathname === "/" ? "stroke-[2.5]" : "stroke-[1.5]"}`} />
-              <span className="text-[10px] mt-0.5 leading-tight font-medium">{t("home")}</span>
-            </button>
+      <nav className="safe-area-bottom fixed bottom-0 left-0 right-0 z-50 border-t border-white/[0.06] bg-sacred-blue/95 backdrop-blur-xl shadow-[0_-4px_20px_-5px_rgba(0,0,0,0.3)] dark:bg-slate-900/95 md:hidden">
+        <div className="flex items-end justify-around px-2 pb-1.5 pt-1.5">
+          <button
+            onClick={() => navigateTo("/dashboard")}
+            className={`flex w-14 flex-col items-center justify-center rounded-lg py-1 transition-colors ${
+              pathname === "/dashboard" ? "text-gold-400" : "text-white/50"
+            }`}
+          >
+            <LayoutDashboard className={`h-[22px] w-[22px] ${pathname === "/dashboard" ? "stroke-[2.5]" : "stroke-[1.5]"}`} />
+            <span className="mt-0.5 text-[10px] font-medium leading-tight">{t("dashboard")}</span>
+          </button>
 
-            <button
-              onClick={() => {
-                setMobileMenuOpen(!mobileMenuOpen);
-                setLangOpen(false);
-              }}
-              className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
-                isOnContentPage || mobileMenuOpen ? "text-gold-400" : "text-white/50"
-              }`}
-            >
-              <BookOpen className={`w-[22px] h-[22px] ${isOnContentPage || mobileMenuOpen ? "stroke-[2.5]" : "stroke-[1.5]"}`} />
-              <span className="text-[10px] mt-0.5 leading-tight font-medium">{t("explore")}</span>
-            </button>
+          <button
+            onClick={() => navigateTo("/como-rezar")}
+            className={`flex w-14 flex-col items-center justify-center rounded-lg py-1 transition-colors ${
+              pathname === "/como-rezar" ? "text-gold-400" : "text-white/50"
+            }`}
+          >
+            <BookOpen className={`h-[22px] w-[22px] ${pathname === "/como-rezar" ? "stroke-[2.5]" : "stroke-[1.5]"}`} />
+            <span className="mt-0.5 text-[10px] font-medium leading-tight">{t("howToPray")}</span>
+          </button>
 
-            <button
-              onClick={() => navigateTo("/ferramentas/guia-interativo")}
-              className="flex flex-col items-center justify-center -mt-3 group"
-            >
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center shadow-gold-glow active:scale-90 transition-transform">
-                <Play className="w-5 h-5 text-sacred-blue ml-0.5 fill-current" />
-              </div>
-              <span className="text-[10px] text-gold-400 mt-1 leading-tight font-bold">{commonT("praying")}</span>
-            </button>
+          <button onClick={() => navigateTo("/ferramentas/guia-interativo")} className="-mt-3 flex flex-col items-center justify-center group">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-gold-500 to-gold-600 shadow-gold-glow transition-transform active:scale-90">
+              <Play className="ml-0.5 h-5 w-5 fill-current text-sacred-blue" />
+            </div>
+            <span className="mt-1 text-[10px] font-bold leading-tight text-gold-400">Rezar</span>
+          </button>
 
-            <button
-              onClick={() => navigateTo("/dashboard")}
-              className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
-                pathname === "/dashboard" ? "text-gold-400" : "text-white/50"
-              }`}
-            >
-              <LayoutDashboard className={`w-[22px] h-[22px] ${pathname === "/dashboard" ? "stroke-[2.5]" : "stroke-[1.5]"}`} />
-              <span className="text-[10px] mt-0.5 leading-tight font-medium">{commonT("dashboard")}</span>
-            </button>
+          <button
+            onClick={() => navigateTo("/ensinamentos")}
+            className={`flex w-14 flex-col items-center justify-center rounded-lg py-1 transition-colors ${
+              pathname.startsWith("/ensinamentos") ? "text-gold-400" : "text-white/50"
+            }`}
+          >
+            <Sparkles className={`h-[22px] w-[22px] ${pathname.startsWith("/ensinamentos") ? "stroke-[2.5]" : "stroke-[1.5]"}`} />
+            <span className="mt-0.5 text-[10px] font-medium leading-tight">{t("teachings")}</span>
+          </button>
 
-            <button
-              onClick={() => {
-                setLangOpen(!langOpen);
-                setMobileMenuOpen(false);
-              }}
-              className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${langOpen ? "text-gold-400" : "text-white/50"}`}
-            >
-              <Globe className={`w-[22px] h-[22px] ${langOpen ? "stroke-[2.5]" : "stroke-[1.5]"}`} />
-              <span className="text-[10px] mt-0.5 leading-tight uppercase font-bold">{locale}</span>
-            </button>
-          </div>
+          <button
+            onClick={() => {
+              setMenuOpen((v) => !v);
+              setLangOpen(false);
+            }}
+            className={`flex w-14 flex-col items-center justify-center rounded-lg py-1 transition-colors ${
+              menuOpen ? "text-gold-400" : "text-white/50"
+            }`}
+          >
+            <Compass className={`h-[22px] w-[22px] ${menuOpen ? "stroke-[2.5]" : "stroke-[1.5]"}`} />
+            <span className="mt-0.5 text-[10px] font-medium leading-tight">{t("more")}</span>
+          </button>
         </div>
       </nav>
 
-      {/* Mobile Explorar Sheet */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 md:hidden" onClick={() => setMobileMenuOpen(false)}>
+      {menuOpen && (
+        <div className="fixed inset-0 z-40 md:hidden" onClick={() => setMenuOpen(false)}>
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-          <div 
-            className="absolute bottom-[72px] left-3 right-3 bg-sacred-blue/95 dark:bg-slate-900/95 backdrop-blur-2xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300 p-3" 
+          <div
+            className="animate-in fade-in slide-in-from-bottom-4 absolute bottom-[72px] left-3 right-3 overflow-hidden rounded-2xl border border-white/10 bg-sacred-blue/95 p-3 shadow-2xl backdrop-blur-2xl duration-300 dark:bg-slate-900/95"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="w-10 h-1 rounded-full bg-white/20 mx-auto mb-4" />
-            <div className="max-h-[60vh] overflow-y-auto scrollbar-hide space-y-1.5">
-              {explorarLinks.map((link) => (
+            <div className="mb-4 mx-auto h-1 w-10 rounded-full bg-white/20" />
+            <div className="space-y-1.5">
+              {moreLinks.map((link) => (
                 <button
                   key={link.path}
                   onClick={() => navigateTo(link.path)}
-                  className={`flex items-center gap-3 w-full px-3 py-3 rounded-xl transition-colors active:bg-white/10 ${
+                  className={`flex w-full items-center gap-3 rounded-xl px-3 py-3 transition-colors active:bg-white/10 ${
                     pathname === link.path ? "bg-gold-500/15 text-gold-400" : "text-white hover:bg-white/5"
                   }`}
                 >
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${pathname === link.path ? "bg-gold-500/20" : "bg-white/5"}`}>
-                    <link.icon className="w-5 h-5" />
+                  <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${pathname === link.path ? "bg-gold-500/20" : "bg-white/5"}`}>
+                    <link.icon className="h-5 w-5" />
                   </div>
-                  <div className="text-left min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="font-semibold block text-sm">{link.label}</span>
-                      {!link.isPublic && <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-gold-500/20 text-gold-300 font-bold uppercase tracking-wider">{commonT("members")}</span>}
-                    </div>
-                    <span className="text-[11px] text-white/40 truncate block">{link.description}</span>
-                  </div>
+                  <span className="text-left text-sm font-semibold">{link.label}</span>
                 </button>
               ))}
             </div>
+
+            <button
+              onClick={() => {
+                setLangOpen((v) => !v);
+              }}
+              className="mt-3 flex w-full items-center justify-between rounded-xl border border-white/10 bg-white/5 px-3 py-3 text-white"
+            >
+              <span className="inline-flex items-center gap-2 text-sm font-semibold">
+                <Globe className="h-4 w-4" />
+                Idioma / Language
+              </span>
+              <span className="text-xs font-bold uppercase">{locale}</span>
+            </button>
+
+            {langOpen && (
+              <div className="mt-2 grid grid-cols-1 gap-2">
+                <button
+                  onClick={() => changeLanguage("pt")}
+                  className={`flex items-center justify-between rounded-xl px-4 py-3 transition-all ${locale === "pt" ? "border border-gold-500/30 bg-gold-500/20 text-gold-400" : "bg-white/5 text-white"}`}
+                >
+                  <span className="font-semibold text-sm">🇧🇷 Português</span>
+                  {locale === "pt" && <Sparkles className="h-4 w-4 fill-gold-400" />}
+                </button>
+                <button
+                  onClick={() => changeLanguage("en")}
+                  className={`flex items-center justify-between rounded-xl px-4 py-3 transition-all ${locale === "en" ? "border border-gold-500/30 bg-gold-500/20 text-gold-400" : "bg-white/5 text-white"}`}
+                >
+                  <span className="font-semibold text-sm">🇺🇸 English</span>
+                  {locale === "en" && <Sparkles className="h-4 w-4 fill-gold-400" />}
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
-
-      {/* Mobile Language Sheet */}
-      {langOpen && (
-        <div className="fixed inset-0 z-40 md:hidden" onClick={() => setLangOpen(false)}>
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-          <div 
-            className="absolute bottom-[72px] left-3 right-3 bg-sacred-blue/95 dark:bg-slate-900/95 backdrop-blur-2xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300 p-5" 
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3 className="text-white font-cinzel font-bold mb-5 text-center text-lg">Idioma / Language</h3>
-            <div className="grid grid-cols-1 gap-3">
-              <button
-                onClick={() => changeLanguage("pt")}
-                className={`flex items-center justify-between px-5 py-4 rounded-xl transition-all active:scale-[0.98] ${locale === 'pt' ? "bg-gold-500/20 text-gold-400 border border-gold-500/30" : "bg-white/5 text-white"}`}
-              >
-                <div className="flex items-center gap-4">
-                  <span className="text-3xl">🇧🇷</span>
-                  <div className="flex flex-col items-start text-left">
-                    <span className="font-bold text-sm">Português</span>
-                    <span className="text-[10px] opacity-50 uppercase tracking-widest">Brasil</span>
-                  </div>
-                </div>
-                {locale === 'pt' && <Sparkles className="w-5 h-5 fill-gold-400" />}
-              </button>
-              <button
-                onClick={() => changeLanguage("en")}
-                className={`flex items-center justify-between px-5 py-4 rounded-xl transition-all active:scale-[0.98] ${locale === 'en' ? "bg-gold-500/20 text-gold-400 border border-gold-500/30" : "bg-white/5 text-white"}`}
-              >
-                <div className="flex items-center gap-4">
-                  <span className="text-3xl">🇺🇸</span>
-                  <div className="flex flex-col items-start text-left">
-                    <span className="font-bold text-sm">English</span>
-                    <span className="text-[10px] opacity-50 uppercase tracking-widest">United States</span>
-                  </div>
-                </div>
-                {locale === 'en' && <Sparkles className="w-5 h-5 fill-gold-400" />}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      <CheckInModal open={checkInOpen} onOpenChange={setCheckInOpen} />
     </>
   );
 }

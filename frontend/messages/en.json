@@ -966,6 +966,12 @@
     "title": "Holy Church Teachings",
     "subtitle": "Learn more about the Catholic faith and the Church's teachings",
     "breadcrumb": "Teachings",
+    "hub": {
+      "featured": "Featured",
+      "latest": "Recent readings",
+      "categories": "Categories",
+      "readArticle": "Read article"
+    },
     "hero": {
       "title": "Deepen Your Faith",
       "label": "EXPLORE OUR CONTENT LIBRARY",
@@ -1020,9 +1026,16 @@
       "progress": "Journey Progress",
       "welcome": "Welcome to the beginning",
       "content": "Content",
+      "comingSoon": "New lessons coming soon.",
       "nextStep": "Next step",
       "nextStepDesc": "After taking your First Steps, continue your journey by deepening the mysteries.",
       "nextStepBtn": "Deepening the Mystery",
+      "continuePathTitle": "Continue to Living Mysteries",
+      "continuePathDesc": "Advance to the final path and deepen these teachings even further.",
+      "finalCtaTitle": "Bring these mysteries into your daily prayer",
+      "finalCtaDesc": "Now that you completed these learning paths, unite study and prayer in your concrete Rosary routine.",
+      "finalCtaPrimary": "See today's mysteries",
+      "finalCtaSecondary": "Explore teachings",
       "primeiros-passos": {
         "title": "First Steps",
         "subtitle": "Foundations of faith and prayer",
@@ -1279,9 +1292,12 @@
   },
   "PublicHeader": {
     "accessNow": "Access Now",
+    "openDashboard": "Open Dashboard",
     "login": "Login",
     "start": "Start",
     "startNow": "Start Now",
+    "badgeEssential": "Essential",
+    "badgeToday": "Today",
     "theme": "Toggle theme",
     "menu": "Menu"
   },
@@ -1316,6 +1332,11 @@
     "locked": "Login required"
   },
   "Landing": {
+    "mission": {
+      "badge": "A prayer project, not a sales funnel",
+      "title": "A simple place to pray, learn, and stay faithful",
+      "description": "Living Rosary exists to help you keep a daily prayer life. No ads, no pressure, no distractions: just a clear path to meet Christ through Mary."
+    },
     "whatYouGet": {
       "title": "What you can do",
       "subtitle": "Explore now • Create your free account to unlock everything",
@@ -1384,6 +1405,43 @@
         "btn": "Access Dashboard"
       }
     },
+    "soul": {
+      "title": "The soul of Living Rosary",
+      "subtitle": "A reverent, welcoming experience rooted in Catholic tradition.",
+      "items": [
+        {
+          "title": "No commercial logic",
+          "desc": "Nothing here is designed to trap attention. Everything is built for silence, focus, and prayer."
+        },
+        {
+          "title": "Companion for every day",
+          "desc": "For first-time visitors and daily users alike, navigation is clear and the next step is always simple."
+        },
+        {
+          "title": "Depth with serenity",
+          "desc": "Content, tools, and spiritual follow-up without visual overload."
+        }
+      ]
+    },
+    "rhythm": {
+      "title": "A daily rhythm of prayer",
+      "subtitle": "Three steps to turn intention into consistency",
+      "steps": [
+        {
+          "title": "1. Prepare your heart",
+          "desc": "Enter calmly, remember the method, and place your intention before God."
+        },
+        {
+          "title": "2. Pray with attention",
+          "desc": "Use the interactive guide to meditate on the mysteries without losing your place."
+        },
+        {
+          "title": "3. Continue the journey",
+          "desc": "Track your path and easily resume the next day."
+        }
+      ],
+      "action": "Open"
+    },
     "why": {
       "title": "Why Living Rosary?",
       "subtitle": "More than an app, we are your companion on the spiritual journey",
@@ -1410,7 +1468,9 @@
       "title": "Start your journey today",
       "desc": "Join thousands of Catholics around the world living the Living Rosary. Free, open-source, and made with faith.",
       "btn": "Start now",
-      "learnMore": "Learn more"
+      "learnMore": "Learn more",
+      "primaryBtn": "Begin prayer",
+      "secondaryBtn": "Open my dashboard"
     },
     "footer": {
       "desc": "Live your Catholic faith fully. Global community of prayer and spiritual growth.",

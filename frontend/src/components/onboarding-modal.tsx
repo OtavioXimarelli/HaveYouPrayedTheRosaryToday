@@ -12,19 +12,23 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 
-export function OnboardingModal() {
+export function OnboardingModal({ enabled = true }: { enabled?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState(1);
   const t = useTranslations("Onboarding");
 
   useEffect(() => {
+    if (!enabled) {
+      setIsOpen(false);
+      return;
+    }
     const hasSeenOnboarding = localStorage.getItem("rosario-onboarding-seen");
     if (!hasSeenOnboarding) {
       // Small delay for better UX
       const timer = setTimeout(() => setIsOpen(true), 1500);
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [enabled]);
 
   const handleClose = () => {
     localStorage.setItem("rosario-onboarding-seen", "true");

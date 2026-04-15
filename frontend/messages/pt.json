@@ -966,6 +966,12 @@
     "title": "Ensinamentos da Santa Igreja",
     "subtitle": "Aprenda mais sobre a fé católica e os ensinamentos da Igreja",
     "breadcrumb": "Ensinamentos",
+    "hub": {
+      "featured": "Em destaque",
+      "latest": "Leituras recentes",
+      "categories": "Categorias",
+      "readArticle": "Ler artigo"
+    },
     "hero": {
       "title": "Aprofunde Sua Fé",
       "label": "EXPLORE NOSSA BIBLIOTECA DE CONTEÚDOS",
@@ -1020,9 +1026,16 @@
       "progress": "Progresso na jornada",
       "welcome": "Bem-vindo ao início",
       "content": "Conteúdo",
+      "comingSoon": "Novas lições em breve.",
       "nextStep": "Próximo passo",
       "nextStepDesc": "Após percorrer os Primeiros Passos, continue sua jornada aprofundando os mistérios.",
       "nextStepBtn": "Aprofundando o Mistério",
+      "continuePathTitle": "Continuar para Mistérios Vivos",
+      "continuePathDesc": "Avance para o último caminho e aprofunde ainda mais os ensinamentos.",
+      "finalCtaTitle": "Leve estes mistérios para sua oração diária",
+      "finalCtaDesc": "Agora que você percorreu os caminhos de formação, una estudo e oração na prática concreta do Rosário.",
+      "finalCtaPrimary": "Ver mistérios de hoje",
+      "finalCtaSecondary": "Explorar ensinamentos",
       "primeiros-passos": {
         "title": "Primeiros Passos",
         "subtitle": "Fundamentos da fé e oração",
@@ -1315,9 +1328,12 @@
   },
   "PublicHeader": {
     "accessNow": "Acessar Agora",
+    "openDashboard": "Abrir Painel",
     "login": "Entrar",
     "start": "Começar",
     "startNow": "Começar Agora",
+    "badgeEssential": "Essencial",
+    "badgeToday": "Hoje",
     "theme": "Alternar tema",
     "menu": "Menu"
   },
@@ -1352,6 +1368,11 @@
     "locked": "Requer login"
   },
   "Landing": {
+    "mission": {
+      "badge": "Um projeto de oração, não de venda",
+      "title": "Um lugar simples para rezar, aprender e permanecer fiel",
+      "description": "Rosário Vivo existe para ajudar você a manter a vida de oração no dia a dia. Sem anúncios, sem pressão, sem distrações: apenas um caminho claro para encontrar Cristo com Maria."
+    },
     "whatYouGet": {
       "title": "O que você consegue fazer",
       "subtitle": "Explore agora • Crie sua conta gratuita para desbloquear tudo",
@@ -1420,6 +1441,43 @@
         "btn": "Acessar Dashboard"
       }
     },
+    "soul": {
+      "title": "A alma do Rosário Vivo",
+      "subtitle": "Uma experiência reverente, acolhedora e fiel à tradição católica.",
+      "items": [
+        {
+          "title": "Sem lógica comercial",
+          "desc": "Nada aqui é desenhado para prender atenção. Tudo foi feito para favorecer silêncio, foco e oração."
+        },
+        {
+          "title": "Companhia para todos os dias",
+          "desc": "Para quem chega hoje e para quem já reza há anos: a navegação é clara e o próximo passo sempre é simples."
+        },
+        {
+          "title": "Profundidade com serenidade",
+          "desc": "Conteúdo, ferramentas e acompanhamento espiritual sem excesso visual e sem sobrecarga."
+        }
+      ]
+    },
+    "rhythm": {
+      "title": "Um ritmo diário de oração",
+      "subtitle": "Três passos para transformar intenção em constância",
+      "steps": [
+        {
+          "title": "1. Prepare o coração",
+          "desc": "Entre com calma, relembre o método e recoloque sua intenção diante de Deus."
+        },
+        {
+          "title": "2. Reze com atenção",
+          "desc": "Use o guia interativo para meditar os mistérios sem se perder no caminho."
+        },
+        {
+          "title": "3. Continue sua caminhada",
+          "desc": "Acompanhe sua jornada e retome facilmente no dia seguinte."
+        }
+      ],
+      "action": "Abrir"
+    },
     "why": {
       "title": "Por que Rosário Vivo?",
       "subtitle": "Mais que um app, somos sua companhia na jornada espiritual",
@@ -1446,7 +1504,9 @@
       "title": "Comece sua jornada hoje",
       "desc": "Junte-se a milhares de católicos ao redor do mundo vivendo o Rosário Vivo. Gratuito, open-source, e feito com fé.",
       "btn": "Começar agora",
-      "learnMore": "Saiba mais"
+      "learnMore": "Saiba mais",
+      "primaryBtn": "Começar oração",
+      "secondaryBtn": "Abrir meu painel"
     },
     "footer": {
       "desc": "Viva sua fé católica plenamente. Comunidade global de oração e crescimento espiritual.",
