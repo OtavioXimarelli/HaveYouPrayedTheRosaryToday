@@ -11,7 +11,7 @@ services:
       MONGO_INITDB_DATABASE: rosary-app
     volumes:
       - mongodb_data:/data/db
-      - ./docker/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./docker/mongo-init.ts:/docker-entrypoint-initdb.d/mongo-init.ts:ro
     networks:
       - rosary-network
     healthcheck:

@@ -5,6 +5,8 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import { AuthProvider } from "@/providers/auth-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { NavigationWrapper } from "@/components/navigation-wrapper";
+import { CursorGlow } from "@/components/cursor-glow";
+import { FEATURE_FLAGS } from "@/config/feature-flags";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from "next/navigation";
@@ -81,6 +83,7 @@ export default async function RootLayout({
           <ThemeProvider defaultTheme="system" storageKey="rosario-theme">
             <QueryProvider>
               <AuthProvider>
+                {FEATURE_FLAGS.CURSOR_GLOW_ENABLED && <CursorGlow />}
                 <NavigationWrapper />
                 {children}
                 <Toaster />

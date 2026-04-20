@@ -9,7 +9,7 @@ services:
       MONGO_INITDB_DATABASE: rosary-app
     volumes:
       - mongodb_data:/data/db
-      - ./backend/docker/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./backend/docker/mongo-init.ts:/docker-entrypoint-initdb.d/mongo-init.ts:ro
     healthcheck:
       test: ["CMD", "mongosh", "-u", "rosary_root", "-p", "rosary_root_password_2024", "--authenticationDatabase", "admin", "--eval", "db.adminCommand('ping')"]
       interval: 10s
