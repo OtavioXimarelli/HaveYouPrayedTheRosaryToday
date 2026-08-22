@@ -1,6 +1,7 @@
 'use client';
 
 import {useEffect, useRef, useState} from 'react';
+import {createPortal} from 'react-dom';
 import {ArrowLeft} from 'lucide-react';
 import {useTranslations} from 'next-intl';
 import {useRouter} from '@/i18n/routing';
@@ -36,7 +37,7 @@ export function ExitPrayerControl() {
         <span>{tNav('leavePrayer')}</span>
       </button>
 
-      {open && (
+      {open && createPortal(
         <div className="beta-overlay" onClick={() => setOpen(false)}>
           <section
             className="beta-modal"
@@ -53,7 +54,8 @@ export function ExitPrayerControl() {
               <button type="button" className="text-link exit-keep" onClick={() => setOpen(false)}>{t('exitKeep')}</button>
             </div>
           </section>
-        </div>
+        </div>,
+        document.body,
       )}
     </>
   );

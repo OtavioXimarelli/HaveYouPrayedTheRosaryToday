@@ -107,7 +107,9 @@ export default function RosaryPage() {
     );
   }
 
-  if (!prayer.sessionStartedAt || gateAfterCompletion) {
+  // The gate must react to the store, not to a stale flag: once a mystery is
+  // chosen, initRosary clears isCompleted and the room renders immediately.
+  if (!prayer.sessionStartedAt || (gateAfterCompletion && prayer.isCompleted)) {
     return <MysteryGate todayMystery={today.mystery} />;
   }
 
