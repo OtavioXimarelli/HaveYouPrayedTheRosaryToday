@@ -8,3 +8,9 @@ cmds = [
   "npm i -g pnpm@11.22.0",
   "pnpm i --frozen-lockfile"
 ]
+
+# Next.js standalone binds to process.env.HOSTNAME, and Docker pollutes that
+# variable with the container id — force the server onto every interface.
+[variables]
+HOSTNAME = "0.0.0.0"
+NODE_ENV = "production"
