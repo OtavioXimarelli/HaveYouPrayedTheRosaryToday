@@ -352,11 +352,17 @@ blockquote {
   width: 1.2rem;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
 .theme-toggle {
+  display: none;
   width: 2.75rem;
   height: 2.75rem;
   flex-shrink: 0;
-  display: inline-flex;
   align-items: center;
   justify-content: center;
   border: 1px solid var(--rule);
@@ -367,6 +373,32 @@ blockquote {
 
 .theme-toggle svg {
   width: 1.2rem;
+}
+
+.desktop-nav .theme-toggle {
+  display: inline-flex;
+  width: auto;
+  height: auto;
+  min-height: 2.65rem;
+  padding: 0.65rem 1.05rem;
+  border: 0;
+  border-radius: 999px;
+  color: var(--muted-ink);
+}
+
+.desktop-nav .theme-toggle:hover {
+  background: var(--paper-deep);
+  color: var(--ink);
+}
+
+@media (max-width: 860px) {
+  .theme-toggle {
+    display: inline-flex;
+  }
+
+  .desktop-nav .theme-toggle {
+    display: none;
+  }
 }
 
 .mobile-menu {
@@ -1009,7 +1041,8 @@ blockquote {
 .reader-large { --reader-size: 1.28rem; }
 .reader-xl { --reader-size: 1.48rem; }
 
-@media (max-width: 760px) {
+/* Navigation chrome collapses with redesign.css at 860px */
+@media (max-width: 860px) {
   .site-main {
     padding-bottom: 5rem;
   }
@@ -1065,7 +1098,9 @@ blockquote {
     width: 1.15rem;
     height: 1.15rem;
   }
+}
 
+@media (max-width: 760px) {
   .site-footer {
     grid-template-columns: 1fr;
   }
@@ -1088,10 +1123,6 @@ blockquote {
 
   .hero > .editorial-note {
     order: 2;
-  }
-
-  .product-header .menu-button {
-    display: none;
   }
 
   .reminder-layout {

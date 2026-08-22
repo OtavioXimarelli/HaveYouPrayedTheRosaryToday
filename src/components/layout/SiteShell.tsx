@@ -89,6 +89,7 @@ export function SiteShell({children}: {children: React.ReactNode}) {
                     <span>{label}</span>
                   </Link>
                 ))}
+                <ThemeToggle />
               </nav>
             ) : (
               <nav className="desktop-nav" aria-label={t('primaryLabel')}>
@@ -98,13 +99,16 @@ export function SiteShell({children}: {children: React.ReactNode}) {
                     <span>{label}</span>
                   </Link>
                 ))}
+                <ThemeToggle />
                 <Link href="/comecar" className="button button-small">{t('begin')}</Link>
               </nav>
             )}
-            <ThemeToggle />
-            <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label={t('menu')}>
-              {menuOpen ? <X /> : <Menu />}
-            </button>
+            <div className="header-actions">
+              <ThemeToggle />
+              <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label={t('menu')}>
+                {menuOpen ? <X /> : <Menu />}
+              </button>
+            </div>
           </div>
           {menuOpen && (
             <nav className="mobile-menu" aria-label={t('drawerLabel')}>
