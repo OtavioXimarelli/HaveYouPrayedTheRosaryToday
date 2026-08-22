@@ -1,5 +1,7 @@
 # Evangelizae — Esqueleto Técnico, Arquitetura e Manual de Operação para Agentes de IA
 
+> **Aviso de blueprint histórico (2026-08):** O beta atual usa repositórios separados para frontend e Spring. O escopo e o contrato implementados estão em `README.md` e `contracts/evangelizae-v1.openapi.yaml`; topologia e versões abaixo são aspiracionais quando divergirem dessas fontes.
+
 > **Status:** Blueprint Técnico Oficial & Guia de Inicialização do Projeto do Zero ("From Zero")  
 > **Versão:** 2.0 (AI-Agent Ready)  
 > **Arquitetura Geral:** Decoupled Monorepo/Polyrepo (Frontend Next.js/React + Backend Java/Spring Boot + MongoDB)  
@@ -61,7 +63,7 @@ evangelizae-root/
 │   ├── package.json
 │   ├── next.config.ts
 │   ├── tailwind.config.ts
-│   ├── messages/                     # Dicionários i18n (pt.json, en.json)
+│   ├── messages/                     # Dicionário i18n (pt.json — único idioma no beta)
 │   ├── public/                       # Ícones sagrados, manifest.json, manifestos pwa
 │   └── src/
 │       ├── app/[locale]/             # Páginas (Santuário, Rosário Guiado, Liturgia, Intenções, IA, Perfil)
@@ -139,7 +141,7 @@ O motor interativo do Rosário Guiado (`guia-interativo`) e o cálculo de Misté
 
 ### 🌍 Regra 2: Zero Strings Hardcoded (Internacionalização i18n Estrita)
 * Qualquer texto apresentado na interface do usuário (labels de botões, títulos, erros, reflexões) **nunca** pode ser escrito hardcoded diretamente no JSX/TSX.
-* Toda chave de texto deve ser externalizada e sincronizada simultaneamente nos dicionários `frontend/messages/pt.json` (idioma primário) e `frontend/messages/en.json` (idioma secundário).
+* Toda chave de texto deve ser externalizada no dicionário `frontend/messages/pt.json` (idioma primário e único do beta; inglês será reintroduzido em ciclo futuro).
 * Uso de hooks do `next-intl`: `useTranslations('Namespace')` em Client Components e `getTranslations('Namespace')` em Server Components.
 
 ### ⛪ Regra 3: Guardrails Teológicos no RAG e IA Católica do Magistério

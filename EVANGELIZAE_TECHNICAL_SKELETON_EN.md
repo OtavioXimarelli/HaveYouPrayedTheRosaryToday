@@ -1,5 +1,7 @@
 # Evangelizae — Technical Skeleton, Architecture & AI Agent Operating Manual
 
+> **Historical blueprint notice (2026-08):** The current beta uses separate frontend and Spring repositories. The implemented scope and contract are documented in `README.md` and `contracts/evangelizae-v1.openapi.yaml`; topology and version examples below are aspirational when they differ from those sources.
+
 > **Status:** Official Technical Blueprint & Project "From Zero" Initialization Guide  
 > **Version:** 2.0 (AI-Agent Ready)  
 > **Overall Architecture:** Decoupled Monorepo/Polyrepo (Next.js/React Frontend + Java/Spring Boot Backend + MongoDB)  

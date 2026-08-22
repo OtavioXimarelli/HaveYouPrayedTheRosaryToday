@@ -46,6 +46,18 @@ export interface RosaryStep {
   mystery?: DecadeMystery;
 }
 
+export const ROSARY_PRAYERS = {
+  ourFatherPt: 'Pai Nosso que estais nos céus, santificado seja o vosso nome; venha a nós o vosso reino; seja feita a vossa vontade, assim na terra como no céu. O pão nosso de cada dia nos dai hoje; perdoai-nos as nossas ofensas, assim como nós perdoamos a quem nos tem ofendido; e não nos deixeis cair em tentação, mas livrai-nos do mal. Amém.',
+  ourFatherEn: 'Our Father, who art in heaven, hallowed be Thy name; Thy kingdom come; Thy will be done on earth as it is in heaven. Give us this day our daily bread; and forgive us our trespasses as we forgive those who trespass against us; and lead us not into temptation, but deliver us from evil. Amen.',
+  ourFatherLa: 'Pater noster, qui es in caelis, sanctificetur nomen tuum. Adveniat regnum tuum. Fiat voluntas tua, sicut in caelo et in terra. Panem nostrum quotidianum da nobis hodie, et dimitte nobis debita nostra, sicut et nos dimittimus debitoribus nostris. Et ne nos inducas in tentationem, sed libera nos a malo. Amen.',
+  hailMaryPt: 'Ave Maria, cheia de graça, o Senhor é convosco; bendita sois vós entre as mulheres e bendito é o fruto do vosso ventre, Jesus. Santa Maria, Mãe de Deus, rogai por nós, pecadores, agora e na hora da nossa morte. Amém.',
+  hailMaryEn: 'Hail Mary, full of grace, the Lord is with thee; blessed art thou among women, and blessed is the fruit of thy womb, Jesus. Holy Mary, Mother of God, pray for us sinners, now and at the hour of our death. Amen.',
+  hailMaryLa: 'Ave Maria, gratia plena, Dominus tecum. Benedicta tu in mulieribus, et benedictus fructus ventris tui, Iesus. Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostrae. Amen.',
+  gloryFatimaPt: 'Glória ao Pai, ao Filho e ao Espírito Santo. Como era no princípio, agora e sempre. Amém.\n\nOração de Fátima: Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno; levai as almas todas para o Céu e socorrei principalmente as que mais precisarem da vossa misericórdia.',
+  gloryFatimaEn: 'Glory be to the Father, and to the Son, and to the Holy Spirit. As it was in the beginning, is now, and ever shall be, world without end. Amen.\n\nFatima Prayer: O my Jesus, forgive us our sins, save us from the fires of hell, lead all souls to Heaven, especially those most in need of Thy mercy.',
+  gloryLa: 'Gloria Patri, et Filio, et Spiritui Sancto. Sicut erat in principio, et nunc, et semper, et in saecula saeculorum. Amen.',
+} as const;
+
 export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
   gozosos: {
     type: 'gozosos',
@@ -319,7 +331,7 @@ export function buildRosarySequence(mysteryType: MysteryType): RosaryStep[] {
     titleEn: 'Apostles\' Creed',
     prayerTextPt: `Creio em Deus Pai Todo-Poderoso, Criador do céu e da terra; e em Jesus Cristo, seu único Filho, nosso Senhor; que foi concebido pelo poder do Espírito Santo; nasceu da Virgem Maria; padeceu sob Pôncio Pilatos, foi crucificado, morto e sepultado; desceu à mansão dos mortos; ressuscitou ao terceiro dia; subiu aos céus, está sentado à direita de Deus Pai Todo-Poderoso, donde há de vir a julgar os vivos e os mortos. Creio no Espírito Santo, na Santa Igreja Católica, na comunhão dos santos, na remissão dos pecados, na ressurreição da carne, na vida eterna. Amém.`,
     prayerTextEn: `I believe in God, the Father Almighty, Creator of heaven and earth, and in Jesus Christ, His only Son, our Lord, who was conceived by the Holy Spirit, born of the Virgin Mary, suffered under Pontius Pilate, was crucified, died and was buried; He descended into hell; on the third day He rose again from the dead; He ascended into heaven, and is seated at the right hand of God the Father Almighty; from there He will come to judge the living and the dead. I believe in the Holy Spirit, the Holy Catholic Church, the communion of Saints, the forgiveness of sins, the resurrection of the body, and life everlasting. Amen.`,
-    latinText: `Credo in Deum Patrem omnipotentem, Creatorem caeli et terrae. Et in Iesum Christum... Amen.`
+    latinText: `Credo in Deum Patrem omnipotentem, Creatorem caeli et terrae. Et in Iesum Christum, Filium eius unicum, Dominum nostrum, qui conceptus est de Spiritu Sancto, natus ex Maria Virgine, passus sub Pontio Pilato, crucifixus, mortuus et sepultus; descendit ad inferos; tertia die resurrexit a mortuis; ascendit ad caelos; sedet ad dexteram Dei Patris omnipotentis; inde venturus est iudicare vivos et mortuos. Credo in Spiritum Sanctum, sanctam Ecclesiam catholicam, sanctorum communionem, remissionem peccatorum, carnis resurrectionem, vitam aeternam. Amen.`
   });
 
   // 3. Our Father for the Intentions of the Holy Father
@@ -330,9 +342,9 @@ export function buildRosarySequence(mysteryType: MysteryType): RosaryStep[] {
     type: 'our_father_pope',
     titlePt: 'Pai Nosso (Pelas intenções do Santo Padre e exaltação da Fé)',
     titleEn: 'Our Father (For the Holy Father\'s intentions and increase in Faith)',
-    prayerTextPt: `Pai Nosso que estais nos céus, santificado seja o vosso nome; venha a nós o vosso reino; seja feita a vossa vontade, assim na terra como no céu. O pão nosso de cada dia nos dai hoje; perdoai-nos as nossas ofensas, assim como nós perdoamos a quem nos tem ofendido; e não nos deixeis cair em tentação, mas livrai-nos do mal. Amém.`,
-    prayerTextEn: `Our Father, who art in heaven, hallowed be Thy name; Thy kingdom come; Thy will be done on earth as it is in heaven. Give us this day our daily bread; and forgive us our trespasses as we forgive those who trespass against us; and lead us not into temptation, but deliver us from evil. Amen.`,
-    latinText: `Pater noster, qui es in caelis, sanctificetur nomen tuum. Adveniat regnum tuum... Amen.`
+    prayerTextPt: ROSARY_PRAYERS.ourFatherPt,
+    prayerTextEn: ROSARY_PRAYERS.ourFatherEn,
+    latinText: ROSARY_PRAYERS.ourFatherLa
   });
 
   // 4. Three Hail Marys (Faith, Hope, Charity)
@@ -347,9 +359,9 @@ export function buildRosarySequence(mysteryType: MysteryType): RosaryStep[] {
       type: 'three_hail_marys',
       titlePt: `Ave Maria (${theologicalVirtuesPt[i - 1]})`,
       titleEn: `Hail Mary (${theologicalVirtuesEn[i - 1]})`,
-      prayerTextPt: `Ave Maria, cheia de graça, o Senhor é convosco; bendita sois vós entre as mulheres e bendito é o fruto do vosso ventre, Jesus. Santa Maria, Mãe de Deus, rogai por nós, pecadores, agora e na hora da nossa morte. Amém.`,
-      prayerTextEn: `Hail Mary, full of grace, the Lord is with thee; blessed art thou among women, and blessed is the fruit of thy womb, Jesus. Holy Mary, Mother of God, pray for us sinners, now and at the hour of our death. Amen.`,
-      latinText: `Ave Maria, gratia plena, Dominus tecum... Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostrae. Amen.`
+      prayerTextPt: ROSARY_PRAYERS.hailMaryPt,
+      prayerTextEn: ROSARY_PRAYERS.hailMaryEn,
+      latinText: ROSARY_PRAYERS.hailMaryLa
     });
   }
 
@@ -361,9 +373,9 @@ export function buildRosarySequence(mysteryType: MysteryType): RosaryStep[] {
     type: 'glory_be_fatima',
     titlePt: 'Glória ao Pai & Oração de Fátima',
     titleEn: 'Glory Be & Fatima Prayer',
-    prayerTextPt: `Glória ao Pai, ao Filho e ao Espírito Santo. Como era no princípio, agora e sempre. Amém.\n\nOração de Fátima: "Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno; levai as almas todas para o Céu e socorrei principalmente as que mais precisarem da vossa misericórdia."`,
-    prayerTextEn: `Glory be to the Father, and to the Son, and to the Holy Spirit. As it was in the beginning, is now, and ever shall be, world without end. Amen.\n\nFatima Prayer: "O my Jesus, forgive us our sins, save us from the fires of hell, lead all souls to Heaven, especially those most in need of Thy mercy."`,
-    latinText: `Gloria Patri, et Filio, et Spiritui Sancto. Sicut erat in principio, et nunc, et semper, et in saecula saeculorum. Amen.`
+    prayerTextPt: ROSARY_PRAYERS.gloryFatimaPt,
+    prayerTextEn: ROSARY_PRAYERS.gloryFatimaEn,
+    latinText: ROSARY_PRAYERS.gloryLa
   });
 
   // 6. Decades Loop (1 to 5)
@@ -390,9 +402,9 @@ export function buildRosarySequence(mysteryType: MysteryType): RosaryStep[] {
       type: 'decade_our_father',
       titlePt: `Pai Nosso (${decade.decadeNumber}º Mistério)`,
       titleEn: `Our Father (${decade.decadeNumber}st Mystery)`,
-      prayerTextPt: `Pai Nosso que estais nos céus, santificado seja o vosso nome... O pão nosso de cada dia nos dai hoje; perdoai-nos as nossas ofensas... e não nos deixeis cair em tentação, mas livrai-nos do mal. Amém.`,
-      prayerTextEn: `Our Father, who art in heaven, hallowed be Thy name... Give us this day our daily bread... and lead us not into temptation, but deliver us from evil. Amen.`,
-      latinText: `Pater noster, qui es in caelis, sanctificetur nomen tuum... Amen.`,
+      prayerTextPt: ROSARY_PRAYERS.ourFatherPt,
+      prayerTextEn: ROSARY_PRAYERS.ourFatherEn,
+      latinText: ROSARY_PRAYERS.ourFatherLa,
       decadeNumber: decade.decadeNumber,
       mystery: decade
     });
@@ -406,9 +418,9 @@ export function buildRosarySequence(mysteryType: MysteryType): RosaryStep[] {
         type: 'decade_hail_mary',
         titlePt: `Ave Maria (${bead}ª Conta — ${decade.decadeNumber}º Mistério)`,
         titleEn: `Hail Mary (Bead ${bead} — ${decade.decadeNumber}st Mystery)`,
-        prayerTextPt: `Ave Maria, cheia de graça, o Senhor é convosco; bendita sois vós entre as mulheres e bendito é o fruto do vosso ventre, Jesus. Santa Maria, Mãe de Deus, rogai por nós, pecadores, agora e na hora da nossa morte. Amém.`,
-        prayerTextEn: `Hail Mary, full of grace, the Lord is with thee; blessed art thou among women, and blessed is the fruit of thy womb, Jesus. Holy Mary, Mother of God, pray for us sinners, now and at the hour of our death. Amen.`,
-        latinText: `Ave Maria, gratia plena, Dominus tecum... Sancta Maria, Mater Dei, ora pro nobis peccatoribus, nunc et in hora mortis nostrae. Amen.`,
+        prayerTextPt: ROSARY_PRAYERS.hailMaryPt,
+        prayerTextEn: ROSARY_PRAYERS.hailMaryEn,
+        latinText: ROSARY_PRAYERS.hailMaryLa,
         decadeNumber: decade.decadeNumber,
         beadInDecade: bead,
         mystery: decade
@@ -425,7 +437,7 @@ export function buildRosarySequence(mysteryType: MysteryType): RosaryStep[] {
       titleEn: `Glory Be & Fatima Prayer (${decade.decadeNumber}st Mystery)`,
       prayerTextPt: `Glória ao Pai, ao Filho e ao Espírito Santo. Como era no princípio, agora e sempre. Amém.\n\n"Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno; levai as almas todas para o Céu e socorrei principalmente as que mais precisarem da vossa misericórdia."`,
       prayerTextEn: `Glory be to the Father, and to the Son, and to the Holy Spirit. As it was in the beginning, is now, and ever shall be, world without end. Amen.\n\n"O my Jesus, forgive us our sins, save us from the fires of hell, lead all souls to Heaven, especially those most in need of Thy mercy."`,
-      latinText: `Gloria Patri, et Filio, et Spiritui Sancto... Amen.`,
+      latinText: ROSARY_PRAYERS.gloryLa,
       decadeNumber: decade.decadeNumber,
       mystery: decade
     });
@@ -441,7 +453,7 @@ export function buildRosarySequence(mysteryType: MysteryType): RosaryStep[] {
     titleEn: 'Hail, Holy Queen & Final Thanksgiving',
     prayerTextPt: `Salve, Rainha, Mãe de misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos, os degredados filhos de Eva; a vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei; e depois deste desterro nos mostrai Jesus, bendito fruto do vosso ventre, ó clemente, ó piedosa, ó doce sempre Virgem Maria.\n\nV. Rogai por nós, Santa Mãe de Deus.\nR. Para que sejamos dignos das promessas de Cristo. Amém.`,
     prayerTextEn: `Hail, Holy Queen, Mother of Mercy, our life, our sweetness and our hope. To thee do we cry, poor banished children of Eve: to thee do we send up our sighs, mourning and weeping in this valley of tears. Turn then, most gracious Advocate, thine eyes of mercy toward us, and after this our exile, show unto us the blessed fruit of thy womb, Jesus. O clement, O loving, O sweet Virgin Mary!\n\nV. Pray for us, O Holy Mother of God.\nR. That we may be made worthy of the promises of Christ. Amen.`,
-    latinText: `Salve, Regina, mater misericordiae; vita, dulcedo et spes nostra, salve... Amen.`
+    latinText: `Salve, Regina, mater misericordiae; vita, dulcedo et spes nostra, salve. Ad te clamamus, exsules filii Hevae. Ad te suspiramus, gementes et flentes in hac lacrimarum valle. Eia ergo, advocata nostra, illos tuos misericordes oculos ad nos converte. Et Iesum, benedictum fructum ventris tui, nobis post hoc exsilium ostende. O clemens, o pia, o dulcis Virgo Maria. Amen.`
   });
 
   const total = steps.length;

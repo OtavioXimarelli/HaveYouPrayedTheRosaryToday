@@ -1,35 +1,34 @@
 'use client';
 
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { MysteryType, getDailyMysteryType } from '@/services/rosaryEngine';
+import {create} from 'zustand';
+import {persist} from 'zustand/middleware';
+import {calendarDayDifference, getLocalDateKey, getResolvedTimeZone} from '@/lib/date';
+import {getDailyMysteryType, MysteryType} from '@/services/rosaryEngine';
 
-export interface OfflineCheckIn {
+export interface PrayerCompletion {
   id: string;
+  localDate: string;
+  completedAt: string;
+  timeZone: string;
   mysteryType: MysteryType;
-  prayedBeadsCount: number;
-  intentions: string[];
-  reflection?: string;
-  timestamp: string;
+}
+
+export interface PrayerStats {
+  consecutiveDays: number;
+  totalRosariesPrayed: number;
+  lastCompletionDate: string | null;
+  completedToday: boolean;
 }
 
 export interface PrayerState {
-  // Active Rosary Session State
   activeMysteryType: MysteryType;
   currentStepIndex: number;
+  furthestStepIndex: number;
+  sessionStartedAt: string | null;
   isCompleted: boolean;
   intentions: string[];
   reflection: string;
-
-  // Personal Progress Metrics (No leaderboards)
-  consecutiveDays: number;
-  totalRosariesPrayed: number;
-  lastCheckInDate: string | null;
-
-  // Offline Queue
-  offlineCheckIns: OfflineCheckIn[];
-
-  // Actions
+  completions: PrayerCompletion[];
   initRosary: (type?: MysteryType) => void;
   advanceStep: (totalSteps: number) => void;
   previousStep: () => void;
@@ -37,115 +36,114 @@ export interface PrayerState {
   addIntention: (intention: string) => void;
   removeIntention: (index: number) => void;
   setReflection: (text: string) => void;
-  submitCheckIn: () => void;
-  syncOfflineCheckIns: () => Promise<void>;
+  completeRosary: () => void;
+  resetPrayerData: () => void;
+}
+
+const initialPrayerState = {
+  activeMysteryType: getDailyMysteryType(),
+  currentStepIndex: 0,
+  furthestStepIndex: 0,
+  sessionStartedAt: null,
+  isCompleted: false,
+  intentions: [] as string[],
+  reflection: '',
+  completions: [] as PrayerCompletion[],
+};
+
+export function getPrayerStats(completions: PrayerCompletion[], now: Date = new Date()): PrayerStats {
+  const uniqueDates = [...new Set(completions.map((item) => item.localDate))].sort().reverse();
+  const today = getLocalDateKey(now);
+  let consecutiveDays = 0;
+
+  if (uniqueDates.length > 0) {
+    const distanceFromToday = calendarDayDifference(uniqueDates[0], today);
+    if (distanceFromToday <= 1) {
+      consecutiveDays = 1;
+      for (let index = 1; index < uniqueDates.length; index += 1) {
+        if (calendarDayDifference(uniqueDates[index], uniqueDates[index - 1]) === 1) {
+          consecutiveDays += 1;
+        } else {
+          break;
+        }
+      }
+    }
+  }
+
+  return {
+    consecutiveDays,
+    totalRosariesPrayed: completions.length,
+    lastCompletionDate: uniqueDates[0] ?? null,
+    completedToday: uniqueDates[0] === today,
+  };
 }
 
 export const usePrayerStore = create<PrayerState>()(
   persist(
     (set, get) => ({
-      activeMysteryType: getDailyMysteryType(),
-      currentStepIndex: 0,
-      isCompleted: false,
-      intentions: [],
-      reflection: '',
-
-      consecutiveDays: 1,
-      totalRosariesPrayed: 3,
-      lastCheckInDate: null,
-      offlineCheckIns: [],
-
-      initRosary: (type) => {
-        const targetType = type || getDailyMysteryType();
-        set({
-          activeMysteryType: targetType,
-          currentStepIndex: 0,
-          isCompleted: false
-        });
-      },
-
+      ...initialPrayerState,
+      initRosary: (type) => set({
+        activeMysteryType: type ?? getDailyMysteryType(),
+        currentStepIndex: 0,
+        furthestStepIndex: 0,
+        sessionStartedAt: new Date().toISOString(),
+        isCompleted: false,
+        reflection: '',
+      }),
       advanceStep: (totalSteps) => {
-        const { currentStepIndex } = get();
-        if (currentStepIndex + 1 < totalSteps) {
-          set({ currentStepIndex: currentStepIndex + 1 });
-        } else {
-          set({ isCompleted: true });
-        }
-      },
-
-      previousStep: () => {
-        const { currentStepIndex } = get();
-        if (currentStepIndex > 0) {
-          set({ currentStepIndex: currentStepIndex - 1, isCompleted: false });
-        }
-      },
-
-      setStep: (index) => {
-        set({ currentStepIndex: Math.max(0, index), isCompleted: false });
-      },
-
-      addIntention: (intention) => {
-        if (!intention.trim()) return;
-        set((state) => ({ intentions: [...state.intentions, intention.trim()] }));
-      },
-
-      removeIntention: (index) => {
-        set((state) => ({
-          intentions: state.intentions.filter((_, i) => i !== index)
-        }));
-      },
-
-      setReflection: (text) => {
-        set({ reflection: text });
-      },
-
-      submitCheckIn: () => {
-        const state = get();
-        const todayStr = new Date().toISOString().split('T')[0];
-        const isConsecutive = state.lastCheckInDate 
-          ? (new Date(todayStr).getTime() - new Date(state.lastCheckInDate).getTime()) <= 86400000 * 2 
-          : true;
-
-        const newDays = isConsecutive ? state.consecutiveDays + 1 : 1;
-
-        const checkInPayload: OfflineCheckIn = {
-          id: `checkin-${Date.now()}`,
-          mysteryType: state.activeMysteryType,
-          prayedBeadsCount: 53,
-          intentions: state.intentions,
-          reflection: state.reflection,
-          timestamp: new Date().toISOString()
-        };
-
+        const {currentStepIndex, furthestStepIndex, sessionStartedAt} = get();
+        if (currentStepIndex >= totalSteps - 1) return;
+        const nextIndex = currentStepIndex + 1;
         set({
-          isCompleted: true,
-          consecutiveDays: newDays,
-          totalRosariesPrayed: state.totalRosariesPrayed + 1,
-          lastCheckInDate: todayStr,
-          offlineCheckIns: [...state.offlineCheckIns, checkInPayload]
+          currentStepIndex: nextIndex,
+          furthestStepIndex: Math.max(furthestStepIndex, nextIndex),
+          sessionStartedAt: sessionStartedAt ?? new Date().toISOString(),
         });
-
-        // Try syncing right away if online
-        if (typeof window !== 'undefined' && navigator.onLine) {
-          get().syncOfflineCheckIns();
-        }
       },
-
-      syncOfflineCheckIns: async () => {
-        const { offlineCheckIns } = get();
-        if (offlineCheckIns.length === 0) return;
-
-        // In MVP Phase 1 (before backend endpoint is live), simulate sync success
-        try {
-          // Future Spring Boot endpoint: POST /api/v1/prayer/checkin
-          set({ offlineCheckIns: [] });
-        } catch (error) {
-          console.error('Failed to sync offline check-ins:', error);
-        }
-      }
+      previousStep: () => set((state) => ({currentStepIndex: Math.max(0, state.currentStepIndex - 1)})),
+      setStep: (index) => set((state) => ({
+        currentStepIndex: Math.max(0, Math.min(index, state.furthestStepIndex)),
+      })),
+      addIntention: (intention) => {
+        const value = intention.trim();
+        if (value) set((state) => ({intentions: [...state.intentions, value]}));
+      },
+      removeIntention: (index) => set((state) => ({
+        intentions: state.intentions.filter((_, itemIndex) => itemIndex !== index),
+      })),
+      setReflection: (reflection) => set({reflection}),
+      completeRosary: () => {
+        const state = get();
+        if (state.isCompleted) return;
+        const completedAt = new Date();
+        const completion: PrayerCompletion = {
+          id: `rosary-${completedAt.getTime()}`,
+          localDate: getLocalDateKey(completedAt),
+          completedAt: completedAt.toISOString(),
+          timeZone: getResolvedTimeZone(),
+          mysteryType: state.activeMysteryType,
+        };
+        set({isCompleted: true, completions: [...state.completions, completion]});
+      },
+      resetPrayerData: () => set({...initialPrayerState}),
     }),
     {
-      name: 'evangelizae-prayer-session'
-    }
-  )
+      name: 'evangelizae-prayer-session',
+      version: 2,
+      migrate: (persistedState, version) => {
+        if (version >= 2) return persistedState as PrayerState;
+        const legacy = persistedState as Partial<PrayerState>;
+        const currentStepIndex = legacy.currentStepIndex ?? 0;
+        return {
+          ...initialPrayerState,
+          activeMysteryType: legacy.activeMysteryType ?? getDailyMysteryType(),
+          currentStepIndex,
+          furthestStepIndex: currentStepIndex,
+          sessionStartedAt: currentStepIndex ? new Date().toISOString() : null,
+          intentions: Array.isArray(legacy.intentions) ? legacy.intentions : [],
+          reflection: typeof legacy.reflection === 'string' ? legacy.reflection : '',
+        };
+      },
+    },
+  ),
 );

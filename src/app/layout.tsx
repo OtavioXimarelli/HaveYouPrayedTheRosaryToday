@@ -1,24 +1,42 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
+import "./redesign.css";
+import { ServiceWorkerRegistrar } from "@/components/pwa/ServiceWorkerRegistrar";
 
-const inter = Inter({
+const sourceSans = Source_Sans_3({
   variable: "--font-sans",
   subsets: ["latin"],
 });
 
-const playfair = Playfair_Display({
+const sourceSerif = Source_Serif_4({
   variable: "--font-serif",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Evangelizae — Companheiro Diário para a Vida Cristã",
-  description: "Plataforma missionária digital para a verdade católica e vida diária de oração. Em estrita fidelidade ao Magistério da Igreja.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? 'https://evangelizae.org'),
+  title: {
+    default: "Evangelizae — oração para a vida cotidiana",
+    template: "%s — Evangelizae",
+  },
+  description: "Um companheiro católico, gratuito e sereno para rezar o Rosário e acompanhar a liturgia diária.",
+  manifest: "/manifest.webmanifest",
   icons: {
-    icon: "/favicon.ico",
+    icon: [{url: "/evangelizae-seal.svg", type: "image/svg+xml"}],
   },
 };
+
+const devServiceWorkerPurge = `
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then(function (registrations) {
+    registrations.forEach(function (registration) { registration.unregister(); });
+  });
+  if (window.caches) {
+    caches.keys().then(function (keys) { keys.forEach(function (key) { caches.delete(key); }); });
+  }
+}
+`;
 
 export default function RootLayout({
   children,
@@ -26,9 +44,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt" suppressHydrationWarning className={`${inter.variable} ${playfair.variable} antialiased h-full`}>
-      <body className="min-h-full flex flex-col bg-vatican-bg dark:bg-marian-midnight text-foreground transition-colors duration-300">
+    <html lang="pt-BR" suppressHydrationWarning data-scroll-behavior="smooth" className={`${sourceSans.variable} ${sourceSerif.variable}`}>
+      <body>
         {children}
+        <ServiceWorkerRegistrar />
+        {process.env.NODE_ENV !== 'production' && (
+          <script dangerouslySetInnerHTML={{__html: devServiceWorkerPurge}} />
+        )}
       </body>
     </html>
   );

@@ -1,0 +1,26 @@
+name: Feedback do beta
+description: Conte o que ajudou ou dificultou sua experiência no Evangelizae.
+title: "[beta] "
+labels: [feedback]
+body:
+  - type: markdown
+    attributes:
+      value: Obrigado por ajudar a construir uma experiência de oração mais simples e humana. Não inclua intenções pessoais ou outros dados sensíveis.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área
+      options: [Início, Santuário, Rosário, Liturgia, Ajustes, Instalação offline, Acessibilidade]
+    validations:
+      required: true
+  - type: textarea
+    id: observation
+    attributes:
+      label: O que aconteceu?
+      description: Descreva o comportamento observado e o que você esperava.
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Navegador e dispositivo
