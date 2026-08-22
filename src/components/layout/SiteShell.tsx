@@ -9,6 +9,8 @@ import {useIsMounted} from '@/hooks/useIsMounted';
 import {useDayContext} from '@/hooks/useDayContext';
 import {usePreferencesStore} from '@/store/usePreferencesStore';
 import {PwaInstallPrompt} from '@/components/pwa/PwaInstallPrompt';
+import {BetaNotice} from '@/components/common/BetaNotice';
+import {ExitPrayerControl} from '@/components/prayer/ExitPrayerControl';
 import {ThemeToggle} from '@/components/layout/ThemeToggle';
 
 const productRoutes = ['/sanctuary', '/rosary', '/liturgy', '/settings'];
@@ -47,10 +49,7 @@ export function SiteShell({children}: {children: React.ReactNode}) {
       <div className="focus-shell">
         <header className="focus-header">
           <BrandMark />
-          <Link href="/sanctuary" className="focus-exit">
-            <ArrowLeft size={16} aria-hidden="true" />
-            <span>{t('leavePrayer')}</span>
-          </Link>
+          <ExitPrayerControl />
         </header>
         <main>{children}</main>
       </div>
@@ -144,6 +143,7 @@ export function SiteShell({children}: {children: React.ReactNode}) {
         </nav>
       )}
       {isProduct && <PwaInstallPrompt />}
+      {isProduct && <BetaNotice />}
     </div>
   );
 }

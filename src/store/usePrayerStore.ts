@@ -37,6 +37,7 @@ export interface PrayerState {
   removeIntention: (index: number) => void;
   setReflection: (text: string) => void;
   completeRosary: () => void;
+  discardSession: () => void;
   resetPrayerData: () => void;
 }
 
@@ -125,6 +126,15 @@ export const usePrayerStore = create<PrayerState>()(
         };
         set({isCompleted: true, completions: [...state.completions, completion]});
       },
+      discardSession: () => set({
+        activeMysteryType: getDailyMysteryType(),
+        currentStepIndex: 0,
+        furthestStepIndex: 0,
+        sessionStartedAt: null,
+        isCompleted: false,
+        intentions: [],
+        reflection: '',
+      }),
       resetPrayerData: () => set({...initialPrayerState}),
     }),
     {

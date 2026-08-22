@@ -867,7 +867,7 @@ blockquote {
   width: min(1100px, calc(100% - 2rem));
   margin-inline: auto;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 17rem;
+  grid-template-columns: minmax(0, 1fr);
   gap: 2rem;
   padding-block: 2rem 4rem;
 }
@@ -929,38 +929,6 @@ blockquote {
   gap: 1rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--rule);
-}
-
-.prayer-sidebar {
-  border-left: 1px solid var(--rule);
-  padding-left: 1.5rem;
-}
-
-.step-list {
-  max-height: calc(100vh - 13rem);
-  overflow: auto;
-  display: grid;
-}
-
-.step-list button {
-  border: 0;
-  border-bottom: 1px solid var(--rule);
-  background: transparent;
-  color: var(--muted-ink);
-  cursor: pointer;
-  padding: 0.7rem 0;
-  text-align: left;
-  font-size: 0.78rem;
-}
-
-.step-list button[aria-current='step'] {
-  color: var(--oxblood);
-  font-weight: 750;
-}
-
-.step-list button:disabled {
-  cursor: not-allowed;
-  opacity: 0.42;
 }
 
 .bead-line {
@@ -1044,7 +1012,7 @@ blockquote {
 /* Navigation chrome collapses with redesign.css at 860px */
 @media (max-width: 860px) {
   .site-main {
-    padding-bottom: 5rem;
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
   }
 
   .desktop-nav {
@@ -1081,6 +1049,7 @@ blockquote {
   }
 
   .bottom-nav a {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1088,6 +1057,20 @@ blockquote {
     gap: 0.22rem;
     color: var(--muted-ink);
     font-size: 0.68rem;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 150ms ease;
+  }
+
+  .bottom-nav a[aria-current='page']::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2.2rem;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--season-accent, var(--oxblood));
   }
 
   .bottom-nav a[aria-current='page'] {
@@ -1158,14 +1141,6 @@ blockquote {
   .today-strip > * + * {
     border-left: 0;
     border-top: 1px solid var(--rule);
-  }
-
-  .prayer-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .prayer-sidebar {
-    display: none;
   }
 
   .contents-nav {
