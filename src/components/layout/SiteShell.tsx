@@ -12,8 +12,9 @@ import {PwaInstallPrompt} from '@/components/pwa/PwaInstallPrompt';
 import {BetaNotice} from '@/components/common/BetaNotice';
 import {ExitPrayerControl} from '@/components/prayer/ExitPrayerControl';
 import {ThemeToggle} from '@/components/layout/ThemeToggle';
+import {BETA_FEEDBACK_URL} from '@/lib/links';
 
-const productRoutes = ['/sanctuary', '/rosary', '/liturgy', '/settings'];
+const productRoutes = ['/sanctuary', '/rosary', '/liturgy', '/settings', '/offline'];
 
 export function SiteShell({children}: {children: React.ReactNode}) {
   const pathname = usePathname();
@@ -24,7 +25,11 @@ export function SiteShell({children}: {children: React.ReactNode}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const isFocus = pathname.startsWith('/rosary');
   const isOnboarding = pathname.startsWith('/comecar');
+  const isOffline = pathname.startsWith('/offline');
   const isProduct = productRoutes.some((route) => pathname.startsWith(route));
+  const isInstitutional = pathname.startsWith('/about') || pathname.startsWith('/privacy');
+  const [productOrigin, setProductOrigin] = useState(isProduct);
+  const isProductShell = isProduct || (productOrigin && isInstitutional);
 
   useEffect(() => {
     if (!mounted) return;
@@ -58,7 +63,7 @@ export function SiteShell({children}: {children: React.ReactNode}) {
 
   const isActive = (href: string) => (href === '/inicio' ? pathname === '/inicio' : pathname.startsWith(href));
 
-  const nav = isProduct
+  const nav = isProductShell
     ? [
         {href: '/sanctuary' as const, label: t('today'), icon: Sunrise},
         {href: '/rosary' as const, label: t('rosary'), icon: CircleDot},
@@ -77,13 +82,13 @@ export function SiteShell({children}: {children: React.ReactNode}) {
   return (
     <div className="site-shell">
       {!isOnboarding && (
-        <header className={`site-header${isProduct ? ' product-header' : ''}`}>
+        <header className={`site-header${isProductShell ? ' product-header' : ''}`}>
           <div className="site-header-inner">
             <BrandMark />
-            {isProduct ? (
+            {isProductShell ? (
               <nav className="desktop-nav" aria-label={t('primaryLabel')}>
                 {headerNav.map(({href, label, icon: Icon}) => (
-                  <Link key={href} href={href} aria-current={isActive(href) ? 'page' : undefined}>
+                  <Link key={href} href={href} aria-current={isActive(href) ? 'page' : undefined} onClick={() => setProductOrigin(true)}>
                     <Icon size={15} aria-hidden="true" />
                     <span>{label}</span>
                   </Link>
@@ -93,7 +98,7 @@ export function SiteShell({children}: {children: React.ReactNode}) {
             ) : (
               <nav className="desktop-nav" aria-label={t('primaryLabel')}>
                 {publicNav.map(({href, label, icon: Icon}) => (
-                  <Link key={href} href={href} aria-current={isActive(href) ? 'page' : undefined}>
+                  <Link key={href} href={href} aria-current={isActive(href) ? 'page' : undefined} onClick={() => setProductOrigin(false)}>
                     <Icon size={15} aria-hidden="true" />
                     <span>{label}</span>
                   </Link>
@@ -112,12 +117,12 @@ export function SiteShell({children}: {children: React.ReactNode}) {
           {menuOpen && (
             <nav className="mobile-menu" aria-label={t('drawerLabel')}>
               {publicNav.map(({href, label, icon: Icon}) => (
-                <Link key={href} href={href} aria-current={isActive(href) ? 'page' : undefined} onClick={() => setMenuOpen(false)}>
+                <Link key={href} href={href} aria-current={isActive(href) ? 'page' : undefined} onClick={() => { setProductOrigin(isProductShell); setMenuOpen(false); }}>
                   <Icon size={17} aria-hidden="true" />
                   <span>{label}</span>
                 </Link>
               ))}
-              {!isProduct && (
+              {!isProductShell && (
                 <Link href="/comecar" onClick={() => setMenuOpen(false)}>
                   <ArrowLeft size={17} style={{transform: 'rotate(180deg)'}} aria-hidden="true" />
                   <span>{t('begin')}</span>
@@ -127,23 +132,23 @@ export function SiteShell({children}: {children: React.ReactNode}) {
           )}
         </header>
       )}
+      {isProductShell && !isOffline && <BetaNotice />}
       <main className={isOnboarding ? 'onboarding-main' : 'site-main'}>{children}</main>
-      {!isOnboarding && !isProduct && (
+      {!isOnboarding && !isProductShell && (
         <footer className="site-footer">
           <div><BrandMark /></div>
           <p>{t('footerMission')}</p>
-          <div className="footer-links"><Link href="/privacy">{t('privacy')}</Link><a href="https://github.com/OtavioXimarelli/Evangelizae">{t('source')}</a></div>
+          <div className="footer-links"><Link href="/privacy" onClick={() => setProductOrigin(false)}>{t('privacy')}</Link><a href={BETA_FEEDBACK_URL} target="_blank" rel="noreferrer">{t('feedback')}</a><a href="https://github.com/OtavioXimarelli/Evangelizae">{t('source')}</a></div>
         </footer>
       )}
-      {isProduct && (
+      {isProductShell && (
         <nav className="bottom-nav" aria-label={t('mobileLabel')}>
           {nav.map(({href, label, icon: Icon}) => (
             <Link key={href} href={href} aria-current={isActive(href) ? 'page' : undefined}><Icon /><span>{label}</span></Link>
           ))}
         </nav>
       )}
-      {isProduct && <PwaInstallPrompt />}
-      {isProduct && <BetaNotice />}
+      {isProductShell && !isOffline && <PwaInstallPrompt />}
     </div>
   );
 }

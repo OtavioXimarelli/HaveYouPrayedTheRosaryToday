@@ -1,63 +1,36 @@
 'use client';
 
-import {useEffect, useRef, useState} from 'react';
+import {useState} from 'react';
+import {MessageCircle, X} from 'lucide-react';
 import {useTranslations} from 'next-intl';
 import {useIsMounted} from '@/hooks/useIsMounted';
+import {BETA_FEEDBACK_URL} from '@/lib/links';
 
 const DISMISS_KEY = 'evangelizae-beta-notice-dismissed';
 
 export function BetaNotice() {
   const t = useTranslations('Beta');
+  const tCommon = useTranslations('Common');
   const mounted = useIsMounted();
   const [open, setOpen] = useState(
     () => typeof window !== 'undefined' && window.localStorage.getItem(DISMISS_KEY) !== '1',
   );
-  const acceptRef = useRef<HTMLButtonElement>(null);
-
   const close = () => {
     window.localStorage.setItem(DISMISS_KEY, '1');
     setOpen(false);
   };
 
-  useEffect(() => {
-    if (!open) return;
-    acceptRef.current?.focus();
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') close();
-    };
-    window.addEventListener('keydown', onKeyDown);
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      window.removeEventListener('keydown', onKeyDown);
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [open]);
-
   if (!mounted || !open) return null;
 
   return (
-    <div className="beta-overlay" onClick={close}>
-      <section
-        className="beta-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="beta-modal-title"
-        onClick={(event) => event.stopPropagation()}
-      >
+    <aside className="beta-notice" aria-labelledby="beta-notice-title">
+      <button type="button" className="beta-close" onClick={close} aria-label={tCommon('close')}><X size={17} /></button>
+      <div className="beta-notice-copy">
         <span className="eyebrow">{t('eyebrow')}</span>
-        <h2 id="beta-modal-title" className="beta-title">{t('title')}</h2>
+        <h2 id="beta-notice-title" className="beta-title">{t('title')}</h2>
         <p className="beta-body">{t('body')}</p>
-        <p className="beta-coming-label">{t('comingTitle')}</p>
-        <ul className="beta-roadmap">
-          <li>{t('itemAccounts')}</li>
-          <li>{t('itemCommunion')}</li>
-          <li>{t('itemFormation')}</li>
-        </ul>
-        <div className="beta-actions">
-          <button type="button" ref={acceptRef} className="button" onClick={close}>{t('dismiss')}</button>
-        </div>
-      </section>
-    </div>
+      </div>
+      <a className="beta-feedback" href={BETA_FEEDBACK_URL} target="_blank" rel="noreferrer"><MessageCircle size={16} />{t('feedback')}</a>
+    </aside>
   );
 }

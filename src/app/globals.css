@@ -6,10 +6,10 @@
   --paper: #f4efe6;
   --paper-raised: #fbf8f2;
   --ink: #24231f;
-  --muted-ink: #6b675f;
+  --muted-ink: #655d55;
   --oxblood: #7a2e35;
   --oxblood-deep: #5b2027;
-  --brass: #a57b3c;
+  --brass: #765521;
   --rule: #d8d0c4;
   --success: #3f5a49;
   --danger: #8d3037;
@@ -509,7 +509,7 @@ blockquote {
 }
 
 .feature-number {
-  color: var(--brass);
+  color: var(--oxblood);
   font-family: var(--font-serif), Georgia, serif;
 }
 

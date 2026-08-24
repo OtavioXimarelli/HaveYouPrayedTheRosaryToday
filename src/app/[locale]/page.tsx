@@ -1,9 +1,16 @@
 import {cookies} from 'next/headers';
+import type {Metadata} from 'next';
 import {ArrowRight} from 'lucide-react';
 import {useTranslations} from 'next-intl';
 import {Link} from '@/i18n/routing';
 import {SacredOrnament} from '@/components/brand/SacredOrnament';
 import {getDayContext} from '@/lib/dayContext';
+
+export const metadata: Metadata = {
+  title: 'Oração para a vida cotidiana',
+  description: 'Reze o Rosário com calma e acompanhe a liturgia diária em um aplicativo católico gratuito, privado e sem distrações.',
+  alternates: {canonical: '/pt/inicio'},
+};
 
 export default async function LandingPage() {
   const onboarded = (await cookies()).get('evangelizae_onboarded')?.value === '1';

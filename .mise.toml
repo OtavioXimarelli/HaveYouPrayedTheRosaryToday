@@ -1,0 +1,7 @@
+[tools]
+node = "24.19.0"
+pnpm = "11.22.0"
+
+[env]
+# Prefer sharp's bundled binary over the system libvips during installation.
+SHARP_IGNORE_GLOBAL_LIBVIPS = "1"

@@ -17,8 +17,9 @@
     "comingTitle": "O que vem aí",
     "itemAccounts": "Contas com sincronização entre dispositivos",
     "itemCommunion": "Intenções comunitárias, com moderação",
-    "itemFormation": "Formação catética com fontes verificáveis",
-    "dismiss": "Entendi"
+    "itemFormation": "Formação catequética com fontes verificáveis",
+    "dismiss": "Entendi",
+    "feedback": "Enviar feedback"
   },
   "Brand": {
     "ariaLabel": "Evangelizae — início",
@@ -57,6 +58,7 @@
     "leavePrayer": "Sair da oração",
     "privacy": "Privacidade",
     "source": "Código aberto",
+    "feedback": "Enviar feedback",
     "footerMission": "Uma companhia gratuita para a oração diária, feita para conduzir de volta à vida concreta da Igreja.",
     "installTitle": "Leve o Rosário com você e abra-o sem conexão.",
     "installAction": "Instalar aplicativo",
@@ -136,7 +138,7 @@
     "themeDark": "Escura",
     "submit": "Entrar no meu santuário",
     "skip": "Pular por enquanto",
-    "privacy": "O nome, o horário e seu histórico não saem deste navegador."
+    "privacy": "O nome, o horário e o histórico não saem deste navegador."
   },
   "Sanctuary": {
     "eyebrow": "Seu dia de oração",
@@ -146,7 +148,7 @@
     "resumeTitle": "Continue de onde parou",
     "beginTitle": "Rezar os {mystery}",
     "stepProgress": "Passo {current} de {total}",
-    "rosaryDescription": "Uma oração completa, guiada conta por conta, com meditações das Escrituras.",
+    "rosaryDescription": "Uma oração completa, guiada conta por conta, com meditações sobre as Escrituras.",
     "resumeAction": "Continuar oração",
     "beginAction": "Iniciar o Rosário",
     "liturgyEyebrow": "Palavra do dia",
@@ -188,8 +190,8 @@
     "exitDiscard": "Descartar esta sessão",
     "exitKeep": "Continuar rezando",
     "gateEyebrow": "Preparar a oração",
-    "gateSubtitle": "O mistério de hoje já vem destacado. Você pode rezar por ele ou seguir outro caminho.",
-    "todayBadge": "Mistério de hoje",
+    "gateSubtitle": "Os mistérios de hoje já vêm destacados. Você pode rezá-los ou escolher outro conjunto.",
+    "todayBadge": "Mistérios de hoje",
     "intentionsTitle": "Intenções desta oração",
     "intentionsHint": "Estas palavras ficam somente neste dispositivo.",
     "intentionPlaceholder": "Escreva uma intenção",
@@ -240,6 +242,7 @@
     "clearDone": "Os dados locais foram apagados.",
     "publicHome": "Ver a página inicial pública",
     "privacyLink": "Entender a privacidade",
+    "feedback": "Enviar feedback do beta",
     "nameLabel": "Nome opcional",
     "timeLabel": "Horário da oração",
     "readerLabel": "Tamanho do texto",
@@ -267,7 +270,7 @@
     "giftTitle": "Dom",
     "giftBody": "A plataforma é gratuita, sem publicidade ou paywalls, e seu código é aberto.",
     "roadmapTitle": "Depois do núcleo de oração",
-    "roadmapBody": "Contas, sincronização, intenções comunitárias, planos espirituais e formação assistida só voltarão ao produto quando existirem com dados reais, moderação e limites claros.",
+    "roadmapBody": "Contas, sincronização, intenções comunitárias, planos espirituais e formação assistida só entrarão no produto quando contarem com dados reais, moderação e limites claros.",
     "action": "Preparar meu espaço"
   },
   "Privacy": {
@@ -281,7 +284,7 @@
     "telemetryTitle": "Erros e desempenho",
     "telemetryBody": "Quando configurado pelo operador, o monitoramento recebe somente erros técnicos e desempenho amostrado. Não enviamos nome, intenções, textos de oração ou histórico.",
     "essentialTitle": "Cookie essencial",
-    "essentialBody": "Um único cookie registra que a apresentação inicial foi concluída para abrir o santuário nas próximas visitas.",
+    "essentialBody": "Um único cookie registra que a configuração inicial foi concluída para abrir o santuário nas próximas visitas.",
     "settingsAction": "Abrir ajustes"
   },
   "Offline": {

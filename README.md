@@ -62,9 +62,11 @@ O backend é mantido em outro repositório e implementado integralmente em Java/
 
 ## Desenvolvimento
 
-Requisitos: Node.js 20.9–26 e Corepack.
+Recomendado: [mise](https://mise.jdx.dev/). O arquivo `.mise.toml` fixa as mesmas
+versões de Node.js e pnpm usadas no desenvolvimento local. Como alternativa,
+use Node.js 20.9–26 e pnpm 11.22.0 (via Corepack ou instalação direta).
 
-    corepack enable
+    mise install
     pnpm install
     cp .env.example .env.local
     pnpm dev

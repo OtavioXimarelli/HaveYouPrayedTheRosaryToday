@@ -1,6 +1,13 @@
 import {ArrowRight} from 'lucide-react';
+import type {Metadata} from 'next';
 import {useTranslations} from 'next-intl';
 import {Link} from '@/i18n/routing';
+
+export const metadata: Metadata = {
+  title: 'A missão',
+  description: 'Conheça os compromissos do Evangelizae: fidelidade, silêncio, comunhão, privacidade e acesso gratuito.',
+  alternates: {canonical: '/pt/about'},
+};
 
 export default function AboutPage() {
   const t = useTranslations('About');

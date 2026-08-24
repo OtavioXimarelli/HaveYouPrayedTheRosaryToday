@@ -63,7 +63,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
     type: 'gozosos',
     titlePt: 'Mistérios Gozosos (A Encarnação)',
     titleEn: 'Joyful Mysteries (The Incarnation)',
-    daysPt: 'Segunda-feira e Sábado',
+    daysPt: 'segunda-feira e sábado',
     daysEn: 'Monday & Saturday',
     decades: [
       {
@@ -72,7 +72,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
         nameEn: 'The Annunciation of the Angel to Mary',
         scripturePt: 'E o Anjo disse-lhe: "Não temas, Maria, pois encontraste graça diante de Deus. Eis que conceberás e darás à luz um filho..." (Lc 1, 30-31)',
         scriptureEn: 'And the angel said to her, "Do not be afraid, Mary, for you have found favor with God..." (Lk 1:30-31)',
-        fruitPt: 'A Humildade cristã',
+        fruitPt: 'A humildade cristã',
         fruitEn: 'Christian Humility'
       },
       {
@@ -81,7 +81,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
         nameEn: 'The Visitation of Mary to St. Elizabeth',
         scripturePt: 'E aconteceu que, apenas Isabel ouviu a saudação de Maria, a criança exultou no seu seio... (Lc 1, 41)',
         scriptureEn: 'And when Elizabeth heard the greeting of Mary, the baby leaped in her womb... (Lk 1:41)',
-        fruitPt: 'A Caridade para com o próximo',
+        fruitPt: 'A caridade para com o próximo',
         fruitEn: 'Fraternal Charity'
       },
       {
@@ -90,7 +90,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
         nameEn: 'The Nativity of Our Lord Jesus Christ',
         scripturePt: 'E deu à luz o seu filho primogênito, envolveu-o em panos e deitou-o numa manjedoura... (Lc 2, 7)',
         scriptureEn: 'And she gave birth to her firstborn son and wrapped him in swaddling cloths and laid him in a manger... (Lk 2:7)',
-        fruitPt: 'O Desapego das coisas do mundo',
+        fruitPt: 'O desapego das coisas do mundo',
         fruitEn: 'Detachment from worldly things'
       },
       {
@@ -99,7 +99,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
         nameEn: 'The Presentation of the Child Jesus in the Temple',
         scripturePt: 'E Simeão abençoou-os e disse a Maria: "Uma espada de dor trespassará a tua alma..." (Lc 2, 34-35)',
         scriptureEn: 'And Simeon blessed them and said to Mary his mother: "A sword will pierce through your own soul also..." (Lk 2:34-35)',
-        fruitPt: 'A Obediência e Pureza',
+        fruitPt: 'A obediência e a pureza',
         fruitEn: 'Obedience and Purity of Heart'
       },
       {
@@ -108,7 +108,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
         nameEn: 'The Finding of the Child Jesus in the Temple',
         scripturePt: 'E decorridos três dias, encontraram-no no Templo, sentado no meio dos doutores... (Lc 2, 46)',
         scriptureEn: 'After three days they found him in the temple, sitting among the teachers... (Lk 2:46)',
-        fruitPt: 'O Fervor na busca de Deus',
+        fruitPt: 'O fervor na busca de Deus',
         fruitEn: 'Fervor in seeking God'
       }
     ]
@@ -117,7 +117,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
     type: 'luminosos',
     titlePt: 'Mistérios Luminosos (A Vida Pública de Jesus)',
     titleEn: 'Luminous Mysteries (The Public Life of Jesus)',
-    daysPt: 'Quinta-feira',
+    daysPt: 'quinta-feira',
     daysEn: 'Thursday',
     decades: [
       {
@@ -126,16 +126,16 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
         nameEn: 'The Baptism of Jesus in the River Jordan',
         scripturePt: 'E abriu-se o céu e ouviu-se uma voz: "Este é o meu Filho amado, em quem me comprazo." (Mt 3, 17)',
         scriptureEn: 'And behold, a voice from heaven said, "This is my beloved Son, with whom I am well pleased." (Mt 3:17)',
-        fruitPt: 'A Fidelidade às promessas do Batismo',
+        fruitPt: 'A fidelidade às promessas do Batismo',
         fruitEn: 'Fidelity to Baptismal promises'
       },
       {
         decadeNumber: 2,
-        namePt: 'A Auto-revelação nas Bodas de Caná',
+        namePt: 'A Autorrevelação nas Bodas de Caná',
         nameEn: 'The Wedding at Cana',
         scripturePt: 'Sua Mãe disse aos serventes: "Fazei tudo o que Ele vos disser." (Jo 2, 5)',
         scriptureEn: 'His mother said to the servants, "Do whatever he tells you." (Jn 2:5)',
-        fruitPt: 'A Confiança filial na intercessão de Maria',
+        fruitPt: 'A confiança filial na intercessão de Maria',
         fruitEn: 'Filial trust in Mary’s intercession'
       },
       {
@@ -144,7 +144,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
         nameEn: 'The Proclamation of the Kingdom and Call to Conversion',
         scripturePt: '"O tempo está cumprido e o Reino de Deus está próximo. Arrependei-vos e crede no Evangelho." (Mc 1, 15)',
         scriptureEn: '"The time is fulfilled, and the kingdom of God is at hand; repent and believe in the gospel." (Mk 1:15)',
-        fruitPt: 'O Arrepndimento e Confissão dos pecados',
+        fruitPt: 'O arrependimento e a confissão dos pecados',
         fruitEn: 'Sincere Repentance and Conversion'
       },
       {
@@ -153,7 +153,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
         nameEn: 'The Transfiguration on Mount Tabor',
         scripturePt: 'E transfigurou-se diante deles; o seu rosto resplandeceu como o sol e as suas vestes tornaram-se brancas... (Mt 17, 2)',
         scriptureEn: 'And he was transfigured before them, and his face shone like the sun... (Mt 17:2)',
-        fruitPt: 'O Desejo da santidade e contemplação',
+        fruitPt: 'O desejo da santidade e da contemplação',
         fruitEn: 'Desire for holiness and divine light'
       },
       {
@@ -162,7 +162,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
         nameEn: 'The Institution of the Holy Eucharist',
         scripturePt: '"Tomai e comei, isto é o meu Corpo... Tomai e bebei, isto é o meu Sangue da Nova Aliança." (Mt 26, 26-28)',
         scriptureEn: '"Take, eat; this is my body... Drink of it, all of you, for this is my blood of the covenant..." (Mt 26:26-28)',
-        fruitPt: 'A Adoração e Fervor Eucarístico',
+        fruitPt: 'A adoração e o fervor eucarístico',
         fruitEn: 'Eucharistic Adoration and Devotion'
       }
     ]
@@ -171,7 +171,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
     type: 'dolorosos',
     titlePt: 'Mistérios Dolorosos (A Paixão de Nosso Senhor)',
     titleEn: 'Sorrowful Mysteries (The Passion of Christ)',
-    daysPt: 'Terça-feira e Sexta-feira',
+    daysPt: 'terça-feira e sexta-feira',
     daysEn: 'Tuesday & Friday',
     decades: [
       {
@@ -180,7 +180,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
         nameEn: 'The Agony of Jesus in the Garden of Gethsemane',
         scripturePt: 'E, posto em agonia, orava mais intensamente. E o seu suor tornou-se como gotas de sangue... (Lc 22, 44)',
         scriptureEn: 'And being in agony he prayed more earnestly; and his sweat became like great drops of blood... (Lk 22:44)',
-        fruitPt: 'O Contrição pelos nossos pecados',
+        fruitPt: 'A contrição pelos nossos pecados',
         fruitEn: 'Sorrow for sin and conformity to God’s will'
       },
       {
@@ -189,7 +189,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
         nameEn: 'The Scourging at the Pillar',
         scripturePt: 'Então Pilatos tomou a Jesus e mandou flagelá-lo. (Jo 19, 1)',
         scriptureEn: 'Then Pilate took Jesus and flogged him. (Jn 19:1)',
-        fruitPt: 'A Mortificação dos sentidos e pureza corporal',
+        fruitPt: 'A mortificação dos sentidos e a pureza corporal',
         fruitEn: 'Mortification of the flesh and purity'
       },
       {
@@ -198,7 +198,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
         nameEn: 'The Crowning with Thorns',
         scripturePt: 'E os soldados, tecendo uma coroa de espinhos, puseram-lha na cabeça e vestiram-no com um manto de púrpura... (Jo 19, 2)',
         scriptureEn: 'And the soldiers twisted together a crown of thorns and put it on his head... (Jn 19:2)',
-        fruitPt: 'O Desprezo pelas honras mundanas e soberba',
+        fruitPt: 'O desprezo pelas honras mundanas e pela soberba',
         fruitEn: 'Moral courage and humility'
       },
       {
@@ -207,7 +207,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
         nameEn: 'The Carrying of the Cross to Calvary',
         scripturePt: 'E, levando a sua cruz, Jesus saiu para o lugar chamado Calvário... (Jo 19, 17)',
         scriptureEn: 'And he went out, bearing his own cross, to the place called the place of a skull... (Jn 19:17)',
-        fruitPt: 'A Paciência nas tribulações e cruzes diárias',
+        fruitPt: 'A paciência nas tribulações e nas cruzes diárias',
         fruitEn: 'Patience in enduring trials'
       },
       {
@@ -216,7 +216,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
         nameEn: 'The Crucifixion and Death of Our Lord Jesus Christ',
         scripturePt: 'Jesus deu um grande brado e disse: "Pai, nas tuas mãos entrego o meu espírito." E, dizendo isto, expirou. (Lc 23, 46)',
         scriptureEn: 'Then Jesus, calling out with a loud voice, said, "Father, into your hands I commit my spirit!" And having said this he breathed his last. (Lk 23:46)',
-        fruitPt: 'O Amor a Deus e salvação das almas',
+        fruitPt: 'O amor a Deus e o zelo pela salvação das almas',
         fruitEn: 'Self-sacrificing love and perseverance'
       }
     ]
@@ -225,7 +225,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
     type: 'gloriosos',
     titlePt: 'Mistérios Gloriosos (A Ressurreição e Glória)',
     titleEn: 'Glorious Mysteries (The Resurrection and Glory)',
-    daysPt: 'Domingo e Quarta-feira',
+    daysPt: 'domingo e quarta-feira',
     daysEn: 'Sunday & Wednesday',
     decades: [
       {
@@ -234,7 +234,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
         nameEn: 'The Resurrection of Jesus Christ',
         scripturePt: 'O Anjo disse às mulheres: "Não temais! Sei que buscais Jesus, que foi crucificado. Ele não está aqui, ressuscitou, como disse!" (Mt 28, 5-6)',
         scriptureEn: 'But the angel said to the women, "Do not be afraid... He is not here, for he has risen, as he said." (Mt 28:5-6)',
-        fruitPt: 'A Virtude teologal da Fé viva',
+        fruitPt: 'A virtude teologal da fé viva',
         fruitEn: 'The Theological Virtue of Faith'
       },
       {
@@ -243,7 +243,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
         nameEn: 'The Ascension of Our Lord into Heaven',
         scripturePt: 'E o Senhor Jesus, depois de lhes ter falado, elevou-se ao céu e sentou-se à direita de Deus. (Mc 16, 19)',
         scriptureEn: 'So then the Lord Jesus, after he had spoken to them, was taken up into heaven and sat down at the right hand of God. (Mk 16:19)',
-        fruitPt: 'A Virtude teologal da Esperança e desejo do Céu',
+        fruitPt: 'A virtude teologal da esperança e o desejo do Céu',
         fruitEn: 'The Theological Virtue of Hope and longing for Heaven'
       },
       {
@@ -252,7 +252,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
         nameEn: 'The Descent of the Holy Spirit at Pentecost',
         scripturePt: 'E todos ficaram cheios do Espírito Santo e começaram a falar em outras línguas... (At 2, 4)',
         scriptureEn: 'And they were all filled with the Holy Spirit and began to speak in other tongues... (Acts 2:4)',
-        fruitPt: 'O Amor divino e o zelo missionário pela Santa Igreja',
+        fruitPt: 'O amor divino e o zelo missionário pela Santa Igreja',
         fruitEn: 'Holy Wisdom and Missionary Zeal'
       },
       {
@@ -261,7 +261,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
         nameEn: 'The Assumption of the Blessed Virgin Mary into Heaven',
         scripturePt: 'E apareceu no céu um grande sinal: uma mulher vestida de sol, com a lua debaixo dos pés e uma coroa de doze estrelas na cabeça. (Ap 12, 1)',
         scriptureEn: 'And a great sign appeared in heaven: a woman clothed with the sun, with the moon under her feet... (Rev 12:1)',
-        fruitPt: 'A Graça de uma santa e pacífica morte',
+        fruitPt: 'A graça de uma morte santa e pacífica',
         fruitEn: 'Grace of a happy death and true devotion to Mary'
       },
       {
@@ -270,7 +270,7 @@ export const ROSARY_MYSTERIES: Record<MysteryType, RosaryMysteryGroup> = {
         nameEn: 'The Coronation of the Blessed Virgin Mary as Queen of Heaven and Earth',
         scripturePt: '"Tu és a glória de Jerusalém, a alegria de Israel e a honra do nosso povo." (Jt 15, 9)',
         scriptureEn: '"You are the exaltation of Jerusalem, the great pride of Israel, and the great boast of our nation." (Jdt 15:9)',
-        fruitPt: 'A Perseverança final e a coroa da glória eterna',
+        fruitPt: 'A perseverança final e a coroa da glória eterna',
         fruitEn: 'Final perseverance and confidence in Our Lady’s Reign'
       }
     ]
@@ -340,7 +340,7 @@ export function buildRosarySequence(mysteryType: MysteryType): RosaryStep[] {
     stepNumber: stepIndex++,
     totalSteps: 0,
     type: 'our_father_pope',
-    titlePt: 'Pai Nosso (Pelas intenções do Santo Padre e exaltação da Fé)',
+    titlePt: 'Pai Nosso (pelas intenções do Santo Padre e exaltação da fé)',
     titleEn: 'Our Father (For the Holy Father\'s intentions and increase in Faith)',
     prayerTextPt: ROSARY_PRAYERS.ourFatherPt,
     prayerTextEn: ROSARY_PRAYERS.ourFatherEn,
@@ -348,7 +348,7 @@ export function buildRosarySequence(mysteryType: MysteryType): RosaryStep[] {
   });
 
   // 4. Three Hail Marys (Faith, Hope, Charity)
-  const theologicalVirtuesPt = ['Pela virtude teologal da Fé', 'Pela virtude teologal da Esperança', 'Pela virtude teologal da Caridade'];
+  const theologicalVirtuesPt = ['Pela virtude teologal da fé', 'Pela virtude teologal da esperança', 'Pela virtude teologal da caridade'];
   const theologicalVirtuesEn = ['For the theological virtue of Faith', 'For the theological virtue of Hope', 'For the theological virtue of Charity'];
 
   for (let i = 1; i <= 3; i++) {
@@ -371,7 +371,7 @@ export function buildRosarySequence(mysteryType: MysteryType): RosaryStep[] {
     stepNumber: stepIndex++,
     totalSteps: 0,
     type: 'glory_be_fatima',
-    titlePt: 'Glória ao Pai & Oração de Fátima',
+    titlePt: 'Glória ao Pai e oração de Fátima',
     titleEn: 'Glory Be & Fatima Prayer',
     prayerTextPt: ROSARY_PRAYERS.gloryFatimaPt,
     prayerTextEn: ROSARY_PRAYERS.gloryFatimaEn,
@@ -388,8 +388,8 @@ export function buildRosarySequence(mysteryType: MysteryType): RosaryStep[] {
       type: 'mystery_intro',
       titlePt: `${decade.decadeNumber}º Mistério: ${decade.namePt}`,
       titleEn: `${decade.decadeNumber}st Mystery: ${decade.nameEn}`,
-      prayerTextPt: `Palavra de Deus: ${decade.scripturePt}\n\n🙏 Fruto da contemplação: ${decade.fruitPt}`,
-      prayerTextEn: `Word of God: ${decade.scriptureEn}\n\n🙏 Spiritual Fruit: ${decade.fruitEn}`,
+      prayerTextPt: `Palavra de Deus: ${decade.scripturePt}`,
+      prayerTextEn: `Word of God: ${decade.scriptureEn}`,
       decadeNumber: decade.decadeNumber,
       mystery: decade
     });
@@ -433,7 +433,7 @@ export function buildRosarySequence(mysteryType: MysteryType): RosaryStep[] {
       stepNumber: stepIndex++,
       totalSteps: 0,
       type: 'decade_glory_fatima',
-      titlePt: `Glória & Oração de Fátima (${decade.decadeNumber}º Mistério)`,
+      titlePt: `Glória e oração de Fátima (${decade.decadeNumber}º Mistério)`,
       titleEn: `Glory Be & Fatima Prayer (${decade.decadeNumber}st Mystery)`,
       prayerTextPt: `Glória ao Pai, ao Filho e ao Espírito Santo. Como era no princípio, agora e sempre. Amém.\n\n"Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno; levai as almas todas para o Céu e socorrei principalmente as que mais precisarem da vossa misericórdia."`,
       prayerTextEn: `Glory be to the Father, and to the Son, and to the Holy Spirit. As it was in the beginning, is now, and ever shall be, world without end. Amen.\n\n"O my Jesus, forgive us our sins, save us from the fires of hell, lead all souls to Heaven, especially those most in need of Thy mercy."`,

@@ -24,6 +24,16 @@ describe('rosary engine', () => {
     }
   });
 
+  it('keeps Scripture and the contemplative fruit from being repeated in the same step', () => {
+    const introductions = buildRosarySequence('gloriosos').filter((step) => step.type === 'mystery_intro');
+    expect(introductions).toHaveLength(5);
+    for (const step of introductions) {
+      expect(step.prayerTextPt).toMatch(/^Palavra de Deus:/);
+      expect(step.prayerTextPt).not.toContain('Fruto da contemplação');
+      expect(step.mystery?.fruitPt).toBeTruthy();
+    }
+  });
+
   it('maps weekdays to the traditional daily mysteries', () => {
     expect(getDailyMysteryType(new Date(2026, 7, 17))).toBe('gozosos');
     expect(getDailyMysteryType(new Date(2026, 7, 18))).toBe('dolorosos');

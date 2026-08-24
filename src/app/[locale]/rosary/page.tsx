@@ -161,7 +161,7 @@ export default function RosaryPage() {
         {showIntentions && (
           <section className="intentions-panel" aria-label={t('intentionsTitle')}>
             <p className="intentions-hint">{t('intentionsHint')}</p>
-            <form onSubmit={addIntention} className="field intentions-form"><input aria-label={t('intentionPlaceholder')} value={newIntention} onChange={(event) => setNewIntention(event.target.value)} placeholder={t('intentionPlaceholder')} /><button className="button button-small" disabled={!newIntention.trim()}>{t('addIntention')}</button></form>
+            <form onSubmit={addIntention} className="field intentions-form"><input aria-label={t('intentionPlaceholder')} maxLength={500} value={newIntention} onChange={(event) => setNewIntention(event.target.value)} placeholder={t('intentionPlaceholder')} /><button className="button button-small" disabled={!newIntention.trim()}>{t('addIntention')}</button></form>
             {prayer.intentions.map((intention, index) => <div className="quiet-row" key={`${intention}-${index}`}><span>{intention}</span><button className="button button-quiet" onClick={() => prayer.removeIntention(index)} aria-label={t('removeIntention')}>×</button></div>)}
           </section>
         )}

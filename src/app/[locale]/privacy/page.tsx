@@ -1,5 +1,12 @@
 import {useTranslations} from 'next-intl';
+import type {Metadata} from 'next';
 import {Link} from '@/i18n/routing';
+
+export const metadata: Metadata = {
+  title: 'Privacidade',
+  description: 'Entenda quais dados o Evangelizae guarda localmente e como exportar ou apagar suas informações.',
+  alternates: {canonical: '/pt/privacy'},
+};
 
 export default function PrivacyPage() {
   const t = useTranslations('Privacy');

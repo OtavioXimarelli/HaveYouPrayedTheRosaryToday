@@ -25,6 +25,7 @@ export default function OnboardingPage() {
 
   const finish = (event?: FormEvent) => {
     event?.preventDefault();
+    preferences.setProfile({firstName: preferences.firstName.trim().slice(0, 50)});
     preferences.completeOnboarding();
     router.replace('/sanctuary');
   };
@@ -85,7 +86,7 @@ export default function OnboardingPage() {
           {step === 1 && (
             <div className="field">
               <label htmlFor="first-name">{t('nameLabel')}</label>
-              <input id="first-name" value={preferences.firstName} onChange={(event) => preferences.setProfile({firstName: event.target.value})} placeholder={t('namePlaceholder')} autoComplete="given-name" />
+              <input id="first-name" maxLength={50} value={preferences.firstName} onChange={(event) => preferences.setProfile({firstName: event.target.value})} placeholder={t('namePlaceholder')} autoComplete="given-name" />
             </div>
           )}
           {step === 2 && (
@@ -115,7 +116,7 @@ export default function OnboardingPage() {
           <div className="hero-actions">
             {step > 1 && <button className="button button-secondary" type="button" onClick={() => setStep(step - 1)}>{t('back')}</button>}
             {step < TOTAL_STEPS
-              ? <button className="button" type="button" onClick={() => setStep(step + 1)}>{t('next')}</button>
+              ? <button className="button" type="button" onClick={(event) => { event.preventDefault(); setStep(step + 1); }}>{t('next')}</button>
               : <button className="button" type="submit">{t('submit')}</button>}
             <button className="text-link" type="button" onClick={() => finish()}>{t('skip')}</button>
           </div>

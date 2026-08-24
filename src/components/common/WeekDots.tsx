@@ -6,14 +6,14 @@ export interface WeekDayMark {
 
 export function WeekDots({marks}: {marks: WeekDayMark[]}) {
   return (
-    <ol className="week-dots" aria-hidden="false">
+    <ol className="week-dots">
       {marks.map((mark) => (
         <li
           key={mark.key}
           className={`week-dot${mark.prayed ? ' is-prayed' : ''}`}
-          role="img"
-          aria-label={mark.ariaLabel}
-        />
+        >
+          <span className="sr-only">{mark.ariaLabel}</span>
+        </li>
       ))}
     </ol>
   );
