@@ -42,6 +42,7 @@ export default function LiturgyPage() {
       {failed && !loading && <section className="reading-wrap section-pad"><div className="status-message liturgy-empty" data-tone="error"><span className="liturgy-empty-mark" aria-hidden="true">✦</span><h2>{t('unavailableTitle')}</h2><p>{t('unavailableBody')}</p><div className="hero-actions"><button className="button" onClick={() => void load(true)}><RefreshCw size={16} />{t('retry')}</button><a className="button button-secondary" href="https://www.cnbb.org.br/liturgia-diaria/" target="_blank" rel="noreferrer">{t('officialLink')}</a></div></div></section>}
       {liturgy && !loading && <>
         {liturgy.source.freshness === 'CACHED' && <p className="status-message" style={{marginTop: '2rem'}}>{t('cachedNotice')}</p>}
+        {liturgy.source.freshness === 'EMBEDDED' && <p className="status-message" style={{marginTop: '2rem'}}>{t('embeddedNotice')}</p>}
         <div className={`liturgy-layout reader-${readerScale}`}>
           <nav className="contents-nav" aria-label={t('contents')}><strong>{t('contents')}</strong>{liturgy.groups.map((group, index) => <a key={`${group.kind}-${index}`} href={`#${groupIds[group.kind]}-${index}`}>{t(group.kind)}</a>)}</nav>
           <article className="reading-document">

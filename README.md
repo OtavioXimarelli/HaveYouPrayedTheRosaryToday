@@ -12,7 +12,7 @@ O núcleo atual é deliberadamente pequeno:
 - configuração local opcional, sem conta, em três passos;
 - santuário diário personalizado, com saudação pelo momento do dia e mistério do dia;
 - Rosário guiado completo com 73 passos, retomada e acesso offline;
-- liturgia diária consumida pela API Java/Spring separada;
+- liturgia diária em um pacote local provisório, com intervalo e fontes declarados;
 - histórico semanal, lembrete interno e exportação/exclusão dos dados locais;
 - tema claro/escuro com alternância rápida no cabeçalho (padrão: preferência do sistema);
 - instalação como aplicativo (PWA) com suporte offline.
@@ -24,7 +24,7 @@ Quem já se preparou entra direto no santuário; a página pública permanece ac
 - Fluxo completo de onboarding local (nome, janela de oração, aparência) sem conta.
 - Santuário como página inicial do usuário: convite de oração, retomada do passo interrompido, faixa dos sete dias.
 - Rosário guiado com os quatro mistérios, conclusão iluminada e persistência entre sessões.
-- Liturgia do dia com fonte, horário e estado do cache declarados.
+- Liturgia do dia com fonte, horário e estado provisório declarados.
 - Ajustes de perfil, leitura e tema; exportação JSON e exclusão total dos dados.
 - Missão, privacidade e páginas institucionais em português.
 - Offline depois do primeiro carregamento, monitoramento técnico opcional e imagem Docker.
@@ -60,6 +60,12 @@ Fora de escopo até nova decisão: rankings, moedas, recompensas, feed infinito,
 
 O backend é mantido em outro repositório e implementado integralmente em Java/Spring. O espelho do contrato está em contracts/evangelizae-v1.openapi.yaml.
 
+### Ponte provisória da liturgia
+
+Enquanto a API própria é concluída, esta branch inclui localmente as leituras de **25 de agosto a 1º de setembro de 2026**. A seleção diária segue o calendário litúrgico da Igreja no Brasil. O texto bíblico usa a tradução católica da Vulgata do Pe. António Pereira de Figueiredo, em domínio público, com ortografia atualizada sem alterar o conteúdo. Uma edição histórica dessa tradução tem aprovação eclesiástica registrada pela Biblioteca Nacional. Ela é uma ponte católica legítima, mas não é apresentada como a tradução litúrgica oficial atual da CNBB. Não há consulta remota, repetição de outro dia nem orações do Missal sem licença de redistribuição. Em 2 de setembro, se a API ainda não tiver substituído a ponte, a página passa ao estado indisponível e encaminha para a CNBB.
+
+As fontes, a licença, os limites editoriais e o procedimento de remoção estão em [`LITURGY_CONTENT_SOURCES.md`](LITURGY_CONTENT_SOURCES.md).
+
 ## Desenvolvimento
 
 Recomendado: [mise](https://mise.jdx.dev/). O arquivo `.mise.toml` fixa as mesmas
@@ -71,7 +77,7 @@ use Node.js 20.9–26 e pnpm 11.22.0 (via Corepack ou instalação direta).
     cp .env.example .env.local
     pnpm dev
 
-Acesse http://localhost:3000. O frontend espera a API em http://localhost:8080/api/v1 por padrão.
+Acesse http://localhost:3000. O contrato da futura API permanece documentado, mas a ponte provisória desta branch não faz chamadas externas para carregar a liturgia.
 
 ## Verificação
 

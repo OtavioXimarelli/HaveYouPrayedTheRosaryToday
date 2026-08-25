@@ -212,12 +212,13 @@
     "eyebrow": "Liturgia diária",
     "title": "A Palavra de hoje",
     "subtitle": "Textos apresentados para leitura orante, com a fonte e a atualização sempre identificadas.",
-    "loading": "Buscando a liturgia de hoje…",
+    "loading": "Preparando as leituras de hoje…",
     "unavailableTitle": "A liturgia não está disponível agora.",
     "unavailableBody": "Não exibiremos uma leitura antiga como se fosse a de hoje. Tente novamente ou consulte a Liturgia Diária da CNBB.",
     "officialLink": "Consultar a CNBB",
     "retry": "Tentar novamente",
     "cachedNotice": "Exibindo a cópia de hoje guardada neste dispositivo.",
+    "embeddedNotice": "Edição provisória local para 25 de agosto a 1º de setembro de 2026. As referências seguem o calendário da Igreja no Brasil; os textos usam a tradução católica da Vulgata do Pe. António Pereira de Figueiredo, identificada abaixo.",
     "source": "Fonte: {provider}. Atualizada em {time}.",
     "contents": "Nesta página",
     "FIRST_READING": "Primeira leitura",
@@ -280,7 +281,7 @@
     "localTitle": "Dados locais",
     "localBody": "Você pode exportar ou apagar tudo em Ajustes. Limpar os dados do navegador também remove essas informações.",
     "liturgyTitle": "Liturgia",
-    "liturgyBody": "O aplicativo consulta a API própria do Evangelizae para obter a liturgia. A resposta de hoje pode ser guardada localmente para leitura offline.",
+    "liturgyBody": "Nesta edição provisória, as leituras de 25 de agosto a 1º de setembro de 2026 já vêm no aplicativo e não geram consultas externas. Depois desse período, a página indica a indisponibilidade e oferece o acesso à CNBB.",
     "telemetryTitle": "Erros e desempenho",
     "telemetryBody": "Quando configurado pelo operador, o monitoramento recebe somente erros técnicos e desempenho amostrado. Não enviamos nome, intenções, textos de oração ou histórico.",
     "essentialTitle": "Cookie essencial",
@@ -290,7 +291,7 @@
   "Offline": {
     "eyebrow": "Sem conexão",
     "title": "O silêncio continua disponível.",
-    "body": "Se você já abriu o Rosário neste dispositivo, pode continuar a oração normalmente. A liturgia exige uma cópia de hoje previamente carregada.",
+    "body": "Se você já abriu o Rosário neste dispositivo, pode continuar a oração normalmente. As leituras da edição provisória também ficam disponíveis no período declarado quando o aplicativo já foi carregado.",
     "rosaryAction": "Abrir o Rosário",
     "sanctuaryAction": "Voltar ao santuário"
   }
