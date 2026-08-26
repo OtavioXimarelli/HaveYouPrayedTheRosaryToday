@@ -5,11 +5,10 @@ O núcleo do frontend está pronto para um beta público: onboarding local, sant
 ## Bloqueadores antes de abrir o acesso
 
 - [ ] Definir `NEXT_PUBLIC_APP_URL` com a URL HTTPS final, sem barra no fim.
-- [ ] Definir `NEXT_PUBLIC_API_BASE_URL` com a API Java/Spring de produção em HTTPS.
-- [ ] Confirmar CORS da API para o domínio final do frontend.
-- [ ] Confirmar que `GET /liturgy/today` retorna a data local correta para `America/Sao_Paulo` e nunca reapresenta conteúdo de outro dia como atual.
+- [ ] Conferir pastoral e editorialmente as oito entradas locais, de 25/08 a 01/09/2026, no fuso `America/Sao_Paulo`.
+- [ ] Publicar a API ou adicionar um novo intervalo local revisado antes de 02/09/2026; depois do corte, o produto falha de forma declarada.
 - [ ] Submeter orações, frutos dos mistérios e referências bíblicas a uma revisão pastoral e editorial humana.
-- [ ] Documentar a tradução e a licença dos trechos bíblicos, além da origem e das condições de uso da liturgia.
+- [x] Documentar a tradução e a licença dos trechos bíblicos, além da origem e das condições de uso da liturgia, em `LITURGY_CONTENT_SOURCES.md`.
 - [ ] Validar `GET /api/health` no container publicado.
 - [ ] Configurar `SENTRY_ENVIRONMENT=production`; definir os DSNs somente se o monitoramento privativo for desejado.
 - [ ] Confirmar DNS, certificado TLS e redirecionamento do domínio canônico.
@@ -32,6 +31,6 @@ O núcleo do frontend está pronto para um beta público: onboarding local, sant
 
 ## Critério de go/no-go
 
-Abrir o beta somente quando o build de produção, os testes unitários e os testes E2E estiverem verdes, a liturgia do dia estiver correta no domínio final e os caminhos de feedback e exclusão de dados estiverem funcionando.
+Abrir o beta somente quando o build de produção, os testes unitários e os testes E2E estiverem verdes, a entrada local do dia estiver correta no domínio final e os caminhos de feedback e exclusão de dados estiverem funcionando. A API e o CORS voltam a ser gates obrigatórios no momento da remoção da ponte provisória.
 
 Contas, sincronização, intenções comunitárias, IA teológica, paróquias e planos espirituais continuam deliberadamente fora deste beta.

@@ -22,6 +22,27 @@ test('direct visits render every core page instead of an empty hydration shell',
   await expect(page.getByRole('heading', {level: 1})).toBeVisible();
 });
 
+test('temporary liturgy uses the reviewed local entry and never calls the API', async ({page}) => {
+  const apiRequests: string[] = [];
+  page.on('request', (request) => {
+    if (request.url().includes('/liturgy/today')) apiRequests.push(request.url());
+  });
+  await page.clock.setFixedTime(new Date('2026-08-26T15:00:00Z'));
+  await page.goto('/pt/liturgy');
+  await expect(page.getByRole('heading', {level: 1, name: /quarta-feira da 21ª semana/i})).toBeVisible();
+  await expect(page.getByText('2Ts 3,6-10.16-18')).toBeVisible();
+  await expect(page.getByText(/edição provisória local/i)).toBeVisible();
+  await expect(page.getByText(/^Fonte:.*Pe. António Pereira de Figueiredo/i)).toBeVisible();
+  expect(apiRequests).toEqual([]);
+});
+
+test('temporary liturgy fails closed after its declared end date', async ({page}) => {
+  await page.clock.setFixedTime(new Date('2026-09-02T15:00:00Z'));
+  await page.goto('/pt/liturgy');
+  await expect(page.getByRole('heading', {level: 2, name: /não está disponível/i})).toBeVisible();
+  await expect(page.getByRole('link', {name: /consultar a CNBB/i})).toBeVisible();
+});
+
 test('responsive shells do not clip and mobile navigation stays usable', async ({page, isMobile}) => {
   for (const route of ['inicio', 'sanctuary', 'rosary', 'liturgy', 'settings']) {
     await page.goto(`/pt/${route}`);

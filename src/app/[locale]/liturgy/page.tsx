@@ -41,13 +41,14 @@ export default function LiturgyPage() {
       {loading && <div className="section-pad status-message">{t('loading')}</div>}
       {failed && !loading && <section className="reading-wrap section-pad"><div className="status-message liturgy-empty" data-tone="error"><span className="liturgy-empty-mark" aria-hidden="true">✦</span><h2>{t('unavailableTitle')}</h2><p>{t('unavailableBody')}</p><div className="hero-actions"><button className="button" onClick={() => void load(true)}><RefreshCw size={16} />{t('retry')}</button><a className="button button-secondary" href="https://www.cnbb.org.br/liturgia-diaria/" target="_blank" rel="noreferrer">{t('officialLink')}</a></div></div></section>}
       {liturgy && !loading && <>
-        {liturgy.source.freshness === 'CACHED' && <p className="status-message" style={{marginTop: '2rem'}}>{t('cachedNotice')}</p>}
+        {liturgy.source.freshness === 'CACHED' && <p className="status-message liturgy-edition-note">{t('cachedNotice')}</p>}
+        {liturgy.source.freshness === 'EMBEDDED' && <p className="status-message liturgy-edition-note">{t('embeddedNotice')}</p>}
         <div className={`liturgy-layout reader-${readerScale}`}>
           <nav className="contents-nav" aria-label={t('contents')}><strong>{t('contents')}</strong>{liturgy.groups.map((group, index) => <a key={`${group.kind}-${index}`} href={`#${groupIds[group.kind]}-${index}`}>{t(group.kind)}</a>)}</nav>
           <article className="reading-document">
             {liturgy.groups.map((group, groupIndex) => <section className="reading-group" id={`${groupIds[group.kind]}-${groupIndex}`} key={`${group.kind}-${groupIndex}`}><span className="eyebrow">{t(group.kind)}</span>{group.items.map((item, index) => <div className="reading-item" key={`${item.reference}-${index}`}><h2>{item.title}</h2>{item.reference && <p className="reading-reference">{item.reference}</p>}{item.refrain && <p className="reading-body"><strong>{item.refrain}</strong></p>}<div className={`reading-body${groupIndex === 0 && index === 0 ? ' drop-cap' : ''}`}>{item.text}</div></div>)}</section>)}
             {Object.entries(liturgy.prayers).map(([key, text]) => text && <section className="reading-group" key={key}><span className="eyebrow">{t(key as 'collect' | 'offerings' | 'communion')}</span><div className="reading-body">{text}</div></section>)}
-            <p style={{color: 'var(--muted-ink)', fontSize: '.82rem'}}>{t('source', {provider: liturgy.source.provider, time: new Intl.DateTimeFormat('pt-BR', {hour: '2-digit', minute: '2-digit'}).format(new Date(liturgy.source.fetchedAt))})}</p>
+            <p className="liturgy-source">{t('source', {provider: liturgy.source.provider, time: new Intl.DateTimeFormat('pt-BR', {hour: '2-digit', minute: '2-digit'}).format(new Date(liturgy.source.fetchedAt))})}</p>
           </article>
         </div>
       </>}

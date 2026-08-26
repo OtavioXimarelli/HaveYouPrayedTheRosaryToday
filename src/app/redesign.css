@@ -234,6 +234,10 @@ body {
   gap: 0.45rem;
 }
 
+.beta-notice-copy > .eyebrow {
+  color: var(--oxblood-deep);
+}
+
 .beta-notice .eyebrow::before {
   width: 0.75rem;
 }
@@ -1415,30 +1419,203 @@ body {
 .liturgy-layout {
   grid-template-columns: 220px minmax(0, 1fr);
   gap: clamp(3rem, 7vw, 7rem);
+  align-items: start;
+  min-width: 0;
 }
 
 .contents-nav {
-  border-top: 3px solid var(--oxblood);
-  background: var(--paper-raised);
-  box-shadow: var(--shadow-soft);
-  padding: 1.4rem;
+  position: sticky;
+  top: 7rem;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--rule) 84%, var(--brass));
+  border-top: 3px double var(--oxblood);
+  border-radius: 0.2rem;
+  background:
+    linear-gradient(100deg, rgb(255 255 255 / 8%), transparent 24%),
+    color-mix(in srgb, var(--paper-raised) 95%, var(--brass) 5%);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 32%) inset,
+    0 10px 24px rgb(36 35 31 / 7%);
+  min-width: 0;
+  padding: 1.55rem 1.4rem 1.65rem;
+}
+
+.contents-nav::after {
+  content: '';
+  position: absolute;
+  right: -1.25rem;
+  bottom: -1.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid color-mix(in srgb, var(--rule) 75%, transparent);
+  background: var(--paper);
+  transform: rotate(45deg);
+}
+
+.contents-nav strong {
+  color: var(--ink);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.contents-nav a {
+  position: relative;
+  padding-left: 0.9rem;
+  transition: color 160ms ease, transform 160ms ease;
+}
+
+.contents-nav a::before {
+  content: '';
+  position: absolute;
+  top: 0.72em;
+  left: 0;
+  width: 0.35rem;
+  border-top: 1px solid var(--brass);
+}
+
+.contents-nav a:hover {
+  color: var(--oxblood);
+  transform: translateX(0.15rem);
 }
 
 .reading-document {
+  position: relative;
+  isolation: isolate;
   max-width: 50rem;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--rule) 82%, var(--brass));
+  border-radius: 0.3rem;
+  background:
+    radial-gradient(circle at 12% 4%, rgb(255 255 255 / 32%), transparent 23rem),
+    radial-gradient(circle at 93% 84%, color-mix(in srgb, var(--brass) 5%, transparent), transparent 27rem),
+    color-mix(in srgb, var(--paper-raised) 97%, var(--brass) 3%);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 45%) inset,
+    0 0 0 6px color-mix(in srgb, var(--paper-raised) 42%, transparent),
+    0 28px 60px rgb(36 35 31 / 13%);
+  padding: clamp(2.2rem, 6vw, 5rem) clamp(1.5rem, 7vw, 5.5rem);
+}
+
+.reading-document::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(93deg, transparent 0 23px, rgb(118 85 33 / 1.5%) 24px, transparent 25px 51px),
+    repeating-linear-gradient(2deg, transparent 0 31px, rgb(91 32 39 / 1.2%) 32px, transparent 33px 67px);
+  opacity: 0.62;
+}
+
+.reading-document::after {
+  content: '✦';
+  display: block;
+  width: 5rem;
+  margin: 2.4rem auto 0;
+  color: var(--brass);
+  background: linear-gradient(var(--rule), var(--rule)) center / 100% 1px no-repeat;
+  font-size: 0.72rem;
+  line-height: 1;
+  text-align: center;
+  text-shadow: -0.65rem 0 var(--paper-raised), 0.65rem 0 var(--paper-raised);
 }
 
 .reading-group {
   position: relative;
-  margin-bottom: 1.5rem;
-  border: 1px solid var(--rule);
-  border-radius: 1.2rem 1.2rem 1.2rem 0.25rem;
-  background: color-mix(in srgb, var(--paper-raised) 88%, transparent);
-  box-shadow: var(--shadow-soft);
-  padding: clamp(2rem, 5vw, 4rem);
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--rule) 78%, var(--brass));
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: clamp(2.8rem, 6vw, 4.4rem) 0;
 }
 
-.reading-group:first-child { padding-top: clamp(2rem, 5vw, 4rem); }
+.reading-group:first-child { padding-top: 0; }
+
+.reading-group:last-of-type {
+  border-bottom: 3px double color-mix(in srgb, var(--rule) 72%, var(--brass));
+}
+
+.reading-group .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.reading-group .eyebrow::before {
+  content: '';
+  width: 1.5rem;
+  border-top: 1px solid var(--brass);
+}
+
+.reading-group h2 {
+  max-width: 18ch;
+  margin: 0.7rem 0 0.3rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05;
+}
+
+.reading-reference {
+  margin: 0 0 1.25rem;
+  letter-spacing: 0.025em;
+}
+
+.reading-body {
+  color: color-mix(in srgb, var(--ink) 96%, var(--brass));
+  text-wrap: pretty;
+}
+
+.reading-body.drop-cap::first-letter {
+  float: left;
+  margin: 0.08em 0.12em 0 0;
+  color: var(--brass);
+  font-size: 4.1em;
+  line-height: 0.78;
+}
+
+.liturgy-edition-note {
+  position: relative;
+  margin: 2rem 0 0;
+  border: 0;
+  border-left: 2px solid var(--brass);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0.8rem 1.15rem;
+  color: var(--muted-ink);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 0.92rem;
+  font-style: italic;
+}
+
+.liturgy-source {
+  margin: 2.2rem 0 0;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted-ink);
+  font-size: 0.76rem;
+  letter-spacing: 0.015em;
+  line-height: 1.65;
+}
+
+.dark .contents-nav,
+.dark .reading-document {
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 4%) inset,
+    0 24px 55px rgb(0 0 0 / 28%);
+}
+
+.dark .reading-document {
+  background:
+    radial-gradient(circle at 12% 4%, rgb(255 255 255 / 3%), transparent 23rem),
+    radial-gradient(circle at 93% 84%, rgb(195 154 88 / 4%), transparent 27rem),
+    color-mix(in srgb, var(--paper-raised) 97%, var(--brass) 3%);
+}
 
 .liturgy-empty {
   position: relative;
@@ -1553,8 +1730,10 @@ body {
   }
 
 
-  .liturgy-layout { grid-template-columns: 1fr; }
-  .contents-nav { position: static; display: flex; overflow-x: auto; border-top-width: 1px; border-left: 3px solid var(--oxblood); }
+  .liturgy-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+  .contents-nav { position: static; display: flex; max-width: 100%; flex-wrap: wrap; overflow-x: hidden; border-top-width: 1px; border-left: 3px solid var(--oxblood); border-radius: 0.2rem; }
+  .contents-nav strong { flex: 0 0 auto; }
+  .contents-nav a { flex: 0 0 auto; }
 }
 
 /* Phone */
@@ -1671,8 +1850,21 @@ body {
   .prayer-actions { gap: 0.6rem; padding-top: 1rem; }
   .prayer-actions .button { min-width: 0; flex: 1; padding-inline: 0.7rem; font-size: 0.78rem; }
 
-  .reading-group { padding: 1.7rem 1.25rem; }
+  .reading-document {
+    width: calc(100% + 0.5rem);
+    margin-left: -0.25rem;
+    padding: 2.3rem 1.3rem;
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 38%) inset,
+      0 0 0 3px color-mix(in srgb, var(--paper-raised) 38%, transparent),
+      0 18px 36px rgb(36 35 31 / 11%);
+  }
+  .reading-group { padding: 2.5rem 0; }
+  .reading-group:first-child { padding-top: 0; }
+  .reading-group h2 { font-size: clamp(2rem, 10vw, 2.7rem); }
   .reading-body { font-size: var(--reader-size, 1.13rem); }
+  .reading-body.drop-cap::first-letter { font-size: 3.65em; }
+  .liturgy-source { font-size: 0.72rem; }
   .liturgy-empty .hero-actions { width: 100%; }
   .liturgy-empty .button { width: 100%; }
 
