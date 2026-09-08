@@ -168,7 +168,11 @@
     "lastLabel": "Última oração",
     "never": "Ainda não registrada",
     "completedToday": "O Rosário de hoje foi concluído.",
-    "settingsHint": "Você pode ajustar horário, leitura e aparência a qualquer momento."
+    "settingsHint": "Você pode ajustar horário, leitura e aparência a qualquer momento.",
+    "emptyTitle": "Seu santuário está pronto.",
+    "emptyBody": "Comece rezando o Rosário de hoje. O histórico aparecerá aqui, em particular.",
+    "emptyAction": "Rezar o primeiro Rosário",
+    "loading": "Preparando seu santuário…"
   },
   "Rosary": {
     "progress": "Passo {current} de {total}",
@@ -181,6 +185,8 @@
     "completedEyebrow": "Oração concluída",
     "completedTitle": "Permaneça um instante em silêncio.",
     "completedBody": "Seu Rosário foi guardado neste dispositivo. Que esta oração acompanhe o restante do seu dia.",
+    "reflectionPrompt": "Como esta oração ressoou em você?",
+    "reflectionPlaceholder": "Um pensamento, uma graça recebida, uma intenção especial… (opcional)",
     "returnSanctuary": "Voltar ao santuário",
     "prayAgain": "Iniciar outro Rosário",
     "chooseMystery": "Escolher os mistérios",

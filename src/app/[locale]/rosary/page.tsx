@@ -1,6 +1,6 @@
 'use client';
 
-import {FormEvent, useCallback, useEffect, useMemo, useState} from 'react';
+import {FormEvent, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ArrowLeft, ArrowRight} from 'lucide-react';
 import {useLocale, useTranslations} from 'next-intl';
 import {Link} from '@/i18n/routing';
@@ -62,6 +62,8 @@ export default function RosaryPage() {
   const [showIntentions, setShowIntentions] = useState(false);
   const [newIntention, setNewIntention] = useState('');
   const [gateAfterCompletion, setGateAfterCompletion] = useState(false);
+  const intentionsRef = useRef<HTMLDivElement>(null);
+  const intentionsTriggerRef = useRef<HTMLButtonElement>(null);
   const steps = useMemo(() => buildRosarySequence(prayer.activeMysteryType), [prayer.activeMysteryType]);
   const currentStep = steps[Math.min(prayer.currentStepIndex, steps.length - 1)];
 
@@ -91,6 +93,45 @@ export default function RosaryPage() {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [mounted, prayer, next]);
 
+  useEffect(() => {
+    if (!prayer.sessionStartedAt || prayer.isCompleted) return;
+    const onBeforeUnload = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+    };
+    window.addEventListener('beforeunload', onBeforeUnload);
+    return () => window.removeEventListener('beforeunload', onBeforeUnload);
+  }, [prayer.sessionStartedAt, prayer.isCompleted]);
+
+  useEffect(() => {
+    if (!showIntentions || !intentionsRef.current) return;
+    const panel = intentionsRef.current;
+    const trigger = intentionsTriggerRef.current;
+    const focusable = panel.querySelectorAll<HTMLElement>('input, button, [tabindex]:not([tabindex="-1"])');
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    first?.focus();
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setShowIntentions(false);
+        trigger?.focus();
+        return;
+      }
+      if (event.key !== 'Tab' || focusable.length === 0) return;
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      trigger?.focus();
+    };
+  }, [showIntentions]);
+
   if (!mounted) return <div className="reading-wrap section-pad" />;
 
   if (prayer.isCompleted && !gateAfterCompletion) {
@@ -101,7 +142,24 @@ export default function RosaryPage() {
           <span className="eyebrow">{t('completedEyebrow')}</span>
           <h1 className="page-title">{t('completedTitle')}</h1>
           <p className="lede">{t('completedBody')}</p>
-          <div className="hero-actions"><Link href="/sanctuary" className="button">{t('returnSanctuary')}</Link><button className="button button-secondary" onClick={() => setGateAfterCompletion(true)}>{t('prayAgain')}</button></div>
+          <div className="completion-reflection">
+            <label htmlFor="reflection-input" className="completion-reflection-label">
+              {t('reflectionPrompt')}
+            </label>
+            <textarea
+              id="reflection-input"
+              className="completion-reflection-input"
+              rows={3}
+              maxLength={500}
+              value={prayer.reflection}
+              onChange={(e) => prayer.setReflection(e.target.value)}
+              placeholder={t('reflectionPlaceholder')}
+            />
+          </div>
+          <div className="hero-actions">
+            <Link href="/sanctuary" className="button">{t('returnSanctuary')}</Link>
+            <button className="button button-secondary" onClick={() => setGateAfterCompletion(true)}>{t('prayAgain')}</button>
+          </div>
         </div>
       </div>
     );
@@ -122,18 +180,20 @@ export default function RosaryPage() {
   const beadFill = currentStep.type === 'decade_hail_mary' ? (currentStep.beadInDecade ?? 0) : currentStep.type === 'decade_glory_fatima' ? 10 : 0;
   const inDecade = currentStep.type.startsWith('decade_');
   const isDailyMystery = prayer.activeMysteryType === today.mystery;
+  const progressPercent = Math.round(((prayer.currentStepIndex + 1) / steps.length) * 100);
 
   return (
     <div className="prayer-layout">
       <article className="prayer-main">
-        <div className="prayer-progress" aria-label={t('progress', {current: prayer.currentStepIndex + 1, total: steps.length})}><span style={{width: `${((prayer.currentStepIndex + 1) / steps.length) * 100}%`}} /></div>
+        <div className="prayer-progress" aria-label={t('progress', {current: prayer.currentStepIndex + 1, total: steps.length})}><span style={{width: `${progressPercent}%`}} /></div>
         <div className="prayer-toolbar">
           <span className="prayer-toolbar-context">
             {isDailyMystery && <span className="daily-mystery-chip">{t('todayBadge')}</span>}
             {t(mysteryTranslation[prayer.activeMysteryType])}
           </span>
+          <span className="prayer-toolbar-progress" aria-hidden="true">{progressPercent}%</span>
           <span className="prayer-toolbar-actions">
-            <button className="button button-quiet" onClick={() => setShowIntentions(!showIntentions)} aria-expanded={showIntentions}>{t('intentionsTitle')}</button>
+            <button ref={intentionsTriggerRef} className="button button-quiet" onClick={() => setShowIntentions(!showIntentions)} aria-expanded={showIntentions} aria-controls="intentions-panel">{t('intentionsTitle')}</button>
             <button className="button button-quiet" onClick={() => setShowLatin(!showLatin)} disabled={!currentStep.latinText}>{showLatin ? t('hideLatin') : t('showLatin')}</button>
           </span>
         </div>
@@ -159,14 +219,14 @@ export default function RosaryPage() {
         </nav>
 
         {showIntentions && (
-          <section className="intentions-panel" aria-label={t('intentionsTitle')}>
+          <section ref={intentionsRef} id="intentions-panel" className="intentions-panel" aria-label={t('intentionsTitle')}>
             <p className="intentions-hint">{t('intentionsHint')}</p>
-            <form onSubmit={addIntention} className="field intentions-form"><input aria-label={t('intentionPlaceholder')} maxLength={500} value={newIntention} onChange={(event) => setNewIntention(event.target.value)} placeholder={t('intentionPlaceholder')} /><button className="button button-small" disabled={!newIntention.trim()}>{t('addIntention')}</button></form>
-            {prayer.intentions.map((intention, index) => <div className="quiet-row" key={`${intention}-${index}`}><span>{intention}</span><button className="button button-quiet" onClick={() => prayer.removeIntention(index)} aria-label={t('removeIntention')}>×</button></div>)}
+            <form onSubmit={addIntention} className="field intentions-form"><input aria-label={t('intentionPlaceholder')} maxLength={500} value={newIntention} onChange={(event) => setNewIntention(event.target.value)} placeholder={t('intentionPlaceholder')} /><button type="submit" className="button button-small" disabled={!newIntention.trim()}>{t('addIntention')}</button></form>
+            {prayer.intentions.map((intention, index) => <div className="quiet-row" key={`${intention}-${index}`}><span>{intention}</span><button type="button" className="button button-quiet" onClick={() => prayer.removeIntention(index)} aria-label={t('removeIntention')}>×</button></div>)}
           </section>
         )}
 
-        <section className="prayer-step">
+        <section className="prayer-step" aria-live="polite" aria-atomic="true">
           <h1>{displayTitle}</h1>
           {fruit && <p className="prayer-fruit"><strong>{t('fruit')}</strong> · {fruit}</p>}
           <div className="prayer-text">{body}</div>

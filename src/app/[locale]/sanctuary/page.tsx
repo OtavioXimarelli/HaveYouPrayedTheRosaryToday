@@ -27,12 +27,22 @@ export default function SanctuaryPage() {
   const preferences = usePreferencesStore();
   const today = useDayContext();
 
-  if (!mounted) return <div className="page-wrap section-pad" />;
+  if (!mounted) {
+    return (
+      <div className="page-wrap sanctuary-page" aria-busy="true" aria-label={t('loading')}>
+        <div className="page-header sanctuary-masthead" style={{minHeight: '12rem'}}>
+          <span className="eyebrow sanctuary-season" style={{opacity: 0.4}}>···</span>
+          <h1 className="page-title" style={{opacity: 0.4}}>···</h1>
+        </div>
+      </div>
+    );
+  }
 
   const dailyMystery = today.mystery;
   const stats = getPrayerStats(prayer.completions);
   const activeSession = Boolean(prayer.sessionStartedAt) && !prayer.isCompleted && prayer.furthestStepIndex > 0;
   const reminderDue = isReminderDue(preferences.reminderTime, preferences.reminderDismissedDate) && !stats.completedToday;
+  const hasHistory = prayer.completions.length > 0;
 
   const dateLabel = new Intl.DateTimeFormat('pt-BR', {weekday: 'long', day: 'numeric', month: 'long'}).format(new Date());
   const greeting = `${tDay(`greetings.${today.daypart}`)}${preferences.firstName ? `, ${preferences.firstName}` : ''}.`;
@@ -76,6 +86,14 @@ export default function SanctuaryPage() {
 
       {stats.completedToday && <p className="status-message" data-tone="success">{t('completedToday')}</p>}
 
+      <section className="week-strip" aria-label={t('weekDotsLabel')}>
+        <div>
+          <span className="eyebrow">{t('statsTitle')}</span>
+          <WeekDots marks={weekMarks} />
+        </div>
+        <p className="week-summary">{weekSummary}</p>
+      </section>
+
       <section className="paper-panel primary-prayer prayer-invitation marginal-flourish">
         <span className="prayer-card-mark" aria-hidden="true">✢</span>
         <div className="hero-copy">
@@ -85,10 +103,16 @@ export default function SanctuaryPage() {
               <h2 className="section-title">{t('resumeTitle')}</h2>
               <p className="step-ribbon">{t('stepProgress', {current: prayer.currentStepIndex + 1, total: buildRosarySequence(prayer.activeMysteryType).length})}</p>
             </>
-          ) : (
+          ) : hasHistory ? (
             <>
               <span className="eyebrow">{t('beginEyebrow')}</span>
               <h2 className="section-title">{t('beginTitle', {mystery: tRosary(mysteryKeys[dailyMystery]).toLowerCase()})}</h2>
+            </>
+          ) : (
+            <>
+              <span className="eyebrow">{t('beginEyebrow')}</span>
+              <h2 className="section-title">{t('emptyTitle')}</h2>
+              <p className="lede">{t('emptyBody')}</p>
             </>
           )}
           <p className="lede">{t('rosaryDescription')}</p>
@@ -102,22 +126,20 @@ export default function SanctuaryPage() {
               )}
             </>
           ) : (
-            <Link href="/rosary" className="button" onClick={() => prayer.initRosary(dailyMystery)}>{t('beginAction')} <ArrowRight size={17} /></Link>
+            <Link href="/rosary" className="button" onClick={() => prayer.initRosary(dailyMystery)}>
+              {hasHistory ? t('beginAction') : t('emptyAction')} <ArrowRight size={17} />
+            </Link>
           )}
         </div>
       </section>
 
-      <section className="week-strip">
-        <div>
-          <span className="eyebrow">{t('statsTitle')}</span>
-          <WeekDots marks={weekMarks} />
-        </div>
-        <p className="week-summary">{weekSummary}</p>
-      </section>
-
       <aside className="paper-panel liturgy-promo">
-        <BookOpen color="var(--oxblood)" />
-        <div><span className="eyebrow">{t('liturgyEyebrow')}</span><h2 style={{fontSize: '1.8rem', marginBottom: '.35rem'}}>{t('liturgyTitle')}</h2><p style={{margin: 0, color: 'var(--muted-ink)'}}>{t('liturgyBody')}</p></div>
+        <BookOpen size={32} aria-hidden="true" />
+        <div className="liturgy-promo-content">
+          <span className="eyebrow">{t('liturgyEyebrow')}</span>
+          <h2 className="liturgy-promo-title">{t('liturgyTitle')}</h2>
+          <p className="liturgy-promo-body">{t('liturgyBody')}</p>
+        </div>
         <Link href="/liturgy" className="button button-secondary">{t('liturgyAction')}</Link>
       </aside>
     </div>

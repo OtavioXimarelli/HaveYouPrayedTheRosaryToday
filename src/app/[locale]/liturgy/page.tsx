@@ -38,8 +38,8 @@ export default function LiturgyPage() {
   return (
     <div className="page-wrap liturgy-page">
       <header className="page-header statement-header"><span className="eyebrow season-text">{t('eyebrow')} · {tDay(`seasons.${today.season}`)}</span><h1 className="page-title">{liturgy?.title ?? t('title')}</h1><p className="lede">{t('subtitle')}</p></header>
-      {loading && <div className="section-pad status-message">{t('loading')}</div>}
-      {failed && !loading && <section className="reading-wrap section-pad"><div className="status-message liturgy-empty" data-tone="error"><span className="liturgy-empty-mark" aria-hidden="true">✦</span><h2>{t('unavailableTitle')}</h2><p>{t('unavailableBody')}</p><div className="hero-actions"><button className="button" onClick={() => void load(true)}><RefreshCw size={16} />{t('retry')}</button><a className="button button-secondary" href="https://www.cnbb.org.br/liturgia-diaria/" target="_blank" rel="noreferrer">{t('officialLink')}</a></div></div></section>}
+      {loading && <div className="section-pad status-message" role="status">{t('loading')}</div>}
+      {failed && !loading && <section className="reading-wrap section-pad"><div className="status-message liturgy-empty" data-tone="error" role="alert"><span className="liturgy-empty-mark" aria-hidden="true">✦</span><h2>{t('unavailableTitle')}</h2><p>{t('unavailableBody')}</p><div className="hero-actions"><button className="button" onClick={() => void load(true)}><RefreshCw size={16} />{t('retry')}</button><a className="button button-secondary" href="https://www.cnbb.org.br/liturgia-diaria/" target="_blank" rel="noreferrer">{t('officialLink')}</a></div></div></section>}
       {liturgy && !loading && <>
         {liturgy.source.freshness === 'CACHED' && <p className="status-message liturgy-edition-note">{t('cachedNotice')}</p>}
         {liturgy.source.freshness === 'EMBEDDED' && <p className="status-message liturgy-edition-note">{t('embeddedNotice')}</p>}

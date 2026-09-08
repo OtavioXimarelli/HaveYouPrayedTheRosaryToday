@@ -1027,12 +1027,48 @@ body {
   background: var(--chapel);
   color: #fff8eb;
   padding: clamp(2rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-md);
+  align-items: center;
 }
 
-.liturgy-promo > svg { width: 2.4rem; height: 2.4rem; color: #d7b169 !important; }
-.liturgy-promo .eyebrow { color: #d7b169; }
-.liturgy-promo p { color: #d4d5ce !important; }
-.liturgy-promo .button-secondary { border-color: rgb(255 248 235 / 32%); color: #fff8eb; }
+.liturgy-promo > svg {
+  width: 2.8rem;
+  height: 2.8rem;
+  color: #d7b169 !important;
+  flex-shrink: 0;
+}
+
+.liturgy-promo-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.liturgy-promo .eyebrow {
+  color: #d7b169;
+}
+
+.liturgy-promo-title {
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.liturgy-promo-body {
+  margin: 0;
+  color: #d4d5ce !important;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.liturgy-promo .button-secondary {
+  border-color: rgb(255 248 235 / 32%);
+  color: #fff8eb;
+  white-space: nowrap;
+}
 
 .reminder-layout {
   border: 1px solid color-mix(in srgb, var(--brass) 45%, var(--rule));
@@ -1235,6 +1271,15 @@ body {
   min-width: 0;
 }
 
+.prayer-toolbar-progress {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted-ink);
+  padding: 0.25rem 0.5rem;
+  background: var(--paper-deep);
+  border-radius: var(--radius-sm);
+}
+
 .prayer-toolbar-actions {
   display: inline-flex;
   align-items: center;
@@ -1347,8 +1392,8 @@ body {
 }
 
 .decade-bead {
-  width: 1rem;
-  height: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
   padding: 0;
   border-radius: 50%;
   border: 1.5px solid color-mix(in srgb, var(--brass) 80%, transparent);
@@ -1817,10 +1862,23 @@ body {
     min-height: 0;
     grid-template-columns: 1fr;
     padding: 1.7rem 1.35rem;
+    gap: var(--space-sm);
   }
 
-  .liturgy-promo > svg { margin-bottom: 0.25rem; }
-  .liturgy-promo .button { grid-column: auto; }
+  .liturgy-promo > svg {
+    margin-bottom: 0;
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .liturgy-promo .button {
+    grid-column: auto;
+    width: 100%;
+  }
+
+  .liturgy-promo-title {
+    font-size: 1.5rem;
+  }
 
   .onboarding-main { display: block; padding: 0; background: var(--paper-raised); }
   .onboarding-main::before { display: none; }
@@ -2172,6 +2230,39 @@ body {
   margin-inline: auto;
   color: var(--brass);
   animation: completion-rise 1.2s var(--ease-sacred) both;
+}
+
+.completion-reflection {
+  margin-top: var(--space-md);
+  width: 100%;
+  max-width: 32rem;
+}
+
+.completion-reflection-label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--muted-ink);
+}
+
+.completion-reflection-input {
+  width: 100%;
+  min-height: 5rem;
+  padding: var(--space-sm);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  background: var(--paper-raised);
+  color: var(--ink);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.completion-reflection-input:focus {
+  outline: 2px solid var(--oxblood);
+  outline-offset: 2px;
 }
 
 @keyframes completion-rise {
