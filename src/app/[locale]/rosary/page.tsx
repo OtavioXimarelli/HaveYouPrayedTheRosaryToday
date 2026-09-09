@@ -106,17 +106,20 @@ export default function RosaryPage() {
     if (!showIntentions || !intentionsRef.current) return;
     const panel = intentionsRef.current;
     const trigger = intentionsTriggerRef.current;
-    const focusable = panel.querySelectorAll<HTMLElement>('input, button, [tabindex]:not([tabindex="-1"])');
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    first?.focus();
+    const getFocusable = () => Array.from(panel.querySelectorAll<HTMLElement>('input:not(:disabled), button:not(:disabled), [tabindex]:not([tabindex="-1"])'));
+    const focusables = getFocusable();
+    focusables[0]?.focus();
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setShowIntentions(false);
         trigger?.focus();
         return;
       }
-      if (event.key !== 'Tab' || focusable.length === 0) return;
+      if (event.key !== 'Tab') return;
+      const current = getFocusable();
+      if (current.length === 0) return;
+      const first = current[0];
+      const last = current[current.length - 1];
       if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
         last?.focus();
@@ -130,7 +133,7 @@ export default function RosaryPage() {
       window.removeEventListener('keydown', onKeyDown);
       trigger?.focus();
     };
-  }, [showIntentions]);
+  }, [showIntentions, prayer.intentions.length, newIntention]);
 
   if (!mounted) return <div className="reading-wrap section-pad" />;
 

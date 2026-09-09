@@ -200,6 +200,7 @@ paths:
                   user: {$ref: '#/components/schemas/User'}
                   completions: {type: array, items: {$ref: '#/components/schemas/PrayerCompletion'}}
                   spiritualPlan: {$ref: '#/components/schemas/SpiritualPlan'}
+                  preferences: {$ref: '#/components/schemas/UserPreferences'}
         '401': {$ref: '#/components/responses/ApiError'}
   /users/me/migrate:
     post:

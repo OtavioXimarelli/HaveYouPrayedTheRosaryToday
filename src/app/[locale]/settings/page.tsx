@@ -38,11 +38,10 @@ export default function SettingsPage() {
         reflection: prayer.reflection,
       },
       preferences: {
-        firstName: preferences.firstName,
         prayerWindow: preferences.prayerWindow,
         reminderTime: preferences.reminderTime,
         theme: preferences.theme,
-        readerScale: preferences.readerScale,
+        readerSize: preferences.readerScale,
       },
       completions: prayer.completions,
     }, null, 2);
