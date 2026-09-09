@@ -14,12 +14,33 @@ export function ExitPrayerControl() {
   const discardSession = usePrayerStore((state) => state.discardSession);
   const [open, setOpen] = useState(false);
   const confirmRef = useRef<HTMLButtonElement>(null);
+  const modalRef = useRef<HTMLElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
+    const modal = modalRef.current;
+    const trigger = triggerRef.current;
     confirmRef.current?.focus();
+    const getFocusable = () => modal ? Array.from(modal.querySelectorAll<HTMLElement>('button:not(:disabled), [tabindex]:not([tabindex="-1"])')) : [];
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setOpen(false);
+      if (event.key === 'Escape') {
+        setOpen(false);
+        trigger?.focus();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const current = getFocusable();
+      if (current.length === 0) return;
+      const first = current[0];
+      const last = current[current.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
     };
     window.addEventListener('keydown', onKeyDown);
     const previousOverflow = document.body.style.overflow;
@@ -27,12 +48,13 @@ export function ExitPrayerControl() {
     return () => {
       window.removeEventListener('keydown', onKeyDown);
       document.body.style.overflow = previousOverflow;
+      trigger?.focus();
     };
   }, [open]);
 
   return (
     <>
-      <button type="button" className="focus-exit" onClick={() => setOpen(true)}>
+      <button ref={triggerRef} type="button" className="focus-exit" onClick={() => setOpen(true)}>
         <ArrowLeft size={16} aria-hidden="true" />
         <span>{tNav('leavePrayer')}</span>
       </button>
@@ -40,6 +62,7 @@ export function ExitPrayerControl() {
       {open && createPortal(
         <div className="beta-overlay" onClick={() => setOpen(false)}>
           <section
+            ref={modalRef}
             className="beta-modal"
             role="dialog"
             aria-modal="true"
