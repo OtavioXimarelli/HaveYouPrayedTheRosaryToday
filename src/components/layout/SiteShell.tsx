@@ -81,6 +81,9 @@ export function SiteShell({children}: {children: React.ReactNode}) {
 
   return (
     <div className="site-shell">
+      <a href="#main-content" className="skip-link">
+        Pular para o conteúdo principal
+      </a>
       {!isOnboarding && (
         <header className={`site-header${isProductShell ? ' product-header' : ''}`}>
           <div className="site-header-inner">
@@ -108,7 +111,6 @@ export function SiteShell({children}: {children: React.ReactNode}) {
               </nav>
             )}
             <div className="header-actions">
-              <ThemeToggle />
               <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label={t('menu')}>
                 {menuOpen ? <X /> : <Menu />}
               </button>
@@ -128,12 +130,15 @@ export function SiteShell({children}: {children: React.ReactNode}) {
                   <span>{t('begin')}</span>
                 </Link>
               )}
+              <div className="mobile-menu-footer">
+                <ThemeToggle />
+              </div>
             </nav>
           )}
         </header>
       )}
       {isProductShell && !isOffline && <BetaNotice />}
-      <main className={isOnboarding ? 'onboarding-main' : 'site-main'}>{children}</main>
+      <main id="main-content" className={isOnboarding ? 'onboarding-main' : 'site-main'}>{children}</main>
       {!isOnboarding && !isProductShell && (
         <footer className="site-footer">
           <div><BrandMark /></div>

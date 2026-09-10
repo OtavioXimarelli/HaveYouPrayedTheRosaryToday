@@ -11,6 +11,8 @@ export interface PrayerCompletion {
   completedAt: string;
   timeZone: string;
   mysteryType: MysteryType;
+  intentions?: string[];
+  reflection?: string;
 }
 
 export interface PrayerStats {
@@ -112,7 +114,13 @@ export const usePrayerStore = create<PrayerState>()(
       removeIntention: (index) => set((state) => ({
         intentions: state.intentions.filter((_, itemIndex) => itemIndex !== index),
       })),
-      setReflection: (reflection) => set({reflection}),
+      setReflection: (reflection) => set((state) => {
+        if (!state.isCompleted || state.completions.length === 0) return {reflection};
+        const completions = [...state.completions];
+        const last = completions[completions.length - 1];
+        completions[completions.length - 1] = {...last, reflection};
+        return {reflection, completions};
+      }),
       completeRosary: () => {
         const state = get();
         if (state.isCompleted) return;
@@ -123,6 +131,7 @@ export const usePrayerStore = create<PrayerState>()(
           completedAt: completedAt.toISOString(),
           timeZone: getResolvedTimeZone(),
           mysteryType: state.activeMysteryType,
+          intentions: state.intentions.length > 0 ? [...state.intentions] : undefined,
         };
         set({isCompleted: true, completions: [...state.completions, completion]});
       },

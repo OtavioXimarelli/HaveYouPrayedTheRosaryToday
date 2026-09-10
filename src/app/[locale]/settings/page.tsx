@@ -25,9 +25,26 @@ export default function SettingsPage() {
     setMessage(t('saveSuccess'));
   };
   const exportData = () => {
-    const data = JSON.stringify({exportedAt: new Date().toISOString(), preferences: {
-      firstName: preferences.firstName, prayerWindow: preferences.prayerWindow, reminderTime: preferences.reminderTime, theme: preferences.theme, readerScale: preferences.readerScale,
-    }, prayer: {intentions: prayer.intentions, reflection: prayer.reflection, completions: prayer.completions}}, null, 2);
+    const data = JSON.stringify({
+      version: 2,
+      exportedAt: new Date().toISOString(),
+      prayerState: {
+        activeMysteryType: prayer.activeMysteryType,
+        currentStepIndex: prayer.currentStepIndex,
+        furthestStepIndex: prayer.furthestStepIndex,
+        sessionStartedAt: prayer.sessionStartedAt,
+        isCompleted: prayer.isCompleted,
+        intentions: prayer.intentions,
+        reflection: prayer.reflection,
+      },
+      preferences: {
+        prayerWindow: preferences.prayerWindow,
+        reminderTime: preferences.reminderTime,
+        theme: preferences.theme,
+        readerSize: preferences.readerScale,
+      },
+      completions: prayer.completions,
+    }, null, 2);
     const url = URL.createObjectURL(new Blob([data], {type: 'application/json'}));
     const anchor = document.createElement('a'); anchor.href = url; anchor.download = 'evangelizae-dados.json'; anchor.click(); URL.revokeObjectURL(url);
   };
